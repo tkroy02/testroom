@@ -6,7 +6,7 @@
     <title>Student Dashboard - Tklesson Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+   <script src="https://cdn.jsdelivr.net/npm/core-js-bundle@3/minified.js"></script>
    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
    <script>
 window.MathJax = {
@@ -6415,11 +6415,6 @@ function startTopicStudy(topicIndex) {
     }
 }
 
-    // FIX: Use setTimeout to ensure DOM is ready
-    setTimeout(() => {
-        updateFlashcardView();
-    }, 100);
-}
         
 function flipCard(cardElement) {
     cardElement.classList.toggle('flipped');
@@ -6912,6 +6907,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
