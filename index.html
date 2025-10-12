@@ -6186,7 +6186,7 @@ async function loadFlashcards(courseId) {
         const flashcardPaths = {
             'ap-physics-1': {
                 'kinematics': 'flashcards/ap-physics-1/kinematics.json',
-                'dynamics': 'flashcards/ap-physics-1/dynamics.json',
+                'dynamics': 'flashcards/ap-physics-1/dynamics.json', 
                 'circular_motion_and_gravitation': 'flashcards/ap-physics-1/circular_motion_and_gravitation.json',
                 'energy': 'flashcards/ap-physics-1/energy.json',
                 'momentum': 'flashcards/ap-physics-1/momentum.json',
@@ -6194,6 +6194,7 @@ async function loadFlashcards(courseId) {
                 'rotational_motion': 'flashcards/ap-physics-1/rotational_motion.json',
                 'fluid_mechanics': 'flashcards/ap-physics-1/fluid_mechanics.json'
             }
+        };
 
         // Get the specific topic path for this course
         const coursePaths = flashcardPaths[courseId];
@@ -6202,17 +6203,17 @@ async function loadFlashcards(courseId) {
             return null;
         }
 
-        // For now, return dynamics as default - you'll update this later
-        // to show topic selection
+        // For now, return dynamics as default
         const path = coursePaths.dynamics;
         console.log('🔍 Loading flashcard path:', path);
         
         const response = await fetch(path);
+        if (!response.ok) {
+            throw new Error(`Failed to load flashcards: ${response.status}`);
+        }
         const data = await response.json();
         
-        console.log('✅ FULL DATA STRUCTURE:', JSON.stringify(data, null, 2));
-        console.log('🔍 All properties:', Object.keys(data));
-        
+        console.log('✅ Successfully loaded flashcard data');
         return data;
     } catch (error) {
         console.error('❌ Error loading flashcards:', error);
@@ -6928,6 +6929,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
