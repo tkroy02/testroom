@@ -6321,18 +6321,18 @@ function startTopicStudy(topicIndex) {
                     </div>
                 </div>
                 
-                <div class="study-stats">
-                    <div class="stat-item">
-                        <span class="stat-value">${currentCardIndex + 1}</span>
-                        <span class="stat-label">Current</span>
+                <div class="flashcard-stats">
+                    <div class="flashcard-stat-item">
+                        <span class="flashcard-stat-value">${currentCardIndex + 1}</span>
+                        <span class="flashcard-stat-label">Current</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-value">${currentDeck.length}</span>
-                        <span class="stat-label">Total</span>
+                    <div class="flashcard-stat-item">
+                        <span class="flashcard-stat-value">${currentDeck.length}</span>
+                        <span class="flashcard-stat-label">Total</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-value">${Math.round(((currentCardIndex + 1) / currentDeck.length) * 100)}%</span>
-                        <span class="stat-label">Progress</span>
+                    <div class="flashcard-stat-item">
+                        <span class="flashcard-stat-value">${Math.round(((currentCardIndex + 1) / currentDeck.length) * 100)}%</span>
+                        <span class="flashcard-stat-label">Progress</span>
                     </div>
                 </div>
             </div>
@@ -6780,6 +6780,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
