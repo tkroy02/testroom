@@ -6184,10 +6184,29 @@ async function loadFlashcards(courseId) {
         console.log('🔍 Loading flashcards for:', courseId);
         
         const flashcardPaths = {
-            'ap-physics-1': 'flashcards/ap-physics-1/dynamics.json'
-        };
+            'ap-physics-1': {
+                'kinematics': 'flashcards/ap-physics-1/kinematics.json',
+                'dynamics': 'flashcards/ap-physics-1/dynamics.json',
+                'circular_motion_and_gravitation': 'flashcards/ap-physics-1/circular_motion_and_gravitation.json',
+                'energy': 'flashcards/ap-physics-1/energy.json',
+                'momentum': 'flashcards/ap-physics-1/momentum.json',
+                'simple_harmonic_motion': 'flashcards/ap-physics-1/simple_harmonic_motion.json',
+                'rotational_motion': 'flashcards/ap-physics-1/rotational_motion.json',
+                'fluid_mechanics': 'flashcards/ap-physics-1/fluid_mechanics.json'
+            }
 
-        const path = flashcardPaths[courseId];
+        // Get the specific topic path for this course
+        const coursePaths = flashcardPaths[courseId];
+        if (!coursePaths) {
+            console.log('❌ No flashcards available for course:', courseId);
+            return null;
+        }
+
+        // For now, return dynamics as default - you'll update this later
+        // to show topic selection
+        const path = coursePaths.dynamics;
+        console.log('🔍 Loading flashcard path:', path);
+        
         const response = await fetch(path);
         const data = await response.json();
         
@@ -6909,6 +6928,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
