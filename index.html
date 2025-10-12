@@ -6061,7 +6061,7 @@ async function startFlashcards() {
         // Load flashcards based on current course
         const flashcardData = await loadFlashcards(currentCourseId);
         
-        if (flashcardData && flashcardData.topics) {
+        if (flashcardData && flashcardData.cards) {
             initializeFlashcardUI(flashcardData);
         } else {
             showNoFlashcardsMessage();
@@ -6675,6 +6675,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
