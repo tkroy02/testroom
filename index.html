@@ -6103,44 +6103,32 @@ let currentDeck = [];
 function initializeFlashcardUI(flashcardData) {
     console.log('🎨 Initializing UI with data:', flashcardData);
     
-    // Check all possible structures
     let topics = [];
     
-    if (flashcardData.topics) {
+    if (flashcardData.cards && Array.isArray(flashcardData.cards)) {
+        // Your structure: {course: "...", topic: "...", cards: [...]}
+        console.log('📚 Using your custom structure');
+        topics = [{
+            topic_name: flashcardData.topic || 'Flashcards',
+            cards: flashcardData.cards
+        }];
+    } else if (flashcardData.topics) {
         topics = flashcardData.topics;
     } else if (flashcardData.flashcards) {
         topics = flashcardData.flashcards.map(item => ({
             topic_name: item.category,
             cards: item.cards
         }));
-    } else {
-        // If no standard structure, try to find cards in root level
-        console.log('🔍 Searching for cards in root level...');
-        console.log('All root keys:', Object.keys(flashcardData));
-        
-        // Look for any array that might contain cards
-        for (let key in flashcardData) {
-            if (Array.isArray(flashcardData[key])) {
-                console.log(`Found array at key "${key}":`, flashcardData[key]);
-                if (flashcardData[key].length > 0 && flashcardData[key][0].front) {
-                    topics = [{
-                        topic_name: 'Flashcards',
-                        cards: flashcardData[key]
-                    }];
-                    break;
-                }
-            }
-        }
     }
     
     console.log('🃏 Final topics:', topics);
     
-    if (topics.length > 0) {
+    if (topics.length > 0 && topics[0].cards.length > 0) {
         currentFlashcardData = { topics: topics };
         currentTopicIndex = 0;
         startTopicStudy(0);
     } else {
-        console.log('❌ No flashcards found in any structure');
+        console.log('❌ No flashcards found');
         showNoFlashcardsMessage();
     }
 }
@@ -6687,6 +6675,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
