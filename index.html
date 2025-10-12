@@ -6378,8 +6378,18 @@ function startTopicStudy(topicIndex) {
         
 function flipCard(cardElement) {
     cardElement.classList.toggle('flipped');
+    
+    // Re-render MathJax after flip animation completes
+    setTimeout(() => {
+        const frontText = document.getElementById('flashcard-front-text');
+        const backText = document.getElementById('flashcard-back-text');
+        
+        if (window.MathJax && frontText && backText) {
+            MathJax.typesetPromise([frontText, backText]).catch(console.error);
+        }
+    }, 300); // Match this to your CSS transition time
 }
-
+        
 function nextCard() {
     if (currentCardIndex < currentDeck.length - 1) {
         currentCardIndex++;
@@ -6416,6 +6426,13 @@ function updateFlashcardView() {
     if (frontText && backText) {
         frontText.innerHTML = currentDeck[currentCardIndex].front;
         backText.innerHTML = currentDeck[currentCardIndex].back;
+        
+        // Re-render MathJax with a small delay to ensure DOM is updated
+        setTimeout(() => {
+            if (window.MathJax) {
+                MathJax.typesetPromise([frontText, backText]).catch(console.error);
+            }
+        }, 50);
     }
     
     // Reset card to front side
@@ -6445,6 +6462,7 @@ function updateFlashcardView() {
         statValues[2].textContent = `${Math.round(((currentCardIndex + 1) / currentDeck.length) * 100)}%`;
     }
 }
+        
 function markCardDifficult() {
     // You can implement spaced repetition logic here
     const currentCard = currentDeck[currentCardIndex];
@@ -6842,6 +6860,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
