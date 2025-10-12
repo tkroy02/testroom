@@ -6542,15 +6542,50 @@ function updateFlashcardView() {
         statValues[2].textContent = `${Math.round(((currentCardIndex + 1) / currentDeck.length) * 100)}%`;
     }
 }
+
+let difficultCards = JSON.parse(localStorage.getItem('difficultCards')) || {};
         
 function markCardDifficult() {
-    // You can implement spaced repetition logic here
     const currentCard = currentDeck[currentCardIndex];
-    console.log('Marked as difficult:', currentCard);
-    // Add to a separate "difficult cards" list for review
+    const cardId = `${currentCourseId}-${currentTopicIndex}-${currentCardIndex}`;
+    
+    // Toggle difficult status
+    if (difficultCards[cardId]) {
+        // Remove from difficult list
+        delete difficultCards[cardId];
+        console.log('✅ Removed from difficult cards:', currentCard.front);
+    } else {
+        // Add to difficult list with timestamp
+        difficultCards[cardId] = {
+            card: currentCard,
+            topic: currentFlashcardData.topics[currentTopicIndex].topic_name,
+            markedAt: new Date().toISOString(),
+            reviewCount: 0
+        };
+        console.log('🔴 Marked as difficult:', currentCard.front);
+    }
+    
+    // Save to localStorage
+    localStorage.setItem('difficultCards', JSON.stringify(difficultCards));
+    
+    // Visual feedback
+    const difficultBtn = document.getElementById('mark-difficult');
+    if (difficultBtn) {
+        const cardId = `${currentCourseId}-${currentTopicIndex}-${currentCardIndex}`;
+        if (difficultCards[cardId]) {
+            difficultBtn.innerHTML = '<i class="fas fa-check"></i> Marked';
+            difficultBtn.style.background = 'var(--accent)';
+            difficultBtn.style.color = 'white';
+        } else {
+            difficultBtn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Difficult';
+            difficultBtn.style.background = '';
+            difficultBtn.style.color = '';
+        }
+    }
 }
 
-function showDeckComplete() {
+    function showDeckComplete() {
+    const difficultCount = Object.keys(difficultCards).length;
     const resourceContent = document.getElementById('resource-content');
     
     resourceContent.innerHTML = `
@@ -6570,12 +6605,18 @@ function showDeckComplete() {
                 <p style="color: var(--gray); margin-bottom: 30px;">
                     You've completed ${currentDeck.length} flashcards in 
                     ${currentFlashcardData.topics[currentTopicIndex].topic_name}.
+                    ${difficultCount > 0 ? `<br>You have ${difficultCount} difficult cards to review.` : ''}
                 </p>
                 
                 <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                     <button class="btn" onclick="startTopicStudy(currentTopicIndex)">
                         <i class="fas fa-redo"></i> Study Again
                     </button>
+                    ${difficultCount > 0 ? `
+                    <button class="btn btn-outline" onclick="showDifficultCardsReview()">
+                        <i class="fas fa-fire"></i> Review Difficult (${difficultCount})
+                    </button>
+                    ` : ''}
                     <button class="btn btn-outline" onclick="showTopicSelection(currentFlashcardData)">
                         <i class="fas fa-list"></i> Choose Another Topic
                     </button>
@@ -6940,6 +6981,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
