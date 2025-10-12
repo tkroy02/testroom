@@ -6413,6 +6413,8 @@ function startTopicStudy(topicIndex) {
     if (difficultButton) {
         difficultButton.addEventListener('click', markCardDifficult);
     }
+        // Call updateFlashcardView directly - the DOM should be ready now
+    updateFlashcardView();
 }
 
         
@@ -6907,6 +6909,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
