@@ -6207,6 +6207,36 @@ let currentTopicIndex = 0;
 let currentCardIndex = 0;
 let currentDeck = [];
 
+function renderMarkdown(text) {
+    // First, protect math content from markdown processing
+    const mathBlocks = [];
+    let mathIndex = 0;
+    
+    // Temporarily replace math blocks with placeholders
+    text = text.replace(/\$\$.*?\$\$/g, (match) => {
+        const placeholder = `@@MATH${mathIndex}@@`;
+        mathBlocks[mathIndex] = match;
+        mathIndex++;
+        return placeholder;
+    });
+    
+    // Now process markdown on the non-math content
+    text = text
+        // Convert **bold** to <strong>bold</strong>
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        // Convert *italic* to <em>italic</em>  
+        .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+        // Convert `code` to <code>code</code>
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
+    
+    // Restore math blocks
+    mathBlocks.forEach((mathBlock, index) => {
+        text = text.replace(`@@MATH${index}@@`, mathBlock);
+    });
+    
+    return text;
+}
+        
 function initializeFlashcardUI(flashcardData) {
     console.log('🎨 Initializing UI with data:', flashcardData);
     
@@ -6566,16 +6596,6 @@ function showFlashcardError() {
         </div>
     `;
 }
-
-function renderMarkdown(text) {
-    return text
-        // Convert **bold** to <strong>bold</strong>
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        // Convert *italic* to <em>italic</em>  
-        .replace(/\*(.*?)\*/g, '<em>$1</em>')
-        // Convert `code` to <code>code</code>
-        .replace(/`(.*?)`/g, '<code>$1</code>');
-}
         
 function loadVideoLessons() {
     const videoList = document.getElementById('video-list');
@@ -6870,6 +6890,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
