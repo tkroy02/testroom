@@ -55,6 +55,97 @@
         }
 
 
+.flashcard-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.flashcard {
+    perspective: 1000px;
+    height: 300px;
+    margin: 20px 0;
+    cursor: pointer;
+}
+
+.flashcard-front, .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.flashcard-back {
+    transform: rotateY(180deg);
+}
+
+.flashcard.flipped .flashcard-front {
+    transform: rotateY(180deg);
+}
+
+.flashcard.flipped .flashcard-back {
+    transform: rotateY(0deg);
+}
+
+.flashcard-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.flashcard-text {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin: 20px 0;
+}
+
+.flashcard-hint {
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.flashcard-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.study-stats {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--light-bg);
+    border-radius: 10px;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+        
 /* Examination Quiz Styles - More Specific Selectors */
 .exam-quiz-container {
     max-width: 1200px;
@@ -6167,14 +6258,14 @@ function startTopicStudy(topicIndex) {
     currentTopicIndex = topicIndex;
     currentCardIndex = 0;
     const topic = currentFlashcardData.topics[topicIndex];
-    currentDeck = [...topic.cards]; // Create a copy of the cards
+    currentDeck = [...topic.cards];
     
     const resourceContent = document.getElementById('resource-content');
     
     resourceContent.innerHTML = `
         <div class="tool-interface active">
             <div class="tool-header">
-                <h3 class="section-title">${currentFlashcardData.course} - ${topic.topic_name}</h3>
+                <h3 class="section-title">${currentFlashcardData.course || 'Flashcards'} - ${topic.topic_name}</h3>
                 <button class="tool-back" onclick="${currentFlashcardData.topics.length > 1 ? 'showTopicSelection(currentFlashcardData)' : 'closeFlashcards()'}">
                     <i class="fas fa-arrow-left"></i> ${currentFlashcardData.topics.length > 1 ? 'Back to Topics' : 'Back to Course'}
                 </button>
@@ -6191,16 +6282,11 @@ function startTopicStudy(topicIndex) {
                     </div>
                 </div>
                 
-                <div class="flashcard" id="current-flashcard" onclick="flipCard(this)">
+                <div class="flashcard" id="current-flashcard">
                     <div class="flashcard-front">
                         <div class="flashcard-content">
                             <h4>Question</h4>
-                            <div class="flashcard-text">${currentDeck[currentCardIndex].front}</div>
-                            ${currentDeck[currentCardIndex].image ? 
-                                `<div class="flashcard-image">
-                                    <img src="${currentDeck[currentCardIndex].image}" alt="Flashcard illustration">
-                                </div>` : ''
-                            }
+                            <div class="flashcard-text" id="flashcard-front-text">${currentDeck[currentCardIndex].front}</div>
                         </div>
                         <div class="flashcard-hint">
                             <i class="fas fa-lightbulb"></i> Click to reveal answer
@@ -6209,12 +6295,7 @@ function startTopicStudy(topicIndex) {
                     <div class="flashcard-back">
                         <div class="flashcard-content">
                             <h4>Answer</h4>
-                            <div class="flashcard-text">${currentDeck[currentCardIndex].back}</div>
-                            ${currentDeck[currentCardIndex].explanation ? 
-                                `<div class="flashcard-explanation">
-                                    <strong>Explanation:</strong> ${currentDeck[currentCardIndex].explanation}
-                                </div>` : ''
-                            }
+                            <div class="flashcard-text" id="flashcard-back-text">${currentDeck[currentCardIndex].back}</div>
                         </div>
                         <div class="flashcard-hint">
                             <i class="fas fa-lightbulb"></i> Click to see question
@@ -6223,15 +6304,15 @@ function startTopicStudy(topicIndex) {
                 </div>
                 
                 <div class="flashcard-controls">
-                    <button class="btn btn-outline" onclick="previousCard()" ${currentCardIndex === 0 ? 'disabled' : ''}>
+                    <button class="btn btn-outline" id="prev-card" ${currentCardIndex === 0 ? 'disabled' : ''}>
                         <i class="fas fa-arrow-left"></i> Previous
                     </button>
                     
                     <div class="card-actions">
-                        <button class="btn btn-outline" onclick="markCardDifficult()">
+                        <button class="btn btn-outline" id="mark-difficult">
                             <i class="fas fa-exclamation-circle"></i> Difficult
                         </button>
-                        <button class="btn" onclick="nextCard()">
+                        <button class="btn" id="next-card">
                             ${currentCardIndex === currentDeck.length - 1 ? 'Finish' : 'Next'} 
                             <i class="fas fa-arrow-right"></i>
                         </button>
@@ -6255,8 +6336,30 @@ function startTopicStudy(topicIndex) {
             </div>
         </div>
     `;
-}
 
+    // Add event listeners after the HTML is rendered
+    const flashcardElement = document.getElementById('current-flashcard');
+    const prevButton = document.getElementById('prev-card');
+    const nextButton = document.getElementById('next-card');
+    const difficultButton = document.getElementById('mark-difficult');
+
+    if (flashcardElement) {
+        flashcardElement.addEventListener('click', () => flipCard(flashcardElement));
+    }
+    
+    if (prevButton) {
+        prevButton.addEventListener('click', previousCard);
+    }
+    
+    if (nextButton) {
+        nextButton.addEventListener('click', nextCard);
+    }
+    
+    if (difficultButton) {
+        difficultButton.addEventListener('click', markCardDifficult);
+    }
+}
+        
 function flipCard(cardElement) {
     cardElement.classList.toggle('flipped');
 }
@@ -6675,6 +6778,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
