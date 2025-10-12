@@ -6142,7 +6142,6 @@ function startExamQuiz() {
 }
 
 async function startFlashcards() {
-    // ADD THIS ONE LINE:
     console.log("ACTUAL COURSE ID:", currentCourseId);
     try {
         // Show loading state
@@ -6168,8 +6167,9 @@ async function startFlashcards() {
         // Load flashcards based on current course
         const flashcardData = await loadFlashcards(currentCourseId);
         
-        if (flashcardData && flashcardData.cards) {
-            initializeFlashcardUI(flashcardData);
+        if (flashcardData && flashcardData.availableTopics) {
+            // NEW: Show topic selection instead of directly loading dynamics
+            showTopicSelection(flashcardData);
         } else {
             showNoFlashcardsMessage();
         }
@@ -6178,7 +6178,7 @@ async function startFlashcards() {
         showFlashcardError();
     }
 }
-
+        
 async function loadFlashcards(courseId) {
     try {
         console.log('🔍 Loading flashcards for:', courseId);
@@ -6186,7 +6186,7 @@ async function loadFlashcards(courseId) {
         const flashcardPaths = {
             'ap-physics-1': {
                 'kinematics': 'flashcards/ap-physics-1/kinematics.json',
-                'dynamics': 'flashcards/ap-physics-1/dynamics.json', 
+                'dynamics': 'flashcards/ap-physics-1/dynamics.json',
                 'circular_motion_and_gravitation': 'flashcards/ap-physics-1/circular_motion_and_gravitation.json',
                 'energy': 'flashcards/ap-physics-1/energy.json',
                 'momentum': 'flashcards/ap-physics-1/momentum.json',
@@ -6196,25 +6196,19 @@ async function loadFlashcards(courseId) {
             }
         };
 
-        // Get the specific topic path for this course
         const coursePaths = flashcardPaths[courseId];
         if (!coursePaths) {
             console.log('❌ No flashcards available for course:', courseId);
             return null;
         }
 
-        // For now, return dynamics as default
-        const path = coursePaths.dynamics;
-        console.log('🔍 Loading flashcard path:', path);
+        // NEW: Return the topic mapping instead of loading a specific topic
+        return {
+            course: 'AP Physics 1',
+            availableTopics: Object.keys(coursePaths),
+            topicPaths: coursePaths
+        };
         
-        const response = await fetch(path);
-        if (!response.ok) {
-            throw new Error(`Failed to load flashcards: ${response.status}`);
-        }
-        const data = await response.json();
-        
-        console.log('✅ Successfully loaded flashcard data');
-        return data;
     } catch (error) {
         console.error('❌ Error loading flashcards:', error);
         return null;
@@ -6312,13 +6306,10 @@ function showTopicSelection(flashcardData) {
             </div>
             
             <div class="courses-grid">
-                ${flashcardData.topics.map((topic, index) => `
-                    <div class="course-card" onclick="startTopicStudy(${index})">
-                        <h3>${topic.topic_name}</h3>
-                        <p>${topic.cards.length} flashcards</p>
-                        <div class="progress-bar" style="margin: 15px 0;">
-                            <div class="progress-fill" style="width: 0%"></div>
-                        </div>
+                ${flashcardData.availableTopics.map((topic, index) => `
+                    <div class="course-card" onclick="loadSpecificTopic('${topic}', '${flashcardData.topicPaths[topic]}')">
+                        <h3>${topic.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h3>
+                        <p>Select to study ${topic.replace(/_/g, ' ')} flashcards</p>
                         <button class="btn" style="margin-top: 10px;">
                             <i class="fas fa-layer-group"></i> Study Now
                         </button>
@@ -6329,6 +6320,26 @@ function showTopicSelection(flashcardData) {
     `;
 }
 
+// NEW FUNCTION: Load a specific topic
+async function loadSpecificTopic(topicName, topicPath) {
+    try {
+        console.log('🔍 Loading specific topic:', topicName, 'from:', topicPath);
+        
+        const response = await fetch(topicPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load topic: ${response.status}`);
+        }
+        const topicData = await response.json();
+        
+        // Initialize the flashcard UI with the loaded topic data
+        initializeFlashcardUI(topicData);
+        
+    } catch (error) {
+        console.error('❌ Error loading topic:', error);
+        showFlashcardError();
+    }
+}
+        
 function startTopicStudy(topicIndex) {
     currentTopicIndex = topicIndex;
     currentCardIndex = 0;
@@ -6929,6 +6940,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
