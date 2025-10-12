@@ -6414,6 +6414,12 @@ function startTopicStudy(topicIndex) {
         difficultButton.addEventListener('click', markCardDifficult);
     }
 }
+
+    // FIX: Use setTimeout to ensure DOM is ready
+    setTimeout(() => {
+        updateFlashcardView();
+    }, 100);
+}
         
 function flipCard(cardElement) {
     cardElement.classList.toggle('flipped');
@@ -6906,6 +6912,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
