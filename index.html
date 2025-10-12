@@ -6369,9 +6369,8 @@ function flipCard(cardElement) {
 function nextCard() {
     if (currentCardIndex < currentDeck.length - 1) {
         currentCardIndex++;
-        startTopicStudy(currentTopicIndex); // Refresh the view
+        updateFlashcardView(); // Update the view without full re-render
     } else {
-        // Finished the deck
         showDeckComplete();
     }
 }
@@ -6379,10 +6378,59 @@ function nextCard() {
 function previousCard() {
     if (currentCardIndex > 0) {
         currentCardIndex--;
-        startTopicStudy(currentTopicIndex); // Refresh the view
+        updateFlashcardView(); // Update the view without full re-render
     }
 }
 
+function updateFlashcardView() {
+    // Update progress bar
+    const progressFill = document.querySelector('.progress-fill');
+    if (progressFill) {
+        progressFill.style.width = `${((currentCardIndex + 1) / currentDeck.length) * 100}%`;
+    }
+    
+    // Update card number display
+    const progressInfo = document.querySelector('.progress-info span:first-child');
+    if (progressInfo) {
+        progressInfo.textContent = `Card ${currentCardIndex + 1} of ${currentDeck.length}`;
+    }
+    
+    // Update flashcard content
+    const frontText = document.getElementById('flashcard-front-text');
+    const backText = document.getElementById('flashcard-back-text');
+    
+    if (frontText && backText) {
+        frontText.innerHTML = currentDeck[currentCardIndex].front;
+        backText.innerHTML = currentDeck[currentCardIndex].back;
+    }
+    
+    // Reset card to front side
+    const flashcard = document.getElementById('current-flashcard');
+    if (flashcard) {
+        flashcard.classList.remove('flipped');
+    }
+    
+    // Update buttons state
+    const prevButton = document.getElementById('prev-card');
+    const nextButton = document.getElementById('next-card');
+    
+    if (prevButton) {
+        prevButton.disabled = currentCardIndex === 0;
+    }
+    
+    if (nextButton) {
+        nextButton.innerHTML = currentCardIndex === currentDeck.length - 1 ? 
+            'Finish <i class="fas fa-arrow-right"></i>' : 
+            'Next <i class="fas fa-arrow-right"></i>';
+    }
+    
+    // Update stats
+    const statValues = document.querySelectorAll('.flashcard-stat-value');
+    if (statValues.length >= 3) {
+        statValues[0].textContent = currentCardIndex + 1;
+        statValues[2].textContent = `${Math.round(((currentCardIndex + 1) / currentDeck.length) * 100)}%`;
+    }
+}
 function markCardDifficult() {
     // You can implement spaced repetition logic here
     const currentCard = currentDeck[currentCardIndex];
@@ -6780,6 +6828,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
