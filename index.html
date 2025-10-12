@@ -6076,11 +6076,11 @@ async function loadFlashcards(courseId) {
     try {
         // Map course IDs to flashcard paths
         const flashcardPaths = {
-            'ap-physics-1': 'testroom/flashcards/ap-physics-1/kinematics.json',
-            'ap-physics-1': 'testroom/flashcards/ap-physics-1/dynamics.json',
+            'ap-physics-1': 'flashcards/ap-physics-1/kinematics.json',
+            'ap-physics-1': 'flashcards/ap-physics-1/dynamics.json',
             // Add mappings for other courses as you create their flashcard files
-            'physics-grade-11': 'testroom/flashcards/physics-grade-11/mechanics.json',
-            'algebra-2': 'testroom/flashcards/algebra-2/functions.json'
+            'physics-grade-11': 'flashcards/physics-grade-11/mechanics.json',
+            'algebra-2': 'flashcards/algebra-2/functions.json'
         };
 
         const flashcardPath = flashcardPaths[courseId];
@@ -6671,5 +6671,6 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
