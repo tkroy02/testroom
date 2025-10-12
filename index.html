@@ -6617,9 +6617,9 @@ function markCardDifficult() {
                         <i class="fas fa-fire"></i> Review Difficult (${difficultCount})
                     </button>
                     ` : ''}
-                    <button class="btn btn-outline" onclick="showTopicSelection(currentFlashcardData)">
-                        <i class="fas fa-list"></i> Choose Another Topic
-                    </button>
+                    <button class="btn btn-outline" onclick="closeFlashcards(); openResource('flashcards')">
+    <i class="fas fa-list"></i> Choose Another Topic
+</button>
                     <button class="btn btn-outline" onclick="closeFlashcards()">
                         <i class="fas fa-home"></i> Back to Course
                     </button>
@@ -6629,6 +6629,21 @@ function markCardDifficult() {
     `;
 }
 
+// NEW FUNCTION: Reload the topic selection
+async function loadTopicSelection() {
+    try {
+        const flashcardData = await loadFlashcards(currentCourseId);
+        if (flashcardData && flashcardData.availableTopics) {
+            showTopicSelection(flashcardData);
+        } else {
+            showNoFlashcardsMessage();
+        }
+    } catch (error) {
+        console.error('Error loading topic selection:', error);
+        showFlashcardError();
+    }
+}
+        
 function closeFlashcards() {
     const resourceContent = document.getElementById('resource-content');
     resourceContent.innerHTML = '';
@@ -6981,6 +6996,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
