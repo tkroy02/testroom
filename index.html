@@ -6034,9 +6034,346 @@ function startExamQuiz() {
     // Add your exam quiz logic here
 }
 
-function startFlashcards() {
-    alert('Flashcard study session starting');
-    // Add your flashcard logic here
+async function startFlashcards() {
+    try {
+        // Show loading state
+        const resourceContent = document.getElementById('resource-content');
+        resourceContent.innerHTML = `
+            <div class="tool-interface active">
+                <div class="tool-header">
+                    <h3 class="section-title">Loading Flashcards...</h3>
+                    <button class="tool-back" onclick="closeFlashcards()">
+                        <i class="fas fa-arrow-left"></i> Back to Course
+                    </button>
+                </div>
+                <div style="text-align: center; padding: 60px 20px;">
+                    <div class="tool-icon" style="margin: 0 auto 20px;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">Loading Flashcard Content</h4>
+                    <p style="color: var(--gray);">Preparing your study session...</p>
+                </div>
+            </div>
+        `;
+
+        // Load flashcards based on current course
+        const flashcardData = await loadFlashcards(currentCourseId);
+        
+        if (flashcardData && flashcardData.topics) {
+            initializeFlashcardUI(flashcardData);
+        } else {
+            showNoFlashcardsMessage();
+        }
+    } catch (error) {
+        console.error('Error starting flashcards:', error);
+        showFlashcardError();
+    }
+}
+
+async function loadFlashcards(courseId) {
+    try {
+        // Map course IDs to flashcard paths
+        const flashcardPaths = {
+            'ap-physics-1': 'flashcards/ap-physics-1/kinematics.json',
+            'ap-physics-1': 'flashcards/ap-physics-1/dynamics.json',
+            // Add mappings for other courses as you create their flashcard files
+            'physics-grade-11': 'flashcards/physics-grade-11/mechanics.json',
+            'algebra-2': 'flashcards/algebra-2/functions.json'
+        };
+
+        const flashcardPath = flashcardPaths[courseId];
+        
+        if (!flashcardPath) {
+            console.warn(`No flashcard path found for course: ${courseId}`);
+            return null;
+        }
+
+        const response = await fetch(flashcardPath);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error loading flashcards:', error);
+        return null;
+    }
+}
+
+let currentFlashcardData = null;
+let currentTopicIndex = 0;
+let currentCardIndex = 0;
+let currentDeck = [];
+
+function initializeFlashcardUI(flashcardData) {
+    currentFlashcardData = flashcardData;
+    currentTopicIndex = 0;
+    currentCardIndex = 0;
+    
+    const resourceContent = document.getElementById('resource-content');
+    
+    if (flashcardData.topics && flashcardData.topics.length > 0) {
+        // Show topic selection for courses with multiple topics
+        if (flashcardData.topics.length > 1) {
+            showTopicSelection(flashcardData);
+        } else {
+            // Directly start with the first topic
+            startTopicStudy(0);
+        }
+    } else {
+        showNoFlashcardsMessage();
+    }
+}
+
+function showTopicSelection(flashcardData) {
+    const resourceContent = document.getElementById('resource-content');
+    
+    resourceContent.innerHTML = `
+        <div class="tool-interface active">
+            <div class="tool-header">
+                <h3 class="section-title">${flashcardData.course} - Select Topic</h3>
+                <button class="tool-back" onclick="closeFlashcards()">
+                    <i class="fas fa-arrow-left"></i> Back to Course
+                </button>
+            </div>
+            
+            <div class="courses-grid">
+                ${flashcardData.topics.map((topic, index) => `
+                    <div class="course-card" onclick="startTopicStudy(${index})">
+                        <h3>${topic.topic_name}</h3>
+                        <p>${topic.cards.length} flashcards</p>
+                        <div class="progress-bar" style="margin: 15px 0;">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <button class="btn" style="margin-top: 10px;">
+                            <i class="fas fa-layer-group"></i> Study Now
+                        </button>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function startTopicStudy(topicIndex) {
+    currentTopicIndex = topicIndex;
+    currentCardIndex = 0;
+    const topic = currentFlashcardData.topics[topicIndex];
+    currentDeck = [...topic.cards]; // Create a copy of the cards
+    
+    const resourceContent = document.getElementById('resource-content');
+    
+    resourceContent.innerHTML = `
+        <div class="tool-interface active">
+            <div class="tool-header">
+                <h3 class="section-title">${currentFlashcardData.course} - ${topic.topic_name}</h3>
+                <button class="tool-back" onclick="${currentFlashcardData.topics.length > 1 ? 'showTopicSelection(currentFlashcardData)' : 'closeFlashcards()'}">
+                    <i class="fas fa-arrow-left"></i> ${currentFlashcardData.topics.length > 1 ? 'Back to Topics' : 'Back to Course'}
+                </button>
+            </div>
+            
+            <div class="flashcard-container">
+                <div class="flashcard-progress">
+                    <div class="progress-info">
+                        <span>Card ${currentCardIndex + 1} of ${currentDeck.length}</span>
+                        <span>Topic: ${topic.topic_name}</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${((currentCardIndex + 1) / currentDeck.length) * 100}%"></div>
+                    </div>
+                </div>
+                
+                <div class="flashcard" id="current-flashcard" onclick="flipCard(this)">
+                    <div class="flashcard-front">
+                        <div class="flashcard-content">
+                            <h4>Question</h4>
+                            <div class="flashcard-text">${currentDeck[currentCardIndex].front}</div>
+                            ${currentDeck[currentCardIndex].image ? 
+                                `<div class="flashcard-image">
+                                    <img src="${currentDeck[currentCardIndex].image}" alt="Flashcard illustration">
+                                </div>` : ''
+                            }
+                        </div>
+                        <div class="flashcard-hint">
+                            <i class="fas fa-lightbulb"></i> Click to reveal answer
+                        </div>
+                    </div>
+                    <div class="flashcard-back">
+                        <div class="flashcard-content">
+                            <h4>Answer</h4>
+                            <div class="flashcard-text">${currentDeck[currentCardIndex].back}</div>
+                            ${currentDeck[currentCardIndex].explanation ? 
+                                `<div class="flashcard-explanation">
+                                    <strong>Explanation:</strong> ${currentDeck[currentCardIndex].explanation}
+                                </div>` : ''
+                            }
+                        </div>
+                        <div class="flashcard-hint">
+                            <i class="fas fa-lightbulb"></i> Click to see question
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flashcard-controls">
+                    <button class="btn btn-outline" onclick="previousCard()" ${currentCardIndex === 0 ? 'disabled' : ''}>
+                        <i class="fas fa-arrow-left"></i> Previous
+                    </button>
+                    
+                    <div class="card-actions">
+                        <button class="btn btn-outline" onclick="markCardDifficult()">
+                            <i class="fas fa-exclamation-circle"></i> Difficult
+                        </button>
+                        <button class="btn" onclick="nextCard()">
+                            ${currentCardIndex === currentDeck.length - 1 ? 'Finish' : 'Next'} 
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="study-stats">
+                    <div class="stat-item">
+                        <span class="stat-value">${currentCardIndex + 1}</span>
+                        <span class="stat-label">Current</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">${currentDeck.length}</span>
+                        <span class="stat-label">Total</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">${Math.round(((currentCardIndex + 1) / currentDeck.length) * 100)}%</span>
+                        <span class="stat-label">Progress</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function flipCard(cardElement) {
+    cardElement.classList.toggle('flipped');
+}
+
+function nextCard() {
+    if (currentCardIndex < currentDeck.length - 1) {
+        currentCardIndex++;
+        startTopicStudy(currentTopicIndex); // Refresh the view
+    } else {
+        // Finished the deck
+        showDeckComplete();
+    }
+}
+
+function previousCard() {
+    if (currentCardIndex > 0) {
+        currentCardIndex--;
+        startTopicStudy(currentTopicIndex); // Refresh the view
+    }
+}
+
+function markCardDifficult() {
+    // You can implement spaced repetition logic here
+    const currentCard = currentDeck[currentCardIndex];
+    console.log('Marked as difficult:', currentCard);
+    // Add to a separate "difficult cards" list for review
+}
+
+function showDeckComplete() {
+    const resourceContent = document.getElementById('resource-content');
+    
+    resourceContent.innerHTML = `
+        <div class="tool-interface active">
+            <div class="tool-header">
+                <h3 class="section-title">Study Session Complete! 🎉</h3>
+                <button class="tool-back" onclick="closeFlashcards()">
+                    <i class="fas fa-arrow-left"></i> Back to Course
+                </button>
+            </div>
+            
+            <div style="text-align: center; padding: 60px 20px;">
+                <div class="tool-icon" style="background: var(--success); margin: 0 auto 20px;">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h4 style="color: var(--primary); margin-bottom: 10px;">Great Job!</h4>
+                <p style="color: var(--gray); margin-bottom: 30px;">
+                    You've completed ${currentDeck.length} flashcards in 
+                    ${currentFlashcardData.topics[currentTopicIndex].topic_name}.
+                </p>
+                
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn" onclick="startTopicStudy(currentTopicIndex)">
+                        <i class="fas fa-redo"></i> Study Again
+                    </button>
+                    <button class="btn btn-outline" onclick="showTopicSelection(currentFlashcardData)">
+                        <i class="fas fa-list"></i> Choose Another Topic
+                    </button>
+                    <button class="btn btn-outline" onclick="closeFlashcards()">
+                        <i class="fas fa-home"></i> Back to Course
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+function closeFlashcards() {
+    const resourceContent = document.getElementById('resource-content');
+    resourceContent.innerHTML = '';
+    currentFlashcardData = null;
+    currentDeck = [];
+}
+
+function showNoFlashcardsMessage() {
+    const resourceContent = document.getElementById('resource-content');
+    resourceContent.innerHTML = `
+        <div class="tool-interface active">
+            <div class="tool-header">
+                <h3 class="section-title">Flashcards</h3>
+                <button class="tool-back" onclick="closeFlashcards()">
+                    <i class="fas fa-arrow-left"></i> Back to Course
+                </button>
+            </div>
+            <div style="text-align: center; padding: 60px 20px;">
+                <div class="tool-icon" style="background: var(--warning); margin: 0 auto 20px;">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h4 style="color: var(--primary); margin-bottom: 10px;">No Flashcards Available</h4>
+                <p style="color: var(--gray); margin-bottom: 30px;">
+                    Flashcards for this course are coming soon! Check back later.
+                </p>
+                <button class="btn" onclick="closeFlashcards()">
+                    <i class="fas fa-arrow-left"></i> Back to Course
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function showFlashcardError() {
+    const resourceContent = document.getElementById('resource-content');
+    resourceContent.innerHTML = `
+        <div class="tool-interface active">
+            <div class="tool-header">
+                <h3 class="section-title">Flashcards</h3>
+                <button class="tool-back" onclick="closeFlashcards()">
+                    <i class="fas fa-arrow-left"></i> Back to Course
+                </button>
+            </div>
+            <div style="text-align: center; padding: 60px 20px;">
+                <div class="tool-icon" style="background: var(--accent); margin: 0 auto 20px;">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h4 style="color: var(--primary); margin-bottom: 10px;">Loading Error</h4>
+                <p style="color: var(--gray); margin-bottom: 30px;">
+                    There was an error loading the flashcards. Please try again later.
+                </p>
+                <button class="btn" onclick="startFlashcards()">
+                    <i class="fas fa-redo"></i> Try Again
+                </button>
+            </div>
+        </div>
+    `;
 }
 
 function loadVideoLessons() {
