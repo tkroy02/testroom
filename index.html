@@ -6081,24 +6081,11 @@ async function loadFlashcards(courseId) {
         };
 
         const path = flashcardPaths[courseId];
-        console.log('📁 Using path:', path);
-        
-        if (!path) {
-            console.warn('❌ No path found for course:', courseId);
-            return null;
-        }
-
         const response = await fetch(path);
-        console.log('📄 Response status:', response.status);
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
         const data = await response.json();
-        console.log('✅ Data loaded successfully:', data);
-        console.log('📊 Topics found:', data.topics ? data.topics.length : 'none');
-        console.log('🃏 Cards in first topic:', data.topics && data.topics[0] ? data.topics[0].cards.length : 'none');
+        
+        console.log('✅ FULL DATA STRUCTURE:', JSON.stringify(data, null, 2));
+        console.log('🔍 All properties:', Object.keys(data));
         
         return data;
     } catch (error) {
@@ -6107,33 +6094,6 @@ async function loadFlashcards(courseId) {
     }
 }
 
-        async function loadFlashcards(courseId) {
-    try {
-        console.log('🔍 Loading flashcards for:', courseId);
-        
-        const flashcardPaths = {
-            'ap-physics-1': 'flashcards/ap-physics-1/dynamics.json'
-        };
-
-        const path = flashcardPaths[courseId];
-        console.log('📁 Using path:', path);
-        
-        const response = await fetch(path);
-        console.log('📄 Response status:', response.status);
-        
-        const data = await response.json();
-        console.log('✅ RAW JSON DATA:', data);
-        console.log('🔍 Checking structure...');
-        console.log('Has "flashcards" property:', data.hasOwnProperty('flashcards'));
-        console.log('Has "topics" property:', data.hasOwnProperty('topics'));
-        console.log('Has "course" property:', data.hasOwnProperty('course'));
-        
-        return data;
-    } catch (error) {
-        console.error('❌ Error loading flashcards:', error);
-        return null;
-    }
-}
 
 let currentFlashcardData = null;
 let currentTopicIndex = 0;
@@ -6143,33 +6103,48 @@ let currentDeck = [];
 function initializeFlashcardUI(flashcardData) {
     console.log('🎨 Initializing UI with data:', flashcardData);
     
-    // Handle different JSON structures
+    // Check all possible structures
     let topics = [];
     
     if (flashcardData.topics) {
-        // New structure: {course: "...", topics: [...]}
         topics = flashcardData.topics;
-        console.log('📚 Using topics structure');
     } else if (flashcardData.flashcards) {
-        // Your structure: {flashcards: [{category: "...", cards: [...]}]}
-        console.log('📚 Using flashcards structure');
         topics = flashcardData.flashcards.map(item => ({
             topic_name: item.category,
             cards: item.cards
         }));
+    } else {
+        // If no standard structure, try to find cards in root level
+        console.log('🔍 Searching for cards in root level...');
+        console.log('All root keys:', Object.keys(flashcardData));
+        
+        // Look for any array that might contain cards
+        for (let key in flashcardData) {
+            if (Array.isArray(flashcardData[key])) {
+                console.log(`Found array at key "${key}":`, flashcardData[key]);
+                if (flashcardData[key].length > 0 && flashcardData[key][0].front) {
+                    topics = [{
+                        topic_name: 'Flashcards',
+                        cards: flashcardData[key]
+                    }];
+                    break;
+                }
+            }
+        }
     }
     
-    console.log('🃏 Processed topics:', topics);
+    console.log('🃏 Final topics:', topics);
     
     if (topics.length > 0) {
         currentFlashcardData = { topics: topics };
         currentTopicIndex = 0;
         startTopicStudy(0);
     } else {
-        console.log('❌ No topics found after processing');
+        console.log('❌ No flashcards found in any structure');
         showNoFlashcardsMessage();
     }
 }
+        
 function showTopicSelection(flashcardData) {
     const resourceContent = document.getElementById('resource-content');
     
@@ -6712,6 +6687,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
