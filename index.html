@@ -6035,6 +6035,8 @@ function startExamQuiz() {
 }
 
 async function startFlashcards() {
+    // ADD THIS ONE LINE:
+    console.log("ACTUAL COURSE ID:", currentCourseId);
     try {
         // Show loading state
         const resourceContent = document.getElementById('resource-content');
@@ -6669,4 +6671,5 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
