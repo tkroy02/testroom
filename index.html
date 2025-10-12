@@ -6567,6 +6567,16 @@ function showFlashcardError() {
     `;
 }
 
+function renderMarkdown(text) {
+    return text
+        // Convert **bold** to <strong>bold</strong>
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        // Convert *italic* to <em>italic</em>  
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        // Convert `code` to <code>code</code>
+        .replace(/`(.*?)`/g, '<code>$1</code>');
+}
+        
 function loadVideoLessons() {
     const videoList = document.getElementById('video-list');
     const videos = [
@@ -6860,6 +6870,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
