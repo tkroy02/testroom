@@ -164,6 +164,159 @@ window.MathJax = {
     font-size: 0.9rem;
     color: #6b7280;
 }
+
+/* Textbook Styles */
+.textbook-container {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+    min-height: 600px;
+}
+
+.textbook-sidebar {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    padding: 25px;
+    box-shadow: var(--shadow);
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.textbook-sidebar h4 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--light-bg);
+    padding-bottom: 10px;
+}
+
+.textbook-section-item {
+    padding: 15px;
+    border-radius: var(--border-radius-sm);
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid var(--light-gray);
+}
+
+.textbook-section-item:hover {
+    background: var(--light-bg);
+    border-color: var(--primary);
+    transform: translateX(5px);
+}
+
+.section-title {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+
+.section-description {
+    color: var(--gray);
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.textbook-content {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    padding: 30px;
+    box-shadow: var(--shadow);
+    min-height: 600px;
+}
+
+.textbook-section .section-header {
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--light-bg);
+    padding-bottom: 20px;
+}
+
+.textbook-section .section-header h2 {
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    color: var(--gray);
+    font-size: 1.1rem;
+    font-style: italic;
+}
+
+.content-paragraph {
+    margin-bottom: 20px;
+    line-height: 1.7;
+    color: var(--text-dark);
+}
+
+.content-paragraph:last-child {
+    margin-bottom: 0;
+}
+
+.key-points, .vocabulary {
+    background: var(--light-bg);
+    padding: 25px;
+    border-radius: var(--border-radius);
+    margin: 30px 0;
+    border-left: 4px solid var(--primary);
+}
+
+.key-points h3, .vocabulary h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.key-points ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.key-points li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+}
+
+.key-points li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--success);
+    font-weight: bold;
+}
+
+.vocab-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.vocab-item {
+    padding: 15px;
+    background: white;
+    border-radius: var(--border-radius-sm);
+    border: 1px solid var(--light-gray);
+}
+
+.section-navigation {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 2px solid var(--light-bg);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .textbook-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .textbook-sidebar {
+        position: static;
+    }
+}
         
 /* Examination Quiz Styles - More Specific Selectors */
 .exam-quiz-container {
@@ -3789,14 +3942,7 @@ function openResource(resourceType, element) {
     
     switch(resourceType) {
         case 'textbook':
-            resourceContent.innerHTML = `
-                <div class="course-card">
-                    <h3 class="section-title">Textbook</h3>
-                    <p style="color: var(--gray); margin-bottom: 20px;">Select a chapter to read</p>
-                    <div id="textbook-chapters" style="display: flex; flex-direction: column; gap: 10px;"></div>
-                </div>
-            `;
-            loadTextbookChapters();
+            loadTextbookContent(); // Use new textbook system instead of loadTextbookChapters()
             break;
             
         case 'exam-quiz':
@@ -3986,26 +4132,233 @@ function clearQuizData() {
     userAnswers = [];
 }
 
-function loadTextbookChapters() {
-    const course = courseData[currentCourseId];
-    if (!course || !course.chapters) return;
+// Textbook functionality
+function loadTextbookContent() {
+    const resourceContent = document.getElementById('resource-content');
     
-    const chaptersDiv = document.getElementById('textbook-chapters');
-    chaptersDiv.innerHTML = course.chapters.map((chapter, index) => `
-        <button class="btn btn-outline" onclick="viewChapter(${index})">
-            <i class="fas fa-book-open"></i> ${chapter.title}
-        </button>
+    resourceContent.innerHTML = `
+        <div class="tool-interface active">
+            <div class="tool-header">
+                <h3 class="section-title">AP Biology Textbook - Unit 1: Chemistry of Life</h3>
+                <button class="tool-back" onclick="openResource('textbook', this)">
+                    <i class="fas fa-arrow-left"></i> Back to Resources
+                </button>
+            </div>
+            
+            <div class="textbook-container">
+                <div class="textbook-sidebar">
+                    <h4>Unit 1 Sections</h4>
+                    <div class="textbook-sections" id="textbook-sections">
+                        <!-- Sections will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="textbook-content" id="textbook-content">
+                    <div style="text-align: center; padding: 60px 20px; color: var(--gray);">
+                        <div class="tool-icon" style="margin: 0 auto 20px;">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">AP Biology Textbook</h4>
+                        <p>Select a section from the sidebar to start reading.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    loadTextbookSections();
+}
+
+function loadTextbookSections() {
+    const sectionsContainer = document.getElementById('textbook-sections');
+    
+    const unit1Sections = [
+        {
+            id: 'introduction_to_chemistry_of_life',
+            title: '1.1 Introduction to Chemistry of Life',
+            path: 'textbooks/a-biology/chemistry_of_life/introduction_to_chemistry_of_life.json',
+            description: 'Importance of chemistry in biology'
+        },
+        {
+            id: 'atoms_elements',
+            title: '1.2 Atoms, Elements, and Isotopes',
+            path: 'textbooks/ap-biology/chemistry_of_life/atoms_elements.json',
+            description: 'Structure and variations of atoms'
+        },
+        {
+            id: 'chemical_bonds',
+            title: '1.3 Chemical Bonds and Interactions',
+            path: 'textbooks/ap-biology/chemistry_of_life/chemical_bonds.json',
+            description: 'Ionic, covalent, hydrogen bonds, van der Waals forces'
+        },
+        {
+            id: 'water',
+            title: '1.4 Water and Its Properties',
+            path: 'textbooks/ap-biology/chemistry_of_life/water.json',
+            description: 'Polarity, cohesion, adhesion, high specific heat, solvent abilities'
+        },
+        {
+            id: 'ph',
+            title: '1.5 pH, Acids, Bases, and Buffers',
+            path: 'textbooks/ap-biology/chemistry_of_life/ph.json',
+            description: 'Hydrogen ion concentration and biological significance'
+        },
+        {
+            id: 'organic_molecules',
+            title: '1.6 Organic Molecules Overview',
+            path: 'textbooks/ap-biology/chemistry_of_life/organic_molecules.json',
+            description: 'Role of carbon and functional groups'
+        },
+        {
+            id: 'carbohydrates',
+            title: '1.7 Carbohydrates',
+            path: 'textbooks/ap-biology/chemistry_of_life/carbohydrates.json',
+            description: 'Monosaccharides, disaccharides, polysaccharides, and functions'
+        },
+        {
+            id: 'lipids',
+            title: '1.8 Lipids',
+            path: 'textbooks/ap-biology/chemistry_of_life/lipids.json',
+            description: 'Fats, phospholipids, steroids, and energy storage'
+        },
+        {
+            id: 'proteins',
+            title: '1.9 Proteins',
+            path: 'textbooks/ap-biology/chemistry_of_life/proteins.json',
+            description: 'Amino acids, peptide bonds, structure levels, and functions'
+        },
+        {
+            id: 'nucleic_acids',
+            title: '1.10 Nucleic Acids',
+            path: 'textbooks/ap-biology/chemistry_of_life/nucleic_acids.json',
+            description: 'DNA, RNA, nucleotides, and their roles in heredity'
+        },
+        {
+            id: 'synthesis',
+            title: '1.11 Macromolecule Synthesis and Breakdown',
+            path: 'textbooks/ap-biology/chemistry_of_life/synthesis.json',
+            description: 'Dehydration synthesis and hydrolysis'
+        },
+        {
+            id: 'summary',
+            title: '1.12 Unit 1 Summary and Key Concepts',
+            path: 'textbooks/ap-biology/chemistry_of_life/summary.json',
+            description: 'Review of key concepts from Unit 1'
+        }
+    ];
+    
+    sectionsContainer.innerHTML = unit1Sections.map(section => `
+        <div class="textbook-section-item" onclick="loadTextbookSection('${section.path}', '${section.title}')">
+            <div class="section-title">${section.title}</div>
+            <div class="section-description">${section.description}</div>
+        </div>
     `).join('');
 }
 
-function viewChapter(index) {
-    const course = courseData[currentCourseId];
-    if (!course || !course.chapters[index]) return;
-    
-    const chapter = course.chapters[index];
-    alert(`Chapter: ${chapter.title}\n\n${chapter.content}`);
+async function loadTextbookSection(sectionPath, sectionTitle) {
+    try {
+        const contentArea = document.getElementById('textbook-content');
+        
+        // Show loading state
+        contentArea.innerHTML = `
+            <div style="text-align: center; padding: 40px 20px;">
+                <div class="tool-icon" style="margin: 0 auto 20px;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <h4 style="color: var(--primary); margin-bottom: 10px;">Loading Content</h4>
+                <p style="color: var(--gray);">Loading ${sectionTitle}...</p>
+            </div>
+        `;
+        
+        const response = await fetch(sectionPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load section: ${response.status}`);
+        }
+        
+        const sectionData = await response.json();
+        
+        // Display the section content
+        displayTextbookSection(sectionData, sectionTitle);
+        
+    } catch (error) {
+        console.error('Error loading textbook section:', error);
+        const contentArea = document.getElementById('textbook-content');
+        contentArea.innerHTML = `
+            <div style="text-align: center; padding: 40px 20px; color: var(--accent);">
+                <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                <h4>Content Not Available</h4>
+                <p>Unable to load the textbook section. Please try again later.</p>
+                <button class="btn btn-outline" onclick="loadTextbookContent()">
+                    <i class="fas fa-arrow-left"></i> Back to Sections
+                </button>
+            </div>
+        `;
+    }
 }
 
+function displayTextbookSection(sectionData, sectionTitle) {
+    const contentArea = document.getElementById('textbook-content');
+    
+    contentArea.innerHTML = `
+        <div class="textbook-section">
+            <div class="section-header">
+                <h2>${sectionTitle}</h2>
+                ${sectionData.subtitle ? `<p class="section-subtitle">${sectionData.subtitle}</p>` : ''}
+            </div>
+            
+            <div class="section-content">
+                ${sectionData.content ? renderTextbookContent(sectionData.content) : '<p>No content available.</p>'}
+            </div>
+            
+            ${sectionData.keyPoints ? `
+            <div class="key-points">
+                <h3><i class="fas fa-key"></i> Key Points</h3>
+                <ul>
+                    ${sectionData.keyPoints.map(point => `<li>${renderMarkdown(point)}</li>`).join('')}
+                </ul>
+            </div>
+            ` : ''}
+            
+            ${sectionData.vocabulary ? `
+            <div class="vocabulary">
+                <h3><i class="fas fa-book"></i> Key Vocabulary</h3>
+                <div class="vocab-grid">
+                    ${sectionData.vocabulary.map(term => `
+                        <div class="vocab-item">
+                            <strong>${term.term}</strong>: ${renderMarkdown(term.definition)}
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+            ` : ''}
+            
+            <div class="section-navigation">
+                <button class="btn btn-outline" onclick="loadTextbookContent()">
+                    <i class="fas fa-list"></i> Back to Sections
+                </button>
+            </div>
+        </div>
+    `;
+    
+    // Render MathJax for the content
+    setTimeout(() => {
+        if (window.MathJax) {
+            MathJax.typesetPromise().catch(console.error);
+        }
+    }, 100);
+}
+
+function renderTextbookContent(content) {
+    if (Array.isArray(content)) {
+        return content.map(paragraph => `
+            <div class="content-paragraph">
+                ${renderMarkdown(paragraph)}
+            </div>
+        `).join('');
+    }
+    return renderMarkdown(content);
+}
+        
 function loadTopicQuizzes() {
     const topicList = document.getElementById('topic-list');
     const units = getCourseUnits(currentCourseId);
@@ -7739,6 +8092,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
