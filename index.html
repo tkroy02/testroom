@@ -4563,15 +4563,25 @@ function displayTextbookSection(sectionData, sectionTitle) {
 
             // Add key concept if present
             if (section.key_concept) {
-                htmlContent += `
-                    <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
-                        <strong style="color: var(--primary);">Key Concept:</strong> ${section.key_concept.definition}
-                        ${section.key_concept.biological_context ? `
-                            <div style="margin-top: 8px;"><strong>Biological Context:</strong> ${section.key_concept.biological_context}</div>
-                        ` : ''}
-                    </div>
-                `;
-            }
+    if (typeof section.key_concept === 'object' && section.key_concept.definition) {
+        // Handle object format
+        htmlContent += `
+            <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
+                <strong style="color: var(--primary);">Key Concept:</strong> ${section.key_concept.definition}
+                ${section.key_concept.biological_context ? `
+                    <div style="margin-top: 8px;"><strong>Biological Context:</strong> ${section.key_concept.biological_context}</div>
+                ` : ''}
+            </div>
+        `;
+    } else {
+        // Handle string format
+        htmlContent += `
+            <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
+                <strong style="color: var(--primary);">Key Concept:</strong> ${section.key_concept}
+            </div>
+        `;
+    }
+}
 
             // Handle different section types with the new structure
             if (section.types_of_cellular_work) {
@@ -8588,6 +8598,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
