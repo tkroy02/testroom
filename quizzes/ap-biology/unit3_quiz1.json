@@ -1,4 +1,4 @@
-as{
+{
   "quiz": {
     "title": "Introduction to Cellular Energetics",
     "subtitle": "Basic MCQs on Energy, Thermodynamics, Photosynthesis, Respiration, ATP, and Food Chain",
@@ -10,10 +10,10 @@ as{
         "type": "mcq",
         "question": "Which of the following is an example of kinetic energy?",
         "options": [
-          "A) Glucose molecule",
-          "B) ATP molecule",
-          "C) Moving muscle",
-          "D) Fat stored in adipose tissue"
+          "Glucose molecule",
+          "ATP molecule",
+          "Moving muscle",
+          "Fat stored in adipose tissue"
         ],
         "answer": "C",
         "explanation": "Moving muscle represents energy in motion, which is kinetic energy."
@@ -22,10 +22,10 @@ as{
         "type": "mcq",
         "question": "Which of the following is potential energy?",
         "options": [
-          "A) Water flowing in a river",
-          "B) Stretched rubber band",
-          "C) Heat released from a reaction",
-          "D) Electron moving through a wire"
+          "Water flowing in a river",
+          "Stretched rubber band",
+          "Heat released from a reaction",
+          "Electron moving through a wire"
         ],
         "answer": "B",
         "explanation": "A stretched rubber band stores energy that can be released, making it potential energy."
@@ -34,10 +34,10 @@ as{
         "type": "mcq",
         "question": "Which type of energy is stored in chemical bonds?",
         "options": [
-          "A) Kinetic",
-          "B) Potential",
-          "C) Thermal",
-          "D) Mechanical"
+          "Kinetic",
+          "Potential",
+          "Thermal",
+          "Mechanical"
         ],
         "answer": "B",
         "explanation": "Chemical energy stored in bonds is a form of potential energy that can be released during reactions."
@@ -46,10 +46,10 @@ as{
         "type": "mcq",
         "question": "A rock sitting on a hill has ______ energy.",
         "options": [
-          "A) Kinetic",
-          "B) Potential",
-          "C) Thermal",
-          "D) Chemical"
+          "Kinetic",
+          "Potential",
+          "Thermal",
+          "Chemical"
         ],
         "answer": "B",
         "explanation": "The rock has gravitational potential energy due to its position."
@@ -58,10 +58,10 @@ as{
         "type": "mcq",
         "question": "Which is an example of energy conversion in cells?",
         "options": [
-          "A) ATP → ADP + Pi",
-          "B) Light → Chemical energy",
-          "C) Glucose → ATP",
-          "D) All of the above"
+          "ATP → ADP + Pi",
+          "Light → Chemical energy",
+          "Glucose → ATP",
+          "All of the above"
         ],
         "answer": "D",
         "explanation": "All options represent energy conversions that occur in cellular processes."
@@ -70,10 +70,10 @@ as{
         "type": "mcq",
         "question": "Energy in motion is called:",
         "options": [
-          "A) Potential energy",
-          "B) Kinetic energy",
-          "C) Chemical energy",
-          "D) Gibbs free energy"
+          "Potential energy",
+          "Kinetic energy",
+          "Chemical energy",
+          "Gibbs free energy"
         ],
         "answer": "B",
         "explanation": "Kinetic energy is defined as the energy of motion."
@@ -82,10 +82,10 @@ as{
         "type": "mcq",
         "question": "Food contains energy stored as:",
         "options": [
-          "A) Kinetic energy",
-          "B) Potential energy",
-          "C) Heat energy",
-          "D) Mechanical energy"
+          "Kinetic energy",
+          "Potential energy",
+          "Heat energy",
+          "Mechanical energy"
         ],
         "answer": "B",
         "explanation": "Food stores chemical potential energy in its molecular bonds."
@@ -94,10 +94,10 @@ as{
         "type": "mcq",
         "question": "Which of these is NOT a form of potential energy?",
         "options": [
-          "A) Chemical bonds",
-          "B) Water behind a dam",
-          "C) Flowing river",
-          "D) Compressed spring"
+          "Chemical bonds",
+          "Water behind a dam",
+          "Flowing river",
+          "Compressed spring"
         ],
         "answer": "C",
         "explanation": "A flowing river has kinetic energy, while the others represent stored (potential) energy."
@@ -106,10 +106,10 @@ as{
         "type": "mcq",
         "question": "Muscle contraction primarily uses energy in the form of:",
         "options": [
-          "A) Kinetic energy",
-          "B) Elastic potential energy",
-          "C) Chemical energy",
-          "D) Thermal energy"
+          "Kinetic energy",
+          "Elastic potential energy",
+          "Chemical energy",
+          "Thermal energy"
         ],
         "answer": "C",
         "explanation": "Muscle contraction directly converts chemical energy from ATP hydrolysis into mechanical work."
@@ -118,10 +118,10 @@ as{
         "type": "mcq",
         "question": "During digestion, chemical potential energy is converted into:",
         "options": [
-          "A) Heat and kinetic energy",
-          "B) Only kinetic energy",
-          "C) Only potential energy",
-          "D) Light energy"
+          "Heat and kinetic energy",
+          "Only kinetic energy",
+          "Only potential energy",
+          "Light energy"
         ],
         "answer": "A",
         "explanation": "Digestion releases both heat (thermal energy) and provides energy for cellular work (kinetic energy)."
@@ -130,10 +130,10 @@ as{
         "type": "mcq",
         "question": "The first law of thermodynamics states:",
         "options": [
-          "A) Energy can be created",
-          "B) Energy can be destroyed",
-          "C) Energy cannot be created or destroyed",
-          "D) Entropy decreases"
+          "Energy can be created",
+          "Energy can be destroyed",
+          "Energy cannot be created or destroyed",
+          "Entropy decreases"
         ],
         "answer": "C",
         "explanation": "The first law states that energy is conserved - it can be converted but not created or destroyed."
@@ -142,10 +142,10 @@ as{
         "type": "mcq",
         "question": "The second law of thermodynamics states:",
         "options": [
-          "A) Energy is conserved",
-          "B) Entropy of the universe increases",
-          "C) Gibbs free energy is always positive",
-          "D) ATP is produced in mitochondria"
+          "Energy is conserved",
+          "Entropy of the universe increases",
+          "Gibbs free energy is always positive",
+          "ATP is produced in mitochondria"
         ],
         "answer": "B",
         "explanation": "The second law states that the entropy (disorder) of the universe always increases in spontaneous processes."
@@ -154,10 +154,10 @@ as{
         "type": "mcq",
         "question": "Which of the following is true about entropy?",
         "options": [
-          "A) Cells increase entropy locally without energy input",
-          "B) Cells maintain order at the expense of increasing entropy elsewhere",
-          "C) Entropy is always negative",
-          "D) Entropy does not apply to biological systems"
+          "Cells increase entropy locally without energy input",
+          "Cells maintain order at the expense of increasing entropy elsewhere",
+          "Entropy is always negative",
+          "Entropy does not apply to biological systems"
         ],
         "answer": "B",
         "explanation": "Cells create local order but increase overall entropy in their environment through energy-releasing processes."
@@ -166,10 +166,10 @@ as{
         "type": "mcq",
         "question": "Heat released from cellular respiration is an example of:",
         "options": [
-          "A) Kinetic energy",
-          "B) Entropy increase",
-          "C) Gibbs free energy",
-          "D) Potential energy"
+          "Kinetic energy",
+          "Entropy increase",
+          "Gibbs free energy",
+          "Potential energy"
         ],
         "answer": "B",
         "explanation": "Heat release represents energy dispersal, which increases entropy."
@@ -178,8 +178,8 @@ as{
         "type": "mcq",
         "question": "Living organisms obey the laws of thermodynamics. True or False?",
         "options": [
-          "A) True",
-          "B) False"
+          "True",
+          "False"
         ],
         "answer": "A",
         "explanation": "All biological systems, including living organisms, must obey the laws of thermodynamics."
@@ -188,10 +188,10 @@ as{
         "type": "mcq",
         "question": "Which process decreases the entropy of a system?",
         "options": [
-          "A) Digestion of food",
-          "B) Protein synthesis",
-          "C) Respiration",
-          "D) Heat production"
+          "Digestion of food",
+          "Protein synthesis",
+          "Respiration",
+          "Heat production"
         ],
         "answer": "B",
         "explanation": "Protein synthesis creates ordered structures, decreasing local entropy."
@@ -200,10 +200,10 @@ as{
         "type": "mcq",
         "question": "Energy released in exergonic reactions is:",
         "options": [
-          "A) Stored as potential energy",
-          "B) Lost as heat",
-          "C) Stored in bonds of ATP",
-          "D) Both B and C"
+          "Stored as potential energy",
+          "Lost as heat",
+          "Stored in bonds of ATP",
+          "Both B and C"
         ],
         "answer": "D",
         "explanation": "Exergonic reaction energy can be lost as heat or captured in ATP bonds."
@@ -212,10 +212,10 @@ as{
         "type": "mcq",
         "question": "Endergonic reactions:",
         "options": [
-          "A) Release energy",
-          "B) Require energy input",
-          "C) Happen spontaneously",
-          "D) Produce ATP without input"
+          "Release energy",
+          "Require energy input",
+          "Happen spontaneously",
+          "Produce ATP without input"
         ],
         "answer": "B",
         "explanation": "Endergonic reactions are non-spontaneous and require energy input to proceed."
@@ -224,10 +224,10 @@ as{
         "type": "mcq",
         "question": "The energy for maintaining cell order comes from:",
         "options": [
-          "A) ATP hydrolysis",
-          "B) Photosynthesis",
-          "C) Cellular respiration",
-          "D) All of the above"
+          "ATP hydrolysis",
+          "Photosynthesis",
+          "Cellular respiration",
+          "All of the above"
         ],
         "answer": "D",
         "explanation": "All these processes contribute to providing energy for cellular order maintenance."
@@ -236,10 +236,10 @@ as{
         "type": "mcq",
         "question": "Entropy is best described as:",
         "options": [
-          "A) Stored energy",
-          "B) Energy of motion",
-          "C) Disorder in a system",
-          "D) Heat content"
+          "Stored energy",
+          "Energy of motion",
+          "Disorder in a system",
+          "Heat content"
         ],
         "answer": "C",
         "explanation": "Entropy measures the degree of disorder or randomness in a system."
@@ -248,10 +248,10 @@ as{
         "type": "mcq",
         "question": "Gibbs free energy (ΔG) indicates:",
         "options": [
-          "A) Heat released",
-          "B) Spontaneity of a reaction",
-          "C) Kinetic energy",
-          "D) Potential energy"
+          "Heat released",
+          "Spontaneity of a reaction",
+          "Kinetic energy",
+          "Potential energy"
         ],
         "answer": "B",
         "explanation": "Gibbs free energy (ΔG) determines whether a reaction will occur spontaneously."
@@ -260,10 +260,10 @@ as{
         "type": "mcq",
         "question": "A reaction with ΔG < 0 is:",
         "options": [
-          "A) Endergonic",
-          "B) Exergonic",
-          "C) Non-spontaneous",
-          "D) Impossible"
+          "Endergonic",
+          "Exergonic",
+          "Non-spontaneous",
+          "Impossible"
         ],
         "answer": "B",
         "explanation": "Negative ΔG indicates an exergonic (energy-releasing) spontaneous reaction."
@@ -272,10 +272,10 @@ as{
         "type": "mcq",
         "question": "ATP hydrolysis is:",
         "options": [
-          "A) Exergonic",
-          "B) Endergonic",
-          "C) Not a reaction",
-          "D) Photosynthetic"
+          "Exergonic",
+          "Endergonic",
+          "Not a reaction",
+          "Photosynthetic"
         ],
         "answer": "A",
         "explanation": "ATP hydrolysis releases energy and has negative ΔG, making it exergonic."
@@ -284,10 +284,10 @@ as{
         "type": "mcq",
         "question": "Which of the following is an endergonic process?",
         "options": [
-          "A) Cellular respiration",
-          "B) ATP hydrolysis",
-          "C) Photosynthesis",
-          "D) Diffusion of water"
+          "Cellular respiration",
+          "ATP hydrolysis",
+          "Photosynthesis",
+          "Diffusion of water"
         ],
         "answer": "C",
         "explanation": "Photosynthesis requires energy input (light) and has positive ΔG, making it endergonic."
@@ -296,10 +296,10 @@ as{
         "type": "mcq",
         "question": "Coupling reactions in cells allows:",
         "options": [
-          "A) Endergonic reactions to occur using energy from exergonic reactions",
-          "B) Only exergonic reactions to occur",
-          "C) ATP to be stored as fat",
-          "D) Entropy to decrease universally"
+          "Endergonic reactions to occur using energy from exergonic reactions",
+          "Only exergonic reactions to occur",
+          "ATP to be stored as fat",
+          "Entropy to decrease universally"
         ],
         "answer": "A",
         "explanation": "Cells couple exergonic reactions (like ATP hydrolysis) to drive endergonic processes."
@@ -308,10 +308,10 @@ as{
         "type": "mcq",
         "question": "ΔG = ΔH – TΔS, where ΔH is:",
         "options": [
-          "A) Temperature",
-          "B) Entropy",
-          "C) Enthalpy",
-          "D) Free energy"
+          "Temperature",
+          "Entropy",
+          "Enthalpy",
+          "Free energy"
         ],
         "answer": "C",
         "explanation": "ΔH represents the change in enthalpy (heat content) of the system."
@@ -320,10 +320,10 @@ as{
         "type": "mcq",
         "question": "Spontaneous reactions:",
         "options": [
-          "A) Always produce ATP",
-          "B) Have ΔG > 0",
-          "C) Release free energy",
-          "D) Require energy input"
+          "Always produce ATP",
+          "Have ΔG > 0",
+          "Release free energy",
+          "Require energy input"
         ],
         "answer": "C",
         "explanation": "Spontaneous reactions have ΔG < 0 and release free energy."
@@ -332,10 +332,10 @@ as{
         "type": "mcq",
         "question": "Which process can be driven by ATP hydrolysis?",
         "options": [
-          "A) Active transport",
-          "B) Muscle contraction",
-          "C) Biosynthesis of macromolecules",
-          "D) All of the above"
+          "Active transport",
+          "Muscle contraction",
+          "Biosynthesis of macromolecules",
+          "All of the above"
         ],
         "answer": "D",
         "explanation": "ATP hydrolysis provides energy for various cellular work including transport, movement, and synthesis."
@@ -344,10 +344,10 @@ as{
         "type": "mcq",
         "question": "Gibbs free energy combines:",
         "options": [
-          "A) Kinetic and potential energy",
-          "B) Enthalpy and entropy",
-          "C) Heat and work",
-          "D) ATP and glucose"
+          "Kinetic and potential energy",
+          "Enthalpy and entropy",
+          "Heat and work",
+          "ATP and glucose"
         ],
         "answer": "B",
         "explanation": "Gibbs free energy (ΔG) combines enthalpy (ΔH) and entropy (ΔS) factors: ΔG = ΔH - TΔS."
@@ -356,10 +356,10 @@ as{
         "type": "mcq",
         "question": "Which reaction decreases free energy?",
         "options": [
-          "A) Photosynthesis",
-          "B) ATP synthesis",
-          "C) Cellular respiration",
-          "D) Protein folding requiring energy input"
+          "Photosynthesis",
+          "ATP synthesis",
+          "Cellular respiration",
+          "Protein folding requiring energy input"
         ],
         "answer": "C",
         "explanation": "Cellular respiration has negative ΔG and decreases free energy, releasing it for cellular work."
@@ -368,10 +368,10 @@ as{
         "type": "mcq",
         "question": "Photosynthesis converts:",
         "options": [
-          "A) Chemical energy → light energy",
-          "B) Light energy → chemical energy",
-          "C) ATP → glucose",
-          "D) Heat → ATP"
+          "Chemical energy → light energy",
+          "Light energy → chemical energy",
+          "ATP → glucose",
+          "Heat → ATP"
         ],
         "answer": "B",
         "explanation": "Photosynthesis converts light energy into chemical energy stored in glucose."
@@ -380,10 +380,10 @@ as{
         "type": "mcq",
         "question": "Chlorophyll absorbs mainly:",
         "options": [
-          "A) Green light",
-          "B) Red and blue light",
-          "C) Infrared light",
-          "D) UV light"
+          "Green light",
+          "Red and blue light",
+          "Infrared light",
+          "UV light"
         ],
         "answer": "B",
         "explanation": "Chlorophyll absorbs red and blue light most efficiently, reflecting green light."
@@ -392,10 +392,10 @@ as{
         "type": "mcq",
         "question": "Cellular respiration occurs in:",
         "options": [
-          "A) Chloroplast",
-          "B) Mitochondria",
-          "C) Nucleus",
-          "D) Ribosome"
+          "Chloroplast",
+          "Mitochondria",
+          "Nucleus",
+          "Ribosome"
         ],
         "answer": "B",
         "explanation": "The majority of cellular respiration occurs in mitochondria."
@@ -404,10 +404,10 @@ as{
         "type": "mcq",
         "question": "The main product of cellular respiration is:",
         "options": [
-          "A) Glucose",
-          "B) Oxygen",
-          "C) ATP",
-          "D) Chlorophyll"
+          "Glucose",
+          "Oxygen",
+          "ATP",
+          "Chlorophyll"
         ],
         "answer": "C",
         "explanation": "ATP is the main energy currency produced during cellular respiration."
@@ -416,10 +416,10 @@ as{
         "type": "mcq",
         "question": "Which process releases CO₂?",
         "options": [
-          "A) Photosynthesis",
-          "B) Glycolysis and Krebs cycle",
-          "C) Light reactions",
-          "D) Calvin cycle"
+          "Photosynthesis",
+          "Glycolysis and Krebs cycle",
+          "Light reactions",
+          "Calvin cycle"
         ],
         "answer": "B",
         "explanation": "CO₂ is released during the Krebs cycle and other stages of cellular respiration."
@@ -428,10 +428,10 @@ as{
         "type": "mcq",
         "question": "ATP is produced in mitochondria during:",
         "options": [
-          "A) Glycolysis",
-          "B) Krebs cycle and electron transport chain",
-          "C) Photosynthesis only",
-          "D) Fermentation only"
+          "Glycolysis",
+          "Krebs cycle and electron transport chain",
+          "Photosynthesis only",
+          "Fermentation only"
         ],
         "answer": "B",
         "explanation": "Most ATP is produced in mitochondria during the Krebs cycle and electron transport chain."
@@ -440,10 +440,10 @@ as{
         "type": "mcq",
         "question": "Which molecule is the final electron acceptor in aerobic respiration?",
         "options": [
-          "A) Glucose",
-          "B) Oxygen",
-          "C) NADH",
-          "D) Pyruvate"
+          "Glucose",
+          "Oxygen",
+          "NADH",
+          "Pyruvate"
         ],
         "answer": "B",
         "explanation": "Oxygen serves as the final electron acceptor in the electron transport chain."
@@ -452,10 +452,10 @@ as{
         "type": "mcq",
         "question": "Which process occurs in the cytoplasm?",
         "options": [
-          "A) Krebs cycle",
-          "B) Glycolysis",
-          "C) Electron transport chain",
-          "D) Photosynthesis light reactions"
+          "Krebs cycle",
+          "Glycolysis",
+          "Electron transport chain",
+          "Photosynthesis light reactions"
         ],
         "answer": "B",
         "explanation": "Glycolysis occurs in the cytoplasm, while other processes occur in organelles."
@@ -464,10 +464,10 @@ as{
         "type": "mcq",
         "question": "Which of these captures light energy in plants?",
         "options": [
-          "A) ATP synthase",
-          "B) Chlorophyll",
-          "C) NADH",
-          "D) Pyruvate"
+          "ATP synthase",
+          "Chlorophyll",
+          "NADH",
+          "Pyruvate"
         ],
         "answer": "B",
         "explanation": "Chlorophyll is the primary pigment that captures light energy for photosynthesis."
@@ -476,10 +476,10 @@ as{
         "type": "mcq",
         "question": "Photosynthesis produces:",
         "options": [
-          "A) CO₂ and H₂O",
-          "B) Glucose and O₂",
-          "C) ATP and NADH only",
-          "D) Heat"
+          "CO₂ and H₂O",
+          "Glucose and O₂",
+          "ATP and NADH only",
+          "Heat"
         ],
         "answer": "B",
         "explanation": "The overall products of photosynthesis are glucose and oxygen."
@@ -488,10 +488,10 @@ as{
         "type": "mcq",
         "question": "Metabolism includes:",
         "options": [
-          "A) Only catabolic reactions",
-          "B) Only anabolic reactions",
-          "C) Both catabolic and anabolic reactions",
-          "D) None of the above"
+          "Only catabolic reactions",
+          "Only anabolic reactions",
+          "Both catabolic and anabolic reactions",
+          "None of the above"
         ],
         "answer": "C",
         "explanation": "Metabolism encompasses all chemical reactions, including both catabolic (breakdown) and anabolic (building) processes."
@@ -500,10 +500,10 @@ as{
         "type": "mcq",
         "question": "Catabolic reactions:",
         "options": [
-          "A) Build molecules",
-          "B) Break down molecules",
-          "C) Store energy in ATP",
-          "D) Require energy input"
+          "Build molecules",
+          "Break down molecules",
+          "Store energy in ATP",
+          "Require energy input"
         ],
         "answer": "B",
         "explanation": "Catabolic reactions break down complex molecules into simpler ones, releasing energy."
@@ -512,10 +512,10 @@ as{
         "type": "mcq",
         "question": "Anabolic reactions:",
         "options": [
-          "A) Break down molecules",
-          "B) Require energy",
-          "C) Release CO₂",
-          "D) Produce heat only"
+          "Break down molecules",
+          "Require energy",
+          "Release CO₂",
+          "Produce heat only"
         ],
         "answer": "B",
         "explanation": "Anabolic reactions build complex molecules and require energy input."
@@ -524,10 +524,10 @@ as{
         "type": "mcq",
         "question": "ATP provides energy by:",
         "options": [
-          "A) Forming chemical bonds",
-          "B) Hydrolysis of phosphate bonds",
-          "C) Absorbing light energy",
-          "D) Increasing entropy directly"
+          "Forming chemical bonds",
+          "Hydrolysis of phosphate bonds",
+          "Absorbing light energy",
+          "Increasing entropy directly"
         ],
         "answer": "B",
         "explanation": "ATP releases energy through hydrolysis of its phosphate bonds (ATP → ADP + Pi)."
@@ -536,10 +536,10 @@ as{
         "type": "mcq",
         "question": "Energy flows in a food chain from:",
         "options": [
-          "A) Consumers → Producers",
-          "B) Producers → Consumers → Decomposers",
-          "C) Decomposers → Producers → Consumers",
-          "D) Herbivores → Carnivores → Plants"
+          "Consumers → Producers",
+          "Producers → Consumers → Decomposers",
+          "Decomposers → Producers → Consumers",
+          "Herbivores → Carnivores → Plants"
         ],
         "answer": "B",
         "explanation": "Energy flows from producers (plants) to consumers to decomposers in a food chain."
@@ -548,10 +548,10 @@ as{
         "type": "mcq",
         "question": "Which of the following is a primary producer?",
         "options": [
-          "A) Rabbit",
-          "B) Grass",
-          "C) Lion",
-          "D) Mushroom"
+          "Rabbit",
+          "Grass",
+          "Lion",
+          "Mushroom"
         ],
         "answer": "B",
         "explanation": "Grass is a primary producer that converts light energy into chemical energy through photosynthesis."
@@ -560,10 +560,10 @@ as{
         "type": "mcq",
         "question": "Which of the following stores the most potential energy per gram?",
         "options": [
-          "A) Proteins",
-          "B) Carbohydrates",
-          "C) Fats",
-          "D) Water"
+          "Proteins",
+          "Carbohydrates",
+          "Fats",
+          "Water"
         ],
         "answer": "C",
         "explanation": "Fats store approximately 9 kcal/g, while carbohydrates and proteins store about 4 kcal/g."
@@ -572,10 +572,10 @@ as{
         "type": "mcq",
         "question": "Cellular respiration is important in the food chain because it:",
         "options": [
-          "A) Converts light to chemical energy",
-          "B) Provides energy for consumers",
-          "C) Stores energy in plants",
-          "D) Releases oxygen only"
+          "Converts light to chemical energy",
+          "Provides energy for consumers",
+          "Stores energy in plants",
+          "Releases oxygen only"
         ],
         "answer": "B",
         "explanation": "Cellular respiration releases energy from food molecules, providing energy for consumers in the food chain."
@@ -584,10 +584,10 @@ as{
         "type": "mcq",
         "question": "ATP is regenerated in cells primarily via:",
         "options": [
-          "A) Photosynthesis in animals",
-          "B) Glycolysis, Krebs cycle, and oxidative phosphorylation",
-          "C) Protein synthesis only",
-          "D) Passive diffusion"
+          "Photosynthesis in animals",
+          "Glycolysis, Krebs cycle, and oxidative phosphorylation",
+          "Protein synthesis only",
+          "Passive diffusion"
         ],
         "answer": "B",
         "explanation": "ATP is regenerated through cellular respiration processes: glycolysis, Krebs cycle, and oxidative phosphorylation."
@@ -596,10 +596,10 @@ as{
         "type": "mcq",
         "question": "Which of the following statements is TRUE?",
         "options": [
-          "A) Energy is created in cells",
-          "B) Energy is converted from one form to another in cells",
-          "C) ATP is permanent energy storage",
-          "D) Metabolism only includes energy release"
+          "Energy is created in cells",
+          "Energy is converted from one form to another in cells",
+          "ATP is permanent energy storage",
+          "Metabolism only includes energy release"
         ],
         "answer": "B",
         "explanation": "Cells convert energy from one form to another (e.g., chemical to mechanical) but do not create energy."
@@ -621,5 +621,4 @@ as{
       }
     }
   }
-
 }
