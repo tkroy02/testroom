@@ -4524,15 +4524,17 @@ async function loadTextbookSection(sectionPath, sectionTitle) {
 function displayTextbookSection(sectionData, sectionTitle) {
     const contentArea = document.getElementById('textbook-content');
     
-    // Build HTML content from the structured JSON
+    // Build HTML content from the new structured JSON
     let htmlContent = `
         <div class="textbook-section">
             <div class="section-header">
                 <h2>${sectionTitle}</h2>
-                ${sectionData.description ? `<p class="section-subtitle">${sectionData.description}</p>` : ''}
+                ${sectionData.expanded_description ? `<p class="section-subtitle">${sectionData.expanded_description}</p>` : ''}
                 ${sectionData.core_concept ? `
-                    <div style="background: var(--light-bg); padding: 15px; border-radius: var(--border-radius-sm); margin-top: 15px; border-left: 4px solid var(--primary);">
-                        <strong>Core Concept:</strong> ${sectionData.core_concept}
+                    <div style="background: var(--light-bg); padding: 20px; border-radius: var(--border-radius-sm); margin-top: 20px; border-left: 4px solid var(--primary);">
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Core Concept</h4>
+                        <p style="font-weight: 600; margin-bottom: 10px;">${sectionData.core_concept.principle}</p>
+                        <p style="color: var(--gray);">${sectionData.core_concept.explanation}</p>
                     </div>
                 ` : ''}
             </div>
@@ -4544,31 +4546,51 @@ function displayTextbookSection(sectionData, sectionTitle) {
     if (sectionData.sections && Array.isArray(sectionData.sections)) {
         sectionData.sections.forEach((section, index) => {
             htmlContent += `
-                <div class="content-section" style="margin-bottom: 30px;">
-                    <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 1.3rem;">
+                <div class="content-section" style="margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid var(--light-gray);">
+                    <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.4rem; border-left: 4px solid var(--primary-light); padding-left: 15px;">
                         ${section.section_title || `Section ${index + 1}`}
                     </h3>
             `;
 
-            // Add key concept if present
-            if (section.key_concept) {
+            // Add introduction if present
+            if (section.introduction) {
                 htmlContent += `
-                    <div style="background: #e8f4fd; padding: 12px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #2196F3;">
-                        <strong>Key Concept:</strong> ${section.key_concept}
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-style: italic;">
+                        ${section.introduction}
                     </div>
                 `;
             }
 
-            // Handle different section types
+            // Add key concept if present
+            if (section.key_concept) {
+                htmlContent += `
+                    <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
+                        <strong style="color: var(--primary);">Key Concept:</strong> ${section.key_concept.definition}
+                        ${section.key_concept.biological_context ? `
+                            <div style="margin-top: 8px;"><strong>Biological Context:</strong> ${section.key_concept.biological_context}</div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            // Handle different section types with the new structure
             if (section.types_of_cellular_work) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 20px 0 10px 0;">Types of Cellular Work:</h4>`;
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Types of Cellular Work:</h4>`;
                 section.types_of_cellular_work.forEach(work => {
                     htmlContent += `
-                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--light-gray);">
-                            <strong style="color: var(--primary);">${work.type}:</strong> ${work.description}
-                            ${work.examples ? `
-                                <div style="margin-top: 8px;">
-                                    <strong>Examples:</strong> ${work.examples.join(', ')}
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray); box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;">${work.type}</h5>
+                            <p style="margin-bottom: 10px;"><strong>Description:</strong> ${work.description}</p>
+                            ${work.detailed_mechanism ? `<p style="margin-bottom: 10px;"><strong>Mechanism:</strong> ${work.detailed_mechanism}</p>` : ''}
+                            
+                            ${work.examples && work.examples.length > 0 ? `
+                                <div style="margin-top: 15px;">
+                                    <strong>Examples:</strong>
+                                    ${work.examples.map(example => `
+                                        <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 8px;">
+                                            <strong>${example.process}:</strong> ${example.explanation}
+                                        </div>
+                                    `).join('')}
                                 </div>
                             ` : ''}
                         </div>
@@ -4577,44 +4599,195 @@ function displayTextbookSection(sectionData, sectionTitle) {
             }
 
             if (section.thermodynamic_laws) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 20px 0 10px 0;">Thermodynamic Laws:</h4>`;
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Thermodynamic Laws:</h4>`;
                 section.thermodynamic_laws.forEach(law => {
                     htmlContent += `
-                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--light-gray);">
-                            <strong style="color: var(--primary);">${law.law}:</strong> ${law.principle}
-                            <div style="margin-top: 8px;"><strong>Statement:</strong> ${law.statement}</div>
-                            <div style="margin-top: 8px;"><strong>Biological Implication:</strong> ${law.biological_implication}</div>
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray); box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;">${law.law}</h5>
+                            <p style="margin-bottom: 8px;"><strong>Principle:</strong> ${law.principle}</p>
+                            <p style="margin-bottom: 8px;"><strong>Statement:</strong> ${law.statement}</p>
+                            <p style="margin-bottom: 8px;"><strong>Biological Implication:</strong> ${law.biological_implication}</p>
+                            ${law.example ? `<p style="margin-bottom: 8px;"><strong>Example:</strong> ${law.example}</p>` : ''}
+                            ${law.analogy ? `<div style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px; border-left: 4px solid #ffc107;"><strong>Analogy:</strong> ${law.analogy}</div>` : ''}
                         </div>
                     `;
                 });
             }
 
             if (section.free_energy_components) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 20px 0 10px 0;">Free Energy Components:</h4>`;
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Free Energy Components:</h4>`;
                 const freeEnergy = section.free_energy_components;
                 htmlContent += `
-                    <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--light-gray);">
-                        <strong>Definition:</strong> ${freeEnergy.definition}
-                        <div style="margin-top: 8px;"><strong>Free Energy Change:</strong> ${freeEnergy.free_energy_change}</div>
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray);">
+                        <p style="margin-bottom: 10px;"><strong>Definition:</strong> ${freeEnergy.definition}</p>
+                        ${freeEnergy.free_energy_change_equation ? `<p style="margin-bottom: 10px;"><strong>Equation:</strong> ${freeEnergy.free_energy_change_equation}</p>` : ''}
+                        ${freeEnergy.interpretation ? `<p style="margin-bottom: 15px;"><strong>Interpretation:</strong> ${freeEnergy.interpretation}</p>` : ''}
                     </div>
                 `;
 
-                if (freeEnergy.reaction_types) {
-                    htmlContent += `<h5 style="color: var(--primary); margin: 15px 0 10px 0;">Reaction Types:</h5>`;
-                    freeEnergy.reaction_types.forEach(reaction => {
+                if (section.reaction_types) {
+                    htmlContent += `<h5 style="color: var(--primary); margin: 20px 0 10px 0;">Reaction Types:</h5>`;
+                    section.reaction_types.forEach(reaction => {
                         htmlContent += `
-                            <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 8px;">
-                                <strong>${reaction.type}:</strong> ${reaction.delta_g}
-                                <div style="margin-top: 5px;"><strong>Characteristics:</strong> ${reaction.characteristics.join(', ')}</div>
-                                <div style="margin-top: 5px;"><strong>Energy Flow:</strong> ${reaction.energy_flow}</div>
-                                <div style="margin-top: 5px;"><strong>Example:</strong> ${reaction.biological_example}</div>
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 12px;">
+                                <h6 style="color: var(--primary-dark); margin-bottom: 8px;">${reaction.type}: ${reaction.delta_g}</h6>
+                                <p style="margin-bottom: 8px;"><strong>Characteristics:</strong> ${reaction.characteristics.join(', ')}</p>
+                                <p style="margin-bottom: 8px;"><strong>Energy Flow:</strong> ${reaction.energy_flow}</p>
+                                
+                                ${reaction.biological_example ? `
+                                    <div style="background: white; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                        <strong>Example - ${reaction.biological_example.process}:</strong><br>
+                                        ${reaction.biological_example.equation ? `<div style="font-family: 'Cambria Math', serif; margin: 5px 0;">${reaction.biological_example.equation}</div>` : ''}
+                                        ${reaction.biological_example.delta_g_value ? `<div><strong>ΔG:</strong> ${reaction.biological_example.delta_g_value}</div>` : ''}
+                                        <div style="margin-top: 5px;">${reaction.biological_example.explanation}</div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${reaction.note ? `<div style="background: #fff3cd; padding: 8px; border-radius: 4px; margin-top: 8px; font-size: 0.9em;"><strong>Note:</strong> ${reaction.note}</div>` : ''}
                             </div>
                         `;
                     });
                 }
             }
 
-            // Add more section type handlers as needed...
+            // Add more section type handlers for the new structure...
+            if (section.molecule) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">${section.molecule} - ${section.role || 'Structure and Function'}</h4>`;
+                
+                if (section.structure) {
+                    htmlContent += `<h5 style="color: var(--primary); margin: 15px 0 10px 0;">Structure:</h5>`;
+                    section.structure.components.forEach(component => {
+                        htmlContent += `
+                            <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                                <strong>${component.part}:</strong> ${component.composition}
+                                ${component.function ? `<div style="margin-top: 5px;"><em>Function:</em> ${component.function}</div>` : ''}
+                                ${component.key_feature ? `<div style="margin-top: 5px;"><strong>Key Feature:</strong> ${component.key_feature}</div>` : ''}
+                            </div>
+                        `;
+                    });
+                }
+
+                if (section.function) {
+                    htmlContent += `<h5 style="color: var(--primary); margin: 15px 0 10px 0;">Function:</h5>`;
+                    const func = section.function;
+                    htmlContent += `
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                            <p><strong>Hydrolysis Reaction:</strong> ${func.hydrolysis_reaction}</p>
+                            <p><strong>Energy Release:</strong> ${func.energy_release}</p>
+                            <p><strong>Mechanism:</strong> ${func.mechanism}</p>
+                            
+                            ${func.atp_cycle ? `
+                                <div style="margin-top: 15px;">
+                                    <strong>ATP Cycle:</strong>
+                                    ${func.atp_cycle.map(cycle => `
+                                        <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 8px;">
+                                            <strong>${cycle.process}:</strong> ${cycle.reaction}<br>
+                                            <em>Purpose:</em> ${cycle.purpose}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }
+            }
+
+            if (section.pathway_types) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Metabolic Pathways:</h4>`;
+                htmlContent += `<p style="margin-bottom: 15px;"><strong>Definition:</strong> ${section.definition}</p>`;
+                
+                section.pathway_types.forEach(pathway => {
+                    htmlContent += `
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray);">
+                            <h5 style="color: var(--primary); margin-bottom: 10px;">${pathway.type}</h5>
+                            <p><strong>Energy Profile:</strong> ${pathway.energy_profile} (${pathway.direction})</p>
+                            <p><strong>Function:</strong> ${pathway.function}</p>
+                            
+                            ${pathway.goals ? `<p><strong>Goals:</strong> ${pathway.goals.join('; ')}</p>` : ''}
+                            ${pathway.energy_source ? `<p><strong>Energy Source:</strong> ${pathway.energy_source}</p>` : ''}
+                            
+                            ${pathway.primary_example ? `
+                                <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                    <strong>Primary Example - ${pathway.primary_example.process}:</strong><br>
+                                    ${pathway.primary_example.explanation}
+                                </div>
+                            ` : ''}
+                            
+                            ${pathway.examples ? `
+                                <div style="margin-top: 10px;">
+                                    <strong>Examples:</strong>
+                                    ${pathway.examples.map(example => `
+                                        <div style="background: #f8f9fa; padding: 8px; border-radius: 4px; margin-top: 5px;">
+                                            <strong>${example.process}:</strong> ${example.explanation}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+                
+                if (section.relationship) {
+                    htmlContent += `
+                        <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #4caf50;">
+                            <strong>Relationship:</strong> ${section.relationship}
+                        </div>
+                    `;
+                }
+            }
+
+            if (section.purpose) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Enzymes:</h4>`;
+                htmlContent += `<p style="margin-bottom: 15px;"><strong>Purpose:</strong> ${section.purpose}</p>`;
+                
+                if (section.activation_energy) {
+                    htmlContent += `
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <h5 style="color: var(--primary); margin-bottom: 10px;">Activation Energy</h5>
+                            <p><strong>Definition:</strong> ${section.activation_energy.definition}</p>
+                            <p><strong>Enzyme Effect:</strong> ${section.activation_energy.enzyme_effect}</p>
+                        </div>
+                    `;
+                }
+
+                if (section.key_properties) {
+                    htmlContent += `<h5 style="color: var(--primary); margin: 15px 0 10px 0;">Key Properties:</h5>`;
+                    section.key_properties.forEach(property => {
+                        htmlContent += `
+                            <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 8px;">
+                                <strong>${property.property}:</strong> ${property.explanation}
+                            </div>
+                        `;
+                    });
+                }
+            }
+
+            if (section.energy_flow_pathway) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Energy Flow in Living Systems:</h4>`;
+                if (section.introduction) {
+                    htmlContent += `<p style="margin-bottom: 15px;">${section.introduction}</p>`;
+                }
+                
+                section.energy_flow_pathway.forEach(step => {
+                    htmlContent += `
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--primary-light);">
+                            <div style="display: flex; align-items: flex-start; gap: 15px;">
+                                <div style="background: var(--primary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
+                                    ${step.step}
+                                </div>
+                                <div style="flex: 1;">
+                                    <h6 style="color: var(--primary-dark); margin-bottom: 5px; font-size: 1.1rem;">${step.process}</h6>
+                                    <p style="margin-bottom: 5px;">${step.description}</p>
+                                    ${step.mechanism ? `<p style="margin-bottom: 5px;"><em>Mechanism:</em> ${step.mechanism}</p>` : ''}
+                                    ${step.result ? `<p style="margin-bottom: 5px;"><strong>Result:</strong> ${step.result}</p>` : ''}
+                                    ${step.applications ? `<p style="margin-bottom: 5px;"><strong>Applications:</strong> ${step.applications.join(', ')}</p>` : ''}
+                                    ${step.organization ? `<p style="margin-bottom: 5px;"><strong>Organization:</strong> ${step.organization}</p>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
 
             htmlContent += `</div>`; // Close content-section
         });
@@ -4622,14 +4795,18 @@ function displayTextbookSection(sectionData, sectionTitle) {
 
     htmlContent += `</div>`; // Close section-content
 
-    // Add key points section
+    // Add key terms section
     if (sectionData.key_terms && sectionData.key_terms.length > 0) {
         htmlContent += `
             <div class="key-points">
                 <h3><i class="fas fa-key"></i> Key Terms</h3>
-                <ul>
-                    ${sectionData.key_terms.map(term => `<li>${term}</li>`).join('')}
-                </ul>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    ${sectionData.key_terms.map(term => `
+                        <span style="background: var(--primary); color: white; padding: 6px 12px; border-radius: 15px; font-size: 0.9rem;">
+                            ${term}
+                        </span>
+                    `).join('')}
+                </div>
             </div>
         `;
     }
@@ -4640,7 +4817,7 @@ function displayTextbookSection(sectionData, sectionTitle) {
             <div class="vocabulary">
                 <h3><i class="fas fa-file-alt"></i> Summary</h3>
                 <div class="vocab-grid">
-                    <div class="vocab-item">
+                    <div class="vocab-item" style="font-style: italic; line-height: 1.6;">
                         ${sectionData.summary}
                     </div>
                 </div>
@@ -8411,6 +8588,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
