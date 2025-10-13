@@ -3034,34 +3034,59 @@ body {
                     { title: 'Dynamics', content: 'Dynamics is the branch of physics developed in classical mechanics concerned with the study of forces and their effects on motion.' },
                     { title: 'Work, Energy and Power', content: 'In physics, work is the energy transferred to or from an object via the application of force along a displacement.' }
                 ],
-                quizzes: [
-                    {
-                        title: 'Physics Fundamentals Quiz',
-                        questions: [
-                            {
-                                text: 'Which of the following is a vector quantity?',
-                                options: ['Mass', 'Speed', 'Velocity', 'Temperature'],
-                                correct: 2
-                            },
-                            {
-                                text: 'What is the SI unit of force?',
-                                options: ['Joule', 'Watt', 'Newton', 'Pascal'],
-                                correct: 2
-                            },
-                            {
-                                text: 'According to Newton\'s first law, an object in motion will:',
-                                options: [
-                                    'Accelerate continuously',
-                                    'Slow down and eventually stop',
-                                    'Remain in motion with constant velocity unless acted upon',
-                                    'Change direction randomly'
-                                ],
-                                correct: 2
-                            }
-                        ]
-                    }
-                ]
+               quizzes: [
+    {
+        quiz: {
+            title: "Physics Fundamentals Quiz",
+            subtitle: "Vector Quantities and Newton's Laws",
+            subject: "Physics",
+            topic: "Basic Physics Concepts", 
+            duration: 45,
+            questions: [
+                {
+                    type: "mcq",
+                    question: "Which of the following is a vector quantity?",
+                    options: ["Mass", "Speed", "Velocity", "Temperature"],
+                    answer: "C",
+                    explanation: "Velocity is a vector quantity because it has both magnitude and direction. Mass, speed, and temperature are scalar quantities."
+                },
+                {
+                    type: "mcq",
+                    question: "What is the SI unit of force?",
+                    options: ["Joule", "Watt", "Newton", "Pascal"],
+                    answer: "C", 
+                    explanation: "The Newton (N) is the SI unit of force, named after Sir Isaac Newton. 1 N = 1 kg·m/s²."
+                },
+                {
+                    type: "mcq",
+                    question: "According to Newton's first law, an object in motion will:",
+                    options: [
+                        "Accelerate continuously",
+                        "Slow down and eventually stop", 
+                        "Remain in motion with constant velocity unless acted upon",
+                        "Change direction randomly"
+                    ],
+                    answer: "C",
+                    explanation: "Newton's first law states that an object in motion stays in motion with the same speed and in the same direction unless acted upon by an unbalanced force."
+                }
+            ],
+            settings: {
+                timeLimit: 45,
+                shuffleQuestions: true, 
+                showResults: true,
+                allowRetry: true
             },
+            grading: {
+                scoreMessages: {
+                    "90": "Excellent! You have a solid understanding of fundamental physics concepts.",
+                    "70": "Good work! You understand the basics but should review vector quantities.",
+                    "50": "Keep practicing! Focus on Newton's laws and vector vs scalar quantities.",
+                    "0": "Don't give up! Review the basic concepts and try again."
+                }
+            }
+        }
+    }
+]
             'algebra-2': {
                 title: 'Algebra 2',
                 description: 'Advanced algebra concepts including quadratic equations, functions, and complex numbers.',
@@ -3071,29 +3096,69 @@ body {
                     { title: 'Rational Functions', content: 'A rational function is any function which can be written as the ratio of two polynomial functions.' },
                     { title: 'Exponential and Logarithmic Functions', content: 'Exponential functions model situations where growth or decay is proportional to the current amount.' }
                 ],
-                quizzes: [
-                    {
-                        title: 'Algebra Fundamentals Quiz',
-                        questions: [
-                            {
-                                text: 'What is the solution to x² - 5x + 6 = 0?',
-                                options: ['x = 2, 3', 'x = -2, -3', 'x = 1, 6', 'x = -1, -6'],
-                                correct: 0
-                            },
-                            {
-                                text: 'Which of these is a quadratic function?',
-                                options: ['f(x) = 2x + 3', 'f(x) = x³ - 2x', 'f(x) = x² - 4x + 4', 'f(x) = 1/x'],
-                                correct: 2
-                            },
-                            {
-                                text: 'What is the domain of f(x) = √(x-2)?',
-                                options: ['All real numbers', 'x ≥ 0', 'x ≥ 2', 'x > 2'],
-                                correct: 2
-                            }
-                        ]
-                    }
-                ]
+               quizzes: [
+    {
+        quiz: {
+            title: "Algebra Fundamentals Quiz",
+            subtitle: "Quadratic Equations and Functions",
+            subject: "Algebra",
+            topic: "Algebraic Concepts",
+            duration: 45,
+            questions: [
+                {
+                    type: "mcq",
+                    question: "What is the solution to \\(x^2 - 5x + 6 = 0\\)?",
+                    options: [
+                        "\\(x = 2, 3\\)",
+                        "\\(x = -2, -3\\)", 
+                        "\\(x = 1, 6\\)",
+                        "\\(x = -1, -6\\)"
+                    ],
+                    answer: "A",
+                    explanation: "Factor the quadratic: \\(x^2 - 5x + 6 = (x - 2)(x - 3) = 0\\). Therefore, \\(x = 2\\) or \\(x = 3\\)."
+                },
+                {
+                    type: "mcq",
+                    question: "Which of these is a quadratic function?",
+                    options: [
+                        "\\(f(x) = 2x + 3\\)",
+                        "\\(f(x) = x^3 - 2x\\)",
+                        "\\(f(x) = x^2 - 4x + 4\\)", 
+                        "\\(f(x) = \\frac{1}{x}\\)"
+                    ],
+                    answer: "C",
+                    explanation: "A quadratic function has the form \\(f(x) = ax^2 + bx + c\\) where \\(a \\neq 0\\). Only option C fits this form."
+                },
+                {
+                    type: "mcq",
+                    question: "What is the domain of \\(f(x) = \\sqrt{x - 2}\\)?",
+                    options: [
+                        "All real numbers",
+                        "\\(x \\geq 0\\)",
+                        "\\(x \\geq 2\\)",
+                        "\\(x > 2\\)"
+                    ],
+                    answer: "C",
+                    explanation: "The square root function requires a non-negative argument. So \\(x - 2 \\geq 0\\) which means \\(x \\geq 2\\)."
+                }
+            ],
+            settings: {
+                timeLimit: 45,
+                shuffleQuestions: true,
+                showResults: true,
+                allowRetry: true
             },
+            grading: {
+                scoreMessages: {
+                    "90": "Excellent! You have a strong foundation in algebraic concepts.",
+                    "70": "Good work! You understand most concepts but should review function domains.",
+                    "50": "Keep practicing! Focus on quadratic equations and function properties.",
+                    "0": "Don't give up! Review the basics and try again - algebra gets easier with practice."
+                }
+            }
+        }
+    }
+]
             'chemistry-grade-10': {
                 title: 'Chemistry Grade 10',
                 description: 'Introduction to chemistry covering atomic structure, chemical reactions, and periodic table.',
@@ -3104,31 +3169,69 @@ body {
                     { title: 'Chemical Bonding', content: 'A chemical bond is a lasting attraction between atoms, ions or molecules that enables the formation of chemical compounds.' }
                 ],
                 quizzes: [
-                    {
-                        title: 'Chemistry Fundamentals Quiz',
-                        questions: [
-                            {
-                                text: 'How many electrons can the first electron shell hold?',
-                                options: ['2', '8', '18', '32'],
-                                correct: 0
-                            },
-                            {
-                                text: 'Which element has the atomic number 1?',
-                                options: ['Helium', 'Hydrogen', 'Oxygen', 'Carbon'],
-                                correct: 1
-                            },
-                            {
-                                text: 'What type of bond involves the sharing of electron pairs?',
-                                options: ['Ionic bond', 'Covalent bond', 'Metallic bond', 'Hydrogen bond'],
-                                correct: 1
-                            }
-                        ]
-                    }
-                ]
+    {
+        quiz: {
+            title: "Chemistry Fundamentals Quiz",
+            subtitle: "Atomic Structure and Chemical Bonding",
+            subject: "Chemistry", 
+            topic: "Basic Chemistry Concepts",
+            duration: 45,
+            questions: [
+                {
+                    type: "mcq",
+                    question: "How many electrons can the first electron shell hold?",
+                    options: ["2", "8", "18", "32"],
+                    answer: "A",
+                    explanation: "The first electron shell (K shell) can hold a maximum of 2 electrons, following the 2n² rule where n=1: 2(1)² = 2 electrons."
+                },
+                {
+                    type: "mcq", 
+                    question: "Which element has the atomic number 1?",
+                    options: ["Helium", "Hydrogen", "Oxygen", "Carbon"],
+                    answer: "B",
+                    explanation: "Hydrogen has atomic number 1, meaning it has 1 proton in its nucleus. It's the lightest and most abundant element in the universe."
+                },
+                {
+                    type: "mcq",
+                    question: "What type of bond involves the sharing of electron pairs?",
+                    options: [
+                        "Ionic bond",
+                        "Covalent bond", 
+                        "Metallic bond",
+                        "Hydrogen bond"
+                    ],
+                    answer: "B",
+                    explanation: "Covalent bonds form when atoms share electron pairs. Ionic bonds involve electron transfer, metallic bonds involve delocalized electrons, and hydrogen bonds are intermolecular forces."
+                }
+            ],
+            settings: {
+                timeLimit: 45,
+                shuffleQuestions: true,
+                showResults: true, 
+                allowRetry: true
+            },
+            grading: {
+                scoreMessages: {
+                    "90": "Excellent! You have a solid understanding of fundamental chemistry concepts.",
+                    "70": "Good work! You understand atomic structure but should review chemical bonding types.",
+                    "50": "Keep practicing! Focus on electron configuration and bond characteristics.",
+                    "0": "Don't give up! Chemistry builds on these fundamentals - review and try again."
+                }
             }
-        };
+        }
+    }
+]
+]
 
-
+// Utility Functions
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+                
         // Enrollment System
         let enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses')) || [
             { id: 'physics-grade-11', title: 'Physics Grade 11', description: 'Comprehensive physics course for grade 11 students covering mechanics, waves, and thermodynamics.' },
@@ -3300,6 +3403,23 @@ body {
             
             const question = currentQuiz.questions[currentQuestionIndex];
             const quizContent = document.getElementById('quiz-content');
+
+           // ADD OPTION SHUFFLING HERE:
+    let displayOptions = question.options;
+    let correctAnswer = question.answer;
+    
+    if (currentQuiz.quiz.settings.shuffleOptions) {
+        const shuffledOptions = shuffleArray([...question.options]);
+        // Store original answer mapping
+        const originalAnswer = question.answer;
+        const newAnswerIndex = shuffledOptions.indexOf(question.options[originalAnswer.charCodeAt(0) - 65]);
+        displayOptions = shuffledOptions;
+        correctAnswer = String.fromCharCode(65 + newAnswerIndex); // Convert back to letter
+        
+        // Store for answer checking
+        question.displayOptions = displayOptions;
+        question.displayAnswer = correctAnswer;
+    }
             
             let optionsHtml = '';
             question.options.forEach((option, index) => {
@@ -3359,15 +3479,16 @@ body {
         }
 
         function finishQuiz() {
-            if (!currentQuiz) return;
-            
-            // Calculate score
-            let correctAnswers = 0;
-            currentQuiz.questions.forEach((question, index) => {
-                if (userAnswers[index] === question.correct) {
-                    correctAnswers++;
-                }
-            });
+    if (!currentQuiz) return;
+    
+    let correctAnswers = 0;
+    currentQuiz.quiz.questions.forEach((question, index) => {
+        // Use shuffled answer if available, otherwise original
+        const correctAnswer = question.displayAnswer || question.answer;
+        if (userAnswers[index] === correctAnswer.charCodeAt(0) - 65) {
+            correctAnswers++;
+        }
+    });
             
             const score = Math.round((correctAnswers / currentQuiz.questions.length) * 100);
             
