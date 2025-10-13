@@ -6337,6 +6337,7 @@ function selectQuizOption(questionIndex, optionIndex) {
 function submitTopicQuiz() {
     console.log('📝 Submitting quiz...');
     console.log('📝 Current state:', quizState);
+    console.log('📝 User answers:', quizState.userAnswers);
     
     if (!quizState.currentQuestions || quizState.currentQuestions.length === 0) {
         alert('No quiz questions available to submit.');
@@ -6354,12 +6355,22 @@ function submitTopicQuiz() {
         }
     }
     
-    // Calculate score
+    // Calculate score with detailed debugging
     let correctAnswers = 0;
     const results = [];
     
     quizState.currentQuestions.forEach((question, index) => {
         const userAnswer = quizState.userAnswers[index];
+        
+        // DEBUG: Log each question's data
+        console.log(`🔍 Question ${index}:`, {
+            userAnswer: userAnswer,
+            correctAnswer: question.correct,
+            options: question.options,
+            questionText: question.question
+        });
+        
+        // Check if correct answer index is valid
         const isCorrect = userAnswer === question.correct;
         
         if (isCorrect && userAnswer !== null) {
@@ -6381,7 +6392,12 @@ function submitTopicQuiz() {
     quizState.isQuizComplete = true;
     quizState.showResults = true;
     
-    console.log('📝 Quiz results:', { score, correctAnswers, total: quizState.currentQuestions.length });
+    console.log('📝 Quiz results:', { 
+        score, 
+        correctAnswers, 
+        total: quizState.currentQuestions.length,
+        detailed: results 
+    });
     
     // Display results
     displayQuizResults(score, correctAnswers, results);
@@ -6424,8 +6440,11 @@ function displayQuizResults(score, correctAnswers, results) {
                         
                         // SAFELY get the correct answer text
                         let correctAnswerText = '';
-                        if (result.options && result.options[result.correctAnswer]) {
+                        if (result.options && result.options[result.correctAnswer] !== undefined) {
                             correctAnswerText = renderMarkdown(result.options[result.correctAnswer]);
+                        } else {
+                            console.warn(`❌ No correct answer found for question ${index}:`, result);
+                            correctAnswerText = 'Correct answer not available';
                         }
                         
                         return `
@@ -6456,14 +6475,12 @@ function displayQuizResults(score, correctAnswers, results) {
                                 </span>
                             </div>
                             
-                            ${(!result.isCorrect || !result.wasAnswered) ? `
-                                <div style="margin-bottom: 15px;">
-                                    <strong>Correct answer:</strong> 
-                                    <span style="color: var(--success)">
-                                        ${correctAnswerText}
-                                    </span>
-                                </div>
-                            ` : ''}
+                            <div style="margin-bottom: 15px;">
+                                <strong>Correct answer:</strong> 
+                                <span style="color: var(--success)">
+                                    ${correctAnswerText}
+                                </span>
+                            </div>
                             
                             ${result.explanation ? `
                                 <div class="question-explanation" style="padding: 15px; background: var(--light-bg); border-radius: var(--border-radius-sm); margin-top: 15px;">
@@ -6494,7 +6511,7 @@ function displayQuizResults(score, correctAnswers, results) {
         }
     }, 100);
 }
-
+        
 // Fixed retake function
 function retakeQuiz() {
     console.log('🔄 Retaking quiz...');
@@ -7637,6 +7654,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
