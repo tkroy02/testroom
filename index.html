@@ -6247,29 +6247,110 @@ function displayQuizQuestions(questions) {
     container.innerHTML = questions.map((question, index) => `
         <div class="question" style="margin-bottom: 30px; padding: 20px; background: white; border-radius: var(--border-radius-sm); box-shadow: var(--shadow);">
             <div class="question-text" style="font-weight: 600; color: var(--primary); margin-bottom: 15px;">
-                <strong>Question ${index + 1}:</strong> ${question.question}
+                <strong>Question ${index + 1}:</strong> <span id="question-text-${index}">${renderMarkdown(question.question)}</span>
             </div>
             <div class="options" style="display: flex; flex-direction: column; gap: 10px;">
                 ${question.options.map((option, optionIndex) => `
                     <div class="option" onclick="selectQuizOption(${index}, ${optionIndex})" 
                          style="padding: 12px 15px; border: 2px solid var(--light-gray); border-radius: var(--border-radius-sm); cursor: pointer; transition: var(--transition);">
-                        ${option}
+                         <span id="option-${index}-${optionIndex}">${renderMarkdown(option)}</span>
                     </div>
                 `).join('')}
             </div>
             ${question.explanation ? `
                 <div class="question-explanation" style="display: none; margin-top: 15px; padding: 15px; background: var(--light-bg); border-radius: var(--border-radius-sm);">
-                    <strong>Explanation:</strong> ${question.explanation}
+                    <strong>Explanation:</strong> <span id="explanation-${index}">${renderMarkdown(question.explanation)}</span>
                 </div>
             ` : ''}
         </div>
     `).join('');
+
+    // Render MathJax after the questions are loaded
+    setTimeout(() => {
+        if (window.MathJax) {
+            MathJax.typesetPromise().catch(console.error);
+        }
+    }, 100);
 }
 
-// Add this function for option selection
+// Make sure the renderMarkdown function is available (copy from flashcards if needed)
+function renderMarkdown(text) {
+    if (!text) return '';
+    
+    console.log('🔍 Original text:', text);
+    
+    // First, protect math content from markdown processing
+    const mathBlocks = [];
+    let mathIndex = 0;
+    
+    // Temporarily replace math blocks with placeholders
+    text = text.replace(/\$\$.*?\$\$/g, (match) => {
+        const placeholder = `@@MATH${mathIndex}@@`;
+        mathBlocks[mathIndex] = match;
+        console.log('🔍 Found math block:', match, '->', placeholder);
+        mathIndex++;
+        return placeholder;
+    });
+    
+    text = text.replace(/\\\(.*?\\\)/g, (match) => {
+        const placeholder = `@@MATH${mathIndex}@@`;
+        mathBlocks[mathIndex] = match;
+        console.log('🔍 Found inline math:', match, '->', placeholder);
+        mathIndex++;
+        return placeholder;
+    });
+    
+    console.log('🔍 After math protection:', text);
+    
+    // Now process markdown on the non-math content
+    text = text
+        // Convert **bold** to <strong>bold</strong>
+        .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+        // Convert *italic* to <em>italic</em>  
+        .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+        // Convert `code` to <code>code</code>
+        .replace(/`([^`]+)`/g, '<code>$1</code>');
+    
+    console.log('🔍 After markdown processing:', text);
+    
+    // Restore math blocks
+    mathBlocks.forEach((mathBlock, index) => {
+        text = text.replace(`@@MATH${index}@@`, mathBlock);
+    });
+    
+    console.log('🔍 Final result:', text);
+    return text;
+}
+
+// Also update the selectQuizOption function to handle math re-rendering if needed
 function selectQuizOption(questionIndex, optionIndex) {
     const questionElement = document.querySelectorAll('.question')[questionIndex];
     const options = questionElement.querySelectorAll('.option');
+    
+    // Remove selected class from all options in this question
+    options.forEach(opt => {
+        opt.classList.remove('selected');
+        opt.style.borderColor = 'var(--light-gray)';
+        opt.style.background = 'white';
+    });
+    
+    // Add selected class to clicked option
+    options[optionIndex].classList.add('selected');
+    options[optionIndex].style.borderColor = 'var(--primary)';
+    options[optionIndex].style.background = 'var(--light-bg)';
+    
+    // If there's an explanation, show it
+    const explanation = questionElement.querySelector('.question-explanation');
+    if (explanation) {
+        explanation.style.display = 'block';
+        // Re-render MathJax for the explanation
+        setTimeout(() => {
+            if (window.MathJax) {
+                MathJax.typesetPromise([explanation]).catch(console.error);
+            }
+        }, 50);
+    }
+}
     
     // Remove selected class from all options in this question
     options.forEach(opt => opt.classList.remove('selected'));
@@ -7367,6 +7448,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
