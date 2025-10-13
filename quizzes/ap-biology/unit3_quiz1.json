@@ -1,4 +1,4 @@
-{
+as{
   "quiz": {
     "title": "Introduction to Cellular Energetics",
     "subtitle": "Basic MCQs on Energy, Thermodynamics, Photosynthesis, Respiration, ATP, and Food Chain",
@@ -107,7 +107,7 @@
         "question": "Muscle contraction primarily uses energy in the form of:",
         "options": [
           "A) Kinetic energy",
-          "B) Potential energy",
+          "B) Elastic potential energy",
           "C) Chemical energy",
           "D) Thermal energy"
         ],
@@ -621,4 +621,5 @@
       }
     }
   }
+
 }
