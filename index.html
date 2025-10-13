@@ -6134,9 +6134,50 @@ function generateQuizzes(count) {
     return quizzes;
 }
 
-function startTopicQuiz(unitId, quizNumber, difficulty) {
-    alert(`Starting ${unitId} - Quiz ${quizNumber} (${difficulty} difficulty)`);
-    // Add your quiz logic here
+async function startTopicQuiz(unitId, quizNumber, difficulty) {
+    try {
+        // Show loading state
+        const resourceContent = document.getElementById('resource-content');
+        resourceContent.innerHTML = `
+            <div class="tool-interface active">
+                <div class="tool-header">
+                    <h3 class="section-title">Loading Quiz...</h3>
+                    <button class="tool-back" onclick="openResource('topic-quiz', this)">
+                        <i class="fas fa-arrow-left"></i> Back to Topics
+                    </button>
+                </div>
+                <div style="text-align: center; padding: 60px 20px;">
+                    <div class="tool-icon" style="margin: 0 auto 20px;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">Loading Quiz Content</h4>
+                    <p style="color: var(--gray);">Preparing your quiz...</p>
+                </div>
+            </div>
+        `;
+
+        // Determine the quiz path based on course and unit
+        const quizPath = getQuizPath(currentCourseId, unitId, quizNumber);
+        
+        if (quizPath) {
+            const quizData = await loadQuizData(quizPath);
+            if (quizData) {
+                // Show a simple alert for now to confirm it's working
+                alert(`Loaded quiz from: ${quizPath}\nTitle: ${quizData.title || 'No title'}\nQuestions: ${quizData.questions ? quizData.questions.length : 0}`);
+                
+                // For now, just show the default quiz
+                displayDefaultTopicQuiz(unitId, quizNumber, difficulty);
+                return;
+            }
+        }
+
+        // Fallback to default quiz if JSON not found
+        displayDefaultTopicQuiz(unitId, quizNumber, difficulty);
+        
+    } catch (error) {
+        console.error('Error starting topic quiz:', error);
+        displayDefaultTopicQuiz(unitId, quizNumber, difficulty);
+    }
 }
 
 function startExamQuiz() {
@@ -7127,6 +7168,35 @@ function selectOption(optionElement) {
     optionElement.classList.add('selected');
 }
 
+// Add this function to load quiz data from JSON files
+async function loadQuizData(quizPath) {
+    try {
+        const response = await fetch(quizPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load quiz: ${response.status}`);
+        }
+        return await response.json();
+    } catch (error) {
+        console.error('Error loading quiz data:', error);
+        return null;
+    }
+}
+
+// Add this function to map courses and units to quiz files
+function getQuizPath(courseId, unitId, quizNumber) {
+    const quizPaths = {
+        'ap-calculus': {
+            'unit-5': {
+                1: 'quizzes/ap-calculus/unit5_quiz1.json'
+            }
+            // You can add more unit mappings for AP Calculus here later
+        }
+        // Add mappings for other courses as needed
+    };
+
+    return quizPaths[courseId]?.[unitId]?.[quizNumber] || null;
+}
+        
         // Logout function
         function logout() {
             if(confirm('Are you sure you want to log out?')) {
@@ -7160,6 +7230,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
