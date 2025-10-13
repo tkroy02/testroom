@@ -81,7 +81,7 @@
           "\\(e^{\\sin x} \\ln x \\cos x\\)",
           "\\(e^{\\sin x}\\left(\\frac{1}{x} + \\cos x\\right)\\)"
         ],
-        "answer": "C"
+        "answer": "A"
       },
       {
         "type": "mcq",
