@@ -6355,23 +6355,28 @@ function submitTopicQuiz() {
         }
     }
     
-    // Calculate score with detailed debugging
+    // Calculate score with letter-to-index conversion
     let correctAnswers = 0;
     const results = [];
     
     quizState.currentQuestions.forEach((question, index) => {
         const userAnswer = quizState.userAnswers[index];
         
+        // Convert letter answer (A,B,C,D) to numeric index (0,1,2,3)
+        const correctAnswerLetter = question.answer; // "A", "B", "C", "D"
+        const correctAnswerIndex = correctAnswerLetter ? correctAnswerLetter.charCodeAt(0) - 65 : -1; // A->0, B->1, C->2, D->3
+        
+        const isCorrect = userAnswer === correctAnswerIndex;
+        
         // DEBUG: Log each question's data
         console.log(`🔍 Question ${index}:`, {
             userAnswer: userAnswer,
-            correctAnswer: question.correct,
+            correctAnswerLetter: correctAnswerLetter,
+            correctAnswerIndex: correctAnswerIndex,
+            isCorrect: isCorrect,
             options: question.options,
             questionText: question.question
         });
-        
-        // Check if correct answer index is valid
-        const isCorrect = userAnswer === question.correct;
         
         if (isCorrect && userAnswer !== null) {
             correctAnswers++;
@@ -6380,7 +6385,8 @@ function submitTopicQuiz() {
         results.push({
             question: question.question,
             userAnswer: userAnswer,
-            correctAnswer: question.correct,
+            correctAnswer: correctAnswerIndex,
+            correctAnswerLetter: correctAnswerLetter,
             isCorrect: isCorrect,
             explanation: question.explanation,
             options: question.options,
@@ -6402,7 +6408,7 @@ function submitTopicQuiz() {
     // Display results
     displayQuizResults(score, correctAnswers, results);
 }
-
+        
 // FIXED results display function
 function displayQuizResults(score, correctAnswers, results) {
     const resourceContent = document.getElementById('resource-content');
@@ -6434,8 +6440,10 @@ function displayQuizResults(score, correctAnswers, results) {
                     ${results.map((result, index) => {
                         // SAFELY get the user's answer text
                         let userAnswerText = 'Not answered';
+                        let userAnswerLetter = '';
                         if (result.userAnswer !== null && result.options && result.options[result.userAnswer]) {
                             userAnswerText = renderMarkdown(result.options[result.userAnswer]);
+                            userAnswerLetter = String.fromCharCode(65 + result.userAnswer); // 0->A, 1->B, 2->C, 3->D
                         }
                         
                         // SAFELY get the correct answer text
@@ -6471,14 +6479,14 @@ function displayQuizResults(score, correctAnswers, results) {
                             <div style="margin-bottom: 15px;">
                                 <strong>Your answer:</strong> 
                                 <span style="color: ${result.wasAnswered ? (result.isCorrect ? 'var(--success)' : 'var(--accent)') : 'var(--warning)'}">
-                                    ${userAnswerText}
+                                    ${userAnswerLetter ? `${userAnswerLetter}. ` : ''}${userAnswerText}
                                 </span>
                             </div>
                             
                             <div style="margin-bottom: 15px;">
                                 <strong>Correct answer:</strong> 
                                 <span style="color: var(--success)">
-                                    ${correctAnswerText}
+                                    ${result.correctAnswerLetter}. ${correctAnswerText}
                                 </span>
                             </div>
                             
@@ -7654,6 +7662,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
