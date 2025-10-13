@@ -4193,19 +4193,40 @@ function loadTextbookContent() {
             <div class="textbook-container">
                 <div class="textbook-sidebar">
                     <div class="unit-selector">
-                        <h4>Select Unit</h4>
-                        <div class="unit-buttons">
-                            <button class="unit-btn ${currentTextbookUnit === 'unit1' ? 'active' : ''}" onclick="switchTextbookUnit('unit1')">
-                                Unit 1: Chemistry of Life
-                            </button>
-                            <button class="unit-btn ${currentTextbookUnit === 'unit2' ? 'active' : ''}" onclick="switchTextbookUnit('unit2')">
-                                Unit 2: Cell Structure
-                            </button>
-                            <button class="unit-btn ${currentTextbookUnit === 'unit3' ? 'active' : ''}" onclick="switchTextbookUnit('unit3')">
-                                Unit 3: Cellular Energetics
-                            </button>
-                        </div>
-                    </div>
+    <h4>Select Unit</h4>
+    <div class="unit-buttons">
+        <button class="unit-btn ${currentTextbookUnit === 'unit1' ? 'active' : ''}" onclick="switchTextbookUnit('unit1')">
+            Unit 1: Chemistry of Life
+        </button>
+        <button class="unit-btn ${currentTextbookUnit === 'unit2' ? 'active' : ''}" onclick="switchTextbookUnit('unit2')">
+            Unit 2: Cell Structure & Function
+        </button>
+        <button class="unit-btn ${currentTextbookUnit === 'unit3' ? 'active' : ''}" onclick="switchTextbookUnit('unit3')">
+            Unit 3: Cellular Energetics
+        </button>
+        <button class="unit-btn ${currentTextbookUnit === 'unit4' ? 'active' : ''}" onclick="switchTextbookUnit('unit4')">
+            Unit 4: Cell Communication
+        </button>
+        <button class="unit-btn ${currentTextbookUnit === 'unit5' ? 'active' : ''}" onclick="switchTextbookUnit('unit5')">
+            Unit 5: Review and Practice
+        </button>
+        <button class="unit-btn ${currentTextbookUnit === 'unit6' ? 'active' : ''}" onclick="switchTextbookUnit('unit6')">
+            Unit 6: Mendelian Genetics
+        </button>
+        <button class="unit-btn ${currentTextbookUnit === 'unit7' ? 'active' : ''}" onclick="switchTextbookUnit('unit7')">
+            Unit 7: Molecular Genetics
+        </button>
+        <button class="unit-btn ${currentTextbookUnit === 'unit8' ? 'active' : ''}" onclick="switchTextbookUnit('unit8')">
+            Unit 8: Biotechnology
+        </button>
+        <button class="unit-btn ${currentTextbookUnit === 'unit9' ? 'active' : ''}" onclick="switchTextbookUnit('unit9')">
+            Unit 9: Evolution
+        </button>
+        <button class="unit-btn ${currentTextbookUnit === 'unit10' ? 'active' : ''}" onclick="switchTextbookUnit('unit10')">
+            Unit 10: Final Review
+        </button>
+    </div>
+</div>
                     <h4>${getUnitTitle(currentTextbookUnit)} Sections</h4>
                     <div class="textbook-sections" id="textbook-sections">
                         <!-- Sections will be loaded here -->
@@ -4395,77 +4416,507 @@ function loadTextbookSections() {
             }
         ],
         unit3: [
+            // Add Unit 3 sections here when you create them
             {
-                id: 'introduction',
+                id: 'cellular_energetics_intro',
                 title: '3.1 Introduction to Cellular Energetics',
-                path: 'textbooks/ap-biology/cellular_energetics/introduction.json',
-                description: 'The role of energy in living systems'
+                path: 'textbooks/ap-biology/cell_communication/introduction.json',
+                description: 'Energy flow and transformation in cells'
+            }
+            // Add other Unit 3 sections...
+        ],
+        unit4: [
+            {
+                id: 'cell_comm_intro',
+                title: '4.1 Introduction to Cell Communication',
+                path: 'textbooks/ap-biology/cell_communication/introduction.json',
+                description: 'Importance of signaling in multicellular organisms'
             },
             {
-                id: 'thermodynamics',
-                title: '3.2 Thermodynamics and Free Energy',
-                path: 'textbooks/ap-biology/cellular_energetics/thermodynamics.json',
-                description: 'Laws of thermodynamics, Gibbs free energy (ΔG)'
+                id: 'signaling_types',
+                title: '4.2 Types of Cell Signaling',
+                path: 'textbooks/ap-biology/cell_communication/cell-signalling.json',
+                description: 'Autocrine, paracrine, endocrine, and juxtacrine'
             },
             {
-                id: 'atp',
-                title: '3.3 ATP: The Energy Currency of the Cell',
-                path: 'textbooks/ap-biology/cellular_energetics/atp.json',
-                description: 'Structure, hydrolysis, and energy coupling'
+                id: 'signal_reception',
+                title: '4.3 Signal Reception',
+                path: 'textbooks/ap-biology/cell_communication/signal_reception.json',
+                description: 'Receptors: membrane-bound vs. intracellular'
             },
             {
-                id: 'enzymes',
-                title: '3.4 Enzymes and Catalysis',
-                path: 'textbooks/ap-biology/cellular_energetics/enzymes.json',
-                description: 'Enzyme structure, function, activation energy, and specificity'
+                id: 'signal_transduction',
+                title: '4.4 Signal Transduction Pathways',
+                path: 'textbooks/ap-biology/cell_communication/signal_transduction.json',
+                description: 'Second messengers, phosphorylation cascades'
             },
             {
-                id: 'enzyme_activity',
-                title: '3.5 Factors Affecting Enzyme Activity',
-                path: 'textbooks/ap-biology/cellular_energetics/enzyme_activity.json',
-                description: 'Temperature, pH, substrate concentration, inhibitors'
+                id: 'cellular_responses',
+                title: '4.5 Cellular Responses to Signals',
+                path: 'textbooks/ap-biology/cell_communication/responses.json',
+                description: 'Gene expression, enzyme activation, and other outcomes'
             },
             {
-                id: 'respiration',
-                title: '3.6 Cellular Respiration Overview',
-                path: 'textbooks/ap-biology/cellular_energetics/respiration.json',
-                description: 'Pathways and energy yield'
+                id: 'regulation_signaling',
+                title: '4.6 Regulation of Cell Signaling',
+                path: 'textbooks/ap-biology/cell_communication/reglation.json',
+                description: 'Feedback mechanisms and signal termination'
             },
             {
-                id: 'glycolysis',
-                title: '3.7 Glycolysis',
-                path: 'textbooks/ap-biology/cellular_energetics/glycolysis.json',
-                description: 'Steps, products, and regulation'
+                id: 'cell_cycle_overview',
+                title: '4.7 Overview of the Cell Cycle',
+                path: 'textbooks/ap-biology/cell_communication/cell_cycle.json',
+                description: 'Phases: G1, S, G2, M'
             },
             {
-                id: 'krebs',
-                title: '3.8 Citric Acid Cycle (Krebs Cycle)',
-                path: 'textbooks/ap-biology/cellular_energetics/krebs.json',
-                description: 'Inputs, outputs, and importance'
+                id: 'mitosis',
+                title: '4.8 Mitosis',
+                path: 'textbooks/ap-biology/cell_communication/mitosis.json',
+                description: 'Stages, regulation, and significance'
             },
             {
-                id: 'chemiosmosis',
-                title: '3.9 Oxidative Phosphorylation and Chemiosmosis',
-                path: 'textbooks/ap-biology/cellular_energetics/chemiosmosis.json',
-                description: 'Electron transport chain and ATP synthesis'
+                id: 'cytokinesis',
+                title: '4.9 Cytokinesis',
+                path: 'textbooks/ap-biology/cell_communication/cytokinesis.json',
+                description: 'Division of cytoplasm in plant and animal cells'
             },
             {
-                id: 'photosynthesis',
-                title: '3.10 Photosynthesis Overview',
-                path: 'textbooks/ap-biology/cellular_energetics/photosynthesis.json',
-                description: 'Light-dependent and light-independent reactions'
+                id: 'meiosis',
+                title: '4.10 Meiosis',
+                path: 'textbooks/ap-biology/cell_communication/meiosis.json',
+                description: 'Phases, genetic variation, and comparison with mitosis'
             },
             {
-                id: 'metabolic',
-                title: '3.11 Alternative Pathways and Metabolic Adaptations',
-                path: 'textbooks/ap-biology/cellular_energetics/metabolic.json',
-                description: 'Fermentation, C4, CAM, anaerobic processes'
+                id: 'cell_cycle_regulation',
+                title: '4.11 Cell Cycle Regulation and Checkpoints',
+                path: 'textbooks/ap-biology/cell_communication/checkpoints.json',
+                description: 'Cyclins, CDKs, tumor suppressors, apoptosis'
             },
             {
-                id: 'summary',
-                title: '3.12 Unit 3 Summary and Key Concepts',
-                path: 'textbooks/ap-biology/cellular_energetics/summary.json',
-                description: 'Review of key concepts from Unit 3'
+                id: 'unit4_summary',
+                title: '4.12 Unit 4 Summary and Key Concepts',
+                path: 'textbooks/ap-biology/cell_communication/summary.json',
+                description: 'Review of key concepts from Unit 4'
+            }
+        ],
+        unit5: [
+            {
+                id: 'review_water',
+                title: '5.1 The Importance of Water, Carbon, and Oxygen',
+                path: 'textbooks/ap-biology/review/water.json',
+                description: 'Problems and answers'
+            },
+            {
+                id: 'review_macromolecules',
+                title: '5.2 Macromolecules',
+                path: 'textbooks/ap-biology/review/macromolecules.json',
+                description: 'Problems and answers'
+            },
+            {
+                id: 'review_enzymes',
+                title: '5.3 Enzymes',
+                path: 'textbooks/ap-biology/review/enzymes.json',
+                description: 'Problems and answers'
+            },
+            {
+                id: 'review_plant_cell',
+                title: '5.4 Plant Cell',
+                path: 'textbooks/ap-biology/review/plant.json',
+                description: 'Problems and answers'
+            },
+            {
+                id: 'review_animal_cell',
+                title: '5.5 Animal Cell',
+                path: 'textbooks/ap-biology/review/animal.json',
+                description: 'Problems and answers'
+            },
+            {
+                id: 'review_energy',
+                title: '5.6 Energy Transmission and Conversion',
+                path: 'textbooks/ap-biology/review/energy.json',
+                description: 'Problems and answers'
+            },
+            {
+                id: 'review_respiration',
+                title: '5.7 Cellular Respiration',
+                path: 'textbooks/ap-biology/review/respiration.json',
+                description: 'Problems and answers'
+            },
+            {
+                id: 'review_thermodynamics',
+                title: '5.8 Thermodynamics',
+                path: 'textbooks/ap-biology/review/thermodynamics.json',
+                description: 'Problems and answers'
+            },
+            {
+                id: 'review_communication',
+                title: '5.9 Cell Communication',
+                path: 'textbooks/ap-biology/review/communication.json',
+                description: 'Problems and answers'
+            },
+            {
+                id: 'review_mitosis',
+                title: '5.10 Mitosis, Cytokinesis and Meiosis',
+                path: 'textbooks/ap-biology/review/mitosis.json',
+                description: 'Problems and answers'
+            }
+        ],
+        unit6: [
+            {
+                id: 'genetics_intro',
+                title: '6.1 Introduction to Genetics',
+                path: 'textbooks/ap-biology/mendelian/introduction.json',
+                description: 'History, Gregor Mendel, and basic principles'
+            },
+            {
+                id: 'law_segregation',
+                title: '6.2 Mendel\'s Laws: Law of Segregation',
+                path: 'textbooks/ap-biology/mendelian/mendel1.json',
+                description: 'Alleles, gametes, and inheritance patterns'
+            },
+            {
+                id: 'law_independent_assortment',
+                title: '6.3 Mendel\'s Laws: Law of Independent Assortment',
+                path: 'textbooks/ap-biology/mendelian/mendel2.json',
+                description: 'Dihybrid crosses and probability'
+            },
+            {
+                id: 'monohybrid_crosses',
+                title: '6.4 Monohybrid Crosses',
+                path: 'textbooks/ap-biology/mendelian/monohybrid.json',
+                description: 'Predicting offspring genotypes and phenotypes'
+            },
+            {
+                id: 'dihybrid_crosses',
+                title: '6.5 Dihybrid Crosses',
+                path: 'textbooks/ap-biology/mendelian/dihybrid.json',
+                description: 'Punnett squares and phenotypic ratios'
+            },
+            {
+                id: 'incomplete_dominance',
+                title: '6.6 Incomplete Dominance and Codominance',
+                path: 'textbooks/ap-biology/mendelian/dominance.json',
+                description: 'Non-Mendelian inheritance patterns'
+            },
+            {
+                id: 'multiple_alleles',
+                title: '6.7 Multiple Alleles and Blood Types',
+                path: 'textbooks/ap-biology/mendelian/alleles.json',
+                description: 'ABO system and inheritance examples'
+            },
+            {
+                id: 'pedigree_analysis',
+                title: '6.8 Pedigree Analysis',
+                path: 'textbooks/ap-biology/mendelian/pedigree.json',
+                description: 'Tracing traits across generations'
+            },
+            {
+                id: 'sex_linked_inheritance',
+                title: '6.9 Sex-Linked Inheritance',
+                path: 'textbooks/ap-biology/mendelian/sex-linked.json',
+                description: 'X-linked and Y-linked traits'
+            },
+            {
+                id: 'gene_interaction',
+                title: '6.10 Gene Interaction and Epistasis',
+                path: 'textbooks/ap-biology/mendelian/gene.json',
+                description: 'How genes affect each other'
+            },
+            {
+                id: 'probability_statistics',
+                title: '6.11 Probability and Statistics in Genetics',
+                path: 'textbooks/ap-biology/mendelian/probability.json',
+                description: 'Chi-square tests and predicting outcomes'
+            },
+            {
+                id: 'unit6_summary',
+                title: '6.12 Unit 6 Summary and Key Concepts',
+                path: 'textbooks/ap-biology/mendelian/summary.json',
+                description: 'Review of key concepts from Unit 6'
+            }
+        ],
+        unit7: [
+            {
+                id: 'molecular_intro',
+                title: '7.1 Introduction to Molecular Genetics',
+                path: 'textbooks/ap-biology/molecular/introduction.json',
+                description: 'DNA as the genetic material'
+            },
+            {
+                id: 'dna_rna_structure',
+                title: '7.2 Structure of DNA and RNA',
+                path: 'textbooks/ap-biology/molecular/structure.json',
+                description: 'Nucleotides, double helix, and complementary base pairing'
+            },
+            {
+                id: 'dna_replication',
+                title: '7.3 DNA Replication',
+                path: 'textbooks/ap-biology/molecular/dna.json',
+                description: 'Enzymes, leading/lagging strands, and semiconservative model'
+            },
+            {
+                id: 'transcription',
+                title: '7.4 Transcription',
+                path: 'textbooks/ap-biology/molecular/transcription.json',
+                description: 'Process, RNA types, and promoter regions'
+            },
+            {
+                id: 'rna_processing',
+                title: '7.5 RNA Processing',
+                path: 'textbooks/ap-biology/molecular/rna.json',
+                description: 'Splicing, 5′ cap, poly-A tail'
+            },
+            {
+                id: 'translation',
+                title: '7.6 Translation',
+                path: 'textbooks/ap-biology/molecular/translation.json',
+                description: 'Ribosomes, tRNA, codons, and polypeptide synthesis'
+            },
+            {
+                id: 'gene_reg_prokaryotes',
+                title: '7.7 Gene Regulation in Prokaryotes',
+                path: 'textbooks/ap-biology/molecular/genereg1.json',
+                description: 'Operons, repressors, and activators'
+            },
+            {
+                id: 'gene_reg_eukaryotes',
+                title: '7.8 Gene Regulation in Eukaryotes',
+                path: 'textbooks/ap-biology/molecular/genereg2.json',
+                description: 'Transcription factors, enhancers, and epigenetics'
+            },
+            {
+                id: 'mutations',
+                title: '7.9 Mutations',
+                path: 'textbooks/ap-biology/molecular/mutations.json',
+                description: 'Point mutations, frameshifts, and their effects on proteins'
+            },
+            {
+                id: 'dna_technology',
+                title: '7.10 DNA Technology Basics',
+                path: 'textbooks/ap-biology/molecular/tech.json',
+                description: 'PCR, gel electrophoresis, and sequencing'
+            },
+            {
+                id: 'applications_molecular',
+                title: '7.11 Applications of Molecular Genetics',
+                path: 'textbooks/ap-biology/molecular/molgen.json',
+                description: 'Genetic engineering, CRISPR, and biotechnology'
+            },
+            {
+                id: 'unit7_summary',
+                title: '7.12 Unit 7 Summary and Key Concepts',
+                path: 'textbooks/ap-biology/molecular/summary.json',
+                description: 'Review of key concepts from Unit 7'
+            }
+        ],
+        unit8: [
+            {
+                id: 'biotech_intro',
+                title: '8.1 Introduction to Biotechnology',
+                path: 'textbooks/ap-biology/biotechnology/introduction.json',
+                description: 'Definition, history, and importance'
+            },
+            {
+                id: 'dna_cloning',
+                title: '8.2 DNA Cloning and Recombinant DNA',
+                path: 'textbooks/ap-biology/biotechnology/cloning.json',
+                description: 'Plasmids, restriction enzymes, and ligation'
+            },
+            {
+                id: 'pcr',
+                title: '8.3 Polymerase Chain Reaction (PCR)',
+                path: 'textbooks/ap-biology/biotechnology/chain.json',
+                description: 'Amplifying DNA sequences'
+            },
+            {
+                id: 'gel_electrophoresis',
+                title: '8.4 Gel Electrophoresis',
+                path: 'textbooks/ap-biology/biotechnology/gel.json',
+                description: 'Separating DNA fragments by size'
+            },
+            {
+                id: 'dna_sequencing',
+                title: '8.5 DNA Sequencing',
+                path: 'textbooks/ap-biology/biotechnology/sequencing.json',
+                description: 'Sanger sequencing and modern techniques'
+            },
+            {
+                id: 'gen_eng_prokaryotes',
+                title: '8.6 Genetic Engineering in Prokaryotes',
+                path: 'textbooks/ap-biology/biotechnology/engineering1.json',
+                description: 'Bacteria as tools for protein production'
+            },
+            {
+                id: 'gen_eng_eukaryotes',
+                title: '8.7 Genetic Engineering in Eukaryotes',
+                path: 'textbooks/ap-biology/biotechnology/engineering2.json',
+                description: 'Transgenic plants and animals'
+            },
+            {
+                id: 'crispr',
+                title: '8.8 CRISPR-Cas9 Technology',
+                path: 'textbooks/ap-biology/biotechnology/tech.json',
+                description: 'Gene editing principles and applications'
+            },
+            {
+                id: 'dna_fingerprinting',
+                title: '8.9 DNA Fingerprinting and Forensics',
+                path: 'textbooks/ap-biology/biotechnology/forensics.json',
+                description: 'Identifying individuals using genetic markers'
+            },
+            {
+                id: 'biotech_medicine',
+                title: '8.10 Biotechnology in Medicine',
+                path: 'textbooks/ap-biology/biotechnology/medicine.json',
+                description: 'Gene therapy, vaccines, and personalized medicine'
+            },
+            {
+                id: 'ethical_issues',
+                title: '8.11 Ethical, Legal, and Social Implications (ELSI)',
+                path: 'textbooks/ap-biology/biotechnology/ethical.json',
+                description: 'Bioethics and regulation'
+            },
+            {
+                id: 'unit8_summary',
+                title: '8.12 Unit 8 Summary and Key Concepts',
+                path: 'textbooks/ap-biology/biotechnology/summary.json',
+                description: 'Review of key concepts from Unit 8'
+            }
+        ],
+        unit9: [
+            {
+                id: 'evolution_intro',
+                title: '9.1 Introduction to Evolution',
+                path: 'textbooks/ap-biology/evolution/introduction.json',
+                description: 'Definition, history, and significance in biology'
+            },
+            {
+                id: 'evidence_evolution',
+                title: '9.2 Evidence for Evolution',
+                path: 'textbooks/ap-biology/evolution/evidence.json',
+                description: 'Fossils, comparative anatomy, molecular evidence'
+            },
+            {
+                id: 'natural_selection',
+                title: '9.3 Natural Selection',
+                path: 'textbooks/ap-biology/evolution/natural.json',
+                description: 'Mechanism, examples, and adaptive traits'
+            },
+            {
+                id: 'artificial_selection',
+                title: '9.4 Artificial Selection',
+                path: 'textbooks/ap-biology/evolution/artificial.json',
+                description: 'Human-driven evolution and selective breeding'
+            },
+            {
+                id: 'genetic_drift',
+                title: '9.5 Genetic Drift',
+                path: 'textbooks/ap-biology/evolution/drift.json',
+                description: 'Founder effect, bottleneck effect, and population implications'
+            },
+            {
+                id: 'gene_flow',
+                title: '9.6 Gene Flow and Migration',
+                path: 'textbooks/ap-biology/evolution/flow.json',
+                description: 'How alleles move between populations'
+            },
+            {
+                id: 'speciation',
+                title: '9.7 Speciation',
+                path: 'textbooks/ap-biology/evolution/speciation.json',
+                description: 'Allopatric, sympatric, and reproductive isolation'
+            },
+            {
+                id: 'patterns_evolution',
+                title: '9.8 Patterns of Evolution',
+                path: 'textbooks/ap-biology/evolution/patterns.json',
+                description: 'Convergent, divergent, and coevolution'
+            },
+            {
+                id: 'phylogenetics',
+                title: '9.9 Phylogenetics and Classification',
+                path: 'textbooks/ap-biology/evolution/classification.json',
+                description: 'Cladograms, trees, and evolutionary relationships'
+            },
+            {
+                id: 'molecular_evolution',
+                title: '9.10 Evolutionary Mechanisms at the Molecular Level',
+                path: 'textbooks/ap-biology/evolution/mechanisms.json',
+                description: 'Mutations, genetic variation, and molecular clocks'
+            },
+            {
+                id: 'human_evolution',
+                title: '9.11 Human Evolution',
+                path: 'textbooks/ap-biology/evolution/human.json',
+                description: 'Hominid lineage and key adaptations'
+            },
+            {
+                id: 'unit9_summary',
+                title: '9.12 Unit 9 Summary and Key Concepts',
+                path: 'textbooks/ap-biology/evolution/summary.json',
+                description: 'Review of key concepts from Unit 9'
+            }
+        ],
+        unit10: [
+            {
+                id: 'practice_chemistry_life',
+                title: '10.1 Chemistry of Life',
+                path: 'textbooks/ap-biology/practice/life.json',
+                description: 'Review and practice problems'
+            },
+            {
+                id: 'practice_cell_structure',
+                title: '10.2 Cell Structure and Function',
+                path: 'textbooks/ap-biology/practice/structure.json',
+                description: 'Review and practice problems'
+            },
+            {
+                id: 'practice_diffusion',
+                title: '10.3 Diffusion and Osmosis',
+                path: 'textbooks/ap-biology/practice/diffusion.json',
+                description: 'Review and practice problems'
+            },
+            {
+                id: 'practice_energetics',
+                title: '10.4 Cellular Energetics',
+                path: 'textbooks/ap-biology/practice/energetics.json',
+                description: 'Review and practice problems'
+            },
+            {
+                id: 'practice_cell_cycle',
+                title: '10.5 Cell Communication and Cell Cycle',
+                path: 'textbooks/ap-biology/practice/cell_cycle.json',
+                description: 'Review and practice problems'
+            },
+            {
+                id: 'practice_plants_animals',
+                title: '10.6 Plants and Animals',
+                path: 'textbooks/ap-biology/practice/plants.json',
+                description: 'Review and practice problems'
+            },
+            {
+                id: 'practice_mendelian',
+                title: '10.7 Mendelian Genetics',
+                path: 'textbooks/ap-biology/practice/mendelian.json',
+                description: 'Review and practice problems'
+            },
+            {
+                id: 'practice_molecular',
+                title: '10.8 Molecular Genetics',
+                path: 'textbooks/ap-biology/practice/molecular.json',
+                description: 'Review and practice problems'
+            },
+            {
+                id: 'practice_biotech',
+                title: '10.9 Biotechnology',
+                path: 'textbooks/ap-biology/practice/biotech.json',
+                description: 'Review and practice problems'
+            },
+            {
+                id: 'practice_evolution',
+                title: '10.10 Evolution',
+                path: 'textbooks/ap-biology/practice/evolution.json',
+                description: 'Review and practice problems'
             }
         ]
     };
@@ -8598,6 +9049,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
