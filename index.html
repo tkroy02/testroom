@@ -6322,7 +6322,7 @@ function renderMarkdown(text) {
     return text;
 }
 
-// Also update the selectQuizOption function to handle math re-rendering if needed
+// SINGLE, CLEAN selectQuizOption function (remove all duplicates!)
 function selectQuizOption(questionIndex, optionIndex) {
     const questionElement = document.querySelectorAll('.question')[questionIndex];
     const options = questionElement.querySelectorAll('.option');
@@ -6350,15 +6350,6 @@ function selectQuizOption(questionIndex, optionIndex) {
             }
         }, 50);
     }
-}
-    
-    // Remove selected class from all options in this question
-    options.forEach(opt => opt.classList.remove('selected'));
-    
-    // Add selected class to clicked option
-    options[optionIndex].classList.add('selected');
-    options[optionIndex].style.borderColor = 'var(--primary)';
-    options[optionIndex].style.background = 'var(--light-bg)';
 }
 
 function startExamQuiz() {
@@ -7448,6 +7439,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
