@@ -133,7 +133,7 @@
     "shuffleOptions": true,      // ✅ NEW: Option randomization
     "showResults": true,
     "allowRetry": true
-}
+},
     "grading": {
       "scoreMessages": {
         "90": "Excellent work! You have a strong understanding of differentiation using the chain rule.",
@@ -144,3 +144,4 @@
     }
   }
 }
+
