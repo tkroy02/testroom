@@ -6184,6 +6184,7 @@ async function loadFlashcards(courseId) {
         console.log('🔍 Loading flashcards for:', courseId);
         
         const flashcardPaths = {
+            // AP Physics 1
             'ap-physics-1': {
                 'kinematics': 'flashcards/ap-physics-1/kinematics.json',
                 'dynamics': 'flashcards/ap-physics-1/dynamics.json',
@@ -6193,6 +6194,98 @@ async function loadFlashcards(courseId) {
                 'simple_harmonic_motion': 'flashcards/ap-physics-1/simple_harmonic_motion.json',
                 'rotational_motion': 'flashcards/ap-physics-1/rotational_motion.json',
                 'fluid_mechanics': 'flashcards/ap-physics-1/fluid_mechanics.json'
+            },
+            
+            // AP Physics 2
+            'ap-physics-2': {
+                'fluids': 'flashcards/ap-physics-2/fluids.json',
+                'thermodynamics': 'flashcards/ap-physics-2/thermodynamics.json',
+                'electric_field': 'flashcards/ap-physics-2/electricfield.json',
+                'electric_circuits': 'flashcards/ap-physics-2/electriccircuits.json',
+                'magnetism': 'flashcards/ap-physics-2/magnetism.json',
+                'optics': 'flashcards/ap-physics-2/optics.json',
+                'atomic_physics': 'flashcards/ap-physics-2/atomicphysics.json'
+            },
+            
+            // Physics Grade 9
+            'physics-grade-9': {
+                'scientific_method': 'flashcards/physics-9/scientific_method.json',
+                'measurement': 'flashcards/physics-9/measurement.json',
+                'motion': 'flashcards/physics-9/motion.json',
+                'forces': 'flashcards/physics-9/forces.json',
+                'work': 'flashcards/physics-9/work.json',
+                'heat': 'flashcards/physics-9/heat.json',
+                'waves': 'flashcards/physics-9/waves.json',
+                'light': 'flashcards/physics-9/light.json',
+                'electricity': 'flashcards/physics-9/electricity.json'
+            },
+            
+            // Physics Grade 10
+            'physics-grade-10': {
+                'kinematics': 'flashcards/physics-10/kinematics.json',
+                'dynamics': 'flashcards/physics-10/dynamics.json',
+                'work': 'flashcards/physics-10/work.json',
+                'momentum': 'flashcards/physics-10/momentum.json',
+                'circular_motion': 'flashcards/physics-10/circular_mtn.json',
+                'waves': 'flashcards/physics-10/waves.json',
+                'sound': 'flashcards/physics-10/sound.json',
+                'light': 'flashcards/physics-10/light.json',
+                'electricity': 'flashcards/physics-10/electricity.json',
+                'magnetism': 'flashcards/physics-10/magnetism.json'
+            },
+            
+            // Physics Grade 11
+            'physics-grade-11': {
+                'kinematics': 'flashcards/physics-11/kinematics.json',
+                'newton_laws': 'flashcards/physics-11/newton.json',
+                'energy': 'flashcards/physics-11/energy.json',
+                'momentum': 'flashcards/physics-11/momentum.json',
+                'rotational_motion': 'flashcards/physics-11/rotational_mtn.json',
+                'fluid_mechanics': 'flashcards/physics-11/fluid.json',
+                'thermodynamics': 'flashcards/physics-11/thermodynamics.json',
+                'oscillations': 'flashcards/physics-11/oscillation.json',
+                'electricity': 'flashcards/physics-11/electricity.json',
+                'modern_physics': 'flashcards/physics-11/modern_phy.json'
+            },
+            
+            // Physics Grade 12
+            'physics-grade-12': {
+                'kinematics': 'flashcards/physics-12/kinematics.json',
+                'gravitation': 'flashcards/physics-12/gravitation.json',
+                'oscillations': 'flashcards/physics-12/oscillations.json',
+                'electric_field': 'flashcards/physics-12/electric_field.json',
+                'magnetism': 'flashcards/physics-12/magnetic.json',
+                'alternating_current': 'flashcards/physics-12/alternating_current.json',
+                'quantum_physics': 'flashcards/physics-12/quantum.json',
+                'atomic_physics': 'flashcards/physics-12/atomicphysics.json',
+                'relativity': 'flashcards/physics-12/relativity.json'
+            },
+            
+            // AP Biology
+            'ap-biology': {
+                'chemistry_of_life': 'flashcards/ap-biology/chemistry_of_life.json',
+                'cell_structure': 'flashcards/ap-biology/cell_structure.json',
+                'energetics': 'flashcards/ap-biology/energetics.json',
+                'cell_cycle': 'flashcards/ap-biology/cell_cycle.json',
+                'midterm_review': 'flashcards/ap-biology/review.json',
+                'mendelian_genetics': 'flashcards/ap-biology/mendelian.json',
+                'molecular_genetics': 'flashcards/ap-biology/molecular_genetics.json',
+                'biotechnology': 'flashcards/ap-biology/biotechnology.json',
+                'evolutionary_biology': 'flashcards/ap-biology/evolutionary_bio.json'
+            },
+            
+            // Economics
+            'economics': {
+                'introduction': 'flashcards/economics/introduction.json',
+                'economic_analysis': 'flashcards/economics/ecoanalysis.json',
+                'demand_supply': 'flashcards/economics/demand_supply.json',
+                'elasticity': 'flashcards/economics/elasticity.json',
+                'production_costs': 'flashcards/economics/production_costs.json',
+                'market_structures': 'flashcards/economics/market_structures.json',
+                'wages': 'flashcards/economics/wages.json',
+                'national_income': 'flashcards/economics/national_income.json',
+                'employment': 'flashcards/economics/employment.json',
+                'fiscal_policy': 'flashcards/economics/fiscal_policy.json'
             }
         };
 
@@ -6202,9 +6295,9 @@ async function loadFlashcards(courseId) {
             return null;
         }
 
-        // NEW: Return the topic mapping instead of loading a specific topic
+        // Return the topic mapping
         return {
-            course: 'AP Physics 1',
+            course: getCourseDisplayName(courseId),
             availableTopics: Object.keys(coursePaths),
             topicPaths: coursePaths
         };
@@ -6213,6 +6306,21 @@ async function loadFlashcards(courseId) {
         console.error('❌ Error loading flashcards:', error);
         return null;
     }
+}
+
+// Helper function for display names
+function getCourseDisplayName(courseId) {
+    const displayNames = {
+        'ap-physics-1': 'AP Physics 1',
+        'ap-physics-2': 'AP Physics 2',
+        'physics-grade-9': 'Physics Grade 9',
+        'physics-grade-10': 'Physics Grade 10', 
+        'physics-grade-11': 'Physics Grade 11',
+        'physics-grade-12': 'Physics Grade 12',
+        'ap-biology': 'AP Biology',
+        'economics': 'Economics'
+    };
+    return displayNames[courseId] || courseId;
 }
 
 
@@ -7020,6 +7128,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
