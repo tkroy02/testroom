@@ -4524,39 +4524,131 @@ async function loadTextbookSection(sectionPath, sectionTitle) {
 function displayTextbookSection(sectionData, sectionTitle) {
     const contentArea = document.getElementById('textbook-content');
     
-    contentArea.innerHTML = `
+    // Build HTML content from the structured JSON
+    let htmlContent = `
         <div class="textbook-section">
             <div class="section-header">
                 <h2>${sectionTitle}</h2>
-                ${sectionData.subtitle ? `<p class="section-subtitle">${sectionData.subtitle}</p>` : ''}
+                ${sectionData.description ? `<p class="section-subtitle">${sectionData.description}</p>` : ''}
+                ${sectionData.core_concept ? `
+                    <div style="background: var(--light-bg); padding: 15px; border-radius: var(--border-radius-sm); margin-top: 15px; border-left: 4px solid var(--primary);">
+                        <strong>Core Concept:</strong> ${sectionData.core_concept}
+                    </div>
+                ` : ''}
             </div>
             
             <div class="section-content">
-                ${sectionData.content ? renderTextbookContent(sectionData.content) : '<p>No content available.</p>'}
-            </div>
-            
-            ${sectionData.keyPoints ? `
+    `;
+
+    // Process each section
+    if (sectionData.sections && Array.isArray(sectionData.sections)) {
+        sectionData.sections.forEach((section, index) => {
+            htmlContent += `
+                <div class="content-section" style="margin-bottom: 30px;">
+                    <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 1.3rem;">
+                        ${section.section_title || `Section ${index + 1}`}
+                    </h3>
+            `;
+
+            // Add key concept if present
+            if (section.key_concept) {
+                htmlContent += `
+                    <div style="background: #e8f4fd; padding: 12px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid #2196F3;">
+                        <strong>Key Concept:</strong> ${section.key_concept}
+                    </div>
+                `;
+            }
+
+            // Handle different section types
+            if (section.types_of_cellular_work) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 20px 0 10px 0;">Types of Cellular Work:</h4>`;
+                section.types_of_cellular_work.forEach(work => {
+                    htmlContent += `
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--light-gray);">
+                            <strong style="color: var(--primary);">${work.type}:</strong> ${work.description}
+                            ${work.examples ? `
+                                <div style="margin-top: 8px;">
+                                    <strong>Examples:</strong> ${work.examples.join(', ')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                });
+            }
+
+            if (section.thermodynamic_laws) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 20px 0 10px 0;">Thermodynamic Laws:</h4>`;
+                section.thermodynamic_laws.forEach(law => {
+                    htmlContent += `
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--light-gray);">
+                            <strong style="color: var(--primary);">${law.law}:</strong> ${law.principle}
+                            <div style="margin-top: 8px;"><strong>Statement:</strong> ${law.statement}</div>
+                            <div style="margin-top: 8px;"><strong>Biological Implication:</strong> ${law.biological_implication}</div>
+                        </div>
+                    `;
+                });
+            }
+
+            if (section.free_energy_components) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 20px 0 10px 0;">Free Energy Components:</h4>`;
+                const freeEnergy = section.free_energy_components;
+                htmlContent += `
+                    <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid var(--light-gray);">
+                        <strong>Definition:</strong> ${freeEnergy.definition}
+                        <div style="margin-top: 8px;"><strong>Free Energy Change:</strong> ${freeEnergy.free_energy_change}</div>
+                    </div>
+                `;
+
+                if (freeEnergy.reaction_types) {
+                    htmlContent += `<h5 style="color: var(--primary); margin: 15px 0 10px 0;">Reaction Types:</h5>`;
+                    freeEnergy.reaction_types.forEach(reaction => {
+                        htmlContent += `
+                            <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 8px;">
+                                <strong>${reaction.type}:</strong> ${reaction.delta_g}
+                                <div style="margin-top: 5px;"><strong>Characteristics:</strong> ${reaction.characteristics.join(', ')}</div>
+                                <div style="margin-top: 5px;"><strong>Energy Flow:</strong> ${reaction.energy_flow}</div>
+                                <div style="margin-top: 5px;"><strong>Example:</strong> ${reaction.biological_example}</div>
+                            </div>
+                        `;
+                    });
+                }
+            }
+
+            // Add more section type handlers as needed...
+
+            htmlContent += `</div>`; // Close content-section
+        });
+    }
+
+    htmlContent += `</div>`; // Close section-content
+
+    // Add key points section
+    if (sectionData.key_terms && sectionData.key_terms.length > 0) {
+        htmlContent += `
             <div class="key-points">
-                <h3><i class="fas fa-key"></i> Key Points</h3>
+                <h3><i class="fas fa-key"></i> Key Terms</h3>
                 <ul>
-                    ${sectionData.keyPoints.map(point => `<li>${renderMarkdown(point)}</li>`).join('')}
+                    ${sectionData.key_terms.map(term => `<li>${term}</li>`).join('')}
                 </ul>
             </div>
-            ` : ''}
-            
-            ${sectionData.vocabulary ? `
+        `;
+    }
+
+    // Add summary
+    if (sectionData.summary) {
+        htmlContent += `
             <div class="vocabulary">
-                <h3><i class="fas fa-book"></i> Key Vocabulary</h3>
+                <h3><i class="fas fa-file-alt"></i> Summary</h3>
                 <div class="vocab-grid">
-                    ${sectionData.vocabulary.map(term => `
-                        <div class="vocab-item">
-                            <strong>${term.term}</strong>: ${renderMarkdown(term.definition)}
-                        </div>
-                    `).join('')}
+                    <div class="vocab-item">
+                        ${sectionData.summary}
+                    </div>
                 </div>
             </div>
-            ` : ''}
-            
+        `;
+    }
+
+    htmlContent += `
             <div class="section-navigation">
                 <button class="btn btn-outline" onclick="loadTextbookContent()">
                     <i class="fas fa-list"></i> Back to Sections
@@ -4564,6 +4656,8 @@ function displayTextbookSection(sectionData, sectionTitle) {
             </div>
         </div>
     `;
+
+    contentArea.innerHTML = htmlContent;
     
     // Render MathJax for the content
     setTimeout(() => {
@@ -8317,6 +8411,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
