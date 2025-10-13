@@ -128,12 +128,12 @@
       }
     ],
     "settings": {
-    "timeLimit": 45,
-    "shuffleQuestions": true,
-    "shuffleOptions": true,      // ✅ NEW: Option randomization
-    "showResults": true,
-    "allowRetry": true
-},
+      "timeLimit": 45,
+      "shuffleQuestions": true,
+      "shuffleOptions": true,
+      "showResults": true,
+      "allowRetry": true
+    },
     "grading": {
       "scoreMessages": {
         "90": "Excellent work! You have a strong understanding of differentiation using the chain rule.",
@@ -144,4 +144,3 @@
     }
   }
 }
-
