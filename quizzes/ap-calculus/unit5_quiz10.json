@@ -1,0 +1,146 @@
+{
+  "quiz": {
+    "title": "Calculus Implicit Function Rule (Quiz 10)",
+    "subtitle": "Implicit Function Rule Differentiation Practice (10 Questions)",
+    "subject": "Calculus",
+    "topic": "Implicit Function Rule Differentiation",
+    "duration": 60,
+    "questions": [
+      {
+        "type": "mcq",
+        "question": "Find \\(\\frac{dy}{dx}\\) if \\(x^2 + y^2 = 25\\)",
+        "options": [
+          "\\(\\frac{x}{y}\\)",
+          "\\(-\\frac{x}{y}\\)",
+          "\\(\\frac{y}{x}\\)",
+          "\\(-\\frac{y}{x}\\)"
+        ],
+        "answer": "B",
+        "explanation": "Differentiate both sides: 2x + 2y·dy/dx = 0 → 2y·dy/dx = -2x → dy/dx = -x/y"
+      },
+      {
+        "type": "mcq",
+        "question": "Find \\(\\frac{dy}{dx}\\) if \\(xy = 10\\)",
+        "options": [
+          "\\(\\frac{y}{x}\\)",
+          "\\(\\frac{x}{y}\\)",
+          "\\(-\\frac{y}{x}\\)",
+          "\\(-\\frac{x}{y}\\)"
+        ],
+        "answer": "C",
+        "explanation": "Differentiate both sides: y + x·dy/dx = 0 → x·dy/dx = -y → dy/dx = -y/x"
+      },
+      {
+        "type": "mcq",
+        "question": "Find \\(\\frac{dy}{dx}\\) if \\(x^2y + y^3 = 4\\)",
+        "options": [
+          "\\(-\\frac{2xy}{x^2 + 3y^2}\\)",
+          "\\(\\frac{2xy}{x^2 + 3y^2}\\)",
+          "\\(-\\frac{x^2 + 3y^2}{2xy}\\)",
+          "\\(\\frac{x^2 + 3y^2}{2xy}\\)"
+        ],
+        "answer": "A",
+        "explanation": "Differentiate both sides: 2xy + x²·dy/dx + 3y²·dy/dx = 0 → (x² + 3y²)·dy/dx = -2xy → dy/dx = -2xy/(x² + 3y²)"
+      },
+      {
+        "type": "mcq",
+        "question": "Find \\(\\frac{dy}{dx}\\) if \\(y^2 - 3x = 7\\)",
+        "options": [
+          "\\(\\frac{3}{2y}\\)",
+          "\\(\\frac{2y}{3}\\)",
+          "\\(-\\frac{3}{2y}\\)",
+          "\\(-\\frac{2y}{3}\\)"
+        ],
+        "answer": "A",
+        "explanation": "Differentiate both sides: 2y·dy/dx - 3 = 0 → 2y·dy/dx = 3 → dy/dx = 3/(2y)"
+      },
+      {
+        "type": "mcq",
+        "question": "Find \\(\\frac{dy}{dx}\\) if \\(x^3 + y^3 = 8\\)",
+        "options": [
+          "\\(\\frac{x^2}{y^2}\\)",
+          "\\(-\\frac{x^2}{y^2}\\)",
+          "\\(\\frac{y^2}{x^2}\\)",
+          "\\(-\\frac{y^2}{x^2}\\)"
+        ],
+        "answer": "B",
+        "explanation": "Differentiate both sides: 3x² + 3y²·dy/dx = 0 → 3y²·dy/dx = -3x² → dy/dx = -x²/y²"
+      },
+      {
+        "type": "mcq",
+        "question": "Find \\(\\frac{dy}{dx}\\) if \\(x^2 + xy + y^2 = 7\\)",
+        "options": [
+          "\\(-\\frac{2x + y}{x + 2y}\\)",
+          "\\(\\frac{2x + y}{x + 2y}\\)",
+          "\\(-\\frac{x + 2y}{2x + y}\\)",
+          "\\(\\frac{x + 2y}{2x + y}\\)"
+        ],
+        "answer": "A",
+        "explanation": "Differentiate both sides: 2x + y + x·dy/dx + 2y·dy/dx = 0 → (x + 2y)·dy/dx = -(2x + y) → dy/dx = -(2x + y)/(x + 2y)"
+      },
+      {
+        "type": "mcq",
+        "question": "Find \\(\\frac{dy}{dx}\\) if \\(\\sin(x + y) = 1\\)",
+        "options": [
+          "\\(1\\)",
+          "\\(0\\)",
+          "\\(-1\\)",
+          "\\(\\cos(x + y)\\)"
+        ],
+        "answer": "C",
+        "explanation": "Differentiate both sides: cos(x+y)(1 + dy/dx) = 0 → 1 + dy/dx = 0 → dy/dx = -1"
+      },
+      {
+        "type": "mcq",
+        "question": "Find \\(\\frac{dy}{dx}\\) if \\(e^x + e^y = 5\\)",
+        "options": [
+          "\\(-e^{x-y}\\)",
+          "\\(e^{x-y}\\)",
+          "\\(-e^{y-x}\\)",
+          "\\(e^{y-x}\\)"
+        ],
+        "answer": "A",
+        "explanation": "Differentiate both sides: e^x + e^y·dy/dx = 0 → e^y·dy/dx = -e^x → dy/dx = -e^x/e^y = -e^(x-y)"
+      },
+      {
+        "type": "mcq",
+        "question": "Find \\(\\frac{dy}{dx}\\) if \\(x^2y^2 = 16\\)",
+        "options": [
+          "\\(\\frac{y}{x}\\)",
+          "\\(-\\frac{y}{x}\\)",
+          "\\(\\frac{x}{y}\\)",
+          "\\(-\\frac{x}{y}\\)"
+        ],
+        "answer": "B",
+        "explanation": "Differentiate both sides: 2xy² + x²·2y·dy/dx = 0 → 2x²y·dy/dx = -2xy² → dy/dx = -y/x"
+      },
+      {
+        "type": "mcq",
+        "question": "Find \\(\\frac{dy}{dx}\\) if \\(x^2 + \\cos y = 2\\)",
+        "options": [
+          "\\(\\frac{2x}{\\sin y}\\)",
+          "\\(-\\frac{2x}{\\sin y}\\)",
+          "\\(\\frac{\\sin y}{2x}\\)",
+          "\\(-\\frac{\\sin y}{2x}\\)"
+        ],
+        "answer": "B",
+        "explanation": "Differentiate both sides: 2x - sin y·dy/dx = 0 → -sin y·dy/dx = -2x → dy/dx = 2x/sin y"
+      }
+    ],
+    "settings": {
+      "timeLimit": 60,
+      "shuffleQuestions": true,
+      "shuffleOptions": false,
+      "showResults": true,
+      "allowRetry": true
+    },
+    "grading": {
+      "scoreMessages": {
+        "90": "Excellent work! You have mastered implicit differentiation.",
+        "70": "Good job! You understand most implicit differentiation concepts but could use some review.",
+        "50": "Not bad! Review the implicit differentiation applications you missed and try again.",
+        "0": "Keep practicing! Focus on understanding the implicit differentiation formula: differentiate both sides and solve for dy/dx."
+      }
+    }
+  }
+}
