@@ -82,7 +82,7 @@
         "type": "mcq",
         "question": "If y = x^4 - 3x^2 + 2x, what is y'''?",
         "options": [
-          "24x - 6",
+          "24x",
           "12x^2 - 6",
           "24x^3 - 6x",
           "12x - 6"
