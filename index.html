@@ -4199,11 +4199,14 @@ function loadTextbookContent() {
                                 Unit 1: Chemistry of Life
                             </button>
                             <button class="unit-btn ${currentTextbookUnit === 'unit2' ? 'active' : ''}" onclick="switchTextbookUnit('unit2')">
-                                Unit 2: Cell Structure & Function
+                                Unit 2: Cell Structure
+                            </button>
+                            <button class="unit-btn ${currentTextbookUnit === 'unit3' ? 'active' : ''}" onclick="switchTextbookUnit('unit3')">
+                                Unit 3: Cellular Energetics
                             </button>
                         </div>
                     </div>
-                    <h4>${currentTextbookUnit === 'unit1' ? 'Unit 1' : 'Unit 2'} Sections</h4>
+                    <h4>${getUnitTitle(currentTextbookUnit)} Sections</h4>
                     <div class="textbook-sections" id="textbook-sections">
                         <!-- Sections will be loaded here -->
                     </div>
@@ -4223,6 +4226,15 @@ function loadTextbookContent() {
     `;
     
     loadTextbookSections();
+}
+
+function getUnitTitle(unit) {
+    const unitTitles = {
+        unit1: 'Unit 1: Chemistry of Life',
+        unit2: 'Unit 2: Cell Structure & Function', 
+        unit3: 'Unit 3: Cellular Energetics'
+    };
+    return unitTitles[unit] || 'Unit';
 }
 
 function switchTextbookUnit(unit) {
@@ -4380,6 +4392,80 @@ function loadTextbookSections() {
                 title: '2.12 Unit 2 Summary and Key Concepts',
                 path: 'textbooks/ap-biology/cell_structure/summary.json',
                 description: 'Review of key concepts from Unit 2'
+            }
+        ],
+        unit3: [
+            {
+                id: 'introduction',
+                title: '3.1 Introduction to Cellular Energetics',
+                path: 'textbooks/ap-biology/cellular_energetics/introduction.json',
+                description: 'The role of energy in living systems'
+            },
+            {
+                id: 'thermodynamics',
+                title: '3.2 Thermodynamics and Free Energy',
+                path: 'textbooks/ap-biology/cellular_energetics/thermodynamics.json',
+                description: 'Laws of thermodynamics, Gibbs free energy (ΔG)'
+            },
+            {
+                id: 'atp',
+                title: '3.3 ATP: The Energy Currency of the Cell',
+                path: 'textbooks/ap-biology/cellular_energetics/atp.json',
+                description: 'Structure, hydrolysis, and energy coupling'
+            },
+            {
+                id: 'enzymes',
+                title: '3.4 Enzymes and Catalysis',
+                path: 'textbooks/ap-biology/cellular_energetics/enzymes.json',
+                description: 'Enzyme structure, function, activation energy, and specificity'
+            },
+            {
+                id: 'enzyme_activity',
+                title: '3.5 Factors Affecting Enzyme Activity',
+                path: 'textbooks/ap-biology/cellular_energetics/enzyme_activity.json',
+                description: 'Temperature, pH, substrate concentration, inhibitors'
+            },
+            {
+                id: 'respiration',
+                title: '3.6 Cellular Respiration Overview',
+                path: 'textbooks/ap-biology/cellular_energetics/respiration.json',
+                description: 'Pathways and energy yield'
+            },
+            {
+                id: 'glycolysis',
+                title: '3.7 Glycolysis',
+                path: 'textbooks/ap-biology/cellular_energetics/glycolysis.json',
+                description: 'Steps, products, and regulation'
+            },
+            {
+                id: 'krebs',
+                title: '3.8 Citric Acid Cycle (Krebs Cycle)',
+                path: 'textbooks/ap-biology/cellular_energetics/krebs.json',
+                description: 'Inputs, outputs, and importance'
+            },
+            {
+                id: 'chemiosmosis',
+                title: '3.9 Oxidative Phosphorylation and Chemiosmosis',
+                path: 'textbooks/ap-biology/cellular_energetics/chemiosmosis.json',
+                description: 'Electron transport chain and ATP synthesis'
+            },
+            {
+                id: 'photosynthesis',
+                title: '3.10 Photosynthesis Overview',
+                path: 'textbooks/ap-biology/cellular_energetics/photosynthesis.json',
+                description: 'Light-dependent and light-independent reactions'
+            },
+            {
+                id: 'metabolic',
+                title: '3.11 Alternative Pathways and Metabolic Adaptations',
+                path: 'textbooks/ap-biology/cellular_energetics/metabolic.json',
+                description: 'Fermentation, C4, CAM, anaerobic processes'
+            },
+            {
+                id: 'summary',
+                title: '3.12 Unit 3 Summary and Key Concepts',
+                path: 'textbooks/ap-biology/cellular_energetics/summary.json',
+                description: 'Review of key concepts from Unit 3'
             }
         ]
     };
@@ -8231,6 +8317,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
