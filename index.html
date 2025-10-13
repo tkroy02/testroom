@@ -6205,13 +6205,39 @@ let quizState = {
 };
 
 // SINGLE CORRECTED displayQuizWithData function - REPLACE ALL DUPLICATES
+// Updated displayQuizWithData function with option randomization
 function displayQuizWithData(quizData, unitId, quizNumber, difficulty) {
     console.log('📝 Starting quiz with data:', quizData);
     
+    // Process questions to shuffle options while preserving correct answers
+    const processedQuestions = (quizData.questions || []).map(question => {
+        // Create array of options with their original indices
+        const optionsWithIndices = question.options.map((option, index) => ({
+            text: option,
+            originalIndex: index
+        }));
+        
+        // Shuffle the options
+        const shuffledOptions = shuffleArray(optionsWithIndices);
+        
+        // Find the new index of the correct answer
+        const correctAnswerLetter = question.answer; // "A", "B", "C", "D"
+        const originalCorrectIndex = correctAnswerLetter ? correctAnswerLetter.charCodeAt(0) - 65 : -1;
+        const newCorrectIndex = shuffledOptions.findIndex(opt => opt.originalIndex === originalCorrectIndex);
+        
+        return {
+            ...question,
+            options: shuffledOptions.map(opt => opt.text),
+            originalOptions: question.options, // Keep original for reference
+            correctAnswerIndex: newCorrectIndex, // Store the new shuffled index
+            originalCorrectIndex: originalCorrectIndex // Keep original for debugging
+        };
+    });
+    
     // PROPERLY initialize quiz state
     quizState = {
-        currentQuestions: quizData.questions || [],
-        userAnswers: new Array(quizData.questions?.length || 0).fill(null), // Initialize with null
+        currentQuestions: processedQuestions,
+        userAnswers: new Array(processedQuestions.length).fill(null),
         currentQuestionIndex: 0,
         isQuizComplete: false,
         showResults: false,
@@ -6236,7 +6262,7 @@ function displayQuizWithData(quizData, unitId, quizNumber, difficulty) {
                     <p style="color: var(--gray); margin-bottom: 0;">${quizData.subtitle || quizData.description || 'Test your knowledge on this topic.'}</p>
                     ${quizData.duration ? `<div style="margin-top: 10px;"><strong>Duration:</strong> ${quizData.duration} minutes</div>` : ''}
                     <div style="margin-top: 10px; font-size: 0.9rem; color: var(--primary);">
-                        <i class="fas fa-info-circle"></i> Select your answers and click "Submit Quiz" to see results and explanations.
+                        <i class="fas fa-random"></i> Options are randomized for each attempt
                     </div>
                     <div style="margin-top: 5px; font-size: 0.9rem; color: var(--warning);">
                         <strong>Questions:</strong> ${quizState.currentQuestions.length}
@@ -6270,6 +6296,16 @@ function displayQuizWithData(quizData, unitId, quizNumber, difficulty) {
     }
 }
 
+// Fisher-Yates shuffle algorithm
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+        
 // SINGLE CORRECTED displayQuizQuestions function - REPLACE ALL DUPLICATES
 function displayQuizQuestions(questions) {
     const container = document.getElementById('quiz-questions-container');
@@ -6360,39 +6396,38 @@ function submitTopicQuiz() {
     const results = [];
     
     quizState.currentQuestions.forEach((question, index) => {
-        const userAnswer = quizState.userAnswers[index];
-        
-        // Convert letter answer (A,B,C,D) to numeric index (0,1,2,3)
-        const correctAnswerLetter = question.answer; // "A", "B", "C", "D"
-        const correctAnswerIndex = correctAnswerLetter ? correctAnswerLetter.charCodeAt(0) - 65 : -1; // A->0, B->1, C->2, D->3
-        
-        const isCorrect = userAnswer === correctAnswerIndex;
-        
-        // DEBUG: Log each question's data
-        console.log(`🔍 Question ${index}:`, {
-            userAnswer: userAnswer,
-            correctAnswerLetter: correctAnswerLetter,
-            correctAnswerIndex: correctAnswerIndex,
-            isCorrect: isCorrect,
-            options: question.options,
-            questionText: question.question
-        });
-        
-        if (isCorrect && userAnswer !== null) {
-            correctAnswers++;
-        }
-        
-        results.push({
-            question: question.question,
-            userAnswer: userAnswer,
-            correctAnswer: correctAnswerIndex,
-            correctAnswerLetter: correctAnswerLetter,
-            isCorrect: isCorrect,
-            explanation: question.explanation,
-            options: question.options,
-            wasAnswered: userAnswer !== null
-        });
+    const userAnswer = quizState.userAnswers[index];
+    
+    // Use the shuffled correct answer index
+    const correctAnswerIndex = question.correctAnswerIndex;
+    
+    const isCorrect = userAnswer === correctAnswerIndex;
+    
+    // DEBUG: Log each question's data
+    console.log(`🔍 Question ${index}:`, {
+        userAnswer: userAnswer,
+        correctAnswerIndex: correctAnswerIndex,
+        isCorrect: isCorrect,
+        shuffledOptions: question.options,
+        originalCorrect: question.originalCorrectIndex
     });
+    
+    if (isCorrect && userAnswer !== null) {
+        correctAnswers++;
+    }
+    
+    results.push({
+        question: question.question,
+        userAnswer: userAnswer,
+        correctAnswer: correctAnswerIndex,
+        originalCorrectIndex: question.originalCorrectIndex,
+        isCorrect: isCorrect,
+        explanation: question.explanation,
+        options: question.options,
+        originalOptions: question.originalOptions,
+        wasAnswered: userAnswer !== null
+    });
+});
     
     const score = Math.round((correctAnswers / quizState.currentQuestions.length) * 100);
     quizState.isQuizComplete = true;
@@ -7663,6 +7698,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
