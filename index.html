@@ -646,6 +646,49 @@ body {
     }
 }
 
+/* Unit Selector Styles */
+.unit-selector {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--light-bg);
+}
+
+.unit-selector h4 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.unit-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.unit-btn {
+    padding: 12px 15px;
+    border: 2px solid var(--light-gray);
+    border-radius: var(--border-radius-sm);
+    background: white;
+    color: var(--primary);
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.unit-btn:hover {
+    border-color: var(--primary);
+    background: var(--light-bg);
+}
+
+.unit-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+        
 /* Study Materials Cards */
 .tool-card {
     background: white;
@@ -4133,13 +4176,15 @@ function clearQuizData() {
 }
 
 // Textbook functionality
+let currentTextbookUnit = 'unit1';
+        
 function loadTextbookContent() {
     const resourceContent = document.getElementById('resource-content');
     
     resourceContent.innerHTML = `
         <div class="tool-interface active">
             <div class="tool-header">
-                <h3 class="section-title">AP Biology Textbook - Unit 1: Chemistry of Life</h3>
+                <h3 class="section-title">AP Biology Textbook</h3>
                 <button class="tool-back" onclick="openResource('textbook', this)">
                     <i class="fas fa-arrow-left"></i> Back to Resources
                 </button>
@@ -4147,7 +4192,18 @@ function loadTextbookContent() {
             
             <div class="textbook-container">
                 <div class="textbook-sidebar">
-                    <h4>Unit 1 Sections</h4>
+                    <div class="unit-selector">
+                        <h4>Select Unit</h4>
+                        <div class="unit-buttons">
+                            <button class="unit-btn ${currentTextbookUnit === 'unit1' ? 'active' : ''}" onclick="switchTextbookUnit('unit1')">
+                                Unit 1: Chemistry of Life
+                            </button>
+                            <button class="unit-btn ${currentTextbookUnit === 'unit2' ? 'active' : ''}" onclick="switchTextbookUnit('unit2')">
+                                Unit 2: Cell Structure & Function
+                            </button>
+                        </div>
+                    </div>
+                    <h4>${currentTextbookUnit === 'unit1' ? 'Unit 1' : 'Unit 2'} Sections</h4>
                     <div class="textbook-sections" id="textbook-sections">
                         <!-- Sections will be loaded here -->
                     </div>
@@ -4169,92 +4225,175 @@ function loadTextbookContent() {
     loadTextbookSections();
 }
 
+function switchTextbookUnit(unit) {
+    currentTextbookUnit = unit;
+    loadTextbookContent();
+}
+
 function loadTextbookSections() {
     const sectionsContainer = document.getElementById('textbook-sections');
     
-    const unit1Sections = [
-        {
-            id: 'introduction_to_chemistry_of_life',
-            title: '1.1 Introduction to Chemistry of Life',
-            path: 'textbooks/a-biology/chemistry_of_life/introduction_to_chemistry_of_life.json',
-            description: 'Importance of chemistry in biology'
-        },
-        {
-            id: 'atoms_elements',
-            title: '1.2 Atoms, Elements, and Isotopes',
-            path: 'textbooks/ap-biology/chemistry_of_life/atoms_elements.json',
-            description: 'Structure and variations of atoms'
-        },
-        {
-            id: 'chemical_bonds',
-            title: '1.3 Chemical Bonds and Interactions',
-            path: 'textbooks/ap-biology/chemistry_of_life/chemical_bonds.json',
-            description: 'Ionic, covalent, hydrogen bonds, van der Waals forces'
-        },
-        {
-            id: 'water',
-            title: '1.4 Water and Its Properties',
-            path: 'textbooks/ap-biology/chemistry_of_life/water.json',
-            description: 'Polarity, cohesion, adhesion, high specific heat, solvent abilities'
-        },
-        {
-            id: 'ph',
-            title: '1.5 pH, Acids, Bases, and Buffers',
-            path: 'textbooks/ap-biology/chemistry_of_life/ph.json',
-            description: 'Hydrogen ion concentration and biological significance'
-        },
-        {
-            id: 'organic_molecules',
-            title: '1.6 Organic Molecules Overview',
-            path: 'textbooks/ap-biology/chemistry_of_life/organic_molecules.json',
-            description: 'Role of carbon and functional groups'
-        },
-        {
-            id: 'carbohydrates',
-            title: '1.7 Carbohydrates',
-            path: 'textbooks/ap-biology/chemistry_of_life/carbohydrates.json',
-            description: 'Monosaccharides, disaccharides, polysaccharides, and functions'
-        },
-        {
-            id: 'lipids',
-            title: '1.8 Lipids',
-            path: 'textbooks/ap-biology/chemistry_of_life/lipids.json',
-            description: 'Fats, phospholipids, steroids, and energy storage'
-        },
-        {
-            id: 'proteins',
-            title: '1.9 Proteins',
-            path: 'textbooks/ap-biology/chemistry_of_life/proteins.json',
-            description: 'Amino acids, peptide bonds, structure levels, and functions'
-        },
-        {
-            id: 'nucleic_acids',
-            title: '1.10 Nucleic Acids',
-            path: 'textbooks/ap-biology/chemistry_of_life/nucleic_acids.json',
-            description: 'DNA, RNA, nucleotides, and their roles in heredity'
-        },
-        {
-            id: 'synthesis',
-            title: '1.11 Macromolecule Synthesis and Breakdown',
-            path: 'textbooks/ap-biology/chemistry_of_life/synthesis.json',
-            description: 'Dehydration synthesis and hydrolysis'
-        },
-        {
-            id: 'summary',
-            title: '1.12 Unit 1 Summary and Key Concepts',
-            path: 'textbooks/ap-biology/chemistry_of_life/summary.json',
-            description: 'Review of key concepts from Unit 1'
-        }
-    ];
+    const unitSections = {
+        unit1: [
+            {
+                id: 'introduction_to_chemistry_of_life',
+                title: '1.1 Introduction to Chemistry of Life',
+                path: 'textbooks/ap-biology/chemistry_of_life/introduction_to_chemistry_of_life.json',
+                description: 'Importance of chemistry in biology'
+            },
+            {
+                id: 'atoms_elements',
+                title: '1.2 Atoms, Elements, and Isotopes',
+                path: 'textbooks/ap-biology/chemistry_of_life/atoms_elements.json',
+                description: 'Structure and variations of atoms'
+            },
+            {
+                id: 'chemical_bonds',
+                title: '1.3 Chemical Bonds and Interactions',
+                path: 'textbooks/ap-biology/chemistry_of_life/chemical_bonds.json',
+                description: 'Ionic, covalent, hydrogen bonds, van der Waals forces'
+            },
+            {
+                id: 'water',
+                title: '1.4 Water and Its Properties',
+                path: 'textbooks/ap-biology/chemistry_of_life/water.json',
+                description: 'Polarity, cohesion, adhesion, high specific heat, solvent abilities'
+            },
+            {
+                id: 'ph',
+                title: '1.5 pH, Acids, Bases, and Buffers',
+                path: 'textbooks/ap-biology/chemistry_of_life/ph.json',
+                description: 'Hydrogen ion concentration and biological significance'
+            },
+            {
+                id: 'organic_molecules',
+                title: '1.6 Organic Molecules Overview',
+                path: 'textbooks/ap-biology/chemistry_of_life/organic_molecules.json',
+                description: 'Role of carbon and functional groups'
+            },
+            {
+                id: 'carbohydrates',
+                title: '1.7 Carbohydrates',
+                path: 'textbooks/ap-biology/chemistry_of_life/carbohydrates.json',
+                description: 'Monosaccharides, disaccharides, polysaccharides, and functions'
+            },
+            {
+                id: 'lipids',
+                title: '1.8 Lipids',
+                path: 'textbooks/ap-biology/chemistry_of_life/lipids.json',
+                description: 'Fats, phospholipids, steroids, and energy storage'
+            },
+            {
+                id: 'proteins',
+                title: '1.9 Proteins',
+                path: 'textbooks/ap-biology/chemistry_of_life/proteins.json',
+                description: 'Amino acids, peptide bonds, structure levels, and functions'
+            },
+            {
+                id: 'nucleic_acids',
+                title: '1.10 Nucleic Acids',
+                path: 'textbooks/ap-biology/chemistry_of_life/nucleic_acids.json',
+                description: 'DNA, RNA, nucleotides, and their roles in heredity'
+            },
+            {
+                id: 'synthesis',
+                title: '1.11 Macromolecule Synthesis and Breakdown',
+                path: 'textbooks/ap-biology/chemistry_of_life/synthesis.json',
+                description: 'Dehydration synthesis and hydrolysis'
+            },
+            {
+                id: 'summary',
+                title: '1.12 Unit 1 Summary and Key Concepts',
+                path: 'textbooks/ap-biology/chemistry_of_life/summary.json',
+                description: 'Review of key concepts from Unit 1'
+            }
+        ],
+        unit2: [
+            {
+                id: 'introduction',
+                title: '2.1 Introduction to Cells',
+                path: 'textbooks/ap-biology/cell_structure/introduction.json',
+                description: 'Overview, cell theory, and the importance of cells'
+            },
+            {
+                id: 'prokaryotic_eukaryotic',
+                title: '2.2 Prokaryotic vs. Eukaryotic Cells',
+                path: 'textbooks/ap-biology/cell_structure/ryotic.json',
+                description: 'Differences, similarities, examples'
+            },
+            {
+                id: 'cell_membrane',
+                title: '2.3 Cell Membrane Structure and Function',
+                path: 'textbooks/ap-biology/cell_structure/cell_membrane.json',
+                description: 'Phospholipid bilayer, fluid mosaic model'
+            },
+            {
+                id: 'membrane_transport',
+                title: '2.4 Membrane Transport',
+                path: 'textbooks/ap-biology/cell_structure/membrane_transport.json',
+                description: 'Passive transport, active transport, osmosis, diffusion, facilitated diffusion'
+            },
+            {
+                id: 'cytoplasm',
+                title: '2.5 Cytoplasm and Cytoskeleton',
+                path: 'textbooks/ap-biology/cell_structure/cytoplasm.json',
+                description: 'Structure, microtubules, microfilaments, intermediate filaments'
+            },
+            {
+                id: 'nucleus',
+                title: '2.6 Nucleus and Nuclear Components',
+                path: 'textbooks/ap-biology/cell_structure/nucleus.json',
+                description: 'Nuclear envelope, nucleolus, chromatin'
+            },
+            {
+                id: 'endomembrane',
+                title: '2.7 Endomembrane System',
+                path: 'textbooks/ap-biology/cell_structure/endomembrane.json',
+                description: 'ER, Golgi apparatus, vesicles, lysosomes, peroxisomes'
+            },
+            {
+                id: 'mitochondria',
+                title: '2.8 Mitochondria and Chloroplasts',
+                path: 'textbooks/ap-biology/cell_structure/mitochondria.json',
+                description: 'Structure, function, energy conversion'
+            },
+            {
+                id: 'organelles',
+                title: '2.9 Other Organelles',
+                path: 'textbooks/ap-biology/cell_structure/organelles.json',
+                description: 'Ribosomes, vacuoles, centrosomes, cilia, flagella'
+            },
+            {
+                id: 'communication',
+                title: '2.10 Cell Communication and Signaling Basics',
+                path: 'textbooks/ap-biology/cell_structure/communication.json',
+                description: 'Receptors, signal transduction overview'
+            },
+            {
+                id: 'specialized',
+                title: '2.11 Specialized Cells and Cell Differentiation',
+                path: 'textbooks/ap-biology/cell_structure/specialized.json',
+                description: 'Examples in plants and animals'
+            },
+            {
+                id: 'summary',
+                title: '2.12 Unit 2 Summary and Key Concepts',
+                path: 'textbooks/ap-biology/cell_structure/summary.json',
+                description: 'Review of key concepts from Unit 2'
+            }
+        ]
+    };
     
-    sectionsContainer.innerHTML = unit1Sections.map(section => `
+    const currentSections = unitSections[currentTextbookUnit];
+    
+    sectionsContainer.innerHTML = currentSections.map(section => `
         <div class="textbook-section-item" onclick="loadTextbookSection('${section.path}', '${section.title}')">
             <div class="section-title">${section.title}</div>
             <div class="section-description">${section.description}</div>
         </div>
     `).join('');
 }
-
+        
 async function loadTextbookSection(sectionPath, sectionTitle) {
     try {
         const contentArea = document.getElementById('textbook-content');
@@ -8092,6 +8231,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
