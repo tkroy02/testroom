@@ -6415,7 +6415,20 @@ function displayQuizResults(score, correctAnswers, results) {
                 </div>
                 
                 <div id="quiz-results-detailed">
-                    ${results.map((result, index) => `
+                    ${results.map((result, index) => {
+                        // SAFELY get the user's answer text
+                        let userAnswerText = 'Not answered';
+                        if (result.userAnswer !== null && result.options && result.options[result.userAnswer]) {
+                            userAnswerText = renderMarkdown(result.options[result.userAnswer]);
+                        }
+                        
+                        // SAFELY get the correct answer text
+                        let correctAnswerText = '';
+                        if (result.options && result.options[result.correctAnswer]) {
+                            correctAnswerText = renderMarkdown(result.options[result.correctAnswer]);
+                        }
+                        
+                        return `
                         <div class="question-result" style="margin-bottom: 30px; padding: 20px; background: white; border-radius: var(--border-radius-sm); box-shadow: var(--shadow); border-left: 4px solid ${result.isCorrect && result.wasAnswered ? 'var(--success)' : result.wasAnswered ? 'var(--accent)' : 'var(--warning)'}">
                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
                                 <h4 style="color: var(--primary); margin: 0;">Question ${index + 1}</h4>
@@ -6439,7 +6452,7 @@ function displayQuizResults(score, correctAnswers, results) {
                             <div style="margin-bottom: 15px;">
                                 <strong>Your answer:</strong> 
                                 <span style="color: ${result.wasAnswered ? (result.isCorrect ? 'var(--success)' : 'var(--accent)') : 'var(--warning)'}">
-                                    ${result.userAnswer !== null ? renderMarkdown(result.options[result.userAnswer]) : 'Not answered'}
+                                    ${userAnswerText}
                                 </span>
                             </div>
                             
@@ -6447,7 +6460,7 @@ function displayQuizResults(score, correctAnswers, results) {
                                 <div style="margin-bottom: 15px;">
                                     <strong>Correct answer:</strong> 
                                     <span style="color: var(--success)">
-                                        ${renderMarkdown(result.options[result.correctAnswer])}
+                                        ${correctAnswerText}
                                     </span>
                                 </div>
                             ` : ''}
@@ -6458,7 +6471,8 @@ function displayQuizResults(score, correctAnswers, results) {
                                 </div>
                             ` : ''}
                         </div>
-                    `).join('')}
+                    `;
+                    }).join('')}
                 </div>
                 
                 <div class="quiz-actions" style="margin-top: 30px; display: flex; gap: 15px; justify-content: center;">
@@ -6728,6 +6742,8 @@ let currentCardIndex = 0;
 let currentDeck = [];
 
 function renderMarkdown(text) {
+    if (!text) return ''; // This will handle undefined, null, empty string
+    
     console.log('🔍 Original text:', text);
     
     // First, protect math content from markdown processing
@@ -7621,6 +7637,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
