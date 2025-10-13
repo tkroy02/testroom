@@ -3386,71 +3386,106 @@ function shuffleArray(array) {
         let userAnswers = [];
 
         function startQuiz() {
-            if (!currentCourseId) return;
-            
-            const course = courseData[currentCourseId];
-            if (!course || !course.quizzes || course.quizzes.length === 0) return;
-            
-            currentQuiz = course.quizzes[0]; // Use first quiz for demo
-            currentQuestionIndex = 0;
-            userAnswers = [];
-            
-            displayQuestion();
-        }
-
+    if (!currentCourseId) return;
+    
+    const course = courseData[currentCourseId];
+    
+    // Define external quiz paths
+    const externalQuizPaths = {
+        'ap-calculus': 'quizzes/ap-calculus/wk9_quiz1.json'
+        // Add more courses here as needed
+    };
+    
+    // Check if this course has an external quiz
+    if (externalQuizPaths[currentCourseId]) {
+        // Load from external JSON file
+        fetch(externalQuizPaths[currentCourseId])
+            .then(response => {
+                if (!response.ok) throw new Error('Quiz not found');
+                return response.json();
+            })
+            .then(quizData => {
+                currentQuiz = quizData.quiz; // Use the nested quiz object
+                currentQuestionIndex = 0;
+                userAnswers = [];
+                displayQuestion();
+            })
+            .catch(error => {
+                console.error('Error loading external quiz:', error);
+                // Fallback to embedded quiz if available
+                if (course.quizzes && course.quizzes.length > 0) {
+                    currentQuiz = course.quizzes[0].quiz || course.quizzes[0];
+                    currentQuestionIndex = 0;
+                    userAnswers = [];
+                    displayQuestion();
+                } else {
+                    alert('Quiz not available at the moment.');
+                }
+            });
+    }
+    // Use embedded quiz for other courses
+    else if (course.quizzes && course.quizzes.length > 0) {
+        currentQuiz = course.quizzes[0].quiz || course.quizzes[0];
+        currentQuestionIndex = 0;
+        userAnswers = [];
+        displayQuestion();
+    }
+}
         function displayQuestion() {
-            if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
-                finishQuiz();
-                return;
-            }
-            
-            const question = currentQuiz.questions[currentQuestionIndex];
-            const quizContent = document.getElementById('quiz-content');
+    if (!currentQuiz || currentQuestionIndex >= currentQuiz.questions.length) {
+        finishQuiz();
+        return;
+    }
+    
+    const question = currentQuiz.questions[currentQuestionIndex];
+    const quizContent = document.getElementById('quiz-content');
 
-           // ADD OPTION SHUFFLING HERE:
+    // ADD OPTION SHUFFLING HERE:
     let displayOptions = question.options;
     let correctAnswer = question.answer;
     
-    if (currentQuiz.quiz.settings.shuffleOptions) {
+    // FIXED: Check settings properly
+    if (currentQuiz.settings && currentQuiz.settings.shuffleOptions) {
         const shuffledOptions = shuffleArray([...question.options]);
-        // Store original answer mapping
         const originalAnswer = question.answer;
         const newAnswerIndex = shuffledOptions.indexOf(question.options[originalAnswer.charCodeAt(0) - 65]);
         displayOptions = shuffledOptions;
-        correctAnswer = String.fromCharCode(65 + newAnswerIndex); // Convert back to letter
+        correctAnswer = String.fromCharCode(65 + newAnswerIndex);
         
-        // Store for answer checking
         question.displayOptions = displayOptions;
         question.displayAnswer = correctAnswer;
     }
-            
-            let optionsHtml = '';
-            question.options.forEach((option, index) => {
-                optionsHtml += `
-                    <div class="option" onclick="selectOption(${index})">
-                        ${option}
-                    </div>
-                `;
-            });
-            
-            quizContent.innerHTML = `
-                <h4 style="color: var(--primary); margin-bottom: 20px;">${currentQuiz.title}</h4>
-                <div class="question">
-                    <div class="question-text">${question.text}</div>
-                    <div class="options">
-                        ${optionsHtml}
-                    </div>
-                </div>
-                <div class="quiz-actions">
-                    <button class="btn btn-outline" onclick="previousQuestion()" ${currentQuestionIndex === 0 ? 'disabled' : ''}>
-                        <i class="fas fa-arrow-left"></i> Previous
-                    </button>
-                    <button class="btn" onclick="nextQuestion()">
-                        ${currentQuestionIndex === currentQuiz.questions.length - 1 ? 'Finish Quiz' : 'Next Question'} <i class="fas fa-arrow-right"></i>
-                    </button>
-                </div>
-            `;
-        }
+    
+    let optionsHtml = '';
+    displayOptions.forEach((option, index) => {
+        optionsHtml += `
+            <div class="option" onclick="selectOption(${index})">
+                ${option}
+            </div>
+        `;
+    });
+    
+    // FIXED: Handle both question structures
+    const questionText = question.question || question.text;
+    
+    quizContent.innerHTML = `
+        <h4 style="color: var(--primary); margin-bottom: 20px;">${currentQuiz.title}</h4>
+        <div class="question">
+            <div class="question-text">${questionText}</div>
+            <div class="options">
+                ${optionsHtml}
+            </div>
+        </div>
+        <div class="quiz-actions">
+            <button class="btn btn-outline" onclick="previousQuestion()" ${currentQuestionIndex === 0 ? 'disabled' : ''}>
+                <i class="fas fa-arrow-left"></i> Previous
+            </button>
+            <button class="btn" onclick="nextQuestion()">
+                ${currentQuestionIndex === currentQuiz.questions.length - 1 ? 'Finish Quiz' : 'Next Question'} <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    `;
+}
 
         function selectOption(optionIndex) {
             // Remove selected class from all options
@@ -7284,6 +7319,7 @@ function selectOption(optionElement) {
     </script>
 </body>
 </html>
+
 
 
 
