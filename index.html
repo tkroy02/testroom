@@ -4224,6 +4224,7 @@ function loadTextbookContent() {
     const isAPPhysicsCEM = currentCourseId === 'ap-physics-c-em';
     const isEconomics = currentCourseId === 'economics';
     const isAPMacroeconomics = currentCourseId === 'ap-macroeconomics';
+    const isAPMicroeconomics = currentCourseId === 'ap-microeconomics';
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
                      isPhysics10 ? 'Physics Grade 10 Textbook' :
@@ -4235,6 +4236,7 @@ function loadTextbookContent() {
                      isAPPhysicsCEM ? 'AP Physics C: Electricity & Magnetism Textbook' : 
                      isEconomics ? 'Economics Textbook' : 
                      isAPMacroeconomics ? 'AP Macroeconomics Textbook' :
+                     isAPMicroeconomics ? 'AP Microeconomics Textbook' :
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4314,6 +4316,44 @@ function loadTextbookContent() {
     </button>
     <button class="unit-btn ${currentTextbookUnit === 'economics-term10' ? 'active' : ''}" onclick="switchTextbookUnit('economics-term10')">
         Term 10: Government Fiscal Policy
+    </button>
+
+    ` : isAPMicroeconomics ? `
+    <button class="unit-btn ${currentTextbookUnit === 'ap-microeconomics-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('ap-microeconomics-unit1')">
+        Unit 1: The Fundamentals of Economics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-microeconomics-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('ap-microeconomics-unit2')">
+        Unit 2: Supply, Demand, and Market Equilibrium
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-microeconomics-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('ap-microeconomics-unit3')">
+        Unit 3: Elasticity and Consumer Choice
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-microeconomics-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('ap-microeconomics-unit4')">
+        Unit 4: Firm Production and Costs
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-microeconomics-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('ap-microeconomics-unit5')">
+        Unit 5: Perfect Competition
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-microeconomics-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('ap-microeconomics-unit6')">
+        Unit 6: Monopoly
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-microeconomics-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('ap-microeconomics-unit7')">
+        Unit 7: Imperfect Competition
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-microeconomics-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('ap-microeconomics-unit8')">
+        Unit 8: Factor Markets
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-microeconomics-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('ap-microeconomics-unit9')">
+        Unit 9: Market Efficiency & Government
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-microeconomics-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('ap-microeconomics-unit10')">
+        Unit 10: Market Failures & Public Goods
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-microeconomics-unit11' ? 'active' : ''}" onclick="switchTextbookUnit('ap-microeconomics-unit11')">
+        Unit 11: International Microeconomics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-microeconomics-unit12' ? 'active' : ''}" onclick="switchTextbookUnit('ap-microeconomics-unit12')">
+        Unit 12: Comprehensive Review & AP Exam Prep
     </button>
 
 ` : isAPMacroeconomics ? `
@@ -4654,6 +4694,20 @@ function getCurrentUnitName() {
 'physics10-unit9': 'Unit 9: Static & Current Electricity',
 'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
 
+// Add to getCurrentUnitName function
+'ap-microeconomics-unit1': 'Unit 1: The Fundamentals of Economics',
+'ap-microeconomics-unit2': 'Unit 2: Supply, Demand, and Market Equilibrium',
+'ap-microeconomics-unit3': 'Unit 3: Elasticity and Consumer Choice',
+'ap-microeconomics-unit4': 'Unit 4: Firm Production and Costs',
+'ap-microeconomics-unit5': 'Unit 5: Perfect Competition',
+'ap-microeconomics-unit6': 'Unit 6: Monopoly',
+'ap-microeconomics-unit7': 'Unit 7: Imperfect Competition',
+'ap-microeconomics-unit8': 'Unit 8: Factor Markets',
+'ap-microeconomics-unit9': 'Unit 9: Market Efficiency & Government',
+'ap-microeconomics-unit10': 'Unit 10: Market Failures & Public Goods',
+'ap-microeconomics-unit11': 'Unit 11: International Microeconomics',
+'ap-microeconomics-unit12': 'Unit 12: Comprehensive Review & AP Exam Prep',
+        
         // Add to getCurrentUnitName function
 'ap-macroeconomics-unit1': 'Unit 1: Foundations of Macroeconomics',
 'ap-macroeconomics-unit2': 'Unit 2: Measuring Economic Performance',
@@ -5492,6 +5546,403 @@ function loadTextbookSections() {
         }
     ],
 
+// Add to the unitSections object in the loadTextbookSections function
+'ap-microeconomics-unit1': [
+    {
+        id: 'ap_micro_scarcity_opportunity_cost',
+        title: '1.1 Scarcity and Opportunity Cost',
+        path: 'textbooks/ap_microeconomics/fundamentals/scarcity_and_opportunity_cost.json',
+        description: 'Fundamental economic problem and tradeoffs'
+    },
+    {
+        id: 'ap_micro_models_and_graphs',
+        title: '1.2 Models and Graphs',
+        path: 'textbooks/ap_microeconomics/fundamentals/models_and_graphs.json',
+        description: 'Economic modeling and graphical analysis'
+    },
+    {
+        id: 'ap_micro_ppc_in_action',
+        title: '1.3 PPC in Action',
+        path: 'textbooks/ap_microeconomics/fundamentals/ppc_in_action.json',
+        description: 'Production possibilities curve applications'
+    },
+    {
+        id: 'ap_micro_comparative_advantage',
+        title: '1.4 Comparative Advantage',
+        path: 'textbooks/ap_microeconomics/fundamentals/comparative_advantage.json',
+        description: 'Specialization and gains from trade'
+    },
+    {
+        id: 'ap_micro_economic_systems',
+        title: '1.5 Economic Systems',
+        path: 'textbooks/ap_microeconomics/fundamentals/economic_systems.json',
+        description: 'Market, command, and mixed economies'
+    }
+],
+
+'ap-microeconomics-unit2': [
+    {
+        id: 'ap_micro_law_of_demand',
+        title: '2.1 Law of Demand',
+        path: 'textbooks/ap_microeconomics/supply_demand_equilibrium/law_of_demand.json',
+        description: 'Price-quantity relationship and demand curve'
+    },
+    {
+        id: 'ap_micro_law_of_supply',
+        title: '2.2 Law of Supply',
+        path: 'textbooks/ap_microeconomics/supply_demand_equilibrium/law_of_supply.json',
+        description: 'Price-quantity relationship and supply curve'
+    },
+    {
+        id: 'ap_micro_finding_market_equilibrium',
+        title: '2.3 Finding Market Equilibrium',
+        path: 'textbooks/ap_microeconomics/supply_demand_equilibrium/finding_market_equilibrium.json',
+        description: 'Market clearing price and quantity'
+    },
+    {
+        id: 'ap_micro_disequilibrium_analysis',
+        title: '2.4 Disequilibrium Analysis',
+        path: 'textbooks/ap_microeconomics/supply_demand_equilibrium/disequilibrium_analysis.json',
+        description: 'Shortages, surpluses, and market adjustments'
+    },
+    {
+        id: 'ap_micro_analyzing_market_changes',
+        title: '2.5 Analyzing Market Changes',
+        path: 'textbooks/ap_microeconomics/supply_demand_equilibrium/analyzing_market_changes.json',
+        description: 'Shifts in supply and demand curves'
+    }
+],
+
+'ap-microeconomics-unit3': [
+    {
+        id: 'ap_micro_price_elasticity_demand',
+        title: '3.1 Price Elasticity of Demand',
+        path: 'textbooks/ap_microeconomics/elasticity_consumer_choice/price_elasticity_of_demand.json',
+        description: 'Calculating and interpreting PED'
+    },
+    {
+        id: 'ap_micro_total_revenue_test',
+        title: '3.2 Total Revenue Test',
+        path: 'textbooks/ap_microeconomics/elasticity_consumer_choice/total_revenue_test.json',
+        description: 'Elasticity and revenue relationships'
+    },
+    {
+        id: 'ap_micro_cross_price_income_elasticity',
+        title: '3.3 Cross Price and Income Elasticity',
+        path: 'textbooks/ap_microeconomics/elasticity_consumer_choice/cross_price_and_income_elasticity.json',
+        description: 'Related goods and income effects'
+    },
+    {
+        id: 'ap_micro_price_elasticity_supply',
+        title: '3.4 Price Elasticity of Supply',
+        path: 'textbooks/ap_microeconomics/elasticity_consumer_choice/price_elasticity_of_supply.json',
+        description: 'Producer responsiveness to price changes'
+    },
+    {
+        id: 'ap_micro_applications_elasticity',
+        title: '3.5 Applications of Elasticity',
+        path: 'textbooks/ap_microeconomics/elasticity_consumer_choice/applications_of_elasticity.json',
+        description: 'Real-world elasticity scenarios'
+    }
+],
+
+'ap-microeconomics-unit4': [
+    {
+        id: 'ap_micro_production_function',
+        title: '4.1 Production Function',
+        path: 'textbooks/ap_microeconomics/firm_production_costs/production_function.json',
+        description: 'Input-output relationships in production'
+    },
+    {
+        id: 'ap_micro_law_diminishing_returns',
+        title: '4.2 Law of Diminishing Returns',
+        path: 'textbooks/ap_microeconomics/firm_production_costs/law_of_diminishing_returns.json',
+        description: 'Marginal product and variable inputs'
+    },
+    {
+        id: 'ap_micro_short_run_costs',
+        title: '4.3 Short Run Costs',
+        path: 'textbooks/ap_microeconomics/firm_production_costs/short_run_costs.json',
+        description: 'Fixed, variable, and total costs'
+    },
+    {
+        id: 'ap_micro_cost_curves',
+        title: '4.4 Cost Curves',
+        path: 'textbooks/ap_microeconomics/firm_production_costs/cost_curves.json',
+        description: 'Graphical analysis of cost structures'
+    },
+    {
+        id: 'ap_micro_long_run_costs',
+        title: '4.5 Long Run Costs',
+        path: 'textbooks/ap_microeconomics/firm_production_costs/long_run_costs.json',
+        description: 'Economies and diseconomies of scale'
+    }
+],
+
+'ap-microeconomics-unit5': [
+    {
+        id: 'ap_micro_characteristics_pc',
+        title: '5.1 Characteristics of Perfect Competition',
+        path: 'textbooks/ap_microeconomics/market_structures_pc/characteristics_of_perfect_competition.json',
+        description: 'Price takers and market conditions'
+    },
+    {
+        id: 'ap_micro_profit_maximization_rule',
+        title: '5.2 Profit Maximization Rule',
+        path: 'textbooks/ap_microeconomics/market_structures_pc/profit_maximization_rule.json',
+        description: 'MR = MC decision making'
+    },
+    {
+        id: 'ap_micro_short_run_profit_loss',
+        title: '5.3 Short Run Profit and Loss',
+        path: 'textbooks/ap_microeconomics/market_structures_pc/short_run_profit_and_loss.json',
+        description: 'Economic profit scenarios'
+    },
+    {
+        id: 'ap_micro_firm_short_run_supply',
+        title: '5.4 Firm Short Run Supply Curve',
+        path: 'textbooks/ap_microeconomics/market_structures_pc/firms_short_run_supply_curve.json',
+        description: 'Deriving individual firm supply'
+    },
+    {
+        id: 'ap_micro_long_run_equilibrium',
+        title: '5.5 Long Run Equilibrium',
+        path: 'textbooks/ap_microeconomics/market_structures_pc/long_run_equilibrium.json',
+        description: 'Zero economic profit outcome'
+    }
+],
+
+'ap-microeconomics-unit6': [
+    {
+        id: 'ap_micro_monopoly_characteristics',
+        title: '6.1 Monopoly Characteristics',
+        path: 'textbooks/ap_microeconomics/market_structures_monopoly/monopoly_characteristics.json',
+        description: 'Single seller and barriers to entry'
+    },
+    {
+        id: 'ap_micro_profit_maximization_monopolist',
+        title: '6.2 Profit Maximization - Monopolist',
+        path: 'textbooks/ap_microeconomics/market_structures_monopoly/profit_maximization_monopolist.json',
+        description: 'Monopoly pricing and output decisions'
+    },
+    {
+        id: 'ap_micro_inefficiency_deadweight_loss',
+        title: '6.3 Inefficiency and Deadweight Loss',
+        path: 'textbooks/ap_microeconomics/market_structures_monopoly/inefficiency_and_deadweight_loss.json',
+        description: 'Social welfare analysis of monopoly'
+    },
+    {
+        id: 'ap_micro_price_discrimination',
+        title: '6.4 Price Discrimination',
+        path: 'textbooks/ap_microeconomics/market_structures_monopoly/price_discrimination.json',
+        description: 'Different pricing strategies'
+    },
+    {
+        id: 'ap_micro_regulation_monopoly',
+        title: '6.5 Regulation of Monopoly',
+        path: 'textbooks/ap_microeconomics/market_structures_monopoly/regulation_of_monopoly.json',
+        description: 'Government intervention in monopoly markets'
+    }
+],
+
+'ap-microeconomics-unit7': [
+    {
+        id: 'ap_micro_monopolistic_competition',
+        title: '7.1 Monopolistic Competition',
+        path: 'textbooks/ap_microeconomics/market_structures_imperfect/monopolistic_competition.json',
+        description: 'Differentiated products and many firms'
+    },
+    {
+        id: 'ap_micro_long_run_monopolistic_comp',
+        title: '7.2 Long Run Monopolistic Competition',
+        path: 'textbooks/ap_microeconomics/market_structures_imperfect/long_run_monopolistic_competition.json',
+        description: 'Excess capacity and product differentiation'
+    },
+    {
+        id: 'ap_micro_oligopoly_interdependence',
+        title: '7.3 Oligopoly and Interdependence',
+        path: 'textbooks/ap_microeconomics/market_structures_imperfect/oligopoly_and_interdependence.json',
+        description: 'Strategic behavior among few firms'
+    },
+    {
+        id: 'ap_micro_game_theory_intro',
+        title: '7.4 Game Theory Introduction',
+        path: 'textbooks/ap_microeconomics/market_structures_imperfect/game_theory_intro.json',
+        description: 'Prisoner\'s dilemma and Nash equilibrium'
+    },
+    {
+        id: 'ap_micro_collusion_cartels',
+        title: '7.5 Collusion and Cartels',
+        path: 'textbooks/ap_microeconomics/market_structures_imperfect/collusion_and_cartels.json',
+        description: 'Cooperative behavior in oligopoly'
+    }
+],
+
+'ap-microeconomics-unit8': [
+    {
+        id: 'ap_micro_derived_demand_labor',
+        title: '8.1 Derived Demand for Labor',
+        path: 'textbooks/ap_microeconomics/factor_markets/derived_demand_for_labor.json',
+        description: 'Labor demand from product demand'
+    },
+    {
+        id: 'ap_micro_marginal_revenue_product',
+        title: '8.2 Marginal Revenue Product',
+        path: 'textbooks/ap_microeconomics/factor_markets/marginal_revenue_product.json',
+        description: 'Value of additional labor units'
+    },
+    {
+        id: 'ap_micro_labor_market_equilibrium',
+        title: '8.3 Labor Market Equilibrium',
+        path: 'textbooks/ap_microeconomics/factor_markets/labor_market_equilibrium.json',
+        description: 'Wage and employment determination'
+    },
+    {
+        id: 'ap_micro_wage_differentials',
+        title: '8.4 Wage Differentials',
+        path: 'textbooks/ap_microeconomics/factor_markets/wage_differentials.json',
+        description: 'Causes of wage variations'
+    },
+    {
+        id: 'ap_micro_market_power_labor_markets',
+        title: '8.5 Market Power in Labor Markets',
+        path: 'textbooks/ap_microeconomics/factor_markets/market_power_in_labor_markets.json',
+        description: 'Unions and monopsony power'
+    }
+],
+
+'ap-microeconomics-unit9': [
+    {
+        id: 'ap_micro_consumer_producer_surplus',
+        title: '9.1 Consumer and Producer Surplus',
+        path: 'textbooks/ap_microeconomics/market_efficiency_government/consumer_and_producer_surplus.json',
+        description: 'Measuring economic welfare'
+    },
+    {
+        id: 'ap_micro_market_efficiency',
+        title: '9.2 Market Efficiency',
+        path: 'textbooks/ap_microeconomics/market_efficiency_government/market_efficiency.json',
+        description: 'Total surplus maximization'
+    },
+    {
+        id: 'ap_micro_effects_of_taxes',
+        title: '9.3 Effects of Taxes',
+        path: 'textbooks/ap_microeconomics/market_efficiency_government/effects_of_taxes.json',
+        description: 'Tax incidence and deadweight loss'
+    },
+    {
+        id: 'ap_micro_price_controls',
+        title: '9.4 Price Controls',
+        path: 'textbooks/ap_microeconomics/market_efficiency_government/price_controls.json',
+        description: 'Price ceilings and floors analysis'
+    },
+    {
+        id: 'ap_micro_evaluating_government_policies',
+        title: '9.5 Evaluating Government Policies',
+        path: 'textbooks/ap_microeconomics/market_efficiency_government/evaluating_government_policies.json',
+        description: 'Cost-benefit analysis of interventions'
+    }
+],
+
+'ap-microeconomics-unit10': [
+    {
+        id: 'ap_micro_externalities_defined',
+        title: '10.1 Externalities Defined',
+        path: 'textbooks/ap_microeconomics/market_failures_public_goods/externalities_defined.json',
+        description: 'Spillover costs and benefits'
+    },
+    {
+        id: 'ap_micro_negative_externalities',
+        title: '10.2 Negative Externalities',
+        path: 'textbooks/ap_microeconomics/market_failures_public_goods/negative_externalities.json',
+        description: 'Pollution and overproduction'
+    },
+    {
+        id: 'ap_micro_positive_externalities',
+        title: '10.3 Positive Externalities',
+        path: 'textbooks/ap_microeconomics/market_failures_public_goods/positive_externalities.json',
+        description: 'Education and underproduction'
+    },
+    {
+        id: 'ap_micro_public_goods',
+        title: '10.4 Public Goods',
+        path: 'textbooks/ap_microeconomics/market_failures_public_goods/public_goods.json',
+        description: 'Non-excludable and non-rival goods'
+    },
+    {
+        id: 'ap_micro_free_rider_problem',
+        title: '10.5 Free Rider Problem',
+        path: 'textbooks/ap_microeconomics/market_failures_public_goods/free_rider_problem.json',
+        description: 'Market failure in public goods provision'
+    }
+],
+
+'ap-microeconomics-unit11': [
+    {
+        id: 'ap_micro_comparative_advantage_revisited',
+        title: '11.1 Comparative Advantage Revisited',
+        path: 'textbooks/ap_microeconomics/international_microeconomics/comparative_advantage_revisited.json',
+        description: 'International specialization patterns'
+    },
+    {
+        id: 'ap_micro_world_price_domestic_markets',
+        title: '11.2 World Price and Domestic Markets',
+        path: 'textbooks/ap_microeconomics/international_microeconomics/world_price_and_domestic_markets.json',
+        description: 'Global market integration effects'
+    },
+    {
+        id: 'ap_micro_welfare_effects_trade',
+        title: '11.3 Welfare Effects of Trade',
+        path: 'textbooks/ap_microeconomics/international_microeconomics/welfare_effects_of_trade.json',
+        description: 'Gains and losses from international trade'
+    },
+    {
+        id: 'ap_micro_tariffs_quotas',
+        title: '11.4 Tariffs and Quotas',
+        path: 'textbooks/ap_microeconomics/international_microeconomics/tariffs_and_quotas.json',
+        description: 'Trade restriction analysis'
+    },
+    {
+        id: 'ap_micro_arguments_protectionism',
+        title: '11.5 Arguments for Protectionism',
+        path: 'textbooks/ap_microeconomics/international_microeconomics/arguments_for_protectionism.json',
+        description: 'Economic and political trade barriers'
+    }
+],
+
+'ap-microeconomics-unit12': [
+    {
+        id: 'ap_micro_graphing_bootcamp',
+        title: '12.1 Graphing Bootcamp',
+        path: 'textbooks/ap_microeconomics/comprehensive_review/graphing_bootcamp.json',
+        description: 'Essential graphs for AP exam'
+    },
+    {
+        id: 'ap_micro_connecting_concepts',
+        title: '12.2 Connecting Concepts',
+        path: 'textbooks/ap_microeconomics/comprehensive_review/connecting_concepts.json',
+        description: 'Integrating microeconomic principles'
+    },
+    {
+        id: 'ap_micro_timed_mc_practice',
+        title: '12.3 Timed Multiple Choice Practice',
+        path: 'textbooks/ap_microeconomics/comprehensive_review/timed_multiple_choice_practice.json',
+        description: 'Exam-style multiple choice questions'
+    },
+    {
+        id: 'ap_micro_frq_practice_rubrics',
+        title: '12.4 FRQ Practice and Rubrics',
+        path: 'textbooks/ap_microeconomics/comprehensive_review/frq_practice_and_rubrics.json',
+        description: 'Free response question strategies'
+    },
+    {
+        id: 'ap_micro_final_exam_strategy',
+        title: '12.5 Final Exam Strategy',
+        path: 'textbooks/ap_microeconomics/comprehensive_review/final_exam_strategy.json',
+        description: 'Test-taking tips and time management'
+    }
+],
+        
 // Add to the unitSections object in the loadTextbookSections function
 'economics-term1': [
     {
@@ -15266,6 +15717,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
