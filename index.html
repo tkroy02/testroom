@@ -4289,7 +4289,7 @@ function loadTextbookContent() {
                                     Unit 10: Modern Physics Introduction
                                 </button>
 
-    ` : PreCalculus ? `
+    ` : isPreCalculus ? `
     <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit1')">
         Unit 1: Algebraic Fundamentals
     </button>
@@ -16730,6 +16730,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
