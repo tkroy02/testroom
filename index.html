@@ -3322,6 +3322,16 @@ const courseData = {
             }
         ]
     },
+    'physics-grade-10': {
+    title: 'Physics Grade 10',
+    description: 'Intermediate physics covering kinematics, forces, energy, momentum, waves, and electricity with mathematical applications.',
+    chapters: [
+        // We'll use the unit structure for the textbook system
+    ],
+    quizzes: [
+        // Physics Grade 10 quizzes will be added later
+    ]
+},
     'ap-calculus': {
         title: 'AP Calculus',
         description: 'College-level calculus covering limits, derivatives, integrals, and advanced topics in preparation for the AP exam.',
@@ -4204,9 +4214,11 @@ function loadTextbookContent() {
     // Determine which textbook to show based on current course
     const isCalculus = currentCourseId === 'ap-calculus';
     const isPhysics9 = currentCourseId === 'physics-grade-9';
+    const isPhysics10 = currentCourseId === 'physics-grade-10';
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
-                         isPhysics9 ? 'Physics Grade 9 Textbook' : 
-                         'AP Biology Textbook';
+                     isPhysics9 ? 'Physics Grade 9 Textbook' :
+                     isPhysics10 ? 'Physics Grade 10 Textbook' :
+                     'AP Biology Textbook';
     
     resourceContent.innerHTML = `
         <div class="tool-interface active">
@@ -4268,6 +4280,38 @@ function loadTextbookContent() {
                                 <button class="unit-btn ${currentTextbookUnit === 'physics9-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit10')">
                                     Unit 10: Electricity
                                 </button>
+                                ${isPhysics10 ? `
+    <!-- Physics Grade 10 Units -->
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit1')">
+        Unit 1: Measurement & 1D Kinematics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit2')">
+        Unit 2: Forces & Newton's First Law
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit3')">
+        Unit 3: Newton's Second Law & Friction
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit4')">
+        Unit 4: Work, Energy & Power
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit5')">
+        Unit 5: Momentum & Impulse
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit6')">
+        Unit 6: Waves Basic Properties
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit7')">
+        Unit 7: Sound and Its Properties
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit8')">
+        Unit 8: Light Reflection & Mirrors
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit9')">
+        Unit 9: Static & Current Electricity
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit10')">
+        Unit 10: Circuits & Electromagnetism
+    </button>
                             ` : `
                                 <!-- Biology Units (your original structure) -->
                                 <button class="unit-btn ${currentTextbookUnit === 'unit1' ? 'active' : ''}" onclick="switchTextbookUnit('unit1')">
@@ -4345,7 +4389,19 @@ function getCurrentUnitName() {
         'physics9-unit8': 'Unit 8: Waves & Sound',
         'physics9-unit9': 'Unit 9: Light & Reflection',
         'physics9-unit10': 'Unit 10: Electricity',
-        
+
+        // Add Physics Grade 10 units
+        'physics10-unit1': 'Unit 1: Measurement & 1D Kinematics',
+        'physics10-unit2': 'Unit 2: Forces & Newton\'s First Law',
+        'physics10-unit3': 'Unit 3: Newton\'s Second Law & Friction',
+        'physics10-unit4': 'Unit 4: Work, Energy & Power',
+        'physics10-unit5': 'Unit 5: Momentum & Impulse',
+        'physics10-unit6': 'Unit 6: Waves Basic Properties',
+        'physics10-unit7': 'Unit 7: Sound and Its Properties',
+        'physics10-unit8': 'Unit 8: Light Reflection & Mirrors',
+        'physics10-unit9': 'Unit 9: Static & Current Electricity',
+        'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
+                              
         // Biology units (your original structure)
         'unit1': 'Unit 1: Chemistry of Life',
         'unit2': 'Unit 2: Cell Structure & Function',
@@ -5096,6 +5152,628 @@ function loadTextbookSections() {
         }
     ],
 
+    // Add to your unitSections object
+'physics10-unit1': [
+    {
+        id: 'physics10_physics_basics',
+        title: '1.1 Physics Basics',
+        path: 'textbooks/physics-10/measurement_and_1d_kinematics/physics_basics.json',
+        description: 'Introduction to physics concepts and methods'
+    },
+    {
+        id: 'physics10_units_measurement',
+        title: '1.2 Units and Measurement',
+        path: 'textbooks/physics-10/measurement_and_1d_kinematics/units_and_measurement.json',
+        description: 'Measurement systems and units'
+    },
+    {
+        id: 'physics10_scientific_notation',
+        title: '1.3 Scientific Notation and Precision',
+        path: 'textbooks/physics-10/measurement_and_1d_kinematics/scientific_notation_and_precision.json',
+        description: 'Expressing numbers and measurement accuracy'
+    },
+    {
+        id: 'physics10_scalars_vectors',
+        title: '1.4 Scalars vs Vectors',
+        path: 'textbooks/physics-10/measurement_and_1d_kinematics/scalars_vs_vectors.json',
+        description: 'Quantity types with and without direction'
+    },
+    {
+        id: 'physics10_distance_displacement',
+        title: '1.5 Distance and Displacement',
+        path: 'textbooks/physics-10/measurement_and_1d_kinematics/distance_and_displacement.json',
+        description: 'Path length vs position change'
+    },
+    {
+        id: 'physics10_speed_velocity',
+        title: '1.6 Speed and Velocity',
+        path: 'textbooks/physics-10/measurement_and_1d_kinematics/speed_and_velocity.json',
+        description: 'Rate of motion with and without direction'
+    },
+    {
+        id: 'physics10_acceleration',
+        title: '1.7 Acceleration',
+        path: 'textbooks/physics-10/measurement_and_1d_kinematics/acceleration.json',
+        description: 'Rate of change of velocity'
+    },
+    {
+        id: 'physics10_graphs_dt',
+        title: '1.8 Graphs of Motion (d-t)',
+        path: 'textbooks/physics-10/measurement_and_1d_kinematics/graphs_of_motion_dt.json',
+        description: 'Position-time graph analysis'
+    },
+    {
+        id: 'physics10_graphs_vt',
+        title: '1.9 Graphs of Motion (v-t)',
+        path: 'textbooks/physics-10/measurement_and_1d_kinematics/graphs_of_motion_vt.json',
+        description: 'Velocity-time graph analysis'
+    },
+    {
+        id: 'physics10_kinematic_calculations',
+        title: '1.10 Kinematic Calculations',
+        path: 'textbooks/physics-10/measurement_and_1d_kinematics/kinematic_calculations.json',
+        description: 'Motion equation applications'
+    }
+],
+'physics10-unit2': [
+    {
+        id: 'physics10_what_is_force',
+        title: '2.1 What is a Force',
+        path: 'textbooks/physics-10/forces_and_newtons_first_law/what_is_a_force.json',
+        description: 'Understanding forces and their effects'
+    },
+    {
+        id: 'physics10_net_force',
+        title: '2.2 Net Force',
+        path: 'textbooks/physics-10/forces_and_newtons_first_law/net_force.json',
+        description: 'Combining multiple forces'
+    },
+    {
+        id: 'physics10_first_law',
+        title: '2.3 Newton\'s First Law',
+        path: 'textbooks/physics-10/forces_and_newtons_first_law/newtons_first_law.json',
+        description: 'Law of inertia'
+    },
+    {
+        id: 'physics10_inertia_mass',
+        title: '2.4 Inertia and Mass',
+        path: 'textbooks/physics-10/forces_and_newtons_first_law/inertia_and_mass.json',
+        description: 'Resistance to motion change'
+    },
+    {
+        id: 'physics10_equilibrium',
+        title: '2.5 Equilibrium',
+        path: 'textbooks/physics-10/forces_and_newtons_first_law/equilibrium.json',
+        description: 'Balanced forces and zero acceleration'
+    },
+    {
+        id: 'physics10_force_diagrams',
+        title: '2.6 Force Diagrams',
+        path: 'textbooks/physics-10/forces_and_newtons_first_law/force_diagrams.json',
+        description: 'Visualizing force interactions'
+    },
+    {
+        id: 'physics10_gravitational_force',
+        title: '2.7 Gravitational Force',
+        path: 'textbooks/physics-10/forces_and_newtons_first_law/gravitational_force.json',
+        description: 'Weight and gravity'
+    },
+    {
+        id: 'physics10_normal_force',
+        title: '2.8 Normal Force',
+        path: 'textbooks/physics-10/forces_and_newtons_first_law/normal_force.json',
+        description: 'Surface support force'
+    },
+    {
+        id: 'physics10_tension_force',
+        title: '2.9 Tension Force',
+        path: 'textbooks/physics-10/forces_and_newtons_first_law/tension_force.json',
+        description: 'Rope and string forces'
+    },
+    {
+        id: 'physics10_equilibrium_apps',
+        title: '2.10 Applications of Equilibrium',
+        path: 'textbooks/physics-10/forces_and_newtons_first_law/applications_of_equilibrium.json',
+        description: 'Real-world equilibrium problems'
+    }
+],
+'physics10-unit3': [
+    {
+        id: 'physics10_second_law',
+        title: '3.1 Newton\'s Second Law',
+        path: 'textbooks/physics-10/newtons_second_law_and_friction/newtons_second_law.json',
+        description: 'Force, mass, and acceleration relationship'
+    },
+    {
+        id: 'physics10_force_acceleration',
+        title: '3.2 Force and Acceleration',
+        path: 'textbooks/physics-10/newtons_second_law_and_friction/force_and_acceleration.json',
+        description: 'Direct proportionality'
+    },
+    {
+        id: 'physics10_mass_acceleration',
+        title: '3.3 Mass and Acceleration',
+        path: 'textbooks/physics-10/newtons_second_law_and_friction/mass_and_acceleration.json',
+        description: 'Inverse proportionality'
+    },
+    {
+        id: 'physics10_applying_fnet_ma',
+        title: '3.4 Applying Fnet = ma',
+        path: 'textbooks/physics-10/newtons_second_law_and_friction/applying_fnet_ma.json',
+        description: 'Second law calculations'
+    },
+    {
+        id: 'physics10_third_law',
+        title: '3.5 Newton\'s Third Law',
+        path: 'textbooks/physics-10/newtons_second_law_and_friction/newtons_third_law.json',
+        description: 'Action-reaction pairs'
+    },
+    {
+        id: 'physics10_intro_friction',
+        title: '3.6 Introduction to Friction',
+        path: 'textbooks/physics-10/newtons_second_law_and_friction/introduction_to_friction.json',
+        description: 'Opposing motion forces'
+    },
+    {
+        id: 'physics10_static_kinetic',
+        title: '3.7 Static vs Kinetic Friction',
+        path: 'textbooks/physics-10/newtons_second_law_and_friction/static_vs_kinetic_friction.json',
+        description: 'Stationary vs moving friction'
+    },
+    {
+        id: 'physics10_friction_formula',
+        title: '3.8 Friction Formula',
+        path: 'textbooks/physics-10/newtons_second_law_and_friction/friction_formula.json',
+        description: 'Friction coefficient calculations'
+    },
+    {
+        id: 'physics10_fnet_with_friction',
+        title: '3.9 Fnet with Friction',
+        path: 'textbooks/physics-10/newtons_second_law_and_friction/fnet_with_friction.json',
+        description: 'Net force including friction'
+    },
+    {
+        id: 'physics10_terminal_velocity',
+        title: '3.10 Terminal Velocity Concept',
+        path: 'textbooks/physics-10/newtons_second_law_and_friction/terminal_velocity_concept.json',
+        description: 'Maximum falling speed'
+    }
+],
+'physics10-unit4': [
+    {
+        id: 'physics10_work_definition',
+        title: '4.1 Work Definition',
+        path: 'textbooks/physics-10/work_energy_and_power/work_definition.json',
+        description: 'Force applied through distance'
+    },
+    {
+        id: 'physics10_positive_vs_negative_work',
+        title: '4.2 Positive vs Negative Work',
+        path: 'textbooks/physics-10/work_energy_and_power/positive_vs_negative_work.json',
+        description: 'Work direction and energy transfer'
+    },
+    {
+        id: 'physics10_kinetic_energy',
+        title: '4.3 Kinetic Energy',
+        path: 'textbooks/physics-10/work_energy_and_power/kinetic_energy.json',
+        description: 'Energy of motion'
+    },
+    {
+        id: 'physics10_gravitational_potential_energy',
+        title: '4.4 Gravitational Potential Energy',
+        path: 'textbooks/physics-10/work_energy_and_power/gravitational_potential_energy.json',
+        description: 'Energy due to height'
+    },
+    {
+        id: 'physics10_work_energy_theorem',
+        title: '4.5 Work-Energy Theorem',
+        path: 'textbooks/physics-10/work_energy_and_power/work_energy_theorem.json',
+        description: 'Work and energy relationship'
+    },
+    {
+        id: 'physics10_conservation_of_energy',
+        title: '4.6 Conservation of Energy',
+        path: 'textbooks/physics-10/work_energy_and_power/conservation_of_energy.json',
+        description: 'Energy cannot be created or destroyed'
+    },
+    {
+        id: 'physics10_energy_transformations',
+        title: '4.7 Energy Transformations',
+        path: 'textbooks/physics-10/work_energy_and_power/energy_transformations.json',
+        description: 'Converting between energy forms'
+    },
+    {
+        id: 'physics10_energy_losses',
+        title: '4.8 Energy Losses',
+        path: 'textbooks/physics-10/work_energy_and_power/energy_losses.json',
+        description: 'Friction and thermal energy'
+    },
+    {
+        id: 'physics10_power_definition',
+        title: '4.9 Power Definition',
+        path: 'textbooks/physics-10/work_energy_and_power/power_definition.json',
+        description: 'Rate of doing work'
+    },
+    {
+        id: 'physics10_efficiency_concept',
+        title: '4.10 Efficiency Concept',
+        path: 'textbooks/physics-10/work_energy_and_power/efficiency_concept.json',
+        description: 'Useful energy output ratio'
+    }
+],
+'physics10-unit5': [
+    {
+        id: 'physics10_momentum_definition',
+        title: '5.1 Momentum Definition',
+        path: 'textbooks/physics-10/momentum_and_impulse/momentum_definition.json',
+        description: 'Mass in motion'
+    },
+    {
+        id: 'physics10_momentum_and_inertia',
+        title: '5.2 Momentum and Inertia',
+        path: 'textbooks/physics-10/momentum_and_impulse/momentum_and_inertia.json',
+        description: 'Relationship to Newton\'s laws'
+    },
+    {
+        id: 'physics10_impulse_definition',
+        title: '5.3 Impulse Definition',
+        path: 'textbooks/physics-10/momentum_and_impulse/impulse_definition.json',
+        description: 'Force over time'
+    },
+    {
+        id: 'physics10_impulse_momentum_theorem',
+        title: '5.4 Impulse-Momentum Theorem',
+        path: 'textbooks/physics-10/momentum_and_impulse/impulse_momentum_theorem.json',
+        description: 'Impulse changes momentum'
+    },
+    {
+        id: 'physics10_safety_applications',
+        title: '5.5 Safety Applications',
+        path: 'textbooks/physics-10/momentum_and_impulse/safety_applications.json',
+        description: 'Crumple zones and airbags'
+    },
+    {
+        id: 'physics10_conservation_of_momentum',
+        title: '5.6 Conservation of Momentum',
+        path: 'textbooks/physics-10/momentum_and_impulse/conservation_of_momentum.json',
+        description: 'Momentum in isolated systems'
+    },
+    {
+        id: 'physics10_inelastic_collisions',
+        title: '5.7 Inelastic Collisions',
+        path: 'textbooks/physics-10/momentum_and_impulse/inelastic_collisions.json',
+        description: 'Objects stick together'
+    },
+    {
+        id: 'physics10_elastic_collisions_concept',
+        title: '5.8 Elastic Collisions Concept',
+        path: 'textbooks/physics-10/momentum_and_impulse/elastic_collisions_concept.json',
+        description: 'Objects bounce apart'
+    },
+    {
+        id: 'physics10_explosions_recoil',
+        title: '5.9 Explosions and Recoil',
+        path: 'textbooks/physics-10/momentum_and_impulse/explosions_recoil.json',
+        description: 'Objects separating'
+    },
+    {
+        id: 'physics10_momentum_review',
+        title: '5.10 Momentum Review',
+        path: 'textbooks/physics-10/momentum_and_impulse/momentum_review.json',
+        description: 'Comprehensive applications'
+    }
+],
+'physics10-unit6': [
+    {
+        id: 'physics10_introduction_to_waves',
+        title: '6.1 Introduction to Waves',
+        path: 'textbooks/physics-10/waves_basic_properties/introduction_to_waves.json',
+        description: 'Wave basics and energy transfer'
+    },
+    {
+        id: 'physics10_types_of_waves',
+        title: '6.2 Types of Waves',
+        path: 'textbooks/physics-10/waves_basic_properties/types_of_waves.json',
+        description: 'Mechanical vs electromagnetic'
+    },
+    {
+        id: 'physics10_transverse_waves',
+        title: '6.3 Transverse Waves',
+        path: 'textbooks/physics-10/waves_basic_properties/transverse_waves.json',
+        description: 'Perpendicular oscillation'
+    },
+    {
+        id: 'physics10_longitudinal_waves',
+        title: '6.4 Longitudinal Waves',
+        path: 'textbooks/physics-10/waves_basic_properties/longitudinal_waves.json',
+        description: 'Parallel oscillation'
+    },
+    {
+        id: 'physics10_amplitude',
+        title: '6.5 Amplitude',
+        path: 'textbooks/physics-10/waves_basic_properties/amplitude.json',
+        description: 'Wave height and energy'
+    },
+    {
+        id: 'physics10_wavelength',
+        title: '6.6 Wavelength',
+        path: 'textbooks/physics-10/waves_basic_properties/wavelength.json',
+        description: 'Distance between points'
+    },
+    {
+        id: 'physics10_frequency_and_period',
+        title: '6.7 Frequency and Period',
+        path: 'textbooks/physics-10/waves_basic_properties/frequency_and_period.json',
+        description: 'Oscillations per second'
+    },
+    {
+        id: 'physics10_wave_speed_equation',
+        title: '6.8 Wave Speed Equation',
+        path: 'textbooks/physics-10/waves_basic_properties/wave_speed_equation.json',
+        description: 'v = fλ calculations'
+    },
+    {
+        id: 'physics10_the_medium',
+        title: '6.9 The Medium',
+        path: 'textbooks/physics-10/waves_basic_properties/the_medium.json',
+        description: 'Material waves travel through'
+    },
+    {
+        id: 'physics10_reflection',
+        title: '6.10 Reflection',
+        path: 'textbooks/physics-10/waves_basic_properties/reflection.json',
+        description: 'Waves bouncing off surfaces'
+    }
+],
+'physics10-unit7': [
+    {
+        id: 'physics10_sound_as_a_wave',
+        title: '7.1 Sound as a Wave',
+        path: 'textbooks/physics-10/sound_and_its_properties/sound_as_a_wave.json',
+        description: 'Longitudinal pressure waves'
+    },
+    {
+        id: 'physics10_sound_requires_a_medium',
+        title: '7.2 Sound Requires a Medium',
+        path: 'textbooks/physics-10/sound_and_its_properties/sound_requires_a_medium.json',
+        description: 'No sound in vacuum'
+    },
+    {
+        id: 'physics10_speed_of_sound',
+        title: '7.3 Speed of Sound',
+        path: 'textbooks/physics-10/sound_and_its_properties/speed_of_sound.json',
+        description: 'Factors affecting sound speed'
+    },
+    {
+        id: 'physics10_pitch',
+        title: '7.4 Pitch',
+        path: 'textbooks/physics-10/sound_and_its_properties/pitch.json',
+        description: 'Frequency perception'
+    },
+    {
+        id: 'physics10_loudness',
+        title: '7.5 Loudness',
+        path: 'textbooks/physics-10/sound_and_its_properties/loudness.json',
+        description: 'Amplitude and intensity'
+    },
+    {
+        id: 'physics10_decibel_scale',
+        title: '7.6 Decibel Scale',
+        path: 'textbooks/physics-10/sound_and_its_properties/decibel_scale.json',
+        description: 'Sound intensity measurement'
+    },
+    {
+        id: 'physics10_echoes',
+        title: '7.7 Echoes',
+        path: 'textbooks/physics-10/sound_and_its_properties/echoes.json',
+        description: 'Sound reflection'
+    },
+    {
+        id: 'physics10_interference_simple',
+        title: '7.8 Interference',
+        path: 'textbooks/physics-10/sound_and_its_properties/interference_simple.json',
+        description: 'Wave combination effects'
+    },
+    {
+        id: 'physics10_resonance',
+        title: '7.9 Resonance',
+        path: 'textbooks/physics-10/sound_and_its_properties/resonance.json',
+        description: 'Natural frequency vibration'
+    },
+    {
+        id: 'physics10_noise_pollution',
+        title: '7.10 Noise Pollution',
+        path: 'textbooks/physics-10/sound_and_its_properties/noise_pollution.json',
+        description: 'Environmental sound impact'
+    }
+],
+'physics10-unit8': [
+    {
+        id: 'physics10_nature_of_light',
+        title: '8.1 Nature of Light',
+        path: 'textbooks/physics-10/light_reflection_and_plane_mirrors/nature_of_light.json',
+        description: 'Wave-particle duality'
+    },
+    {
+        id: 'physics10_speed_of_light',
+        title: '8.2 Speed of Light',
+        path: 'textbooks/physics-10/light_reflection_and_plane_mirrors/speed_of_light.json',
+        description: 'Universal constant'
+    },
+    {
+        id: 'physics10_visible_spectrum',
+        title: '8.3 Visible Spectrum',
+        path: 'textbooks/physics-10/light_reflection_and_plane_mirrors/visible_spectrum.json',
+        description: 'Colors humans can see'
+    },
+    {
+        id: 'physics10_opaque_translucent_transparent',
+        title: '8.4 Opaque, Translucent, Transparent',
+        path: 'textbooks/physics-10/light_reflection_and_plane_mirrors/opaque_translucent_transparent.json',
+        description: 'Light transmission materials'
+    },
+    {
+        id: 'physics10_ray_model_of_light',
+        title: '8.5 Ray Model of Light',
+        path: 'textbooks/physics-10/light_reflection_and_plane_mirrors/ray_model_of_light.json',
+        description: 'Straight-line light path'
+    },
+    {
+        id: 'physics10_law_of_reflection',
+        title: '8.6 Law of Reflection',
+        path: 'textbooks/physics-10/light_reflection_and_plane_mirrors/law_of_reflection.json',
+        description: 'Angle in equals angle out'
+    },
+    {
+        id: 'physics10_specular_vs_diffuse_reflection',
+        title: '8.7 Specular vs Diffuse Reflection',
+        path: 'textbooks/physics-10/light_reflection_and_plane_mirrors/specular_vs_diffuse_reflection.json',
+        description: 'Smooth vs rough surfaces'
+    },
+    {
+        id: 'physics10_plane_mirrors',
+        title: '8.8 Plane Mirrors',
+        path: 'textbooks/physics-10/light_reflection_and_plane_mirrors/plane_mirrors.json',
+        description: 'Flat mirror images'
+    },
+    {
+        id: 'physics10_refraction_intro',
+        title: '8.9 Introduction to Refraction',
+        path: 'textbooks/physics-10/light_reflection_and_plane_mirrors/refraction_intro.json',
+        description: 'Light bending'
+    },
+    {
+        id: 'physics10_color_perception',
+        title: '8.10 Color Perception',
+        path: 'textbooks/physics-10/light_reflection_and_plane_mirrors/color_perception.json',
+        description: 'How we see colors'
+    }
+],
+'physics10-unit9': [
+    {
+        id: 'physics10_electric_charge',
+        title: '9.1 Electric Charge',
+        path: 'textbooks/physics-10/static_and_current_electricity/electric_charge.json',
+        description: 'Positive and negative charges'
+    },
+    {
+        id: 'physics10_structure_of_matter',
+        title: '9.2 Structure of Matter',
+        path: 'textbooks/physics-10/static_and_current_electricity/structure_of_matter.json',
+        description: 'Atoms and subatomic particles'
+    },
+    {
+        id: 'physics10_insulators_and_conductors',
+        title: '9.3 Insulators and Conductors',
+        path: 'textbooks/physics-10/static_and_current_electricity/insulators_and_conductors.json',
+        description: 'Charge flow materials'
+    },
+    {
+        id: 'physics10_charging_by_friction',
+        title: '9.4 Charging by Friction',
+        path: 'textbooks/physics-10/static_and_current_electricity/charging_by_friction.json',
+        description: 'Triboelectric effect'
+    },
+    {
+        id: 'physics10_charging_by_conduction',
+        title: '9.5 Charging by Conduction',
+        path: 'textbooks/physics-10/static_and_current_electricity/charging_by_conduction.json',
+        description: 'Direct contact charging'
+    },
+    {
+        id: 'physics10_coulombs_law_concept',
+        title: '9.6 Coulomb\'s Law Concept',
+        path: 'textbooks/physics-10/static_and_current_electricity/coulombs_law_concept.json',
+        description: 'Electric force relationship'
+    },
+    {
+        id: 'physics10_electric_current',
+        title: '9.7 Electric Current',
+        path: 'textbooks/physics-10/static_and_current_electricity/electric_current.json',
+        description: 'Charge flow rate'
+    },
+    {
+        id: 'physics10_voltage',
+        title: '9.8 Voltage',
+        path: 'textbooks/physics-10/static_and_current_electricity/voltage.json',
+        description: 'Electrical potential difference'
+    },
+    {
+        id: 'physics10_resistance',
+        title: '9.9 Resistance',
+        path: 'textbooks/physics-10/static_and_current_electricity/resistance.json',
+        description: 'Opposition to current flow'
+    },
+    {
+        id: 'physics10_ohms_law',
+        title: '9.10 Ohm\'s Law',
+        path: 'textbooks/physics-10/static_and_current_electricity/ohms_law.json',
+        description: 'V = IR relationship'
+    }
+],
+'physics10-unit10': [
+    {
+        id: 'physics10_circuit_components',
+        title: '10.1 Circuit Components',
+        path: 'textbooks/physics-10/basic_circuits_and_electromagnetism_intro/circuit_components.json',
+        description: 'Batteries, resistors, switches'
+    },
+    {
+        id: 'physics10_series_circuits',
+        title: '10.2 Series Circuits',
+        path: 'textbooks/physics-10/basic_circuits_and_electromagnetism_intro/series_circuits.json',
+        description: 'Single path circuits'
+    },
+    {
+        id: 'physics10_parallel_circuits',
+        title: '10.3 Parallel Circuits',
+        path: 'textbooks/physics-10/basic_circuits_and_electromagnetism_intro/parallel_circuits.json',
+        description: 'Multiple path circuits'
+    },
+    {
+        id: 'physics10_circuit_calculations',
+        title: '10.4 Circuit Calculations',
+        path: 'textbooks/physics-10/basic_circuits_and_electromagnetism_intro/circuit_calculations.json',
+        description: 'Solving circuit problems'
+    },
+    {
+        id: 'physics10_electrical_energy_and_power',
+        title: '10.5 Electrical Energy and Power',
+        path: 'textbooks/physics-10/basic_circuits_and_electromagnetism_intro/electrical_energy_and_power.json',
+        description: 'Energy consumption'
+    },
+    {
+        id: 'physics10_safety_in_the_home',
+        title: '10.6 Safety in the Home',
+        path: 'textbooks/physics-10/basic_circuits_and_electromagnetism_intro/safety_in_the_home.json',
+        description: 'Electrical safety practices'
+    },
+    {
+        id: 'physics10_magnets_and_magnetic_fields',
+        title: '10.7 Magnets and Magnetic Fields',
+        path: 'textbooks/physics-10/basic_circuits_and_electromagnetism_intro/magnets_and_magnetic_fields.json',
+        description: 'Permanent magnets'
+    },
+    {
+        id: 'physics10_electromagnetism_oersted',
+        title: '10.8 Electromagnetism (Oersted)',
+        path: 'textbooks/physics-10/basic_circuits_and_electromagnetism_intro/electromagnetism_oersted.json',
+        description: 'Current creates magnetic fields'
+    },
+    {
+        id: 'physics10_electromagnets',
+        title: '10.9 Electromagnets',
+        path: 'textbooks/physics-10/basic_circuits_and_electromagnetism_intro/electromagnets.json',
+        description: 'Temporary magnets'
+    },
+    {
+        id: 'physics10_applications_of_electromagnetism',
+        title: '10.10 Applications of Electromagnetism',
+        path: 'textbooks/physics-10/basic_circuits_and_electromagnetism_intro/applications_of_electromagnetism.json',
+        description: 'Motors, generators, speakers'
+    }
+]
+        
     // AP Calculus Units
     'calc-unit1': [
         {
@@ -10097,6 +10775,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
