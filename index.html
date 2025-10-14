@@ -4217,10 +4217,12 @@ function loadTextbookContent() {
     const isPhysics9 = currentCourseId === 'physics-grade-9';
     const isPhysics10 = currentCourseId === 'physics-grade-10';
     const isPhysics11 = currentCourseId === 'physics-grade-11';
+    const isPhysics12 = currentCourseId === 'physics-grade-12';
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
                      isPhysics10 ? 'Physics Grade 10 Textbook' :
-                     isPhysics11 ? 'Physics Grade 11 Textbook' : 
+                     isPhysics11 ? 'Physics Grade 11 Textbook' :
+                     isPhysics12 ? 'Physics Grade 12 Textbook' : 
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4283,6 +4285,37 @@ function loadTextbookContent() {
                                 <button class="unit-btn ${currentTextbookUnit === 'calc-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('calc-unit4')">
                                     Unit 4: Advanced Topics
                                 </button>
+                               ` : isPhysics12 ? `
+    <button class="unit-btn ${currentTextbookUnit === 'physics12-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('physics12-unit1')">
+        Unit 1: Advanced Mechanics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics12-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('physics12-unit2')">
+        Unit 2: Gravitation & Satellites
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics12-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('physics12-unit3')">
+        Unit 3: Oscillations & Resonance
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics12-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('physics12-unit4')">
+        Unit 4: Electric Fields & Potential
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics12-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('physics12-unit5')">
+        Unit 5: Magnetic Fields & Induction
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics12-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('physics12-unit6')">
+        Unit 6: Alternating Current & Circuits
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics12-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('physics12-unit7')">
+        Unit 7: Quantum Physics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics12-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('physics12-unit8')">
+        Unit 8: Atomic & Nuclear Physics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics12-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('physics12-unit9')">
+        Unit 9: Relativity (Intro)
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics12-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('physics12-unit10')">
+        Unit 10: Review & Capstone Project
+    </button>
                             ` : isPhysics9 ? `
                                 <!-- Physics Grade 9 Units -->
                                 <button class="unit-btn ${currentTextbookUnit === 'physics9-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit1')">
@@ -4449,6 +4482,18 @@ function getCurrentUnitName() {
 'physics11-unit9': 'Unit 9: Electricity and Magnetism',
 'physics11-unit10': 'Unit 10: Modern Physics Introduction',
 
+// Add to getCurrentUnitName function
+'physics12-unit1': 'Unit 1: Advanced Mechanics',
+'physics12-unit2': 'Unit 2: Gravitation & Satellites',
+'physics12-unit3': 'Unit 3: Oscillations & Resonance',
+'physics12-unit4': 'Unit 4: Electric Fields & Potential',
+'physics12-unit5': 'Unit 5: Magnetic Fields & Induction',
+'physics12-unit6': 'Unit 6: Alternating Current & Circuits',
+'physics12-unit7': 'Unit 7: Quantum Physics',
+'physics12-unit8': 'Unit 8: Atomic & Nuclear Physics',
+'physics12-unit9': 'Unit 9: Relativity (Intro)',
+'physics12-unit10': 'Unit 10: Review & Capstone Project'
+        
         // Biology units (your original structure)
         'unit1': 'Unit 1: Chemistry of Life',
         'unit2': 'Unit 2: Cell Structure & Function',
@@ -5947,8 +5992,6 @@ function loadTextbookSections() {
     }
 ],
 
-// Continue with the remaining units...
-
 'physics11-unit3': [
     {
         id: 'physics11_review_work_ke',
@@ -6451,6 +6494,635 @@ function loadTextbookSections() {
         description: 'Comprehensive modern physics review'
     }
 ],
+        'physics12-unit1': [
+    {
+        id: 'physics12_work_energy_integral',
+        title: '1.1 Work-Energy Integral',
+        path: 'textbooks/physics-12/advanced_mechanics/work_energy_integral.json',
+        description: 'Calculus-based work-energy relationships'
+    },
+    {
+        id: 'physics12_work_energy_theorem',
+        title: '1.2 Work-Energy Theorem',
+        path: 'textbooks/physics-12/advanced_mechanics/work_energy_theorem.json',
+        description: 'Advanced work-energy applications'
+    },
+    {
+        id: 'physics12_potential_energy_curves',
+        title: '1.3 Potential Energy Curves',
+        path: 'textbooks/physics-12/advanced_mechanics/potential_energy_curves.json',
+        description: 'Analyzing motion using potential energy graphs'
+    },
+    {
+        id: 'physics12_center_of_mass',
+        title: '1.4 Center of Mass',
+        path: 'textbooks/physics-12/advanced_mechanics/center_of_mass.json',
+        description: 'Center of mass calculations and applications'
+    },
+    {
+        id: 'physics12_rotational_kinematics',
+        title: '1.5 Rotational Kinematics',
+        path: 'textbooks/physics-12/advanced_mechanics/rotational_kinematics.json',
+        description: 'Advanced rotational motion analysis'
+    },
+    {
+        id: 'physics12_moment_of_inertia',
+        title: '1.6 Moment of Inertia',
+        path: 'textbooks/physics-12/advanced_mechanics/moment_of_inertia.json',
+        description: 'Rotational inertia calculations'
+    },
+    {
+        id: 'physics12_torque_and_rotational_dynamics',
+        title: '1.7 Torque and Rotational Dynamics',
+        path: 'textbooks/physics-12/advanced_mechanics/torque_and_rotational_dynamics.json',
+        description: 'Rotational Newton\'s laws'
+    },
+    {
+        id: 'physics12_angular_momentum_and_conservation',
+        title: '1.8 Angular Momentum and Conservation',
+        path: 'textbooks/physics-12/advanced_mechanics/angular_momentum_and_conservation.json',
+        description: 'Rotational momentum principles'
+    },
+    {
+        id: 'physics12_rolling_motion',
+        title: '1.9 Rolling Motion',
+        path: 'textbooks/physics-12/advanced_mechanics/rolling_motion.json',
+        description: 'Combined translational and rotational motion'
+    },
+    {
+        id: 'physics12_review_and_assessment_mechanics',
+        title: '1.10 Review and Assessment',
+        path: 'textbooks/physics-12/advanced_mechanics/review_and_assessment.json',
+        description: 'Comprehensive mechanics review'
+    }
+],
+
+'physics12-unit2': [
+    {
+        id: 'physics12_newtons_law_of_gravitation',
+        title: '2.1 Newton\'s Law of Gravitation',
+        path: 'textbooks/physics-12/gravitation_and_satellites/newtons_law_of_gravitation.json',
+        description: 'Universal gravitation principles'
+    },
+    {
+        id: 'physics12_gravitational_field_intensity',
+        title: '2.2 Gravitational Field Intensity',
+        path: 'textbooks/physics-12/gravitation_and_satellites/gravitational_field_intensity.json',
+        description: 'Gravitational field calculations'
+    },
+    {
+        id: 'physics12_gravitational_potential_energy',
+        title: '2.3 Gravitational Potential Energy',
+        path: 'textbooks/physics-12/gravitation_and_satellites/gravitational_potential_energy.json',
+        description: 'Advanced gravitational energy concepts'
+    },
+    {
+        id: 'physics12_escape_velocity',
+        title: '2.4 Escape Velocity',
+        path: 'textbooks/physics-12/gravitation_and_satellites/escape_velocity.json',
+        description: 'Minimum velocity to escape gravitational fields'
+    },
+    {
+        id: 'physics12_orbital_mechanics_circular',
+        title: '2.5 Orbital Mechanics - Circular',
+        path: 'textbooks/physics-12/gravitation_and_satellites/orbital_mechanics_circular.json',
+        description: 'Circular orbit dynamics'
+    },
+    {
+        id: 'physics12_keplers_laws',
+        title: '2.6 Kepler\'s Laws',
+        path: 'textbooks/physics-12/gravitation_and_satellites/keplers_laws.json',
+        description: 'Planetary motion laws'
+    },
+    {
+        id: 'physics12_energy_in_orbit',
+        title: '2.7 Energy in Orbit',
+        path: 'textbooks/physics-12/gravitation_and_satellites/energy_in_orbit.json',
+        description: 'Orbital energy calculations'
+    },
+    {
+        id: 'physics12_elliptical_orbits_concept',
+        title: '2.8 Elliptical Orbits Concept',
+        path: 'textbooks/physics-12/gravitation_and_satellites/elliptical_orbits_concept.json',
+        description: 'Non-circular orbital mechanics'
+    },
+    {
+        id: 'physics12_tides_and_planetary_effects',
+        title: '2.9 Tides and Planetary Effects',
+        path: 'textbooks/physics-12/gravitation_and_satellites/tides_and_planetary_effects.json',
+        description: 'Gravitational effects on Earth'
+    },
+    {
+        id: 'physics12_review_and_assessment_gravitation',
+        title: '2.10 Review and Assessment',
+        path: 'textbooks/physics-12/gravitation_and_satellites/review_and_assessment.json',
+        description: 'Comprehensive gravitation review'
+    }
+],
+
+'physics12-unit3': [
+    {
+        id: 'physics12_simple_harmonic_motion_dynamics',
+        title: '3.1 Simple Harmonic Motion Dynamics',
+        path: 'textbooks/physics-12/oscillations_and_resonance/simple_harmonic_motion_dynamics.json',
+        description: 'SHM force analysis'
+    },
+    {
+        id: 'physics12_shm_kinematics',
+        title: '3.2 SHM Kinematics',
+        path: 'textbooks/physics-12/oscillations_and_resonance/shm_kinematics.json',
+        description: 'Oscillatory motion equations'
+    },
+    {
+        id: 'physics12_period_and_frequency',
+        title: '3.3 Period and Frequency',
+        path: 'textbooks/physics-12/oscillations_and_resonance/period_and_frequency.json',
+        description: 'Oscillation timing parameters'
+    },
+    {
+        id: 'physics12_energy_in_shm',
+        title: '3.4 Energy in SHM',
+        path: 'textbooks/physics-12/oscillations_and_resonance/energy_in_shm.json',
+        description: 'Energy conservation in oscillations'
+    },
+    {
+        id: 'physics12_damped_oscillator',
+        title: '3.5 Damped Oscillator',
+        path: 'textbooks/physics-12/oscillations_and_resonance/damped_oscillator.json',
+        description: 'Oscillations with energy loss'
+    },
+    {
+        id: 'physics12_types_of_damping',
+        title: '3.6 Types of Damping',
+        path: 'textbooks/physics-12/oscillations_and_resonance/types_of_damping.json',
+        description: 'Underdamped, critically damped, overdamped'
+    },
+    {
+        id: 'physics12_forced_oscillations',
+        title: '3.7 Forced Oscillations',
+        path: 'textbooks/physics-12/oscillations_and_resonance/forced_oscillations.json',
+        description: 'Driven oscillatory systems'
+    },
+    {
+        id: 'physics12_resonance',
+        title: '3.8 Resonance',
+        path: 'textbooks/physics-12/oscillations_and_resonance/resonance.json',
+        description: 'Natural frequency matching'
+    },
+    {
+        id: 'physics12_traveling_waves',
+        title: '3.9 Traveling Waves',
+        path: 'textbooks/physics-12/oscillations_and_resonance/traveling_waves.json',
+        description: 'Wave propagation analysis'
+    },
+    {
+        id: 'physics12_review_and_assessment_oscillations',
+        title: '3.10 Review and Assessment',
+        path: 'textbooks/physics-12/oscillations_and_resonance/review_and_assessment.json',
+        description: 'Comprehensive oscillations review'
+    }
+],
+
+'physics12-unit4': [
+    {
+        id: 'physics12_coulombs_law_vector',
+        title: '4.1 Coulomb\'s Law - Vector',
+        path: 'textbooks/physics-12/electric_fields_and_potential/coulombs_law_vector.json',
+        description: 'Vector form of electrostatic force'
+    },
+    {
+        id: 'physics12_electric_field_definition',
+        title: '4.2 Electric Field Definition',
+        path: 'textbooks/physics-12/electric_fields_and_potential/electric_field_definition.json',
+        description: 'Electric field concept and calculation'
+    },
+    {
+        id: 'physics12_electric_field_lines',
+        title: '4.3 Electric Field Lines',
+        path: 'textbooks/physics-12/electric_fields_and_potential/electric_field_lines.json',
+        description: 'Visualizing electric fields'
+    },
+    {
+        id: 'physics12_electric_potential_energy',
+        title: '4.4 Electric Potential Energy',
+        path: 'textbooks/physics-12/electric_fields_and_potential/electric_potential_energy.json',
+        description: 'Energy in electric fields'
+    },
+    {
+        id: 'physics12_electric_potential_voltage',
+        title: '4.5 Electric Potential (Voltage)',
+        path: 'textbooks/physics-12/electric_fields_and_potential/electric_potential_voltage.json',
+        description: 'Electric potential concept'
+    },
+    {
+        id: 'physics12_electric_field_potential_relationship',
+        title: '4.6 Electric Field-Potential Relationship',
+        path: 'textbooks/physics-12/electric_fields_and_potential/electric_field_potential_relationship.json',
+        description: 'Connecting field and potential'
+    },
+    {
+        id: 'physics12_equipotential_surfaces',
+        title: '4.7 Equipotential Surfaces',
+        path: 'textbooks/physics-12/electric_fields_and_potential/equipotential_surfaces.json',
+        description: 'Surfaces of constant potential'
+    },
+    {
+        id: 'physics12_capacitance',
+        title: '4.8 Capacitance',
+        path: 'textbooks/physics-12/electric_fields_and_potential/capacitance.json',
+        description: 'Charge storage capacity'
+    },
+    {
+        id: 'physics12_energy_stored_in_capacitor',
+        title: '4.9 Energy Stored in Capacitor',
+        path: 'textbooks/physics-12/electric_fields_and_potential/energy_stored_in_capacitor.json',
+        description: 'Electrical energy storage'
+    },
+    {
+        id: 'physics12_review_and_assessment_electric',
+        title: '4.10 Review and Assessment',
+        path: 'textbooks/physics-12/electric_fields_and_potential/review_and_assessment.json',
+        description: 'Comprehensive electric fields review'
+    }
+],
+
+'physics12-unit5': [
+    {
+        id: 'physics12_magnetic_field_definition',
+        title: '5.1 Magnetic Field Definition',
+        path: 'textbooks/physics-12/magnetic_fields_and_induction/magnetic_field_definition.json',
+        description: 'Magnetic field concepts'
+    },
+    {
+        id: 'physics12_magnetic_force_on_moving_charge',
+        title: '5.2 Magnetic Force on Moving Charge',
+        path: 'textbooks/physics-12/magnetic_fields_and_induction/magnetic_force_on_moving_charge.json',
+        description: 'Lorentz force on charges'
+    },
+    {
+        id: 'physics12_motion_in_magnetic_field',
+        title: '5.3 Motion in Magnetic Field',
+        path: 'textbooks/physics-12/magnetic_fields_and_induction/motion_in_magnetic_field.json',
+        description: 'Charged particle trajectories'
+    },
+    {
+        id: 'physics12_magnetic_force_on_wire',
+        title: '5.4 Magnetic Force on Wire',
+        path: 'textbooks/physics-12/magnetic_fields_and_induction/magnetic_force_on_wire.json',
+        description: 'Force on current-carrying conductors'
+    },
+    {
+        id: 'physics12_sources_of_magnetic_field',
+        title: '5.5 Sources of Magnetic Field',
+        path: 'textbooks/physics-12/magnetic_fields_and_induction/sources_of_magnetic_field.json',
+        description: 'Currents creating magnetic fields'
+    },
+    {
+        id: 'physics12_faradays_law_of_induction',
+        title: '5.6 Faraday\'s Law of Induction',
+        path: 'textbooks/physics-12/magnetic_fields_and_induction/faradays_law_of_induction.json',
+        description: 'Electromagnetic induction'
+    },
+    {
+        id: 'physics12_lenzs_law',
+        title: '5.7 Lenz\'s Law',
+        path: 'textbooks/physics-12/magnetic_fields_and_induction/lenzs_law.json',
+        description: 'Direction of induced current'
+    },
+    {
+        id: 'physics12_motional_emf',
+        title: '5.8 Motional EMF',
+        path: 'textbooks/physics-12/magnetic_fields_and_induction/motional_emf.json',
+        description: 'EMF from motion in magnetic field'
+    },
+    {
+        id: 'physics12_electric_generators_and_motors',
+        title: '5.9 Electric Generators and Motors',
+        path: 'textbooks/physics-12/magnetic_fields_and_induction/electric_generators_and_motors.json',
+        description: 'Electromagnetic energy conversion'
+    },
+    {
+        id: 'physics12_review_and_assessment_magnetic',
+        title: '5.10 Review and Assessment',
+        path: 'textbooks/physics-12/magnetic_fields_and_induction/review_and_assessment.json',
+        description: 'Comprehensive magnetism review'
+    }
+],
+
+'physics12-unit6': [
+    {
+        id: 'physics12_dc_circuit_review',
+        title: '6.1 DC Circuit Review',
+        path: 'textbooks/physics-12/ac_and_circuits/dc_circuit_review.json',
+        description: 'Direct current fundamentals'
+    },
+    {
+        id: 'physics12_rc_circuits',
+        title: '6.2 RC Circuits',
+        path: 'textbooks/physics-12/ac_and_circuits/rc_circuits.json',
+        description: 'Resistor-capacitor circuits'
+    },
+    {
+        id: 'physics12_introduction_to_ac',
+        title: '6.3 Introduction to AC',
+        path: 'textbooks/physics-12/ac_and_circuits/introduction_to_ac.json',
+        description: 'Alternating current basics'
+    },
+    {
+        id: 'physics12_capacitive_reactance',
+        title: '6.4 Capacitive Reactance',
+        path: 'textbooks/physics-12/ac_and_circuits/capacitive_reactance.json',
+        description: 'AC resistance of capacitors'
+    },
+    {
+        id: 'physics12_inductive_reactance',
+        title: '6.5 Inductive Reactance',
+        path: 'textbooks/physics-12/ac_and_circuits/inductive_reactance.json',
+        description: 'AC resistance of inductors'
+    },
+    {
+        id: 'physics12_series_rlc_circuits',
+        title: '6.6 Series RLC Circuits',
+        path: 'textbooks/physics-12/ac_and_circuits/series_rlc_circuits.json',
+        description: 'Resistor-inductor-capacitor circuits'
+    },
+    {
+        id: 'physics12_phasor_diagrams',
+        title: '6.7 Phasor Diagrams',
+        path: 'textbooks/physics-12/ac_and_circuits/phasor_diagrams.json',
+        description: 'Visualizing AC circuit relationships'
+    },
+    {
+        id: 'physics12_resonance_in_rlc',
+        title: '6.8 Resonance in RLC',
+        path: 'textbooks/physics-12/ac_and_circuits/resonance_in_rlc.json',
+        description: 'Resonant frequency in circuits'
+    },
+    {
+        id: 'physics12_transformers',
+        title: '6.9 Transformers',
+        path: 'textbooks/physics-12/ac_and_circuits/transformers.json',
+        description: 'Voltage transformation'
+    },
+    {
+        id: 'physics12_review_and_assessment_ac',
+        title: '6.10 Review and Assessment',
+        path: 'textbooks/physics-12/ac_and_circuits/review_and_assessment.json',
+        description: 'Comprehensive AC circuits review'
+    }
+],
+
+'physics12-unit7': [
+    {
+        id: 'physics12_blackbody_radiation',
+        title: '7.1 Blackbody Radiation',
+        path: 'textbooks/physics-12/quantum_physics/blackbody_radiation.json',
+        description: 'Thermal radiation and quantum theory'
+    },
+    {
+        id: 'physics12_photoelectric_effect',
+        title: '7.2 Photoelectric Effect',
+        path: 'textbooks/physics-12/quantum_physics/photoelectric_effect.json',
+        description: 'Particle nature of light'
+    },
+    {
+        id: 'physics12_photons_and_momentum',
+        title: '7.3 Photons and Momentum',
+        path: 'textbooks/physics-12/quantum_physics/photons_and_momentum.json',
+        description: 'Photon momentum concept'
+    },
+    {
+        id: 'physics12_xray_production',
+        title: '7.4 X-ray Production',
+        path: 'textbooks/physics-12/quantum_physics/xray_production.json',
+        description: 'X-rays and quantum transitions'
+    },
+    {
+        id: 'physics12_compton_scattering',
+        title: '7.5 Compton Scattering',
+        path: 'textbooks/physics-12/quantum_physics/compton_scattering.json',
+        description: 'Photon-electron collisions'
+    },
+    {
+        id: 'physics12_wave_particle_duality',
+        title: '7.6 Wave-Particle Duality',
+        path: 'textbooks/physics-12/quantum_physics/wave_particle_duality.json',
+        description: 'Dual nature of matter and light'
+    },
+    {
+        id: 'physics12_de_broglie_waves',
+        title: '7.7 De Broglie Waves',
+        path: 'textbooks/physics-12/quantum_physics/de_broglie_waves.json',
+        description: 'Matter waves'
+    },
+    {
+        id: 'physics12_uncertainty_principle',
+        title: '7.8 Uncertainty Principle',
+        path: 'textbooks/physics-12/quantum_physics/uncertainty_principle.json',
+        description: 'Heisenberg uncertainty principle'
+    },
+    {
+        id: 'physics12_schrodinger_equation_concept',
+        title: '7.9 Schrödinger Equation Concept',
+        path: 'textbooks/physics-12/quantum_physics/schrodinger_equation_concept.json',
+        description: 'Quantum wave equation introduction'
+    },
+    {
+        id: 'physics12_review_and_assessment_quantum',
+        title: '7.10 Review and Assessment',
+        path: 'textbooks/physics-12/quantum_physics/review_and_assessment.json',
+        description: 'Comprehensive quantum physics review'
+    }
+],
+
+'physics12-unit8': [
+    {
+        id: 'physics12_rutherford_model',
+        title: '8.1 Rutherford Model',
+        path: 'textbooks/physics-12/atomic_and_nuclear_physics/rutherford_model.json',
+        description: 'Nuclear atom model'
+    },
+    {
+        id: 'physics12_bohr_model',
+        title: '8.2 Bohr Model',
+        path: 'textbooks/physics-12/atomic_and_nuclear_physics/bohr_model.json',
+        description: 'Quantum atomic model'
+    },
+    {
+        id: 'physics12_energy_transitions',
+        title: '8.3 Energy Transitions',
+        path: 'textbooks/physics-12/atomic_and_nuclear_physics/energy_transitions.json',
+        description: 'Atomic energy level changes'
+    },
+    {
+        id: 'physics12_quantum_numbers',
+        title: '8.4 Quantum Numbers',
+        path: 'textbooks/physics-12/atomic_and_nuclear_physics/quantum_numbers.json',
+        description: 'Electron state descriptors'
+    },
+    {
+        id: 'physics12_nuclear_structure',
+        title: '8.5 Nuclear Structure',
+        path: 'textbooks/physics-12/atomic_and_nuclear_physics/nuclear_structure.json',
+        description: 'Atomic nucleus composition'
+    },
+    {
+        id: 'physics12_mass_defect_and_binding_energy',
+        title: '8.6 Mass Defect and Binding Energy',
+        path: 'textbooks/physics-12/atomic_and_nuclear_physics/mass_defect_and_binding_energy.json',
+        description: 'Nuclear energy calculations'
+    },
+    {
+        id: 'physics12_radioactive_decay',
+        title: '8.7 Radioactive Decay',
+        path: 'textbooks/physics-12/atomic_and_nuclear_physics/radioactive_decay.json',
+        description: 'Nuclear decay processes'
+    },
+    {
+        id: 'physics12_half_life',
+        title: '8.8 Half-Life',
+        path: 'textbooks/physics-12/atomic_and_nuclear_physics/half_life.json',
+        description: 'Radioactive decay timing'
+    },
+    {
+        id: 'physics12_fission_and_fusion',
+        title: '8.9 Fission and Fusion',
+        path: 'textbooks/physics-12/atomic_and_nuclear_physics/fission_and_fusion.json',
+        description: 'Nuclear reactions'
+    },
+    {
+        id: 'physics12_review_and_assessment_nuclear',
+        title: '8.10 Review and Assessment',
+        path: 'textbooks/physics-12/atomic_and_nuclear_physics/review_and_assessment.json',
+        description: 'Comprehensive nuclear physics review'
+    }
+],
+
+'physics12-unit9': [
+    {
+        id: 'physics12_frames_of_reference',
+        title: '9.1 Frames of Reference',
+        path: 'textbooks/physics-12/relativity_intro/frames_of_reference.json',
+        description: 'Coordinate systems and observers'
+    },
+    {
+        id: 'physics12_galilean_relativity',
+        title: '9.2 Galilean Relativity',
+        path: 'textbooks/physics-12/relativity_intro/galilean_relativity.json',
+        description: 'Classical relativity principles'
+    },
+    {
+        id: 'physics12_postulates_of_special_relativity',
+        title: '9.3 Postulates of Special Relativity',
+        path: 'textbooks/physics-12/relativity_intro/postulates_of_special_relativity.json',
+        description: 'Einstein\'s relativity foundations'
+    },
+    {
+        id: 'physics12_time_dilation',
+        title: '9.4 Time Dilation',
+        path: 'textbooks/physics-12/relativity_intro/time_dilation.json',
+        description: 'Moving clocks run slow'
+    },
+    {
+        id: 'physics12_length_contraction',
+        title: '9.5 Length Contraction',
+        path: 'textbooks/physics-12/relativity_intro/length_contraction.json',
+        description: 'Moving objects appear shorter'
+    },
+    {
+        id: 'physics12_relativistic_momentum',
+        title: '9.6 Relativistic Momentum',
+        path: 'textbooks/physics-12/relativity_intro/relativistic_momentum.json',
+        description: 'Momentum at high speeds'
+    },
+    {
+        id: 'physics12_mass_energy_equivalence',
+        title: '9.7 Mass-Energy Equivalence',
+        path: 'textbooks/physics-12/relativity_intro/mass_energy_equivalence.json',
+        description: 'E=mc² applications'
+    },
+    {
+        id: 'physics12_velocity_addition',
+        title: '9.8 Velocity Addition',
+        path: 'textbooks/physics-12/relativity_intro/velocity_addition.json',
+        description: 'Relativistic velocity composition'
+    },
+    {
+        id: 'physics12_twin_paradox',
+        title: '9.9 Twin Paradox',
+        path: 'textbooks/physics-12/relativity_intro/twin_paradox.json',
+        description: 'Famous relativity thought experiment'
+    },
+    {
+        id: 'physics12_review_and_assessment_relativity',
+        title: '9.10 Review and Assessment',
+        path: 'textbooks/physics-12/relativity_intro/review_and_assessment.json',
+        description: 'Comprehensive relativity review'
+    }
+],
+
+'physics12-unit10': [
+    {
+        id: 'physics12_mechanics_and_energy_review',
+        title: '10.1 Mechanics and Energy Review',
+        path: 'textbooks/physics-12/review_and_capstone/mechanics_and_energy_review.json',
+        description: 'Comprehensive mechanics review'
+    },
+    {
+        id: 'physics12_electricity_and_magnetism_review',
+        title: '10.2 Electricity and Magnetism Review',
+        path: 'textbooks/physics-12/review_and_capstone/electricity_and_magnetism_review.json',
+        description: 'Comprehensive E&M review'
+    },
+    {
+        id: 'physics12_modern_physics_review',
+        title: '10.3 Modern Physics Review',
+        path: 'textbooks/physics-12/review_and_capstone/modern_physics_review.json',
+        description: 'Comprehensive modern physics review'
+    },
+    {
+        id: 'physics12_capstone_project_proposal',
+        title: '10.4 Capstone Project Proposal',
+        path: 'textbooks/physics-12/review_and_capstone/capstone_project_proposal.json',
+        description: 'Research project planning'
+    },
+    {
+        id: 'physics12_capstone_data_collection',
+        title: '10.5 Capstone Data Collection',
+        path: 'textbooks/physics-12/review_and_capstone/capstone_data_collection.json',
+        description: 'Experimental data gathering'
+    },
+    {
+        id: 'physics12_capstone_analysis_and_results',
+        title: '10.6 Capstone Analysis and Results',
+        path: 'textbooks/physics-12/review_and_capstone/capstone_analysis_and_results.json',
+        description: 'Data analysis techniques'
+    },
+    {
+        id: 'physics12_capstone_draft_checkin',
+        title: '10.7 Capstone Draft Check-in',
+        path: 'textbooks/physics-12/review_and_capstone/capstone_draft_checkin.json',
+        description: 'Project progress assessment'
+    },
+    {
+        id: 'physics12_capstone_final_report',
+        title: '10.8 Capstone Final Report',
+        path: 'textbooks/physics-12/review_and_capstone/capstone_final_report.json',
+        description: 'Complete project documentation'
+    },
+    {
+        id: 'physics12_capstone_presentation',
+        title: '10.9 Capstone Presentation',
+        path: 'textbooks/physics-12/review_and_capstone/capstone_presentation.json',
+        description: 'Project presentation skills'
+    },
+    {
+        id: 'physics12_final_assessment',
+        title: '10.10 Final Assessment',
+        path: 'textbooks/physics-12/review_and_capstone/final_assessment.json',
+        description: 'Comprehensive course evaluation'
+    }
+]
         
     // AP Calculus Units
     'calc-unit1': [
@@ -11453,6 +12125,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
