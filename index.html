@@ -4222,6 +4222,7 @@ function loadTextbookContent() {
     const isAPPhysics2 = currentCourseId === 'ap-physics-2';
     const isAPPhysicsCMechanics = currentCourseId === 'ap-physics-c-mechanics';
     const isAPPhysicsCEM = currentCourseId === 'ap-physics-c-em';
+    const isEconomics = currentCourseId === 'economics';
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
                      isPhysics10 ? 'Physics Grade 10 Textbook' :
@@ -4231,6 +4232,7 @@ function loadTextbookContent() {
                      isAPPhysics2 ? 'AP Physics 2 Textbook' :
                      isAPPhysicsCMechanics ? 'AP Physics C: Mechanics Textbook' :
                      isAPPhysicsCEM ? 'AP Physics C: Electricity & Magnetism Textbook' : 
+                     isEconomics ? 'Economics Textbook' : 
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4279,6 +4281,39 @@ function loadTextbookContent() {
                                 <button class="unit-btn ${currentTextbookUnit === 'physics11-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('physics11-unit10')">
                                     Unit 10: Modern Physics Introduction
                                 </button>
+
+                                // Add Economics unit buttons to the HTML template
+` : isEconomics ? `
+    <button class="unit-btn ${currentTextbookUnit === 'economics-term1' ? 'active' : ''}" onclick="switchTextbookUnit('economics-term1')">
+        Term 1: Introduction & Basic Concepts
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'economics-term2' ? 'active' : ''}" onclick="switchTextbookUnit('economics-term2')">
+        Term 2: Production & Trade
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'economics-term3' ? 'active' : ''}" onclick="switchTextbookUnit('economics-term3')">
+        Term 3: Demand and Supply
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'economics-term4' ? 'active' : ''}" onclick="switchTextbookUnit('economics-term4')">
+        Term 4: Elasticity
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'economics-term5' ? 'active' : ''}" onclick="switchTextbookUnit('economics-term5')">
+        Term 5: Production and Costs
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'economics-term6' ? 'active' : ''}" onclick="switchTextbookUnit('economics-term6')">
+        Term 6: Market Structures
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'economics-term7' ? 'active' : ''}" onclick="switchTextbookUnit('economics-term7')">
+        Term 7: Labour Market
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'economics-term8' ? 'active' : ''}" onclick="switchTextbookUnit('economics-term8')">
+        Term 8: National Income & Circular Flow
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'economics-term9' ? 'active' : ''}" onclick="switchTextbookUnit('economics-term9')">
+        Term 9: Employment & Inflation
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'economics-term10' ? 'active' : ''}" onclick="switchTextbookUnit('economics-term10')">
+        Term 10: Government Fiscal Policy
+    </button>
 
                                 // Add AP Physics C: Electricity & Magnetism unit buttons to the HTML template
 ` : isAPPhysicsCEM ? `
@@ -4576,6 +4611,18 @@ function getCurrentUnitName() {
 'physics10-unit9': 'Unit 9: Static & Current Electricity',
 'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
 
+// Add to getCurrentUnitName function
+'economics-term1': 'Term 1: Introduction & Basic Concepts',
+'economics-term2': 'Term 2: Production & Trade', 
+'economics-term3': 'Term 3: Demand and Supply',
+'economics-term4': 'Term 4: Elasticity',
+'economics-term5': 'Term 5: Production and Costs',
+'economics-term6': 'Term 6: Market Structures',
+'economics-term7': 'Term 7: Labour Market',
+'economics-term8': 'Term 8: National Income & Circular Flow',
+'economics-term9': 'Term 9: Employment & Inflation',
+'economics-term10': 'Term 10: Government Fiscal Policy'
+        
 // Add to getCurrentUnitName function
 'ap-physics-c-em-unit1': 'Unit 1: Electrostatics',
 'ap-physics-c-em-unit2': 'Unit 2: Conductors, Capacitors & Dielectrics',
@@ -5387,6 +5434,637 @@ function loadTextbookSections() {
         }
     ],
 
+// Add to the unitSections object in the loadTextbookSections function
+'economics-term1': [
+    {
+        id: 'economics_fundamental_economic_problem',
+        title: '1.1 The Fundamental Economic Problem',
+        path: 'textbooks/economics/introduction_to_economics/the_fundamental_economic_problem.json',
+        description: 'Scarcity and choice in economics'
+    },
+    {
+        id: 'economics_needs_vs_wants',
+        title: '1.2 Needs vs Wants',
+        path: 'textbooks/economics/introduction_to_economics/needs_vs_wants.json',
+        description: 'Distinguishing essential from desirable'
+    },
+    {
+        id: 'economics_factors_of_production',
+        title: '1.3 Factors of Production',
+        path: 'textbooks/economics/introduction_to_economics/factors_of_production.json',
+        description: 'Land, labor, capital, and entrepreneurship'
+    },
+    {
+        id: 'economics_opportunity_cost',
+        title: '1.4 Opportunity Cost',
+        path: 'textbooks/economics/introduction_to_economics/opportunity_cost.json',
+        description: 'The cost of choices in economics'
+    },
+    {
+        id: 'economics_basic_economic_questions',
+        title: '1.5 Basic Economic Questions',
+        path: 'textbooks/economics/introduction_to_economics/basic_economic_questions.json',
+        description: 'What, how, and for whom to produce'
+    },
+    {
+        id: 'economics_economic_systems_overview',
+        title: '1.6 Economic Systems Overview',
+        path: 'textbooks/economics/introduction_to_economics/economic_systems_overview.json',
+        description: 'Market, command, and mixed economies'
+    },
+    {
+        id: 'economics_micro_vs_macro',
+        title: '1.7 Microeconomics vs Macroeconomics',
+        path: 'textbooks/economics/introduction_to_economics/microeconomics_vs_macroeconomics.json',
+        description: 'Individual vs economy-wide analysis'
+    },
+    {
+        id: 'economics_positive_vs_normative',
+        title: '1.8 Positive vs Normative Economics',
+        path: 'textbooks/economics/introduction_to_economics/positive_vs_normative_economics.json',
+        description: 'Fact-based vs value-based economics'
+    },
+    {
+        id: 'economics_models_and_assumptions',
+        title: '1.9 Role of Models and Assumptions',
+        path: 'textbooks/economics/introduction_to_economics/role_of_models_and_assumptions.json',
+        description: 'Economic modeling techniques'
+    },
+    {
+        id: 'economics_decision_makers',
+        title: '1.10 Economic Decision Makers',
+        path: 'textbooks/economics/introduction_to_economics/economic_decision_makers.json',
+        description: 'Households, firms, and government roles'
+    }
+],
+
+'economics-term2': [
+    {
+        id: 'economics_production_possibilities_frontier',
+        title: '2.1 Production Possibilities Frontier',
+        path: 'textbooks/economics/basic_concepts_tools/production_possibilities_frontier.json',
+        description: 'Graphing production trade-offs'
+    },
+    {
+        id: 'economics_opportunity_cost_ppf',
+        title: '2.2 Opportunity Cost on PPF',
+        path: 'textbooks/economics/basic_concepts_tools/opportunity_cost_on_ppf.json',
+        description: 'Calculating costs using PPF'
+    },
+    {
+        id: 'economics_efficiency_and_inefficiency',
+        title: '2.3 Efficiency and Inefficiency',
+        path: 'textbooks/economics/basic_concepts_tools/efficiency_and_inefficiency.json',
+        description: 'Optimal resource allocation'
+    },
+    {
+        id: 'economics_growth_on_ppf',
+        title: '2.4 Economic Growth on PPF',
+        path: 'textbooks/economics/basic_concepts_tools/economic_growth_on_ppf.json',
+        description: 'Shifting the production frontier'
+    },
+    {
+        id: 'economics_introduction_to_trade',
+        title: '2.5 Introduction to Trade',
+        path: 'textbooks/economics/basic_concepts_tools/introduction_to_trade.json',
+        description: 'Benefits of specialization and exchange'
+    },
+    {
+        id: 'economics_absolute_advantage',
+        title: '2.6 Absolute Advantage',
+        path: 'textbooks/economics/basic_concepts_tools/absolute_advantage.json',
+        description: 'Productivity comparisons in trade'
+    },
+    {
+        id: 'economics_comparative_advantage',
+        title: '2.7 Comparative Advantage',
+        path: 'textbooks/economics/basic_concepts_tools/comparative_advantage.json',
+        description: 'Opportunity cost in trade decisions'
+    },
+    {
+        id: 'economics_terms_of_trade',
+        title: '2.8 Terms of Trade',
+        path: 'textbooks/economics/basic_concepts_tools/terms_of_trade.json',
+        description: 'Exchange ratios in international trade'
+    },
+    {
+        id: 'economics_introduction_to_markets',
+        title: '2.9 Introduction to Markets',
+        path: 'textbooks/economics/basic_concepts_tools/introduction_to_markets.json',
+        description: 'Market structures and functions'
+    },
+    {
+        id: 'economics_supply_demand_basics',
+        title: '2.10 Supply and Demand Basics',
+        path: 'textbooks/economics/basic_concepts_tools/supply_and_demand_basics.json',
+        description: 'Fundamental market forces'
+    }
+],
+
+'economics-term3': [
+    {
+        id: 'economics_law_of_demand',
+        title: '3.1 Law of Demand',
+        path: 'textbooks/economics/demand_and_supply/law_of_demand.json',
+        description: 'Price-quantity relationship'
+    },
+    {
+        id: 'economics_demand_schedules_curves',
+        title: '3.2 Demand Schedules and Curves',
+        path: 'textbooks/economics/demand_and_supply/demand_schedules_and_curves.json',
+        description: 'Graphical representation of demand'
+    },
+    {
+        id: 'economics_determinants_of_demand',
+        title: '3.3 Determinants of Demand',
+        path: 'textbooks/economics/demand_and_supply/determinants_of_demand.json',
+        description: 'Factors shifting demand curves'
+    },
+    {
+        id: 'economics_normal_vs_inferior_goods',
+        title: '3.4 Normal vs Inferior Goods',
+        path: 'textbooks/economics/demand_and_supply/normal_vs_inferior_goods.json',
+        description: 'Income effects on demand'
+    },
+    {
+        id: 'economics_law_of_supply',
+        title: '3.5 Law of Supply',
+        path: 'textbooks/economics/demand_and_supply/law_of_supply.json',
+        description: 'Price-quantity relationship for producers'
+    },
+    {
+        id: 'economics_supply_schedules_curves',
+        title: '3.6 Supply Schedules and Curves',
+        path: 'textbooks/economics/demand_and_supply/supply_schedules_and_curves.json',
+        description: 'Graphical representation of supply'
+    },
+    {
+        id: 'economics_determinants_of_supply',
+        title: '3.7 Determinants of Supply',
+        path: 'textbooks/economics/demand_and_supply/determinants_of_supply.json',
+        description: 'Factors shifting supply curves'
+    },
+    {
+        id: 'economics_market_equilibrium',
+        title: '3.8 Market Equilibrium',
+        path: 'textbooks/economics/demand_and_supply/market_equilibrium.json',
+        description: 'Balancing supply and demand'
+    },
+    {
+        id: 'economics_disequilibrium',
+        title: '3.9 Disequilibrium',
+        path: 'textbooks/economics/demand_and_supply/disequilibrium.json',
+        description: 'Surplus and shortage conditions'
+    },
+    {
+        id: 'economics_shifts_in_equilibrium',
+        title: '3.10 Shifts in Equilibrium',
+        path: 'textbooks/economics/demand_and_supply/shifts_in_equilibrium.json',
+        description: 'Market adjustments over time'
+    }
+],
+
+'economics-term4': [
+    {
+        id: 'economics_price_elasticity_demand',
+        title: '4.1 Price Elasticity of Demand',
+        path: 'textbooks/economics/elasticity/price_elasticity_of_demand.json',
+        description: 'Responsiveness to price changes'
+    },
+    {
+        id: 'economics_calculating_ped',
+        title: '4.2 Calculating and Interpreting PED',
+        path: 'textbooks/economics/elasticity/calculating_and_interpreting_ped.json',
+        description: 'PED formula and interpretation'
+    },
+    {
+        id: 'economics_determinants_ped',
+        title: '4.3 Determinants of PED',
+        path: 'textbooks/economics/elasticity/determinants_of_ped.json',
+        description: 'Factors affecting demand elasticity'
+    },
+    {
+        id: 'economics_ped_total_revenue',
+        title: '4.4 PED and Total Revenue',
+        path: 'textbooks/economics/elasticity/ped_and_total_revenue.json',
+        description: 'Revenue implications of elasticity'
+    },
+    {
+        id: 'economics_income_elasticity',
+        title: '4.5 Income Elasticity of Demand',
+        path: 'textbooks/economics/elasticity/income_elasticity_of_demand.json',
+        description: 'Responsiveness to income changes'
+    },
+    {
+        id: 'economics_cross_price_elasticity',
+        title: '4.6 Cross Price Elasticity of Demand',
+        path: 'textbooks/economics/elasticity/cross_price_elasticity_of_demand.json',
+        description: 'Substitute and complement relationships'
+    },
+    {
+        id: 'economics_price_elasticity_supply',
+        title: '4.7 Price Elasticity of Supply',
+        path: 'textbooks/economics/elasticity/price_elasticity_of_supply.json',
+        description: 'Producer responsiveness to price'
+    },
+    {
+        id: 'economics_determinants_pes',
+        title: '4.8 Determinants of PES',
+        path: 'textbooks/economics/elasticity/determinants_of_pes.json',
+        description: 'Factors affecting supply elasticity'
+    },
+    {
+        id: 'economics_applications_elasticity_1',
+        title: '4.9 Applications of Elasticity (Part 1)',
+        path: 'textbooks/economics/elasticity/applications_of_elasticity_1.json',
+        description: 'Real-world elasticity examples'
+    },
+    {
+        id: 'economics_applications_elasticity_2',
+        title: '4.10 Applications of Elasticity (Part 2)',
+        path: 'textbooks/economics/elasticity/applications_of_elasticity_2.json',
+        description: 'Advanced elasticity applications'
+    }
+],
+
+'economics-term5': [
+    {
+        id: 'economics_production_function',
+        title: '5.1 The Production Function',
+        path: 'textbooks/economics/production_and_costs/the_production_function.json',
+        description: 'Input-output relationships'
+    },
+    {
+        id: 'economics_short_run_long_run',
+        title: '5.2 Short Run vs Long Run',
+        path: 'textbooks/economics/production_and_costs/short_run_vs_long_run.json',
+        description: 'Time periods in production'
+    },
+    {
+        id: 'economics_diminishing_returns',
+        title: '5.3 Law of Diminishing Marginal Returns',
+        path: 'textbooks/economics/production_and_costs/law_of_diminishing_marginal_returns.json',
+        description: 'Productivity changes with inputs'
+    },
+    {
+        id: 'economics_costs_of_production',
+        title: '5.4 Costs of Production',
+        path: 'textbooks/economics/production_and_costs/costs_of_production.json',
+        description: 'Fixed, variable, and total costs'
+    },
+    {
+        id: 'economics_calculating_costs',
+        title: '5.5 Calculating Costs',
+        path: 'textbooks/economics/production_and_costs/calculating_costs.json',
+        description: 'Cost calculation methods'
+    },
+    {
+        id: 'economics_short_run_cost_curves',
+        title: '5.6 Short Run Cost Curves',
+        path: 'textbooks/economics/production_and_costs/short_run_cost_curves.json',
+        description: 'Graphical cost analysis'
+    },
+    {
+        id: 'economics_long_run_costs',
+        title: '5.7 Long Run Costs',
+        path: 'textbooks/economics/production_and_costs/long_run_costs.json',
+        description: 'Cost behavior over time'
+    },
+    {
+        id: 'economics_economies_of_scale',
+        title: '5.8 Economies of Scale',
+        path: 'textbooks/economics/production_and_costs/economies_of_scale.json',
+        description: 'Cost advantages of scale'
+    },
+    {
+        id: 'economics_diseconomies_of_scale',
+        title: '5.9 Diseconomies of Scale',
+        path: 'textbooks/economics/production_and_costs/diseconomies_of_scale.json',
+        description: 'Cost disadvantages of scale'
+    },
+    {
+        id: 'economics_firm_goals_revenue',
+        title: '5.10 Firm Goals and Revenue',
+        path: 'textbooks/economics/production_and_costs/firm_goals_and_revenue.json',
+        description: 'Profit maximization and revenue'
+    }
+],
+
+'economics-term6': [
+    {
+        id: 'economics_market_structures_characteristics',
+        title: '6.1 Characteristics of Market Structures',
+        path: 'textbooks/economics/market_structures/characteristics_of_market_structures.json',
+        description: 'Comparing market types'
+    },
+    {
+        id: 'economics_perfect_competition',
+        title: '6.2 Perfect Competition',
+        path: 'textbooks/economics/market_structures/perfect_competition.json',
+        description: 'Ideal competitive markets'
+    },
+    {
+        id: 'economics_profit_maximization',
+        title: '6.3 Profit Maximization',
+        path: 'textbooks/economics/market_structures/profit_maximization.json',
+        description: 'MR = MC rule'
+    },
+    {
+        id: 'economics_short_run_profit_loss',
+        title: '6.4 Short Run Profit and Loss',
+        path: 'textbooks/economics/market_structures/short_run_profit_and_loss.json',
+        description: 'Temporary market conditions'
+    },
+    {
+        id: 'economics_long_run_equilibrium_pc',
+        title: '6.5 Long Run Equilibrium in Perfect Competition',
+        path: 'textbooks/economics/market_structures/long_run_equilibrium_in_pc.json',
+        description: 'Zero economic profit outcome'
+    },
+    {
+        id: 'economics_monopoly',
+        title: '6.6 Monopoly',
+        path: 'textbooks/economics/market_structures/monopoly.json',
+        description: 'Single seller markets'
+    },
+    {
+        id: 'economics_monopoly_profit_max',
+        title: '6.7 Monopoly Profit Maximization',
+        path: 'textbooks/economics/market_structures/monopoly_profit_maximization.json',
+        description: 'Pricing power in monopoly'
+    },
+    {
+        id: 'economics_monopolistic_competition',
+        title: '6.8 Monopolistic Competition',
+        path: 'textbooks/economics/market_structures/monopolistic_competition.json',
+        description: 'Differentiated products market'
+    },
+    {
+        id: 'economics_oligopoly',
+        title: '6.9 Oligopoly',
+        path: 'textbooks/economics/market_structures/oligopoly.json',
+        description: 'Few dominant firms'
+    },
+    {
+        id: 'economics_game_theory_intro',
+        title: '6.10 Game Theory Introduction',
+        path: 'textbooks/economics/market_structures/game_theory_intro.json',
+        description: 'Strategic decision making'
+    }
+],
+
+'economics-term7': [
+    {
+        id: 'economics_derived_demand_labor',
+        title: '7.1 Derived Demand for Labor',
+        path: 'textbooks/economics/labour_market/derived_demand_for_labor.json',
+        description: 'Labor demand from product demand'
+    },
+    {
+        id: 'economics_labor_demand_curve',
+        title: '7.2 The Labor Demand Curve',
+        path: 'textbooks/economics/labour_market/the_labor_demand_curve.json',
+        description: 'Graphical labor demand'
+    },
+    {
+        id: 'economics_determinants_labor_demand',
+        title: '7.3 Determinants of Labor Demand',
+        path: 'textbooks/economics/labour_market/determinants_of_labor_demand.json',
+        description: 'Factors affecting employment'
+    },
+    {
+        id: 'economics_labor_supply_curve',
+        title: '7.4 The Labor Supply Curve',
+        path: 'textbooks/economics/labour_market/the_labor_supply_curve.json',
+        description: 'Graphical labor supply'
+    },
+    {
+        id: 'economics_determinants_labor_supply',
+        title: '7.5 Determinants of Labor Supply',
+        path: 'textbooks/economics/labour_market/determinants_of_labor_supply.json',
+        description: 'Factors affecting workforce participation'
+    },
+    {
+        id: 'economics_labor_market_equilibrium',
+        title: '7.6 Labor Market Equilibrium',
+        path: 'textbooks/economics/labour_market/labor_market_equilibrium.json',
+        description: 'Wage and employment determination'
+    },
+    {
+        id: 'economics_wage_differentials',
+        title: '7.7 Wage Differentials',
+        path: 'textbooks/economics/labour_market/wage_differentials.json',
+        description: 'Wage variations across jobs'
+    },
+    {
+        id: 'economics_role_of_labor_unions',
+        title: '7.8 The Role of Labor Unions',
+        path: 'textbooks/economics/labour_market/the_role_of_labor_unions.json',
+        description: 'Collective bargaining impact'
+    },
+    {
+        id: 'economics_monopsony_power',
+        title: '7.9 Monopsony Power',
+        path: 'textbooks/economics/labour_market/monopsony_power.json',
+        description: 'Single buyer in labor markets'
+    },
+    {
+        id: 'economics_minimum_wage_debate',
+        title: '7.10 Minimum Wage Debate',
+        path: 'textbooks/economics/labour_market/minimum_wage_debate.json',
+        description: 'Pros and cons of wage floors'
+    }
+],
+
+'economics-term8': [
+    {
+        id: 'economics_circular_flow_model',
+        title: '8.1 The Circular Flow Model',
+        path: 'textbooks/economics/national_income_circular_flow/the_circular_flow_model.json',
+        description: 'Economic activity flow'
+    },
+    {
+        id: 'economics_expanding_circular_flow',
+        title: '8.2 Expanding the Circular Flow',
+        path: 'textbooks/economics/national_income_circular_flow/expanding_the_circular_flow.json',
+        description: 'Government and foreign sector inclusion'
+    },
+    {
+        id: 'economics_leakages_injections',
+        title: '8.3 Leakages and Injections',
+        path: 'textbooks/economics/national_income_circular_flow/leakages_and_injections.json',
+        description: 'Economic balance concepts'
+    },
+    {
+        id: 'economics_intro_national_income',
+        title: '8.4 Introduction to National Income',
+        path: 'textbooks/economics/national_income_circular_flow/introduction_to_national_income.json',
+        description: 'Measuring economic performance'
+    },
+    {
+        id: 'economics_gross_domestic_product',
+        title: '8.5 Gross Domestic Product',
+        path: 'textbooks/economics/national_income_circular_flow/gross_domestic_product.json',
+        description: 'Total output measurement'
+    },
+    {
+        id: 'economics_expenditure_approach',
+        title: '8.6 The Expenditure Approach',
+        path: 'textbooks/economics/national_income_circular_flow/the_expenditure_approach.json',
+        description: 'C + I + G + (X-M) calculation'
+    },
+    {
+        id: 'economics_income_approach',
+        title: '8.7 The Income Approach',
+        path: 'textbooks/economics/national_income_circular_flow/the_income_approach.json',
+        description: 'Factor payments method'
+    },
+    {
+        id: 'economics_nominal_vs_real_gdp',
+        title: '8.8 Nominal vs Real GDP',
+        path: 'textbooks/economics/national_income_circular_flow/nominal_vs_real_gdp.json',
+        description: 'Price level adjustments'
+    },
+    {
+        id: 'economics_gdp_limitations',
+        title: '8.9 GDP Limitations',
+        path: 'textbooks/economics/national_income_circular_flow/gdp_limitations.json',
+        description: 'Shortcomings of GDP measure'
+    },
+    {
+        id: 'economics_other_macro_measures',
+        title: '8.10 Other Macro Measures',
+        path: 'textbooks/economics/national_income_circular_flow/other_macro_measures.json',
+        description: 'Alternative economic indicators'
+    }
+],
+
+'economics-term9': [
+    {
+        id: 'economics_measuring_unemployment',
+        title: '9.1 Measuring Unemployment',
+        path: 'textbooks/economics/employment_inflation/measuring_unemployment.json',
+        description: 'Unemployment rate calculation'
+    },
+    {
+        id: 'economics_types_of_unemployment',
+        title: '9.2 Types of Unemployment',
+        path: 'textbooks/economics/employment_inflation/types_of_unemployment.json',
+        description: 'Frictional, structural, cyclical'
+    },
+    {
+        id: 'economics_natural_rate_unemployment',
+        title: '9.3 The Natural Rate of Unemployment',
+        path: 'textbooks/economics/employment_inflation/the_natural_rate_of_unemployment.json',
+        description: 'Full employment concept'
+    },
+    {
+        id: 'economics_costs_of_unemployment',
+        title: '9.4 Costs of Unemployment',
+        path: 'textbooks/economics/employment_inflation/costs_of_unemployment.json',
+        description: 'Economic and social impacts'
+    },
+    {
+        id: 'economics_introduction_to_inflation',
+        title: '9.5 Introduction to Inflation',
+        path: 'textbooks/economics/employment_inflation/introduction_to_inflation.json',
+        description: 'Rising price levels'
+    },
+    {
+        id: 'economics_measuring_inflation',
+        title: '9.6 Measuring Inflation',
+        path: 'textbooks/economics/employment_inflation/measuring_inflation.json',
+        description: 'CPI and inflation rate'
+    },
+    {
+        id: 'economics_causes_of_inflation',
+        title: '9.7 Causes of Inflation',
+        path: 'textbooks/economics/employment_inflation/causes_of_inflation.json',
+        description: 'Demand-pull and cost-push'
+    },
+    {
+        id: 'economics_effects_of_inflation',
+        title: '9.8 Effects of Inflation',
+        path: 'textbooks/economics/employment_inflation/effects_of_inflation.json',
+        description: 'Economic consequences'
+    },
+    {
+        id: 'economics_phillips_curve',
+        title: '9.9 The Phillips Curve',
+        path: 'textbooks/economics/employment_inflation/the_phillips_curve.json',
+        description: 'Inflation-unemployment tradeoff'
+    },
+    {
+        id: 'economics_long_run_phillips_curve',
+        title: '9.10 Long Run Phillips Curve',
+        path: 'textbooks/economics/employment_inflation/long_run_phillips_curve.json',
+        description: 'Natural rate hypothesis'
+    }
+],
+
+'economics-term10': [
+    {
+        id: 'economics_role_of_government',
+        title: '10.1 The Role of Government',
+        path: 'textbooks/economics/government_fiscal_policy/the_role_of_government.json',
+        description: 'Government economic functions'
+    },
+    {
+        id: 'economics_government_budget',
+        title: '10.2 Government Budget',
+        path: 'textbooks/economics/government_fiscal_policy/government_budget.json',
+        description: 'Revenue and expenditure planning'
+    },
+    {
+        id: 'economics_budget_outcomes',
+        title: '10.3 Budget Outcomes',
+        path: 'textbooks/economics/government_fiscal_policy/budget_outcomes.json',
+        description: 'Surplus, deficit, balance'
+    },
+    {
+        id: 'economics_national_debt',
+        title: '10.4 National Debt',
+        path: 'textbooks/economics/government_fiscal_policy/national_debt.json',
+        description: 'Accumulated government borrowing'
+    },
+    {
+        id: 'economics_intro_fiscal_policy',
+        title: '10.5 Introduction to Fiscal Policy',
+        path: 'textbooks/economics/government_fiscal_policy/introduction_to_fiscal_policy.json',
+        description: 'Government spending and taxation'
+    },
+    {
+        id: 'economics_expansionary_fiscal_policy',
+        title: '10.6 Expansionary Fiscal Policy',
+        path: 'textbooks/economics/government_fiscal_policy/expansionary_fiscal_policy.json',
+        description: 'Stimulating economic growth'
+    },
+    {
+        id: 'economics_contractionary_fiscal_policy',
+        title: '10.7 Contractionary Fiscal Policy',
+        path: 'textbooks/economics/government_fiscal_policy/contractionary_fiscal_policy.json',
+        description: 'Cooling down the economy'
+    },
+    {
+        id: 'economics_automatic_stabilizers',
+        title: '10.8 Automatic Stabilizers',
+        path: 'textbooks/economics/government_fiscal_policy/automatic_stabilizers.json',
+        description: 'Built-in economic stabilizers'
+    },
+    {
+        id: 'economics_limitations_fiscal_policy',
+        title: '10.9 Limitations of Fiscal Policy',
+        path: 'textbooks/economics/government_fiscal_policy/limitations_of_fiscal_policy.json',
+        description: 'Challenges in implementation'
+    },
+    {
+        id: 'economics_fiscal_policy_debate',
+        title: '10.10 Fiscal Policy Debate',
+        path: 'textbooks/economics/government_fiscal_policy/fiscal_policy_debate.json',
+        description: 'Contemporary policy discussions'
+    }
+],
+        
 // Add to the unitSections object in the loadTextbookSections function
 'ap-physics-c-em-unit1': [
     {
@@ -14100,6 +14778,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
