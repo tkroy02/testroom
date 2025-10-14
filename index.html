@@ -4282,7 +4282,6 @@ function loadTextbookContent() {
                                     Unit 10: Modern Physics Introduction
                                 </button>
 
-                                // Add Economics unit buttons to the HTML template
 ` : isEconomics ? `
     <button class="unit-btn ${currentTextbookUnit === 'economics-term1' ? 'active' : ''}" onclick="switchTextbookUnit('economics-term1')">
         Term 1: Introduction & Basic Concepts
@@ -4315,7 +4314,7 @@ function loadTextbookContent() {
         Term 10: Government Fiscal Policy
     </button>
 
-                                // Add AP Physics C: Electricity & Magnetism unit buttons to the HTML template
+
 ` : isAPPhysicsCEM ? `
     <button class="unit-btn ${currentTextbookUnit === 'ap-physics-c-em-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics-c-em-unit1')">
         Unit 1: Electrostatics
@@ -4336,7 +4335,7 @@ function loadTextbookContent() {
         Unit 6: Revision & Exam Prep
     </button>
                                 
-                                // Add AP Physics C: Mechanics unit buttons to the HTML template
+    
                             ` : isAPPhysicsCMechanics ? `
     <button class="unit-btn ${currentTextbookUnit === 'ap-physics-c-mechanics-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics-c-mechanics-unit1')">
         Unit 1: Kinematics
@@ -4426,6 +4425,7 @@ function loadTextbookContent() {
                                 <button class="unit-btn ${currentTextbookUnit === 'calc-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('calc-unit4')">
                                     Unit 4: Advanced Topics
                                 </button>
+                                
                                ` : isPhysics12 ? `
     <button class="unit-btn ${currentTextbookUnit === 'physics12-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('physics12-unit1')">
         Unit 1: Advanced Mechanics
@@ -4457,6 +4457,7 @@ function loadTextbookContent() {
     <button class="unit-btn ${currentTextbookUnit === 'physics12-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('physics12-unit10')">
         Unit 10: Review & Capstone Project
     </button>
+    
                             ` : isPhysics9 ? `
                                 <!-- Physics Grade 9 Units -->
                                 <button class="unit-btn ${currentTextbookUnit === 'physics9-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit1')">
@@ -14778,6 +14779,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
