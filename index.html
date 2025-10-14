@@ -4219,12 +4219,14 @@ function loadTextbookContent() {
     const isPhysics11 = currentCourseId === 'physics-grade-11';
     const isPhysics12 = currentCourseId === 'physics-grade-12';
     const isAPPhysics1 = currentCourseId === 'ap-physics-1';
+    const isAPPhysics2 = currentCourseId === 'ap-physics-2';
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
                      isPhysics10 ? 'Physics Grade 10 Textbook' :
                      isPhysics11 ? 'Physics Grade 11 Textbook' :
                      isPhysics12 ? 'Physics Grade 12 Textbook' : 
                      isAPPhysics1 ? 'AP Physics 1 Textbook' :
+                     isAPPhysics2 ? 'AP Physics 2 Textbook' :
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4298,6 +4300,30 @@ function loadTextbookContent() {
     <button class="unit-btn ${currentTextbookUnit === 'ap-physics1-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics1-unit8')">
         Unit 8: Fluid Mechanics
     </button>
+
+    ` : isAPPhysics2 ? `
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics2-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics2-unit1')">
+        Unit 1: Fluids
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics2-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics2-unit2')">
+        Unit 2: Thermodynamics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics2-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics2-unit3')">
+        Unit 3: Electric Force, Field & Potential
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics2-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics2-unit4')">
+        Unit 4: Electric Circuits
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics2-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics2-unit5')">
+        Unit 5: Magnetism & EM Induction
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics2-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics2-unit6')">
+        Unit 6: Geometric & Physical Optics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics2-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics2-unit7')">
+        Unit 7: Quantum, Atomic & Nuclear Physics
+    </button>
+
                             ` : isCalculus ? `
                                 <!-- Calculus Units -->
                                 <button class="unit-btn ${currentTextbookUnit === 'calc-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('calc-unit1')">
@@ -4496,6 +4522,15 @@ function getCurrentUnitName() {
 'physics10-unit8': 'Unit 8: Light Reflection & Mirrors',
 'physics10-unit9': 'Unit 9: Static & Current Electricity',
 'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
+
+        // Add to getCurrentUnitName function
+'ap-physics2-unit1': 'Unit 1: Fluids',
+'ap-physics2-unit2': 'Unit 2: Thermodynamics',
+'ap-physics2-unit3': 'Unit 3: Electric Force, Field & Potential',
+'ap-physics2-unit4': 'Unit 4: Electric Circuits',
+'ap-physics2-unit5': 'Unit 5: Magnetism & EM Induction',
+'ap-physics2-unit6': 'Unit 6: Geometric & Physical Optics',
+'ap-physics2-unit7': 'Unit 7: Quantum, Atomic & Nuclear Physics',
 
         // Add to getCurrentUnitName function
 'physics11-unit1': 'Unit 1: Advanced Kinematics',
@@ -5280,6 +5315,449 @@ function loadTextbookSections() {
             description: 'Review and practice problems'
         }
     ],
+        
+// Add to the unitSections object in the loadTextbookSections function
+'ap-physics2-unit1': [
+    {
+        id: 'ap-physics2_density_and_pressure',
+        title: '1.1 Density and Pressure',
+        path: 'textbooks/ap-physics-2/fluids/density_and_pressure.json',
+        description: 'Fluid properties and pressure fundamentals'
+    },
+    {
+        id: 'ap-physics2_pressure_at_depth',
+        title: '1.2 Pressure at Depth',
+        path: 'textbooks/ap-physics-2/fluids/pressure_at_depth.json',
+        description: 'Hydrostatic pressure calculations'
+    },
+    {
+        id: 'ap-physics2_pascals_principle',
+        title: '1.3 Pascal\'s Principle',
+        path: 'textbooks/ap-physics-2/fluids/pascals_principle.json',
+        description: 'Pressure transmission in confined fluids'
+    },
+    {
+        id: 'ap-physics2_buoyancy_and_archimedes_principle',
+        title: '1.4 Buoyancy and Archimedes Principle',
+        path: 'textbooks/ap-physics-2/fluids/buoyancy_and_archimedes_principle.json',
+        description: 'Buoyant force and displacement'
+    },
+    {
+        id: 'ap-physics2_floating_and_sinking',
+        title: '1.5 Floating and Sinking',
+        path: 'textbooks/ap-physics-2/fluids/floating_and_sinking.json',
+        description: 'Conditions for flotation equilibrium'
+    },
+    {
+        id: 'ap-physics2_fluid_flow_and_continuity',
+        title: '1.6 Fluid Flow and Continuity',
+        path: 'textbooks/ap-physics-2/fluids/fluid_flow_and_continuity.json',
+        description: 'Conservation of mass in fluid dynamics'
+    },
+    {
+        id: 'ap-physics2_bernoullis_equation_1',
+        title: '1.7 Bernoulli\'s Equation (Part 1)',
+        path: 'textbooks/ap-physics-2/fluids/bernoullis_equation_1.json',
+        description: 'Energy conservation in fluid flow'
+    },
+    {
+        id: 'ap-physics2_bernoullis_equation_2',
+        title: '1.8 Bernoulli\'s Equation (Part 2)',
+        path: 'textbooks/ap-physics-2/fluids/bernoullis_equation_2.json',
+        description: 'Advanced Bernoulli applications'
+    },
+    {
+        id: 'ap-physics2_applications_of_fluid_dynamics',
+        title: '1.9 Applications of Fluid Dynamics',
+        path: 'textbooks/ap-physics-2/fluids/applications_of_fluid_dynamics.json',
+        description: 'Real-world fluid flow problems'
+    },
+    {
+        id: 'ap-physics2_viscosity_and_turbulent_flow',
+        title: '1.10 Viscosity and Turbulent Flow',
+        path: 'textbooks/ap-physics-2/fluids/viscosity_and_turbulent_flow.json',
+        description: 'Fluid resistance and flow regimes'
+    }
+],
+
+'ap-physics2-unit2': [
+    {
+        id: 'ap-physics2_temperature_scales_and_thermal_expansion',
+        title: '2.1 Temperature Scales and Thermal Expansion',
+        path: 'textbooks/ap-physics-2/thermodynamics/temperature_scales_and_thermal_expansion.json',
+        description: 'Temperature measurement and material expansion'
+    },
+    {
+        id: 'ap-physics2_heat_energy_and_specific_heat',
+        title: '2.2 Heat Energy and Specific Heat',
+        path: 'textbooks/ap-physics-2/thermodynamics/heat_energy_and_specific_heat.json',
+        description: 'Heat transfer and thermal capacity'
+    },
+    {
+        id: 'ap-physics2_calorimetry',
+        title: '2.3 Calorimetry',
+        path: 'textbooks/ap-physics-2/thermodynamics/calorimetry.json',
+        description: 'Measuring heat transfer in systems'
+    },
+    {
+        id: 'ap-physics2_phase_changes_and_latent_heat',
+        title: '2.4 Phase Changes and Latent Heat',
+        path: 'textbooks/ap-physics-2/thermodynamics/phase_changes_and_latent_heat.json',
+        description: 'Energy in state transitions'
+    },
+    {
+        id: 'ap-physics2_ideal_gases_and_kinetic_theory',
+        title: '2.5 Ideal Gases and Kinetic Theory',
+        path: 'textbooks/ap-physics-2/thermodynamics/ideal_gases_and_kinetic_theory.json',
+        description: 'Gas laws and molecular motion'
+    },
+    {
+        id: 'ap-physics2_first_law_of_thermodynamics',
+        title: '2.6 First Law of Thermodynamics',
+        path: 'textbooks/ap-physics-2/thermodynamics/first_law_of_thermodynamics.json',
+        description: 'Energy conservation in thermal systems'
+    },
+    {
+        id: 'ap-physics2_thermodynamic_processes',
+        title: '2.7 Thermodynamic Processes',
+        path: 'textbooks/ap-physics-2/thermodynamics/thermodynamic_processes.json',
+        description: 'Isobaric, isochoric, isothermal, adiabatic'
+    },
+    {
+        id: 'ap-physics2_heat_engines_and_efficiency',
+        title: '2.8 Heat Engines and Efficiency',
+        path: 'textbooks/ap-physics-2/thermodynamics/heat_engines_and_efficiency.json',
+        description: 'Energy conversion and thermal efficiency'
+    },
+    {
+        id: 'ap-physics2_refrigerators_and_heat_pumps',
+        title: '2.9 Refrigerators and Heat Pumps',
+        path: 'textbooks/ap-physics-2/thermodynamics/refrigerators_and_heat_pumps.json',
+        description: 'Reverse heat engines and cooling'
+    },
+    {
+        id: 'ap-physics2_second_law_of_thermodynamics',
+        title: '2.10 Second Law of Thermodynamics',
+        path: 'textbooks/ap-physics-2/thermodynamics/second_law_of_thermodynamics.json',
+        description: 'Entropy and heat flow direction'
+    }
+],
+
+'ap-physics2-unit3': [
+    {
+        id: 'ap-physics2_electric_charge_and_conservation',
+        title: '3.1 Electric Charge and Conservation',
+        path: 'textbooks/ap-physics-2/electric_force_field_and_potential/electric_charge_and_conservation.json',
+        description: 'Charge properties and conservation law'
+    },
+    {
+        id: 'ap-physics2_coulombs_law',
+        title: '3.2 Coulomb\'s Law',
+        path: 'textbooks/ap-physics-2/electric_force_field_and_potential/coulombs_law.json',
+        description: 'Electrostatic force between charges'
+    },
+    {
+        id: 'ap-physics2_electric_field_introduction',
+        title: '3.3 Electric Field Introduction',
+        path: 'textbooks/ap-physics-2/electric_force_field_and_potential/electric_field_introduction.json',
+        description: 'Electric field concept and definition'
+    },
+    {
+        id: 'ap-physics2_electric_field_calculations',
+        title: '3.4 Electric Field Calculations',
+        path: 'textbooks/ap-physics-2/electric_force_field_and_potential/electric_field_calculations.json',
+        description: 'Calculating electric fields from charge distributions'
+    },
+    {
+        id: 'ap-physics2_electric_fields_of_continuous_charge_distributions',
+        title: '3.5 Electric Fields of Continuous Charge Distributions',
+        path: 'textbooks/ap-physics-2/electric_force_field_and_potential/electric_fields_of_continuous_charge_distributions.json',
+        description: 'Integration methods for charge distributions'
+    },
+    {
+        id: 'ap-physics2_electric_potential_energy',
+        title: '3.6 Electric Potential Energy',
+        path: 'textbooks/ap-physics-2/electric_force_field_and_potential/electric_potential_energy.json',
+        description: 'Energy stored in charge configurations'
+    },
+    {
+        id: 'ap-physics2_electric_potential_voltage',
+        title: '3.7 Electric Potential (Voltage)',
+        path: 'textbooks/ap-physics-2/electric_force_field_and_potential/electric_potential_voltage.json',
+        description: 'Electric potential concept and calculation'
+    },
+    {
+        id: 'ap-physics2_potential_difference_and_work',
+        title: '3.8 Potential Difference and Work',
+        path: 'textbooks/ap-physics-2/electric_force_field_and_potential/potential_difference_and_work.json',
+        description: 'Work done moving charges in fields'
+    },
+    {
+        id: 'ap-physics2_equipotential_lines_and_fields',
+        title: '3.9 Equipotential Lines and Fields',
+        path: 'textbooks/ap-physics-2/electric_force_field_and_potential/equipotential_lines_and_fields.json',
+        description: 'Visualizing electric potential'
+    },
+    {
+        id: 'ap-physics2_electron_volt',
+        title: '3.10 Electron Volt',
+        path: 'textbooks/ap-physics-2/electric_force_field_and_potential/electron_volt.json',
+        description: 'Energy unit for atomic systems'
+    }
+],
+
+'ap-physics2-unit4': [
+    {
+        id: 'ap-physics2_current_resistance_and_ohms_law',
+        title: '4.1 Current, Resistance and Ohm\'s Law',
+        path: 'textbooks/ap-physics-2/electric_circuits/current_resistance_and_ohms_law.json',
+        description: 'Current flow and resistance fundamentals'
+    },
+    {
+        id: 'ap-physics2_resistivity_and_power',
+        title: '4.2 Resistivity and Power',
+        path: 'textbooks/ap-physics-2/electric_circuits/resistivity_and_power.json',
+        description: 'Material properties and electrical power'
+    },
+    {
+        id: 'ap-physics2_series_and_parallel_resistors',
+        title: '4.3 Series and Parallel Resistors',
+        path: 'textbooks/ap-physics-2/electric_circuits/series_and_parallel_resistors.json',
+        description: 'Resistor combinations and equivalent resistance'
+    },
+    {
+        id: 'ap-physics2_kirchhoff_junction_rule',
+        title: '4.4 Kirchhoff Junction Rule',
+        path: 'textbooks/ap-physics-2/electric_circuits/kirchhoff_junction_rule.json',
+        description: 'Current conservation at junctions'
+    },
+    {
+        id: 'ap-physics2_kirchhoff_loop_rule',
+        title: '4.5 Kirchhoff Loop Rule',
+        path: 'textbooks/ap-physics-2/electric_circuits/kirchhoff_loop_rule.json',
+        description: 'Energy conservation around loops'
+    },
+    {
+        id: 'ap-physics2_circuit_analysis_1',
+        title: '4.6 Circuit Analysis (Part 1)',
+        path: 'textbooks/ap-physics-2/electric_circuits/circuit_analysis_1.json',
+        description: 'Applying Kirchhoff\'s rules'
+    },
+    {
+        id: 'ap-physics2_capacitance_and_capacitors',
+        title: '4.7 Capacitance and Capacitors',
+        path: 'textbooks/ap-physics-2/electric_circuits/capacitance_and_capacitors.json',
+        description: 'Charge storage devices'
+    },
+    {
+        id: 'ap-physics2_capacitors_in_series_and_parallel',
+        title: '4.8 Capacitors in Series and Parallel',
+        path: 'textbooks/ap-physics-2/electric_circuits/capacitors_in_series_and_parallel.json',
+        description: 'Capacitor combinations'
+    },
+    {
+        id: 'ap-physics2_rc_circuits',
+        title: '4.9 RC Circuits',
+        path: 'textbooks/ap-physics-2/electric_circuits/rc_circuits.json',
+        description: 'Resistor-capacitor circuits and time constants'
+    },
+    {
+        id: 'ap-physics2_energy_in_capacitors',
+        title: '4.10 Energy in Capacitors',
+        path: 'textbooks/ap-physics-2/electric_circuits/energy_in_capacitors.json',
+        description: 'Energy storage in electric fields'
+    }
+],
+
+'ap-physics2-unit5': [
+    {
+        id: 'ap-physics2_magnetic_fields_and_poles',
+        title: '5.1 Magnetic Fields and Poles',
+        path: 'textbooks/ap-physics-2/magnetism_and_em_induction/magnetic_fields_and_poles.json',
+        description: 'Magnetic field fundamentals'
+    },
+    {
+        id: 'ap-physics2_magnetic_force_on_a_moving_charge',
+        title: '5.2 Magnetic Force on a Moving Charge',
+        path: 'textbooks/ap-physics-2/magnetism_and_em_induction/magnetic_force_on_a_moving_charge.json',
+        description: 'Lorentz force law'
+    },
+    {
+        id: 'ap-physics2_magnetic_force_on_a_current_carrying_wire',
+        title: '5.3 Magnetic Force on a Current-Carrying Wire',
+        path: 'textbooks/ap-physics-2/magnetism_and_em_induction/magnetic_force_on_a_current_carrying_wire.json',
+        description: 'Force on current in magnetic fields'
+    },
+    {
+        id: 'ap-physics2_motion_of_charges_in_magnetic_fields',
+        title: '5.4 Motion of Charges in Magnetic Fields',
+        path: 'textbooks/ap-physics-2/magnetism_and_em_induction/motion_of_charges_in_magnetic_fields.json',
+        description: 'Circular and helical motion of charges'
+    },
+    {
+        id: 'ap-physics2_magnetic_fields_from_currents',
+        title: '5.5 Magnetic Fields from Currents',
+        path: 'textbooks/ap-physics-2/magnetism_and_em_induction/magnetic_fields_from_currents.json',
+        description: 'Biot-Savart and Ampere\'s laws'
+    },
+    {
+        id: 'ap-physics2_electromagnetic_induction_and_faradays_law',
+        title: '5.6 Electromagnetic Induction and Faraday\'s Law',
+        path: 'textbooks/ap-physics-2/magnetism_and_em_induction/electromagnetic_induction_and_faradays_law.json',
+        description: 'Induced EMF from changing magnetic fields'
+    },
+    {
+        id: 'ap-physics2_magnetic_flux',
+        title: '5.7 Magnetic Flux',
+        path: 'textbooks/ap-physics-2/magnetism_and_em_induction/magnetic_flux.json',
+        description: 'Magnetic field through surfaces'
+    },
+    {
+        id: 'ap-physics2_lenzs_law',
+        title: '5.8 Lenz\'s Law',
+        path: 'textbooks/ap-physics-2/magnetism_and_em_induction/lenzs_law.json',
+        description: 'Direction of induced currents'
+    },
+    {
+        id: 'ap-physics2_motional_emf',
+        title: '5.9 Motional EMF',
+        path: 'textbooks/ap-physics-2/magnetism_and_em_induction/motional_emf.json',
+        description: 'EMF from conductors moving in magnetic fields'
+    },
+    {
+        id: 'ap-physics2_applications_generators_motors_transformers',
+        title: '5.10 Applications: Generators, Motors, Transformers',
+        path: 'textbooks/ap-physics-2/magnetism_and_em_induction/applications_generators_motors_transformers.json',
+        description: 'Practical electromagnetic devices'
+    }
+],
+
+'ap-physics2-unit6': [
+    {
+        id: 'ap-physics2_wave_properties_review',
+        title: '6.1 Wave Properties Review',
+        path: 'textbooks/ap-physics-2/geometric_and_physical_optics/wave_properties_review.json',
+        description: 'Wave characteristics and behavior'
+    },
+    {
+        id: 'ap-physics2_reflection_and_refraction',
+        title: '6.2 Reflection and Refraction',
+        path: 'textbooks/ap-physics-2/geometric_and_physical_optics/reflection_and_refraction.json',
+        description: 'Light behavior at interfaces'
+    },
+    {
+        id: 'ap-physics2_dispersion_and_total_internal_reflection',
+        title: '6.3 Dispersion and Total Internal Reflection',
+        path: 'textbooks/ap-physics-2/geometric_and_physical_optics/dispersion_and_total_internal_reflection.json',
+        description: 'Wavelength dependence and critical angle'
+    },
+    {
+        id: 'ap-physics2_ray_diagrams_for_mirrors',
+        title: '6.4 Ray Diagrams for Mirrors',
+        path: 'textbooks/ap-physics-2/geometric_and_physical_optics/ray_diagrams_for_mirrors.json',
+        description: 'Image formation with mirrors'
+    },
+    {
+        id: 'ap-physics2_ray_diagrams_for_lenses',
+        title: '6.5 Ray Diagrams for Lenses',
+        path: 'textbooks/ap-physics-2/geometric_and_physical_optics/ray_diagrams_for_lenses.json',
+        description: 'Image formation with lenses'
+    },
+    {
+        id: 'ap-physics2_thin_lens_mirror_equation',
+        title: '6.6 Thin Lens/Mirror Equation',
+        path: 'textbooks/ap-physics-2/geometric_and_physical_optics/thin_lens_mirror_equation.json',
+        description: 'Mathematical analysis of optical systems'
+    },
+    {
+        id: 'ap-physics2_wave_optics_introduction',
+        title: '6.7 Wave Optics Introduction',
+        path: 'textbooks/ap-physics-2/geometric_and_physical_optics/wave_optics_introduction.json',
+        description: 'Wave nature of light phenomena'
+    },
+    {
+        id: 'ap-physics2_interference_youngs_double_slit',
+        title: '6.8 Interference: Young\'s Double Slit',
+        path: 'textbooks/ap-physics-2/geometric_and_physical_optics/interference_youngs_double_slit.json',
+        description: 'Wave interference patterns'
+    },
+    {
+        id: 'ap-physics2_diffraction_and_single_slit_interference',
+        title: '6.9 Diffraction and Single Slit Interference',
+        path: 'textbooks/ap-physics-2/geometric_and_physical_optics/diffraction_and_single_slit_interference.json',
+        description: 'Wave bending around obstacles'
+    },
+    {
+        id: 'ap-physics2_diffraction_gratings_and_applications',
+        title: '6.10 Diffraction Gratings and Applications',
+        path: 'textbooks/ap-physics-2/geometric_and_physical_optics/diffraction_gratings_and_applications.json',
+        description: 'Multiple slit interference and spectroscopy'
+    }
+],
+
+'ap-physics2-unit7': [
+    {
+        id: 'ap-physics2_photon_model',
+        title: '7.1 Photon Model',
+        path: 'textbooks/ap-physics-2/quantum_atomic_and_nuclear_physics/photon_model.json',
+        description: 'Particle nature of light'
+    },
+    {
+        id: 'ap-physics2_photoelectric_effect',
+        title: '7.2 Photoelectric Effect',
+        path: 'textbooks/ap-physics-2/quantum_atomic_and_nuclear_physics/photoelectric_effect.json',
+        description: 'Electron emission by light'
+    },
+    {
+        id: 'ap-physics2_atomic_spectra_and_energy_levels',
+        title: '7.3 Atomic Spectra and Energy Levels',
+        path: 'textbooks/ap-physics-2/quantum_atomic_and_nuclear_physics/atomic_spectra_and_energy_levels.json',
+        description: 'Discrete atomic energy states'
+    },
+    {
+        id: 'ap-physics2_bohr_model',
+        title: '7.4 Bohr Model',
+        path: 'textbooks/ap-physics-2/quantum_atomic_and_nuclear_physics/bohr_model.json',
+        description: 'Early quantum atomic model'
+    },
+    {
+        id: 'ap-physics2_wave_particle_duality',
+        title: '7.5 Wave-Particle Duality',
+        path: 'textbooks/ap-physics-2/quantum_atomic_and_nuclear_physics/wave_particle_duality.json',
+        description: 'Dual nature of matter and radiation'
+    },
+    {
+        id: 'ap-physics2_nucleus_and_nuclear_force',
+        title: '7.6 Nucleus and Nuclear Force',
+        path: 'textbooks/ap-physics-2/quantum_atomic_and_nuclear_physics/nucleus_and_nuclear_force.json',
+        description: 'Nuclear structure and strong force'
+    },
+    {
+        id: 'ap-physics2_isotopes_and_nuclear_stability',
+        title: '7.7 Isotopes and Nuclear Stability',
+        path: 'textbooks/ap-physics-2/quantum_atomic_and_nuclear_physics/isotopes_and_nuclear_stability.json',
+        description: 'Nuclear composition and stability'
+    },
+    {
+        id: 'ap-physics2_radioactive_decay',
+        title: '7.8 Radioactive Decay',
+        path: 'textbooks/ap-physics-2/quantum_atomic_and_nuclear_physics/radioactive_decay.json',
+        description: 'Alpha, beta, gamma decay processes'
+    },
+    {
+        id: 'ap-physics2_half_life_and_decay_rates',
+        title: '7.9 Half-Life and Decay Rates',
+        path: 'textbooks/ap-physics-2/quantum_atomic_and_nuclear_physics/half_life_and_decay_rates.json',
+        description: 'Radioactive decay kinetics'
+    },
+    {
+        id: 'ap-physics2_mass_energy_equivalence',
+        title: '7.10 Mass-Energy Equivalence',
+        path: 'textbooks/ap-physics-2/quantum_atomic_and_nuclear_physics/mass_energy_equivalence.json',
+        description: 'E=mc² and nuclear energy'
+    }
+],
+
 
         // Add to the unitSections object in the loadTextbookSections function
 'ap-physics1-unit1': [
@@ -12667,6 +13145,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
