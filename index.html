@@ -4225,6 +4225,8 @@ function loadTextbookContent() {
     const isEconomics = currentCourseId === 'economics';
     const isAPMacroeconomics = currentCourseId === 'ap-macroeconomics';
     const isAPMicroeconomics = currentCourseId === 'ap-microeconomics';
+    const isPreCalculus = currentCourseId === 'pre-calculus';
+    
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
                      isPhysics10 ? 'Physics Grade 10 Textbook' :
@@ -4237,6 +4239,7 @@ function loadTextbookContent() {
                      isEconomics ? 'Economics Textbook' : 
                      isAPMacroeconomics ? 'AP Macroeconomics Textbook' :
                      isAPMicroeconomics ? 'AP Microeconomics Textbook' : 
+                     isPreCalculus ? 'Pre-Calculus Textbook' : 
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4285,6 +4288,53 @@ function loadTextbookContent() {
                                 <button class="unit-btn ${currentTextbookUnit === 'physics11-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('physics11-unit10')">
                                     Unit 10: Modern Physics Introduction
                                 </button>
+
+    ` : PreCalculus ? `
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit1')">
+        Unit 1: Algebraic Fundamentals
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit2')">
+        Unit 2: Functions and Their Properties
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit3')">
+        Unit 3: Polynomial Functions
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit4')">
+        Unit 4: Rational Functions
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit5')">
+        Unit 5: Exponential and Logarithmic Functions
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit6')">
+        Unit 6: Systems and Matrices
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit7')">
+        Unit 7: Trigonometry - Angles and the Unit Circle
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit8')">
+        Unit 8: Graphs of Trig Functions
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit9')">
+        Unit 9: Analytic Trig I - Identities
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit10')">
+        Unit 10: Analytic Trig II - Equations
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit11' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit11')">
+        Unit 11: Applications of Trig
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit12' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit12')">
+        Unit 12: Conic Sections
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit13' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit13')">
+        Unit 13: Parametric and Polar Equations
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit14' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit14')">
+        Unit 14: Sequences, Series, and Counting
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit15' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit15')">
+        Unit 15: Introduction to Calculus
+    </button>
 
 ` : isEconomics ? `
     <button class="unit-btn ${currentTextbookUnit === 'economics-term1' ? 'active' : ''}" onclick="switchTextbookUnit('economics-unit1')">
@@ -4734,6 +4784,23 @@ function getCurrentUnitName() {
 'economics-term8': 'Unit 8: National Income & Circular Flow',
 'economics-term9': 'Unit 9: Employment & Inflation',
 'economics-term10': 'Unit 10: Government Fiscal Policy',
+
+// Add to getCurrentUnitName function
+'pre-calculus-unit1': 'Unit 1: Algebraic Fundamentals',
+'pre-calculus-unit2': 'Unit 2: Functions and Their Properties',
+'pre-calculus-unit3': 'Unit 3: Polynomial Functions',
+'pre-calculus-unit4': 'Unit 4: Rational Functions',
+'pre-calculus-unit5': 'Unit 5: Exponential and Logarithmic Functions',
+'pre-calculus-unit6': 'Unit 6: Systems and Matrices',
+'pre-calculus-unit7': 'Unit 7: Trigonometry - Angles and the Unit Circle',
+'pre-calculus-unit8': 'Unit 8: Graphs of Trig Functions',
+'pre-calculus-unit9': 'Unit 9: Analytic Trig I - Identities',
+'pre-calculus-unit10': 'Unit 10: Analytic Trig II - Equations',
+'pre-calculus-unit11': 'Unit 11: Applications of Trig',
+'pre-calculus-unit12': 'Unit 12: Conic Sections',
+'pre-calculus-unit13': 'Unit 13: Parametric and Polar Equations',
+'pre-calculus-unit14': 'Unit 14: Sequences, Series, and Counting',
+'pre-calculus-unit15': 'Unit 15: Introduction to Calculus'
         
 // Add to getCurrentUnitName function
 'ap-physics-c-em-unit1': 'Unit 1: Electrostatics',
@@ -5546,6 +5613,952 @@ function loadTextbookSections() {
         }
     ],
 
+// Add to the unitSections object in the loadTextbookSections function
+'pre-calculus-unit1': [
+    {
+        id: 'precalc_properties_real_numbers',
+        title: '1.1 Properties of Real Numbers',
+        path: 'textbooks/pre-calculus/unit_1_algebraic_fundamentals/properties_real_numbers.json',
+        description: 'Real number system and algebraic properties'
+    },
+    {
+        id: 'precalc_exponent_rules_radicals',
+        title: '1.2 Exponent Rules and Radicals',
+        path: 'textbooks/pre-calculus/unit_1_algebraic_fundamentals/exponent_rules_radicals.json',
+        description: 'Exponent laws and radical expressions'
+    },
+    {
+        id: 'precalc_polynomial_operations_factoring',
+        title: '1.3 Polynomial Operations and Factoring',
+        path: 'textbooks/pre-calculus/unit_1_algebraic_fundamentals/polynomial_operations_factoring.json',
+        description: 'Polynomial arithmetic and factorization'
+    },
+    {
+        id: 'precalc_rational_expressions',
+        title: '1.4 Rational Expressions',
+        path: 'textbooks/pre-calculus/unit_1_algebraic_fundamentals/rational_expressions.json',
+        description: 'Simplifying rational expressions'
+    },
+    {
+        id: 'precalc_solving_linear_equations_inequalities',
+        title: '1.5 Solving Linear Equations and Inequalities',
+        path: 'textbooks/pre-calculus/unit_1_algebraic_fundamentals/solving_linear_equations_inequalities.json',
+        description: 'Linear equation and inequality solutions'
+    },
+    {
+        id: 'precalc_solving_quadratics_factoring_square',
+        title: '1.6 Solving Quadratics: Factoring and Square',
+        path: 'textbooks/pre-calculus/unit_1_algebraic_fundamentals/solving_quadratics_factoring_square.json',
+        description: 'Quadratic equation solution methods'
+    },
+    {
+        id: 'precalc_quadratic_formula_discriminant',
+        title: '1.7 Quadratic Formula and Discriminant',
+        path: 'textbooks/pre-calculus/unit_1_algebraic_fundamentals/quadratic_formula_discriminant.json',
+        description: 'Quadratic formula and nature of roots'
+    },
+    {
+        id: 'precalc_solving_radicals_absolute_rational',
+        title: '1.8 Solving Radical, Absolute, Rational',
+        path: 'textbooks/pre-calculus/unit_1_algebraic_fundamentals/solving_radicals_absolute_rational.json',
+        description: 'Various equation types and solutions'
+    },
+    {
+        id: 'precalc_complex_numbers_operations',
+        title: '1.9 Complex Numbers and Operations',
+        path: 'textbooks/pre-calculus/unit_1_algebraic_fundamentals/complex_numbers_operations.json',
+        description: 'Complex number system and arithmetic'
+    },
+    {
+        id: 'precalc_coordinate_plane_review',
+        title: '1.10 Coordinate Plane Review',
+        path: 'textbooks/pre-calculus/unit_1_algebraic_fundamentals/coordinate_plane_review.json',
+        description: 'Cartesian coordinate system fundamentals'
+    }
+],
+
+'pre-calculus-unit2': [
+    {
+        id: 'precalc_relations_vs_functions',
+        title: '2.1 Relations vs Functions',
+        path: 'textbooks/pre-calculus/unit_2_functions_properties/relations_vs_functions.json',
+        description: 'Understanding functions and relations'
+    },
+    {
+        id: 'precalc_function_notation_evaluation_operations',
+        title: '2.2 Function Notation and Operations',
+        path: 'textbooks/pre-calculus/unit_2_functions_properties/function_notation_evaluation_operations.json',
+        description: 'Function operations and evaluation'
+    },
+    {
+        id: 'precalc_domain_and_range',
+        title: '2.3 Domain and Range',
+        path: 'textbooks/pre-calculus/unit_2_functions_properties/domain_and_range.json',
+        description: 'Determining function domains and ranges'
+    },
+    {
+        id: 'precalc_graphs_common_functions',
+        title: '2.4 Graphs of Common Functions',
+        path: 'textbooks/pre-calculus/unit_2_functions_properties/graphs_common_functions.json',
+        description: 'Library of basic function graphs'
+    },
+    {
+        id: 'precalc_intercepts_symmetry_end_behavior',
+        title: '2.5 Intercepts, Symmetry, End Behavior',
+        path: 'textbooks/pre-calculus/unit_2_functions_properties/intercepts_symmetry_end_behavior.json',
+        description: 'Analyzing function characteristics'
+    },
+    {
+        id: 'precalc_even_odd_functions',
+        title: '2.6 Even and Odd Functions',
+        path: 'textbooks/pre-calculus/unit_2_functions_properties/even_odd_functions.json',
+        description: 'Function symmetry properties'
+    },
+    {
+        id: 'precalc_piecewise_defined_functions',
+        title: '2.7 Piecewise Defined Functions',
+        path: 'textbooks/pre-calculus/unit_2_functions_properties/piecewise_defined_functions.json',
+        description: 'Functions defined by multiple expressions'
+    },
+    {
+        id: 'precalc_composition_of_functions',
+        title: '2.8 Composition of Functions',
+        path: 'textbooks/pre-calculus/unit_2_functions_properties/composition_of_functions.json',
+        description: 'Function composition operations'
+    },
+    {
+        id: 'precalc_inverse_functions_concept_verification',
+        title: '2.9 Inverse Functions Concept',
+        path: 'textbooks/pre-calculus/unit_2_functions_properties/inverse_functions_concept_verification.json',
+        description: 'Understanding and verifying inverse functions'
+    },
+    {
+        id: 'precalc_graphing_inverse_functions',
+        title: '2.10 Graphing Inverse Functions',
+        path: 'textbooks/pre-calculus/unit_2_functions_properties/graphing_inverse_functions.json',
+        description: 'Graphical representation of inverses'
+    }
+],
+
+'pre-calculus-unit3': [
+    {
+        id: 'precalc_graphs_power_functions_end_behavior',
+        title: '3.1 Power Functions and End Behavior',
+        path: 'textbooks/pre-calculus/unit_3_polynomial_functions/graphs_power_functions_end_behavior.json',
+        description: 'Power functions and asymptotic behavior'
+    },
+    {
+        id: 'precalc_zeros_fundamental_theorem',
+        title: '3.2 Zeros and Fundamental Theorem',
+        path: 'textbooks/pre-calculus/unit_3_polynomial_functions/zeros_fundamental_theorem.json',
+        description: 'Polynomial zeros and fundamental theorem'
+    },
+    {
+        id: 'precalc_remainder_and_factor_theorem',
+        title: '3.3 Remainder and Factor Theorem',
+        path: 'textbooks/pre-calculus/unit_3_polynomial_functions/remainder_and_factor_theorem.json',
+        description: 'Polynomial division theorems'
+    },
+    {
+        id: 'precalc_polynomial_long_division',
+        title: '3.4 Polynomial Long Division',
+        path: 'textbooks/pre-calculus/unit_3_polynomial_functions/polynomial_long_division.json',
+        description: 'Long division with polynomials'
+    },
+    {
+        id: 'precalc_synthetic_division',
+        title: '3.5 Synthetic Division',
+        path: 'textbooks/pre-calculus/unit_3_polynomial_functions/synthetic_division.json',
+        description: 'Efficient polynomial division method'
+    },
+    {
+        id: 'precalc_descartes_rule_signs_bounds',
+        title: '3.6 Descartes Rule and Bounds',
+        path: 'textbooks/pre-calculus/unit_3_polynomial_functions/descartes_rule_signs_bounds.json',
+        description: 'Determining possible real roots'
+    },
+    {
+        id: 'precalc_rational_root_theorem',
+        title: '3.7 Rational Root Theorem',
+        path: 'textbooks/pre-calculus/unit_3_polynomial_functions/rational_root_theorem.json',
+        description: 'Finding potential rational roots'
+    },
+    {
+        id: 'precalc_graphing_polynomials',
+        title: '3.8 Graphing Polynomials',
+        path: 'textbooks/pre-calculus/unit_3_polynomial_functions/graphing_polynomials.json',
+        description: 'Comprehensive polynomial graphing'
+    },
+    {
+        id: 'precalc_writing_polynomial_given_zeros',
+        title: '3.9 Writing Polynomial from Zeros',
+        path: 'textbooks/pre-calculus/unit_3_polynomial_functions/writing_polynomial_given_zeros.json',
+        description: 'Constructing polynomials from roots'
+    },
+    {
+        id: 'precalc_solving_polynomial_inequalities',
+        title: '3.10 Solving Polynomial Inequalities',
+        path: 'textbooks/pre-calculus/unit_3_polynomial_functions/solving_polynomial_inequalities.json',
+        description: 'Polynomial inequality solutions'
+    }
+],
+
+'pre-calculus-unit4': [
+    {
+        id: 'precalc_intro_rational_functions',
+        title: '4.1 Introduction to Rational Functions',
+        path: 'textbooks/pre-calculus/unit_4_rational_functions/intro_rational_functions.json',
+        description: 'Rational function fundamentals'
+    },
+    {
+        id: 'precalc_domain_vertical_asymptotes_holes',
+        title: '4.2 Domain, Vertical Asymptotes, Holes',
+        path: 'textbooks/pre-calculus/unit_4_rational_functions/domain_vertical_asymptotes_holes.json',
+        description: 'Rational function discontinuities'
+    },
+    {
+        id: 'precalc_horizontal_oblique_asymptotes',
+        title: '4.3 Horizontal and Oblique Asymptotes',
+        path: 'textbooks/pre-calculus/unit_4_rational_functions/horizontal_oblique_asymptotes.json',
+        description: 'End behavior of rational functions'
+    },
+    {
+        id: 'precalc_graphing_rational_functions',
+        title: '4.4 Graphing Rational Functions',
+        path: 'textbooks/pre-calculus/unit_4_rational_functions/graphing_rational_functions.json',
+        description: 'Complete rational function graphs'
+    },
+    {
+        id: 'precalc_analyzing_end_behavior',
+        title: '4.5 Analyzing End Behavior',
+        path: 'textbooks/pre-calculus/unit_4_rational_functions/analyzing_end_behavior.json',
+        description: 'Limits and asymptotic analysis'
+    },
+    {
+        id: 'precalc_solving_rational_equations',
+        title: '4.6 Solving Rational Equations',
+        path: 'textbooks/pre-calculus/unit_4_rational_functions/solving_rational_equations.json',
+        description: 'Rational equation solutions'
+    },
+    {
+        id: 'precalc_solving_rational_inequalities',
+        title: '4.7 Solving Rational Inequalities',
+        path: 'textbooks/pre-calculus/unit_4_rational_functions/solving_rational_inequalities.json',
+        description: 'Rational inequality solutions'
+    },
+    {
+        id: 'precalc_applications_rational_functions',
+        title: '4.8 Applications of Rational Functions',
+        path: 'textbooks/pre-calculus/unit_4_rational_functions/applications_rational_functions.json',
+        description: 'Real-world rational function problems'
+    },
+    {
+        id: 'precalc_partial_fraction_decomposition_linear',
+        title: '4.9 Partial Fractions: Linear',
+        path: 'textbooks/pre-calculus/unit_4_rational_functions/partial_fraction_decomposition_linear.json',
+        description: 'Partial fraction decomposition basics'
+    },
+    {
+        id: 'precalc_partial_fraction_decomposition_repeated_irreducible',
+        title: '4.10 Partial Fractions: Advanced',
+        path: 'textbooks/pre-calculus/unit_4_rational_functions/partial_fraction_decomposition_repeated_irreducible.json',
+        description: 'Complex partial fraction cases'
+    }
+],
+
+'pre-calculus-unit5': [
+    {
+        id: 'precalc_exponential_functions',
+        title: '5.1 Exponential Functions',
+        path: 'textbooks/pre-calculus/unit_5_exponential_logarithmic_functions/exponential_functions.json',
+        description: 'Exponential function properties and graphs'
+    },
+    {
+        id: 'precalc_natural_base_e',
+        title: '5.2 Natural Base e',
+        path: 'textbooks/pre-calculus/unit_5_exponential_logarithmic_functions/natural_base_e.json',
+        description: 'The natural exponential function'
+    },
+    {
+        id: 'precalc_logarithmic_functions_inverse_exponentials',
+        title: '5.3 Logarithmic Functions as Inverses',
+        path: 'textbooks/pre-calculus/unit_5_exponential_logarithmic_functions/logarithmic_functions_inverse_exponentials.json',
+        description: 'Logarithms as exponential inverses'
+    },
+    {
+        id: 'precalc_common_logs_natural_logs',
+        title: '5.4 Common and Natural Logs',
+        path: 'textbooks/pre-calculus/unit_5_exponential_logarithmic_functions/common_logs_natural_logs.json',
+        description: 'Base 10 and base e logarithms'
+    },
+    {
+        id: 'precalc_properties_of_logarithms',
+        title: '5.5 Properties of Logarithms',
+        path: 'textbooks/pre-calculus/unit_5_exponential_logarithmic_functions/properties_of_logarithms.json',
+        description: 'Logarithm rules and identities'
+    },
+    {
+        id: 'precalc_change_of_base_formula',
+        title: '5.6 Change of Base Formula',
+        path: 'textbooks/pre-calculus/unit_5_exponential_logarithmic_functions/change_of_base_formula.json',
+        description: 'Converting between logarithm bases'
+    },
+    {
+        id: 'precalc_solving_exponential_equations',
+        title: '5.7 Solving Exponential Equations',
+        path: 'textbooks/pre-calculus/unit_5_exponential_logarithmic_functions/solving_exponential_equations.json',
+        description: 'Exponential equation solutions'
+    },
+    {
+        id: 'precalc_solving_logarithmic_equations',
+        title: '5.8 Solving Logarithmic Equations',
+        path: 'textbooks/pre-calculus/unit_5_exponential_logarithmic_functions/solving_logarithmic_equations.json',
+        description: 'Logarithmic equation solutions'
+    },
+    {
+        id: 'precalc_applications_compound_interest',
+        title: '5.9 Applications: Compound Interest',
+        path: 'textbooks/pre-calculus/unit_5_exponential_logarithmic_functions/applications_compound_interest.json',
+        description: 'Financial applications of exponentials'
+    },
+    {
+        id: 'precalc_applications_growth_decay_logistic',
+        title: '5.10 Applications: Growth, Decay, Logistic',
+        path: 'textbooks/pre-calculus/unit_5_exponential_logarithmic_functions/applications_growth_decay_logistic.json',
+        description: 'Biological and physical applications'
+    }
+],
+
+'pre-calculus-unit6': [
+    {
+        id: 'precalc_solving_systems_2x2',
+        title: '6.1 Solving Systems 2x2',
+        path: 'textbooks/pre-calculus/unit_6_systems_matrices/solving_systems_2x2.json',
+        description: 'Two-variable linear systems'
+    },
+    {
+        id: 'precalc_solving_systems_3x3',
+        title: '6.2 Solving Systems 3x3',
+        path: 'textbooks/pre-calculus/unit_6_systems_matrices/solving_systems_3x3.json',
+        description: 'Three-variable linear systems'
+    },
+    {
+        id: 'precalc_solving_nonlinear_systems',
+        title: '6.3 Solving Nonlinear Systems',
+        path: 'textbooks/pre-calculus/unit_6_systems_matrices/solving_nonlinear_systems.json',
+        description: 'Nonlinear system solutions'
+    },
+    {
+        id: 'precalc_intro_matrices',
+        title: '6.4 Introduction to Matrices',
+        path: 'textbooks/pre-calculus/unit_6_systems_matrices/intro_matrices.json',
+        description: 'Matrix fundamentals and operations'
+    },
+    {
+        id: 'precalc_matrix_multiplication_properties',
+        title: '6.5 Matrix Multiplication Properties',
+        path: 'textbooks/pre-calculus/unit_6_systems_matrices/matrix_multiplication_properties.json',
+        description: 'Matrix multiplication techniques'
+    },
+    {
+        id: 'precalc_gaussian_elimination',
+        title: '6.6 Gaussian Elimination',
+        path: 'textbooks/pre-calculus/unit_6_systems_matrices/gaussian_elimination.json',
+        description: 'Row reduction method'
+    },
+    {
+        id: 'precalc_identity_matrix_inverse',
+        title: '6.7 Identity Matrix and Inverse',
+        path: 'textbooks/pre-calculus/unit_6_systems_matrices/identity_matrix_inverse.json',
+        description: 'Matrix inverses and identity'
+    },
+    {
+        id: 'precalc_solving_inverse_matrices',
+        title: '6.8 Solving with Inverse Matrices',
+        path: 'textbooks/pre-calculus/unit_6_systems_matrices/solving_inverse_matrices.json',
+        description: 'Matrix method for linear systems'
+    },
+    {
+        id: 'precalc_determinants_cramers_rule',
+        title: '6.9 Determinants and Cramer\'s Rule',
+        path: 'textbooks/pre-calculus/unit_6_systems_matrices/determinants_cramers_rule.json',
+        description: 'Determinant-based solution method'
+    },
+    {
+        id: 'precalc_applications_systems_matrices',
+        title: '6.10 Applications of Systems and Matrices',
+        path: 'textbooks/pre-calculus/unit_6_systems_matrices/applications_systems_matrices.json',
+        description: 'Real-world matrix problems'
+    }
+],
+
+'pre-calculus-unit7': [
+    {
+        id: 'precalc_angle_measure',
+        title: '7.1 Angle Measure',
+        path: 'textbooks/pre-calculus/unit_7_trig_angles_unit_circle/angle_measure.json',
+        description: 'Radian and degree measurement'
+    },
+    {
+        id: 'precalc_arc_length_sector_area',
+        title: '7.2 Arc Length and Sector Area',
+        path: 'textbooks/pre-calculus/unit_7_trig_angles_unit_circle/arc_length_sector_area.json',
+        description: 'Circular measurements and calculations'
+    },
+    {
+        id: 'precalc_coterminal_reference_angles',
+        title: '7.3 Coterminal and Reference Angles',
+        path: 'textbooks/pre-calculus/unit_7_trig_angles_unit_circle/coterminal_reference_angles.json',
+        description: 'Angle relationships and simplification'
+    },
+    {
+        id: 'precalc_unit_circle',
+        title: '7.4 Unit Circle',
+        path: 'textbooks/pre-calculus/unit_7_trig_angles_unit_circle/unit_circle.json',
+        description: 'Unit circle fundamentals'
+    },
+    {
+        id: 'precalc_trig_functions_any_angle',
+        title: '7.5 Trig Functions of Any Angle',
+        path: 'textbooks/pre-calculus/unit_7_trig_angles_unit_circle/trig_functions_any_angle.json',
+        description: 'General angle trig functions'
+    },
+    {
+        id: 'precalc_right_triangle_trig',
+        title: '7.6 Right Triangle Trigonometry',
+        path: 'textbooks/pre-calculus/unit_7_trig_angles_unit_circle/right_triangle_trig.json',
+        description: 'Trig functions in right triangles'
+    },
+    {
+        id: 'precalc_reciprocal_trig_functions',
+        title: '7.7 Reciprocal Trig Functions',
+        path: 'textbooks/pre-calculus/unit_7_trig_angles_unit_circle/reciprocal_trig_functions.json',
+        description: 'Secant, cosecant, cotangent'
+    },
+    {
+        id: 'precalc_applications_right_triangle_trig',
+        title: '7.8 Applications of Right Triangle Trig',
+        path: 'textbooks/pre-calculus/unit_7_trig_angles_unit_circle/applications_right_triangle_trig.json',
+        description: 'Real-world triangle problems'
+    },
+    {
+        id: 'precalc_fundamental_trig_identities',
+        title: '7.9 Fundamental Trig Identities',
+        path: 'textbooks/pre-calculus/unit_7_trig_angles_unit_circle/fundamental_trig_identities.json',
+        description: 'Basic trigonometric identities'
+    },
+    {
+        id: 'precalc_even_odd_properties_trig',
+        title: '7.10 Even-Odd Properties of Trig',
+        path: 'textbooks/pre-calculus/unit_7_trig_angles_unit_circle/even_odd_properties_trig.json',
+        description: 'Symmetry in trig functions'
+    }
+],
+
+'pre-calculus-unit8': [
+    {
+        id: 'precalc_graphs_sine_cosine',
+        title: '8.1 Graphs of Sine and Cosine',
+        path: 'textbooks/pre-calculus/unit_8_graphs_trig_functions/graphs_sine_cosine.json',
+        description: 'Graphing basic trig functions'
+    },
+    {
+        id: 'precalc_amplitude_period',
+        title: '8.2 Amplitude and Period',
+        path: 'textbooks/pre-calculus/unit_8_graphs_trig_functions/amplitude_period.json',
+        description: 'Vertical and horizontal scaling'
+    },
+    {
+        id: 'precalc_phase_vertical_shift',
+        title: '8.3 Phase and Vertical Shift',
+        path: 'textbooks/pre-calculus/unit_8_graphs_trig_functions/phase_vertical_shift.json',
+        description: 'Horizontal and vertical translations'
+    },
+    {
+        id: 'precalc_graphing_critical_points',
+        title: '8.4 Graphing Critical Points',
+        path: 'textbooks/pre-calculus/unit_8_graphs_trig_functions/graphing_critical_points.json',
+        description: 'Key points in trig graphs'
+    },
+    {
+        id: 'precalc_writing_sinusoidal_equations',
+        title: '8.5 Writing Sinusoidal Equations',
+        path: 'textbooks/pre-calculus/unit_8_graphs_trig_functions/writing_sinusoidal_equations.json',
+        description: 'Creating equations from graphs'
+    },
+    {
+        id: 'precalc_graphs_tangent_cotangent',
+        title: '8.6 Graphs of Tangent and Cotangent',
+        path: 'textbooks/pre-calculus/unit_8_graphs_trig_functions/graphs_tangent_cotangent.json',
+        description: 'Graphing tangent family functions'
+    },
+    {
+        id: 'precalc_graphs_sec_csc',
+        title: '8.7 Graphs of Secant and Cosecant',
+        path: 'textbooks/pre-calculus/unit_8_graphs_trig_functions/graphs_sec_csc.json',
+        description: 'Graphing reciprocal trig functions'
+    },
+    {
+        id: 'precalc_damped_trig_graphs',
+        title: '8.8 Damped Trig Graphs',
+        path: 'textbooks/pre-calculus/unit_8_graphs_trig_functions/damped_trig_graphs.json',
+        description: 'Trig functions with damping factors'
+    },
+    {
+        id: 'precalc_inverse_sine_cosine',
+        title: '8.9 Inverse Sine and Cosine',
+        path: 'textbooks/pre-calculus/unit_8_graphs_trig_functions/inverse_sine_cosine.json',
+        description: 'Arcsin and arccos functions'
+    },
+    {
+        id: 'precalc_inverse_tangent_other',
+        title: '8.10 Inverse Tangent and Other',
+        path: 'textbooks/pre-calculus/unit_8_graphs_trig_functions/inverse_tangent_other.json',
+        description: 'Arctan and other inverse trig functions'
+    }
+],
+
+'pre-calculus-unit9': [
+    {
+        id: 'precalc_verifying_trig_identities',
+        title: '9.1 Verifying Trig Identities',
+        path: 'textbooks/pre-calculus/unit_9_analytic_trig_identities/verifying_trig_identities.json',
+        description: 'Proof techniques for identities'
+    },
+    {
+        id: 'precalc_sum_difference_formulas_sin_cos',
+        title: '9.2 Sum/Difference Formulas: Sin/Cos',
+        path: 'textbooks/pre-calculus/unit_9_analytic_trig_identities/sum_difference_formulas_sin_cos.json',
+        description: 'Angle addition formulas for sine and cosine'
+    },
+    {
+        id: 'precalc_sum_difference_formulas_tan',
+        title: '9.3 Sum/Difference Formulas: Tan',
+        path: 'textbooks/pre-calculus/unit_9_analytic_trig_identities/sum_difference_formulas_tan.json',
+        description: 'Angle addition formulas for tangent'
+    },
+    {
+        id: 'precalc_double_angle_formulas',
+        title: '9.4 Double Angle Formulas',
+        path: 'textbooks/pre-calculus/unit_9_analytic_trig_identities/double_angle_formulas.json',
+        description: 'Formulas for 2θ'
+    },
+    {
+        id: 'precalc_power_reducing_formulas',
+        title: '9.5 Power Reducing Formulas',
+        path: 'textbooks/pre-calculus/unit_9_analytic_trig_identities/power_reducing_formulas.json',
+        description: 'Reducing powers of trig functions'
+    },
+    {
+        id: 'precalc_half_angle_formulas',
+        title: '9.6 Half Angle Formulas',
+        path: 'textbooks/pre-calculus/unit_9_analytic_trig_identities/half_angle_formulas.json',
+        description: 'Formulas for θ/2'
+    },
+    {
+        id: 'precalc_product_to_sum_formulas',
+        title: '9.7 Product-to-Sum Formulas',
+        path: 'textbooks/pre-calculus/unit_9_analytic_trig_identities/product_to_sum_formulas.json',
+        description: 'Converting products to sums'
+    },
+    {
+        id: 'precalc_sum_to_product_formulas',
+        title: '9.8 Sum-to-Product Formulas',
+        path: 'textbooks/pre-calculus/unit_9_analytic_trig_identities/sum_to_product_formulas.json',
+        description: 'Converting sums to products'
+    },
+    {
+        id: 'precalc_identity_verification_practice',
+        title: '9.9 Identity Verification Practice',
+        path: 'textbooks/pre-calculus/unit_9_analytic_trig_identities/identity_verification_practice.json',
+        description: 'Advanced identity problems'
+    },
+    {
+        id: 'precalc_applications_identities_calculus_preview',
+        title: '9.10 Applications and Calculus Preview',
+        path: 'textbooks/pre-calculus/unit_9_analytic_trig_identities/applications_identities_calculus_preview.json',
+        description: 'Real-world applications and calculus connections'
+    }
+],
+
+'pre-calculus-unit10': [
+    {
+        id: 'precalc_solving_basic_trig_equations',
+        title: '10.1 Solving Basic Trig Equations',
+        path: 'textbooks/pre-calculus/unit_10_analytic_trig_equations/solving_basic_trig_equations.json',
+        description: 'Fundamental trig equation solutions'
+    },
+    {
+        id: 'precalc_solving_trig_algebraic',
+        title: '10.2 Solving Trig Equations Algebraically',
+        path: 'textbooks/pre-calculus/unit_10_analytic_trig_equations/solving_trig_algebraic.json',
+        description: 'Algebraic methods for trig equations'
+    },
+    {
+        id: 'precalc_solving_trig_multiple_angles',
+        title: '10.3 Solving Trig Equations: Multiple Angles',
+        path: 'textbooks/pre-calculus/unit_10_analytic_trig_equations/solving_trig_multiple_angles.json',
+        description: 'Equations with nx arguments'
+    },
+    {
+        id: 'precalc_solving_trig_quadratic_form',
+        title: '10.4 Solving Trig Equations: Quadratic Form',
+        path: 'textbooks/pre-calculus/unit_10_analytic_trig_equations/solving_trig_quadratic_form.json',
+        description: 'Trig equations in quadratic form'
+    },
+    {
+        id: 'precalc_using_identities_solve_equations',
+        title: '10.5 Using Identities to Solve Equations',
+        path: 'textbooks/pre-calculus/unit_10_analytic_trig_equations/using_identities_solve_equations.json',
+        description: 'Identity-based solution methods'
+    },
+    {
+        id: 'precalc_inverse_trig_solve_equations',
+        title: '10.6 Inverse Trig in Equation Solving',
+        path: 'textbooks/pre-calculus/unit_10_analytic_trig_equations/inverse_trig_solve_equations.json',
+        description: 'Applying inverse trig functions'
+    },
+    {
+        id: 'precalc_solving_trig_interval',
+        title: '10.7 Solving Trig Equations on Intervals',
+        path: 'textbooks/pre-calculus/unit_10_analytic_trig_equations/solving_trig_interval.json',
+        description: 'Restricted domain solutions'
+    },
+    {
+        id: 'precalc_applications_trig_equations',
+        title: '10.8 Applications of Trig Equations',
+        path: 'textbooks/pre-calculus/unit_10_analytic_trig_equations/applications_trig_equations.json',
+        description: 'Real-world trig equation problems'
+    },
+    {
+        id: 'precalc_solving_trig_inequalities',
+        title: '10.9 Solving Trig Inequalities',
+        path: 'textbooks/pre-calculus/unit_10_analytic_trig_equations/solving_trig_inequalities.json',
+        description: 'Trigonometric inequalities'
+    },
+    {
+        id: 'precalc_comprehensive_trig_equation_solving',
+        title: '10.10 Comprehensive Trig Equation Solving',
+        path: 'textbooks/pre-calculus/unit_10_analytic_trig_equations/comprehensive_trig_equation_solving.json',
+        description: 'Advanced equation scenarios'
+    }
+],
+
+'pre-calculus-unit11': [
+    {
+        id: 'precalc_law_of_sines',
+        title: '11.1 Law of Sines',
+        path: 'textbooks/pre-calculus/unit_11_applications_trig/law_of_sines.json',
+        description: 'Solving triangles using Law of Sines'
+    },
+    {
+        id: 'precalc_ambiguous_case_ssa',
+        title: '11.2 Ambiguous Case (SSA)',
+        path: 'textbooks/pre-calculus/unit_11_applications_trig/ambiguous_case_ssa.json',
+        description: 'Multiple triangle solutions'
+    },
+    {
+        id: 'precalc_law_of_cosines',
+        title: '11.3 Law of Cosines',
+        path: 'textbooks/pre-calculus/unit_11_applications_trig/law_of_cosines.json',
+        description: 'Solving triangles using Law of Cosines'
+    },
+    {
+        id: 'precalc_area_of_triangles',
+        title: '11.4 Area of Triangles',
+        path: 'textbooks/pre-calculus/unit_11_applications_trig/area_of_triangles.json',
+        description: 'Triangle area formulas'
+    },
+    {
+        id: 'precalc_vectors_plane',
+        title: '11.5 Vectors in the Plane',
+        path: 'textbooks/pre-calculus/unit_11_applications_trig/vectors_plane.json',
+        description: 'Vector concepts and operations'
+    },
+    {
+        id: 'precalc_vector_operations_dot',
+        title: '11.6 Vector Operations and Dot Product',
+        path: 'textbooks/pre-calculus/unit_11_applications_trig/vector_operations_dot.json',
+        description: 'Vector arithmetic and dot product'
+    },
+    {
+        id: 'precalc_applications_vectors',
+        title: '11.7 Applications of Vectors',
+        path: 'textbooks/pre-calculus/unit_11_applications_trig/applications_vectors.json',
+        description: 'Real-world vector problems'
+    },
+    {
+        id: 'precalc_trig_form_complex_numbers',
+        title: '11.8 Trig Form of Complex Numbers',
+        path: 'textbooks/pre-calculus/unit_11_applications_trig/trig_form_complex_numbers.json',
+        description: 'Complex numbers in polar form'
+    },
+    {
+        id: 'precalc_multiplying_dividing_complex_trig',
+        title: '11.9 Multiplying/Dividing Complex Numbers',
+        path: 'textbooks/pre-calculus/unit_11_applications_trig/multiplying_dividing_complex_trig.json',
+        description: 'Complex number operations in trig form'
+    },
+    {
+        id: 'precalc_de_moivre_theorem',
+        title: '11.10 De Moivre\'s Theorem',
+        path: 'textbooks/pre-calculus/unit_11_applications_trig/de_moivre_theorem.json',
+        description: 'Powers and roots of complex numbers'
+    }
+],
+
+'pre-calculus-unit12': [
+    {
+        id: 'precalc_parabola_definition',
+        title: '12.1 Parabola Definition',
+        path: 'textbooks/pre-calculus/unit_12_conic_sections/parabola_definition.json',
+        description: 'Parabola properties and equations'
+    },
+    {
+        id: 'precalc_applications_parabolas',
+        title: '12.2 Applications of Parabolas',
+        path: 'textbooks/pre-calculus/unit_12_conic_sections/applications_parabolas.json',
+        description: 'Real-world parabola applications'
+    },
+    {
+        id: 'precalc_ellipse_definition',
+        title: '12.3 Ellipse Definition',
+        path: 'textbooks/pre-calculus/unit_12_conic_sections/ellipse_definition.json',
+        description: 'Ellipse properties and equations'
+    },
+    {
+        id: 'precalc_applications_ellipses',
+        title: '12.4 Applications of Ellipses',
+        path: 'textbooks/pre-calculus/unit_12_conic_sections/applications_ellipses.json',
+        description: 'Real-world ellipse applications'
+    },
+    {
+        id: 'precalc_hyperbola_definition',
+        title: '12.5 Hyperbola Definition',
+        path: 'textbooks/pre-calculus/unit_12_conic_sections/hyperbola_definition.json',
+        description: 'Hyperbola properties and equations'
+    },
+    {
+        id: 'precalc_applications_hyperbolas',
+        title: '12.6 Applications of Hyperbolas',
+        path: 'textbooks/pre-calculus/unit_12_conic_sections/applications_hyperbolas.json',
+        description: 'Real-world hyperbola applications'
+    },
+    {
+        id: 'precalc_circle_review',
+        title: '12.7 Circle Review',
+        path: 'textbooks/pre-calculus/unit_12_conic_sections/circle_review.json',
+        description: 'Circle equations and properties'
+    },
+    {
+        id: 'precalc_identifying_conics_from_general_form',
+        title: '12.8 Identifying Conics from General Form',
+        path: 'textbooks/pre-calculus/unit_12_conic_sections/identifying_conics_from_general_form.json',
+        description: 'Classifying conic sections'
+    },
+    {
+        id: 'precalc_nonlinear_systems_conics',
+        title: '12.9 Nonlinear Systems with Conics',
+        path: 'textbooks/pre-calculus/unit_12_conic_sections/nonlinear_systems_conics.json',
+        description: 'Solving systems involving conics'
+    },
+    {
+        id: 'precalc_rotated_conics_intro',
+        title: '12.10 Rotated Conics Introduction',
+        path: 'textbooks/pre-calculus/unit_12_conic_sections/rotated_conics_intro.json',
+        description: 'Conic sections with rotated axes'
+    }
+],
+
+'pre-calculus-unit13': [
+    {
+        id: 'precalc_intro_parametric',
+        title: '13.1 Introduction to Parametric',
+        path: 'textbooks/pre-calculus/unit_13_parametric_polar_equations/intro_parametric.json',
+        description: 'Parametric equation fundamentals'
+    },
+    {
+        id: 'precalc_eliminating_parameter',
+        title: '13.2 Eliminating the Parameter',
+        path: 'textbooks/pre-calculus/unit_13_parametric_polar_equations/eliminating_parameter.json',
+        description: 'Converting parametric to rectangular'
+    },
+    {
+        id: 'precalc_projectile_motion',
+        title: '13.3 Projectile Motion',
+        path: 'textbooks/pre-calculus/unit_13_parametric_polar_equations/projectile_motion.json',
+        description: 'Parametric applications in physics'
+    },
+    {
+        id: 'precalc_polar_coordinate_system',
+        title: '13.4 Polar Coordinate System',
+        path: 'textbooks/pre-calculus/unit_13_parametric_polar_equations/polar_coordinate_system.json',
+        description: 'Polar coordinates fundamentals'
+    },
+    {
+        id: 'precalc_polar_to_rectangular',
+        title: '13.5 Polar to Rectangular',
+        path: 'textbooks/pre-calculus/unit_13_parametric_polar_equations/polar_to_rectangular.json',
+        description: 'Coordinate system conversion'
+    },
+    {
+        id: 'precalc_graphs_polar_circles_lines_limacons',
+        title: '13.6 Polar Graphs: Circles, Lines, Limacons',
+        path: 'textbooks/pre-calculus/unit_13_parametric_polar_equations/graphs_polar_circles_lines_limacons.json',
+        description: 'Basic polar graphs'
+    },
+    {
+        id: 'precalc_graphs_polar_roses_lemniscates',
+        title: '13.7 Polar Graphs: Roses, Lemniscates',
+        path: 'textbooks/pre-calculus/unit_13_parametric_polar_equations/graphs_polar_roses_lemniscates.json',
+        description: 'Advanced polar graphs'
+    },
+    {
+        id: 'precalc_symmetry_polar_graphs',
+        title: '13.8 Symmetry in Polar Graphs',
+        path: 'textbooks/pre-calculus/unit_13_parametric_polar_equations/symmetry_polar_graphs.json',
+        description: 'Symmetry properties of polar equations'
+    },
+    {
+        id: 'precalc_intersection_polar_graphs',
+        title: '13.9 Intersection of Polar Graphs',
+        path: 'textbooks/pre-calculus/unit_13_parametric_polar_equations/intersection_polar_graphs.json',
+        description: 'Finding intersection points'
+    },
+    {
+        id: 'precalc_complex_numbers_polar_review',
+        title: '13.10 Complex Numbers in Polar Review',
+        path: 'textbooks/pre-calculus/unit_13_parametric_polar_equations/complex_numbers_polar_review.json',
+        description: 'Complex numbers in polar form review'
+    }
+],
+
+'pre-calculus-unit14': [
+    {
+        id: 'precalc_sequences_explicit_recursive',
+        title: '14.1 Sequences: Explicit and Recursive',
+        path: 'textbooks/pre-calculus/unit_14_sequences_series_counting/sequences_explicit_recursive.json',
+        description: 'Sequence definitions and formulas'
+    },
+    {
+        id: 'precalc_arithmetic_sequences_series',
+        title: '14.2 Arithmetic Sequences and Series',
+        path: 'textbooks/pre-calculus/unit_14_sequences_series_counting/arithmetic_sequences_series.json',
+        description: 'Arithmetic progressions'
+    },
+    {
+        id: 'precalc_geometric_sequences_series',
+        title: '14.3 Geometric Sequences and Series',
+        path: 'textbooks/pre-calculus/unit_14_sequences_series_counting/geometric_sequences_series.json',
+        description: 'Geometric progressions'
+    },
+    {
+        id: 'precalc_sum_finite_arithmetic_geometric',
+        title: '14.4 Sum of Finite Arithmetic/Geometric',
+        path: 'textbooks/pre-calculus/unit_14_sequences_series_counting/sum_finite_arithmetic_geometric.json',
+        description: 'Finite series summation'
+    },
+    {
+        id: 'precalc_sum_infinite_geometric',
+        title: '14.5 Sum of Infinite Geometric',
+        path: 'textbooks/pre-calculus/unit_14_sequences_series_counting/sum_infinite_geometric.json',
+        description: 'Infinite geometric series'
+    },
+    {
+        id: 'precalc_mathematical_induction',
+        title: '14.6 Mathematical Induction',
+        path: 'textbooks/pre-calculus/unit_14_sequences_series_counting/mathematical_induction.json',
+        description: 'Proof by induction'
+    },
+    {
+        id: 'precalc_binomial_theorem',
+        title: '14.7 Binomial Theorem',
+        path: 'textbooks/pre-calculus/unit_14_sequences_series_counting/binomial_theorem.json',
+        description: 'Binomial expansion'
+    },
+    {
+        id: 'precalc_counting_principles',
+        title: '14.8 Counting Principles',
+        path: 'textbooks/pre-calculus/unit_14_sequences_series_counting/counting_principles.json',
+        description: 'Fundamental counting principles'
+    },
+    {
+        id: 'precalc_combinations_choose',
+        title: '14.9 Combinations and Choose',
+        path: 'textbooks/pre-calculus/unit_14_sequences_series_counting/combinations_choose.json',
+        description: 'Combination formulas'
+    },
+    {
+        id: 'precalc_intro_probability',
+        title: '14.10 Introduction to Probability',
+        path: 'textbooks/pre-calculus/unit_14_sequences_series_counting/intro_probability.json',
+        description: 'Basic probability concepts'
+    }
+],
+
+'pre-calculus-unit15': [
+    {
+        id: 'precalc_concept_of_limit',
+        title: '15.1 Concept of Limit',
+        path: 'textbooks/pre-calculus/unit_15_introduction_calculus/concept_of_limit.json',
+        description: 'Introduction to limits'
+    },
+    {
+        id: 'precalc_finding_limits_graph_table',
+        title: '15.2 Finding Limits: Graph and Table',
+        path: 'textbooks/pre-calculus/unit_15_introduction_calculus/finding_limits_graph_table.json',
+        description: 'Numerical and graphical limit finding'
+    },
+    {
+        id: 'precalc_properties_limits_direct_substitution',
+        title: '15.3 Properties of Limits and Direct Substitution',
+        path: 'textbooks/pre-calculus/unit_15_introduction_calculus/properties_limits_direct_substitution.json',
+        description: 'Limit properties and evaluation'
+    },
+    {
+        id: 'precalc_one_sided_limits',
+        title: '15.4 One-Sided Limits',
+        path: 'textbooks/pre-calculus/unit_15_introduction_calculus/one_sided_limits.json',
+        description: 'Left-hand and right-hand limits'
+    },
+    {
+        id: 'precalc_limits_at_infinity',
+        title: '15.5 Limits at Infinity',
+        path: 'textbooks/pre-calculus/unit_15_introduction_calculus/limits_at_infinity.json',
+        description: 'End behavior and horizontal asymptotes'
+    },
+    {
+        id: 'precalc_tangent_line_problem',
+        title: '15.6 Tangent Line Problem',
+        path: 'textbooks/pre-calculus/unit_15_introduction_calculus/tangent_line_problem.json',
+        description: 'Slope of tangent lines'
+    },
+    {
+        id: 'precalc_difference_quotient_slope',
+        title: '15.7 Difference Quotient and Slope',
+        path: 'textbooks/pre-calculus/unit_15_introduction_calculus/difference_quotient_slope.json',
+        description: 'Average and instantaneous rates of change'
+    },
+    {
+        id: 'precalc_derivative_as_function',
+        title: '15.8 Derivative as a Function',
+        path: 'textbooks/pre-calculus/unit_15_introduction_calculus/derivative_as_function.json',
+        description: 'Introduction to derivatives'
+    },
+    {
+        id: 'precalc_area_under_curve_intro',
+        title: '15.9 Area Under Curve Introduction',
+        path: 'textbooks/pre-calculus/unit_15_introduction_calculus/area_under_curve_intro.json',
+        description: 'Introduction to integration'
+    },
+    {
+        id: 'precalc_fundamental_theorem_calculus',
+        title: '15.10 Fundamental Theorem of Calculus',
+        path: 'textbooks/pre-calculus/unit_15_introduction_calculus/fundamental_theorem_calculus.json',
+        description: 'Connection between derivatives and integrals'
+    }
+],
+        
 // Add to the unitSections object in the loadTextbookSections function
 'economics-unit1': [
     {
@@ -15717,6 +16730,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
