@@ -4267,8 +4267,8 @@ function loadTextbookContent() {
     <button class="unit-btn ${currentTextbookUnit === 'physics10-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit10')">
         Unit 10: Circuits & Electromagnetism
     </button>
-` : '
-                            ${isCalculus ? `
+
+                            ` : isCalculus ? `
                                 <!-- Calculus Units -->
                                 <button class="unit-btn ${currentTextbookUnit === 'calc-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('calc-unit1')">
                                     Unit 1: Limits & Continuity
@@ -10777,5 +10777,6 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
