@@ -4221,6 +4221,7 @@ function loadTextbookContent() {
     const isAPPhysics1 = currentCourseId === 'ap-physics-1';
     const isAPPhysics2 = currentCourseId === 'ap-physics-2';
     const isAPPhysicsCMechanics = currentCourseId === 'ap-physics-c-mechanics';
+    const isAPPhysicsCEM = currentCourseId === 'ap-physics-c-em';
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
                      isPhysics10 ? 'Physics Grade 10 Textbook' :
@@ -4229,6 +4230,7 @@ function loadTextbookContent() {
                      isAPPhysics1 ? 'AP Physics 1 Textbook' :
                      isAPPhysics2 ? 'AP Physics 2 Textbook' :
                      isAPPhysicsCMechanics ? 'AP Physics C: Mechanics Textbook' :
+                     isAPPhysicsCEM ? 'AP Physics C: Electricity & Magnetism Textbook' : 
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4277,6 +4279,27 @@ function loadTextbookContent() {
                                 <button class="unit-btn ${currentTextbookUnit === 'physics11-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('physics11-unit10')">
                                     Unit 10: Modern Physics Introduction
                                 </button>
+
+                                // Add AP Physics C: Electricity & Magnetism unit buttons to the HTML template
+` : isAPPhysicsCEM ? `
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics-c-em-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics-c-em-unit1')">
+        Unit 1: Electrostatics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics-c-em-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics-c-em-unit2')">
+        Unit 2: Conductors, Capacitors & Dielectrics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics-c-em-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics-c-em-unit3')">
+        Unit 3: Electric Circuits
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics-c-em-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics-c-em-unit4')">
+        Unit 4: Magnetic Fields
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics-c-em-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics-c-em-unit5')">
+        Unit 5: Electromagnetism
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics-c-em-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics-c-em-unit6')">
+        Unit 6: Revision & Exam Prep
+    </button>
                                 
                                 // Add AP Physics C: Mechanics unit buttons to the HTML template
                             ` : isAPPhysicsCMechanics ? `
@@ -4553,6 +4576,14 @@ function getCurrentUnitName() {
 'physics10-unit9': 'Unit 9: Static & Current Electricity',
 'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
 
+// Add to getCurrentUnitName function
+'ap-physics-c-em-unit1': 'Unit 1: Electrostatics',
+'ap-physics-c-em-unit2': 'Unit 2: Conductors, Capacitors & Dielectrics',
+'ap-physics-c-em-unit3': 'Unit 3: Electric Circuits',
+'ap-physics-c-em-unit4': 'Unit 4: Magnetic Fields',
+'ap-physics-c-em-unit5': 'Unit 5: Electromagnetism',
+'ap-physics-c-em-unit6': 'Unit 6: Revision & Exam Prep',
+        
 // Add to getCurrentUnitName function
 'ap-physics-c-mechanics-unit1': 'Unit 1: Kinematics',
 'ap-physics-c-mechanics-unit2': 'Unit 2: Newton\'s Laws',
@@ -5356,6 +5387,385 @@ function loadTextbookSections() {
         }
     ],
 
+// Add to the unitSections object in the loadTextbookSections function
+'ap-physics-c-em-unit1': [
+    {
+        id: 'ap-physics-c-em_electric_charge_and_coulombs_law',
+        title: '1.1 Electric Charge and Coulomb\'s Law',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electrostatics/electric_charge_and_coulombs_law.json',
+        description: 'Vector form of electrostatic forces'
+    },
+    {
+        id: 'ap-physics-c-em_the_electric_field_discrete',
+        title: '1.2 The Electric Field (Discrete)',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electrostatics/the_electric_field_discrete.json',
+        description: 'Electric field from point charges'
+    },
+    {
+        id: 'ap-physics-c-em_the_electric_field_continuous',
+        title: '1.3 The Electric Field (Continuous)',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electrostatics/the_electric_field_continuous.json',
+        description: 'Integration methods for continuous charge distributions'
+    },
+    {
+        id: 'ap-physics-c-em_gauss_law_conceptual',
+        title: '1.4 Gauss\' Law Conceptual',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electrostatics/gauss_law_conceptual.json',
+        description: 'Electric flux and Gauss\' law fundamentals'
+    },
+    {
+        id: 'ap-physics-c-em_gauss_law_applications',
+        title: '1.5 Gauss\' Law Applications',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electrostatics/gauss_law_applications.json',
+        description: 'Using Gauss\' law for symmetric charge distributions'
+    },
+    {
+        id: 'ap-physics-c-em_electric_potential_energy',
+        title: '1.6 Electric Potential Energy',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electrostatics/electric_potential_energy.json',
+        description: 'Work and energy in electric fields'
+    },
+    {
+        id: 'ap-physics-c-em_electric_potential',
+        title: '1.7 Electric Potential',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electrostatics/electric_potential.json',
+        description: 'Scalar potential and voltage'
+    },
+    {
+        id: 'ap-physics-c-em_calculating_potential',
+        title: '1.8 Calculating Potential',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electrostatics/calculating_potential.json',
+        description: 'Integration methods for potential calculations'
+    },
+    {
+        id: 'ap-physics-c-em_relating_e_and_v',
+        title: '1.9 Relating E and V',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electrostatics/relating_e_and_v.json',
+        description: 'Gradient relationship between field and potential'
+    },
+    {
+        id: 'ap-physics-c-em_potential_and_field_maps',
+        title: '1.10 Potential and Field Maps',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electrostatics/potential_and_field_maps.json',
+        description: 'Visualizing electric fields and equipotentials'
+    }
+],
+
+'ap-physics-c-em-unit2': [
+    {
+        id: 'ap-physics-c-em_electrostatics_of_conductors',
+        title: '2.1 Electrostatics of Conductors',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/conductors_capacitors_dielectrics/electrostatics_of_conductors.json',
+        description: 'Charge distribution and field behavior in conductors'
+    },
+    {
+        id: 'ap-physics-c-em_conductors_in_electric_fields',
+        title: '2.2 Conductors in Electric Fields',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/conductors_capacitors_dielectrics/conductors_in_electric_fields.json',
+        description: 'Induced charges and shielding effects'
+    },
+    {
+        id: 'ap-physics-c-em_capacitance',
+        title: '2.3 Capacitance',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/conductors_capacitors_dielectrics/capacitance.json',
+        description: 'Capacitance definition and calculations'
+    },
+    {
+        id: 'ap-physics-c-em_capacitor_circuits',
+        title: '2.4 Capacitor Circuits',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/conductors_capacitors_dielectrics/capacitor_circuits.json',
+        description: 'Series and parallel capacitor combinations'
+    },
+    {
+        id: 'ap-physics-c-em_energy_stored_in_a_capacitor',
+        title: '2.5 Energy Stored in a Capacitor',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/conductors_capacitors_dielectrics/energy_stored_in_a_capacitor.json',
+        description: 'Electric field energy calculations'
+    },
+    {
+        id: 'ap-physics-c-em_dielectrics_microscopic_and_macroscopic',
+        title: '2.6 Dielectrics: Microscopic and Macroscopic',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/conductors_capacitors_dielectrics/dielectrics_microscopic_and_macroscopic.json',
+        description: 'Molecular polarization and dielectric constant'
+    },
+    {
+        id: 'ap-physics-c-em_gauss_law_with_dielectrics',
+        title: '2.7 Gauss\' Law with Dielectrics',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/conductors_capacitors_dielectrics/gauss_law_with_dielectrics.json',
+        description: 'Modified Gauss\' law for dielectric materials'
+    },
+    {
+        id: 'ap-physics-c-em_energy_in_dielectric_filled_capacitors',
+        title: '2.8 Energy in Dielectric-Filled Capacitors',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/conductors_capacitors_dielectrics/energy_in_dielectric_filled_capacitors.json',
+        description: 'Energy storage with dielectric materials'
+    },
+    {
+        id: 'ap-physics-c-em_conductors_problem_solving_i',
+        title: '2.9 Problem Solving I',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/conductors_capacitors_dielectrics/problem_solving_i.json',
+        description: 'Advanced conductor and capacitor problems'
+    },
+    {
+        id: 'ap-physics-c-em_conductors_problem_solving_ii',
+        title: '2.10 Problem Solving II',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/conductors_capacitors_dielectrics/problem_solving_ii.json',
+        description: 'Complex scenarios with conductors and dielectrics'
+    }
+],
+
+'ap-physics-c-em-unit3': [
+    {
+        id: 'ap-physics-c-em_current_and_current_density',
+        title: '3.1 Current and Current Density',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electric_circuits/current_and_current_density.json',
+        description: 'Current flow and vector current density'
+    },
+    {
+        id: 'ap-physics-c-em_resistance_and_resistivity',
+        title: '3.2 Resistance and Resistivity',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electric_circuits/resistance_and_resistivity.json',
+        description: 'Ohm\'s law and material properties'
+    },
+    {
+        id: 'ap-physics-c-em_emf_and_single_loop_circuits',
+        title: '3.3 EMF and Single Loop Circuits',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electric_circuits/emf_and_single_loop_circuits.json',
+        description: 'Electromotive force and basic circuits'
+    },
+    {
+        id: 'ap-physics-c-em_kirchhoff_laws',
+        title: '3.4 Kirchhoff\'s Laws',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electric_circuits/kirchhoff_laws.json',
+        description: 'Junction and loop rules'
+    },
+    {
+        id: 'ap-physics-c-em_multi_loop_circuit_analysis',
+        title: '3.5 Multi-Loop Circuit Analysis',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electric_circuits/multi_loop_circuit_analysis.json',
+        description: 'Complex circuit analysis techniques'
+    },
+    {
+        id: 'ap-physics-c-em_rc_circuits_charging',
+        title: '3.6 RC Circuits: Charging',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electric_circuits/rc_circuits_charging.json',
+        description: 'Differential equations for charging capacitors'
+    },
+    {
+        id: 'ap-physics-c-em_rc_circuits_discharging',
+        title: '3.7 RC Circuits: Discharging',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electric_circuits/rc_circuits_discharging.json',
+        description: 'Exponential decay in discharging circuits'
+    },
+    {
+        id: 'ap-physics-c-em_time_constant_and_analysis',
+        title: '3.8 Time Constant and Analysis',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electric_circuits/time_constant_and_analysis.json',
+        description: 'Characteristic time and circuit behavior'
+    },
+    {
+        id: 'ap-physics-c-em_energy_in_rc_circuits',
+        title: '3.9 Energy in RC Circuits',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electric_circuits/energy_in_rc_circuits.json',
+        description: 'Power and energy transfer in RC circuits'
+    },
+    {
+        id: 'ap-physics-c-em_advanced_circuit_problems',
+        title: '3.10 Advanced Circuit Problems',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electric_circuits/advanced_circuit_problems.json',
+        description: 'Complex circuit scenarios and synthesis'
+    }
+],
+
+'ap-physics-c-em-unit4': [
+    {
+        id: 'ap-physics-c-em_magnetic_force_on_a_moving_charge',
+        title: '4.1 Magnetic Force on a Moving Charge',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/magnetic_fields/magnetic_force_on_a_moving_charge.json',
+        description: 'Lorentz force law and vector cross products'
+    },
+    {
+        id: 'ap-physics-c-em_motion_of_charged_particles_in_b_fields',
+        title: '4.2 Motion of Charged Particles in B Fields',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/magnetic_fields/motion_of_charged_particles_in_b_fields.json',
+        description: 'Circular and helical motion analysis'
+    },
+    {
+        id: 'ap-physics-c-em_magnetic_force_on_a_current_carrying_wire',
+        title: '4.3 Magnetic Force on a Current-Carrying Wire',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/magnetic_fields/magnetic_force_on_a_current_carrying_wire.json',
+        description: 'Force on current elements in magnetic fields'
+    },
+    {
+        id: 'ap-physics-c-em_torque_on_a_current_loop',
+        title: '4.4 Torque on a Current Loop',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/magnetic_fields/torque_on_a_current_loop.json',
+        description: 'Magnetic moment and torque calculations'
+    },
+    {
+        id: 'ap-physics-c-em_biot_savart_law',
+        title: '4.5 Biot-Savart Law',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/magnetic_fields/biot_savart_law.json',
+        description: 'Calculating magnetic fields from current elements'
+    },
+    {
+        id: 'ap-physics-c-em_magnetic_force_between_currents',
+        title: '4.6 Magnetic Force Between Currents',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/magnetic_fields/magnetic_force_between_currents.json',
+        description: 'Force between parallel currents'
+    },
+    {
+        id: 'ap-physics-c-em_ampere_law',
+        title: '4.7 Ampere\'s Law',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/magnetic_fields/ampere_law.json',
+        description: 'Line integrals and magnetic field symmetry'
+    },
+    {
+        id: 'ap-physics-c-em_magnetic_flux',
+        title: '4.8 Magnetic Flux',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/magnetic_fields/magnetic_flux.json',
+        description: 'Surface integrals of magnetic field'
+    },
+    {
+        id: 'ap-physics-c-em_magnetism_problem_solving_i',
+        title: '4.9 Problem Solving I',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/magnetic_fields/problem_solving_i.json',
+        description: 'Advanced magnetic field problems'
+    },
+    {
+        id: 'ap-physics-c-em_magnetism_problem_solving_ii',
+        title: '4.10 Problem Solving II',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/magnetic_fields/problem_solving_ii.json',
+        description: 'Complex magnetic field scenarios'
+    }
+],
+
+'ap-physics-c-em-unit5': [
+    {
+        id: 'ap-physics-c-em_faradays_law',
+        title: '5.1 Faraday\'s Law',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electromagnetism/faradays_law.json',
+        description: 'Induced EMF from changing magnetic flux'
+    },
+    {
+        id: 'ap-physics-c-em_lenzs_law',
+        title: '5.2 Lenz\'s Law',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electromagnetism/lenzs_law.json',
+        description: 'Direction of induced currents and fields'
+    },
+    {
+        id: 'ap-physics-c-em_motional_emf',
+        title: '5.3 Motional EMF',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electromagnetism/motional_emf.json',
+        description: 'EMF from conductors moving in magnetic fields'
+    },
+    {
+        id: 'ap-physics-c-em_induced_electric_fields',
+        title: '5.4 Induced Electric Fields',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electromagnetism/induced_electric_fields.json',
+        description: 'Non-conservative electric fields from changing B'
+    },
+    {
+        id: 'ap-physics-c-em_mutual_inductance',
+        title: '5.5 Mutual Inductance',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electromagnetism/mutual_inductance.json',
+        description: 'Induced EMF between coupled circuits'
+    },
+    {
+        id: 'ap-physics-c-em_self_inductance',
+        title: '5.6 Self Inductance',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electromagnetism/self_inductance.json',
+        description: 'Inductance and back EMF in single circuits'
+    },
+    {
+        id: 'ap-physics-c-em_lr_circuits',
+        title: '5.7 LR Circuits',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electromagnetism/lr_circuits.json',
+        description: 'Differential equations for inductor circuits'
+    },
+    {
+        id: 'ap-physics-c-em_energy_in_an_inductor',
+        title: '5.8 Energy in an Inductor',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electromagnetism/energy_in_an_inductor.json',
+        description: 'Magnetic field energy storage'
+    },
+    {
+        id: 'ap-physics-c-em_lc_circuits',
+        title: '5.9 LC Circuits',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electromagnetism/lc_circuits.json',
+        description: 'Oscillations in inductor-capacitor circuits'
+    },
+    {
+        id: 'ap-physics-c-em_maxwells_equations_integral_form',
+        title: '5.10 Maxwell\'s Equations (Integral Form)',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/electromagnetism/maxwells_equations_integral_form.json',
+        description: 'Complete set of electromagnetic laws'
+    }
+],
+
+'ap-physics-c-em-unit6': [
+    {
+        id: 'ap-physics-c-em_comprehensive_electrostatics_review',
+        title: '6.1 Comprehensive Electrostatics Review',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/revision_and_exam_prep/comprehensive_electrostatics_review.json',
+        description: 'Review of electric fields, potential, and Gauss\' law'
+    },
+    {
+        id: 'ap-physics-c-em_comprehensive_conductors_and_capacitors_review',
+        title: '6.2 Comprehensive Conductors and Capacitors Review',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/revision_and_exam_prep/comprehensive_conductors_and_capacitors_review.json',
+        description: 'Review of conductors, capacitance, and dielectrics'
+    },
+    {
+        id: 'ap-physics-c-em_comprehensive_circuits_review',
+        title: '6.3 Comprehensive Circuits Review',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/revision_and_exam_prep/comprehensive_circuits_review.json',
+        description: 'Review of DC circuits, RC circuits, and analysis'
+    },
+    {
+        id: 'ap-physics-c-em_comprehensive_magnetism_review',
+        title: '6.4 Comprehensive Magnetism Review',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/revision_and_exam_prep/comprehensive_magnetism_review.json',
+        description: 'Review of magnetic fields, forces, and sources'
+    },
+    {
+        id: 'ap-physics-c-em_comprehensive_electromagnetism_review',
+        title: '6.5 Comprehensive Electromagnetism Review',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/revision_and_exam_prep/comprehensive_electromagnetism_review.json',
+        description: 'Review of induction, inductance, and Maxwell\'s equations'
+    },
+    {
+        id: 'ap-physics-c-em_mock_exam_1_multiple_choice',
+        title: '6.6 Mock Exam 1: Multiple Choice',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/revision_and_exam_prep/mock_exam_1_multiple_choice.json',
+        description: 'Practice multiple choice questions'
+    },
+    {
+        id: 'ap-physics-c-em_mock_exam_1_review_and_analysis',
+        title: '6.7 Mock Exam 1: Review and Analysis',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/revision_and_exam_prep/mock_exam_1_review_and_analysis.json',
+        description: 'Analysis of practice exam results'
+    },
+    {
+        id: 'ap-physics-c-em_mock_exam_2_free_response',
+        title: '6.8 Mock Exam 2: Free Response',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/revision_and_exam_prep/mock_exam_2_free_response.json',
+        description: 'Practice free response questions'
+    },
+    {
+        id: 'ap-physics-c-em_mock_exam_2_review_and_analysis',
+        title: '6.9 Mock Exam 2: Review and Analysis',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/revision_and_exam_prep/mock_exam_2_review_and_analysis.json',
+        description: 'Analysis of free response results'
+    },
+    {
+        id: 'ap-physics-c-em_final_strategy_and_conceptual_synthesis',
+        title: '6.10 Final Strategy and Conceptual Synthesis',
+        path: 'textbooks/ap-physics-c/electricity_magnetism/revision_and_exam_prep/final_strategy_and_conceptual_synthesis.json',
+        description: 'Exam strategies and big picture concepts'
+    }
+],
+        
 // Add to the unitSections object in the loadTextbookSections function
 'ap-physics-c-mechanics-unit1': [
     {
@@ -13690,6 +14100,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
