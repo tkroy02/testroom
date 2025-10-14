@@ -3322,6 +3322,17 @@ body {
                     }
                 ]
             }
+            'physics-grade-9': {
+        title: 'Physics Grade 9',
+        description: 'Foundational physics course covering scientific method, motion, forces, energy, waves, and electricity basics.',
+        chapters: [
+            // We'll use the unit structure for the textbook system
+        ],
+        quizzes: [
+            // Physics quizzes will be added
+        ]
+    }
+};
         };
 
 
@@ -4183,7 +4194,10 @@ function loadTextbookContent() {
     
     // Determine which textbook to show based on current course
     const isCalculus = currentCourseId === 'ap-calculus';
-    const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 'AP Biology Textbook';
+    const isPhysics9 = currentCourseId === 'physics-grade-9';
+    const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
+                         isPhysics9 ? 'Physics Grade 9 Textbook' : 
+                         'AP Biology Textbook';
     
     resourceContent.innerHTML = `
         <div class="tool-interface active">
@@ -4213,8 +4227,40 @@ function loadTextbookContent() {
                                 <button class="unit-btn ${currentTextbookUnit === 'calc-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('calc-unit4')">
                                     Unit 4: Advanced Topics
                                 </button>
+                            ` : isPhysics9 ? `
+                                <!-- Physics Grade 9 Units -->
+                                <button class="unit-btn ${currentTextbookUnit === 'physics9-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit1')">
+                                    Unit 1: Scientific Method
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'physics9-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit2')">
+                                    Unit 2: Measurement
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'physics9-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit3')">
+                                    Unit 3: Motion & Graphs
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'physics9-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit4')">
+                                    Unit 4: Forces
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'physics9-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit5')">
+                                    Unit 5: Energy & Power
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'physics9-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit6')">
+                                    Unit 6: Circular Motion
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'physics9-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit7')">
+                                    Unit 7: Heat & Temperature
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'physics9-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit8')">
+                                    Unit 8: Waves & Sound
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'physics9-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit9')">
+                                    Unit 9: Light & Reflection
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'physics9-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('physics9-unit10')">
+                                    Unit 10: Electricity
+                                </button>
                             ` : `
-                                <!-- Biology Units -->
+                                <!-- Biology Units (your original structure) -->
                                 <button class="unit-btn ${currentTextbookUnit === 'unit1' ? 'active' : ''}" onclick="switchTextbookUnit('unit1')">
                                     Unit 1: Chemistry of Life
                                 </button>
@@ -4248,7 +4294,7 @@ function loadTextbookContent() {
                             `}
                         </div>
                     </div>
-                    <h4>${getCurrentUnitName()}</h4>
+                    <h4>${getCurrentUnitName()} Sections</h4>
                     <div class="textbook-sections" id="textbook-sections">
                         <!-- Sections will be loaded here -->
                     </div>
@@ -4273,10 +4319,25 @@ function loadTextbookContent() {
 // Keep this helper function to display the current unit name
 function getCurrentUnitName() {
     const unitNames = {
+        // Calculus units
         'calc-unit1': 'Unit 1: Limits & Continuity',
         'calc-unit2': 'Unit 2: Differentiation', 
         'calc-unit3': 'Unit 3: Integration',
         'calc-unit4': 'Unit 4: Advanced Topics',
+        
+        // Physics Grade 9 units
+        'physics9-unit1': 'Unit 1: Scientific Method',
+        'physics9-unit2': 'Unit 2: Measurement',
+        'physics9-unit3': 'Unit 3: Motion & Graphs',
+        'physics9-unit4': 'Unit 4: Forces',
+        'physics9-unit5': 'Unit 5: Energy & Power',
+        'physics9-unit6': 'Unit 6: Circular Motion',
+        'physics9-unit7': 'Unit 7: Heat & Temperature',
+        'physics9-unit8': 'Unit 8: Waves & Sound',
+        'physics9-unit9': 'Unit 9: Light & Reflection',
+        'physics9-unit10': 'Unit 10: Electricity',
+        
+        // Biology units (your original structure)
         'unit1': 'Unit 1: Chemistry of Life',
         'unit2': 'Unit 2: Cell Structure & Function',
         'unit3': 'Unit 3: Cellular Energetics',
@@ -5272,11 +5333,633 @@ function loadTextbookSections() {
             id: 'calc_sequences_series',
             title: '4.4 Sequences and Series',
             path: 'textbooks/ap-calculus/advanced_topics/series.json',
-            description: 'Infinite sequences and series introduction'
+           description: 'Review and practice problems'
         }
+    ],
+
+    // Physics Grade 9 Units
+'physics9-unit1': [
+    {
+        id: 'physics9_nature_science',
+        title: '1.1 The Nature of Science',
+        path: 'textbooks/physics-9/introduction/nature_of_science.json',
+        description: 'Understanding scientific inquiry and processes'
+    },
+    {
+        id: 'physics9_scientific_method',
+        title: '1.2 The Scientific Method',
+        path: 'textbooks/physics-9/introduction/scientific_method.json',
+        description: 'Steps of scientific investigation and experimentation'
+    },
+    {
+        id: 'physics9_data_analysis',
+        title: '1.3 Data Analysis',
+        path: 'textbooks/physics-9/introduction/data_analysis.json',
+        description: 'Collecting, organizing, and interpreting scientific data'
+    },
+    {
+        id: 'physics9_scientific_notation',
+        title: '1.4 Scientific Notation',
+        path: 'textbooks/physics-9/introduction/scientific_notation.json',
+        description: 'Expressing very large and very small numbers'
+    },
+    {
+        id: 'physics9_significant_figures',
+        title: '1.5 Significant Figures',
+        path: 'textbooks/physics-9/introduction/significant_figures.json',
+        description: 'Rules for measurement precision and calculations'
+    },
+    {
+        id: 'physics9_accuracy_precision',
+        title: '1.6 Accuracy and Precision',
+        path: 'textbooks/physics-9/introduction/accuracy_precision.json',
+        description: 'Understanding measurement reliability and consistency'
+    },
+    {
+        id: 'physics9_graphing_data',
+        title: '1.7 Graphing Data',
+        path: 'textbooks/physics-9/introduction/graphing_data.json',
+        description: 'Creating and interpreting scientific graphs'
+    },
+    {
+        id: 'physics9_problem_solving',
+        title: '1.8 Problem Solving in Physics',
+        path: 'textbooks/physics-9/introduction/problem_solving.json',
+        description: 'Systematic approaches to physics problems'
+    },
+    {
+        id: 'physics9_review_intro',
+        title: '1.9 Review Questions',
+        path: 'textbooks/physics-9/introduction/review.json',
+        description: 'Practice and consolidation of concepts'
+    },
+    {
+        id: 'physics9_test_intro',
+        title: '1.10 Chapter 1 Test',
+        path: 'textbooks/physics-9/introduction/test.json',
+        description: 'Assessment of scientific method understanding'
+    }
+],
+'physics9-unit2': [
+    {
+        id: 'physics9_metric_system',
+        title: '2.1 The Metric System',
+        path: 'textbooks/physics-9/measurement/metric_system.json',
+        description: 'International system of measurement units'
+    },
+    {
+        id: 'physics9_si_base_units',
+        title: '2.2 SI Base Units',
+        path: 'textbooks/physics-9/measurement/si_base_units.json',
+        description: 'Fundamental units of measurement'
+    },
+    {
+        id: 'physics9_derived_units',
+        title: '2.3 Derived Units',
+        path: 'textbooks/physics-9/measurement/derived_units.json',
+        description: 'Units derived from base SI units'
+    },
+    {
+        id: 'physics9_unit_conversions',
+        title: '2.4 Unit Conversions',
+        path: 'textbooks/physics-9/measurement/unit_conversions.json',
+        description: 'Converting between different units'
+    },
+    {
+        id: 'physics9_dimensional_analysis',
+        title: '2.5 Dimensional Analysis',
+        path: 'textbooks/physics-9/measurement/dimensional_analysis.json',
+        description: 'Using units to solve problems'
+    },
+    {
+        id: 'physics9_length_area',
+        title: '2.6 Length and Area',
+        path: 'textbooks/physics-9/measurement/length_area.json',
+        description: 'Measuring distance and surface area'
+    },
+    {
+        id: 'physics9_volume_density',
+        title: '2.7 Volume and Density',
+        path: 'textbooks/physics-9/measurement/volume_density.json',
+        description: 'Measuring space and mass concentration'
+    },
+    {
+        id: 'physics9_time_temperature',
+        title: '2.8 Time and Temperature',
+        path: 'textbooks/physics-9/measurement/time_temperature.json',
+        description: 'Measuring duration and heat intensity'
+    },
+    {
+        id: 'physics9_review_measurement',
+        title: '2.9 Review Questions',
+        path: 'textbooks/physics-9/measurement/review.json',
+        description: 'Practice measurement concepts'
+    },
+    {
+        id: 'physics9_test_measurement',
+        title: '2.10 Chapter 2 Test',
+        path: 'textbooks/physics-9/measurement/test.json',
+        description: 'Assessment of measurement skills'
+    }
+],
+'physics9-unit3': [
+    {
+        id: 'physics9_describing_motion',
+        title: '3.1 Describing Motion',
+        path: 'textbooks/physics-9/motion/describing_motion.json',
+        description: 'Introduction to motion concepts'
+    },
+    {
+        id: 'physics9_position_displacement',
+        title: '3.2 Position, Displacement, and Distance',
+        path: 'textbooks/physics-9/motion/position_displacement.json',
+        description: 'Location and movement measurements'
+    },
+    {
+        id: 'physics9_speed_velocity',
+        title: '3.3 Speed and Velocity',
+        path: 'textbooks/physics-9/motion/speed_velocity.json',
+        description: 'Rate of motion with and without direction'
+    },
+    {
+        id: 'physics9_acceleration',
+        title: '3.4 Acceleration',
+        path: 'textbooks/physics-9/motion/acceleration.json',
+        description: 'Rate of change of velocity'
+    },
+    {
+        id: 'physics9_uniform_motion',
+        title: '3.5 Uniform Motion',
+        path: 'textbooks/physics-9/motion/uniform_motion.json',
+        description: 'Constant velocity movement'
+    },
+    {
+        id: 'physics9_position_time_graphs',
+        title: '3.6 Position-Time Graphs',
+        path: 'textbooks/physics-9/motion/position_time_graphs.json',
+        description: 'Graphical representation of motion'
+    },
+    {
+        id: 'physics9_velocity_time_graphs',
+        title: '3.7 Velocity-Time Graphs',
+        path: 'textbooks/physics-9/motion/velocity_time_graphs.json',
+        description: 'Graphing velocity changes over time'
+    },
+    {
+        id: 'physics9_constant_acceleration',
+        title: '3.8 Motion with Constant Acceleration',
+        path: 'textbooks/physics-9/motion/constant_acceleration.json',
+        description: 'Uniformly changing velocity'
+    },
+    {
+        id: 'physics9_review_motion',
+        title: '3.9 Review Questions',
+        path: 'textbooks/physics-9/motion/review.json',
+        description: 'Practice motion concepts'
+    },
+    {
+        id: 'physics9_test_motion',
+        title: '3.10 Chapter 3 Test',
+        path: 'textbooks/physics-9/motion/test.json',
+        description: 'Assessment of motion understanding'
+    }
+],
+'physics9-unit4': [
+    {
+        id: 'physics9_forces_intro',
+        title: '4.1 Introduction to Forces',
+        path: 'textbooks/physics-9/forces/introduction.json',
+        description: 'Understanding forces and their effects'
+    },
+    {
+        id: 'physics9_first_law',
+        title: '4.2 Newton\'s First Law',
+        path: 'textbooks/physics-9/forces/first_law.json',
+        description: 'Law of inertia'
+    },
+    {
+        id: 'physics9_net_force',
+        title: '4.3 Net Force',
+        path: 'textbooks/physics-9/forces/net_force.json',
+        description: 'Combining multiple forces'
+    },
+    {
+        id: 'physics9_second_law',
+        title: '4.4 Newton\'s Second Law',
+        path: 'textbooks/physics-9/forces/second_law.json',
+        description: 'Force, mass, and acceleration relationship'
+    },
+    {
+        id: 'physics9_free_body',
+        title: '4.5 Free-Body Diagrams',
+        path: 'textbooks/physics-9/forces/free_body.json',
+        description: 'Visualizing force interactions'
+    },
+    {
+        id: 'physics9_third_law',
+        title: '4.6 Newton\'s Third Law',
+        path: 'textbooks/physics-9/forces/third_law.json',
+        description: 'Action-reaction pairs'
+    },
+    {
+        id: 'physics9_weight_gravity',
+        title: '4.7 Weight and Gravity',
+        path: 'textbooks/physics-9/forces/weight_gravity.json',
+        description: 'Gravitational forces'
+    },
+    {
+        id: 'physics9_friction_air',
+        title: '4.8 Friction and Air Resistance',
+        path: 'textbooks/physics-9/forces/friction_air.json',
+        description: 'Opposing forces in motion'
+    },
+    {
+        id: 'physics9_review_forces',
+        title: '4.9 Review Questions',
+        path: 'textbooks/physics-9/forces/review.json',
+        description: 'Practice force concepts'
+    },
+    {
+        id: 'physics9_test_forces',
+        title: '4.10 Chapter 4 Test',
+        path: 'textbooks/physics-9/forces/test.json',
+        description: 'Assessment of forces understanding'
+    }
+],
+'physics9-unit5': [
+    {
+        id: 'physics9_work',
+        title: '5.1 Work',
+        path: 'textbooks/physics-9/energy/work.json',
+        description: 'Transfer of energy through force'
+    },
+    {
+        id: 'physics9_kinetic_energy',
+        title: '5.2 Energy and Kinetic Energy',
+        path: 'textbooks/physics-9/energy/kinetic_energy.json',
+        description: 'Energy of motion'
+    },
+    {
+        id: 'physics9_potential_energy',
+        title: '5.3 Potential Energy',
+        path: 'textbooks/physics-9/energy/potential_energy.json',
+        description: 'Stored energy'
+    },
+    {
+        id: 'physics9_conservation',
+        title: '5.4 Conservation of Energy',
+        path: 'textbooks/physics-9/energy/conservation.json',
+        description: 'Energy cannot be created or destroyed'
+    },
+    {
+        id: 'physics9_interrelationship',
+        title: '5.5 Work, Energy, and Power',
+        path: 'textbooks/physics-9/energy/interrelationship.json',
+        description: 'Connecting work, energy, and power'
+    },
+    {
+        id: 'physics9_simple_machines',
+        title: '5.6 Simple Machines',
+        path: 'textbooks/physics-9/energy/simple_machines.json',
+        description: 'Basic mechanical devices'
+    },
+    {
+        id: 'physics9_mechanical_advantage',
+        title: '5.7 Mechanical Advantage',
+        path: 'textbooks/physics-9/energy/mechanical_advantage.json',
+        description: 'Force amplification'
+    },
+    {
+        id: 'physics9_efficiency',
+        title: '5.8 Efficiency',
+        path: 'textbooks/physics-9/energy/efficiency.json',
+        description: 'Energy conversion effectiveness'
+    },
+    {
+        id: 'physics9_review_energy',
+        title: '5.9 Review Questions',
+        path: 'textbooks/physics-9/energy/review.json',
+        description: 'Practice energy concepts'
+    },
+    {
+        id: 'physics9_test_energy',
+        title: '5.10 Chapter 5 Test',
+        path: 'textbooks/physics-9/energy/test.json',
+        description: 'Assessment of energy understanding'
+    }
+],
+'physics9-unit6': [
+    {
+        id: 'physics9_circular_intro',
+        title: '6.1 Introduction to Circular Motion',
+        path: 'textbooks/physics-9/circular_motion/introduction.json',
+        description: 'Motion along circular path'
+    },
+    {
+        id: 'physics9_centripetal_force',
+        title: '6.2 Centripetal Force',
+        path: 'textbooks/physics-9/circular_motion/centripetal_force.json',
+        description: 'Center-seeking force'
+    },
+    {
+        id: 'physics9_variables',
+        title: '6.3 Variables of Circular Motion',
+        path: 'textbooks/physics-9/circular_motion/variables.json',
+        description: 'Radius, speed, and period relationships'
+    },
+    {
+        id: 'physics9_friction',
+        title: '6.4 Centripetal Force and Friction',
+        path: 'textbooks/physics-9/circular_motion/friction.json',
+        description: 'Friction in circular motion'
+    },
+    {
+        id: 'physics9_tension',
+        title: '6.5 Centripetal Force and Tension',
+        path: 'textbooks/physics-9/circular_motion/tension.json',
+        description: 'Tension forces in circular paths'
+    },
+    {
+        id: 'physics9_vertical_motion',
+        title: '6.6 Vertical Circular Motion',
+        path: 'textbooks/physics-9/circular_motion/vertical_motion.json',
+        description: 'Circular motion in vertical planes'
+    },
+    {
+        id: 'physics9_orbital_motion',
+        title: '6.7 Introduction to Orbital Motion',
+        path: 'textbooks/physics-9/circular_motion/orbital_motion.json',
+        description: 'Celestial body motion'
+    },
+    {
+        id: 'physics9_centrifugal_force',
+        title: '6.8 Centrifugal Force',
+        path: 'textbooks/physics-9/circular_motion/centrifugal_force.json',
+        description: 'Apparent outward force'
+    },
+    {
+        id: 'physics9_review_circular',
+        title: '6.9 Review Questions',
+        path: 'textbooks/physics-9/circular_motion/review.json',
+        description: 'Practice circular motion concepts'
+    },
+    {
+        id: 'physics9_test_circular',
+        title: '6.10 Chapter 6 Test',
+        path: 'textbooks/physics-9/circular_motion/test.json',
+        description: 'Assessment of circular motion understanding'
+    }
+],
+'physics9-unit7': [
+    {
+        id: 'physics9_thermal_energy',
+        title: '7.1 Temperature and Thermal Energy',
+        path: 'textbooks/physics-9/heat/thermal_energy.json',
+        description: 'Heat and temperature concepts'
+    },
+    {
+        id: 'physics9_specific_heat',
+        title: '7.2 Heat and Specific Heat',
+        path: 'textbooks/physics-9/heat/specific_heat.json',
+        description: 'Heat capacity of materials'
+    },
+    {
+        id: 'physics9_heat_transfer',
+        title: '7.3 Heat Transfer',
+        path: 'textbooks/physics-9/heat/heat_transfer.json',
+        description: 'Conduction, convection, and radiation'
+    },
+    {
+        id: 'physics9_phase_changes',
+        title: '7.4 Phase Changes',
+        path: 'textbooks/physics-9/heat/phase_changes.json',
+        description: 'Solid, liquid, gas transitions'
+    },
+    {
+        id: 'physics9_thermodynamics',
+        title: '7.5 Thermodynamics',
+        path: 'textbooks/physics-9/heat/thermodynamics.json',
+        description: 'Laws of thermodynamics'
+    },
+    {
+        id: 'physics9_thermal_expansion',
+        title: '7.6 Thermal Expansion',
+        path: 'textbooks/physics-9/heat/thermal_expansion.json',
+        description: 'Materials expanding with heat'
+    },
+    {
+        id: 'physics9_kinetic_theory',
+        title: '7.7 Kinetic Theory of Matter',
+        path: 'textbooks/physics-9/heat/kinetic_theory.json',
+        description: 'Particle motion and heat'
+    },
+    {
+        id: 'physics9_heat_engines',
+        title: '7.8 Heat Engines',
+        path: 'textbooks/physics-9/heat/heat_engines.json',
+        description: 'Converting heat to work'
+    },
+    {
+        id: 'physics9_review_heat',
+        title: '7.9 Review Questions',
+        path: 'textbooks/physics-9/heat/review.json',
+        description: 'Practice heat concepts'
+    },
+    {
+        id: 'physics9_test_heat',
+        title: '7.10 Chapter 7 Test',
+        path: 'textbooks/physics-9/heat/test.json',
+        description: 'Assessment of heat understanding'
+    }
+],
+'physics9-unit8': [
+    {
+        id: 'physics9_nature_waves',
+        title: '8.1 The Nature of Waves',
+        path: 'textbooks/physics-9/waves/nature_of_waves.json',
+        description: 'Wave properties and behavior'
+    },
+    {
+        id: 'physics9_wave_properties',
+        title: '8.2 Wave Properties',
+        path: 'textbooks/physics-9/waves/wave_properties.json',
+        description: 'Amplitude, wavelength, frequency'
+    },
+    {
+        id: 'physics9_wave_types',
+        title: '8.3 Wave Types',
+        path: 'textbooks/physics-9/waves/wave_types.json',
+        description: 'Transverse and longitudinal waves'
+    },
+    {
+        id: 'physics9_wave_speed',
+        title: '8.4 Wave Speed',
+        path: 'textbooks/physics-9/waves/wave_speed.json',
+        description: 'Calculating wave velocity'
+    },
+    {
+        id: 'physics9_doppler_effect',
+        title: '8.5 The Doppler Effect',
+        path: 'textbooks/physics-9/waves/doppler_effect.json',
+        description: 'Frequency changes with motion'
+    },
+    {
+        id: 'physics9_sound_intro',
+        title: '8.6 Introduction to Sound',
+        path: 'textbooks/physics-9/waves/sound_intro.json',
+        description: 'Sound wave characteristics'
+    },
+    {
+        id: 'physics9_sound_properties',
+        title: '8.7 Sound Properties',
+        path: 'textbooks/physics-9/waves/sound_properties.json',
+        description: 'Pitch, loudness, and quality'
+    },
+    {
+        id: 'physics9_human_ear',
+        title: '8.8 The Human Ear',
+        path: 'textbooks/physics-9/waves/human_ear.json',
+        description: 'How we perceive sound'
+    },
+    {
+        id: 'physics9_review_waves',
+        title: '8.9 Review Questions',
+        path: 'textbooks/physics-9/waves/review.json',
+        description: 'Practice wave concepts'
+    },
+    {
+        id: 'physics9_test_waves',
+        title: '8.10 Chapter 8 Test',
+        path: 'textbooks/physics-9/waves/test.json',
+        description: 'Assessment of wave understanding'
+    }
+],
+'physics9-unit9': [
+    {
+        id: 'physics9_nature_light',
+        title: '9.1 The Nature of Light',
+        path: 'textbooks/physics-9/light/nature_of_light.json',
+        description: 'Light as electromagnetic radiation'
+    },
+    {
+        id: 'physics9_em_spectrum',
+        title: '9.2 Electromagnetic Spectrum',
+        path: 'textbooks/physics-9/light/em_spectrum.json',
+        description: 'Range of electromagnetic waves'
+    },
+    {
+        id: 'physics9_reflection',
+        title: '9.3 Reflection',
+        path: 'textbooks/physics-9/light/reflection.json',
+        description: 'Light bouncing off surfaces'
+    },
+    {
+        id: 'physics9_types_reflection',
+        title: '9.4 Types of Reflection',
+        path: 'textbooks/physics-9/light/types_of_reflection.json',
+        description: 'Specular and diffuse reflection'
+    },
+    {
+        id: 'physics9_plane_mirrors',
+        title: '9.5 Plane Mirrors',
+        path: 'textbooks/physics-9/light/plane_mirrors.json',
+        description: 'Flat mirror properties'
+    },
+    {
+        id: 'physics9_concave_mirrors',
+        title: '9.6 Concave Mirrors',
+        path: 'textbooks/physics-9/light/concave_mirrors.json',
+        description: 'Converging mirrors'
+    },
+    {
+        id: 'physics9_convex_mirrors',
+        title: '9.7 Convex Mirrors',
+        path: 'textbooks/physics-9/light/convex_mirrors.json',
+        description: 'Diverging mirrors'
+    },
+    {
+        id: 'physics9_mirror_equation',
+        title: '9.8 Mirror Equation',
+        path: 'textbooks/physics-9/light/mirror_equation.json',
+        description: 'Mathematical mirror relationships'
+    },
+    {
+        id: 'physics9_review_light',
+        title: '9.9 Review Questions',
+        path: 'textbooks/physics-9/light/review.json',
+        description: 'Practice light concepts'
+    },
+    {
+        id: 'physics9_test_light',
+        title: '9.10 Chapter 9 Test',
+        path: 'textbooks/physics-9/light/test.json',
+        description: 'Assessment of light understanding'
+    }
+],
+'physics9-unit10': [
+    {
+        id: 'physics9_static_electricity',
+        title: '10.1 Introduction to Static Electricity',
+        path: 'textbooks/physics-9/electricity/static_electricity.json',
+        description: 'Stationary electric charges'
+    },
+    {
+        id: 'physics9_induction',
+        title: '10.2 Electrostatic Induction',
+        path: 'textbooks/physics-9/electricity/induction.json',
+        description: 'Charging without contact'
+    },
+    {
+        id: 'physics9_coulombs_law',
+        title: '10.3 Coulomb\'s Law',
+        path: 'textbooks/physics-9/electricity/coulombs_law.json',
+        description: 'Electric force between charges'
+    },
+    {
+        id: 'physics9_three_charges',
+        title: '10.4 Coulomb\'s Law (Three Charges)',
+        path: 'textbooks/physics-9/electricity/three_charges.json',
+        description: 'Multiple charge interactions'
+    },
+    {
+        id: 'physics9_ohms_law',
+        title: '10.5 Ohm\'s Law',
+        path: 'textbooks/physics-9/electricity/ohms_law.json',
+        description: 'Voltage, current, resistance relationship'
+    },
+    {
+        id: 'physics9_power',
+        title: '10.6 Electric Power',
+        path: 'textbooks/physics-9/electricity/power.json',
+        description: 'Electrical energy usage'
+    },
+    {
+        id: 'physics9_series_circuits',
+        title: '10.7 Series Circuits',
+        path: 'textbooks/physics-9/electricity/series_circuits.json',
+        description: 'Single path circuits'
+    },
+    {
+        id: 'physics9_parallel_circuits',
+        title: '10.8 Parallel Circuits',
+        path: 'textbooks/physics-9/electricity/parallel_circuits.json',
+        description: 'Multiple path circuits'
+    },
+    {
+        id: 'physics9_review_electricity',
+        title: '10.9 Review Questions',
+        path: 'textbooks/physics-9/electricity/review.json',
+        description: 'Practice electricity concepts'
+    },
+    {
+        id: 'physics9_test_electricity',
+        title: '10.10 Chapter 10 Test',
+        path: 'textbooks/physics-9/electricity/test.json',
+        description: 'Assessment of electricity understanding'
+    }
     ]
 };
-    
+  
     const currentSections = unitSections[currentTextbookUnit];
     
     sectionsContainer.innerHTML = currentSections.map(section => `
@@ -9405,6 +10088,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
