@@ -3219,121 +3219,130 @@ body {
 
 
     <script>
-        // Course Data
-        const courseData = {
-            'physics-grade-11': {
-                title: 'Physics Grade 11',
-                description: 'Comprehensive physics course for grade 11 students covering mechanics, waves, and thermodynamics.',
-                chapters: [
-                    { title: 'Introduction to Physics', content: 'Physics is the natural science that studies matter, its motion and behavior through space and time, and the related entities of energy and force.' },
-                    { title: 'Kinematics', content: 'Kinematics is the branch of mechanics that describes the motion of points, bodies, and systems of bodies without considering the forces that cause them to move.' },
-                    { title: 'Dynamics', content: 'Dynamics is the branch of physics developed in classical mechanics concerned with the study of forces and their effects on motion.' },
-                    { title: 'Work, Energy and Power', content: 'In physics, work is the energy transferred to or from an object via the application of force along a displacement.' }
-                ],
-                quizzes: [
+        // Complete CourseData object
+const courseData = {
+    'physics-grade-11': {
+        title: 'Physics Grade 11',
+        description: 'Comprehensive physics course for grade 11 students covering mechanics, waves, and thermodynamics.',
+        chapters: [
+            { title: 'Introduction to Physics', content: 'Physics is the natural science that studies matter, its motion and behavior through space and time, and the related entities of energy and force.' },
+            { title: 'Kinematics', content: 'Kinematics is the branch of mechanics that describes the motion of points, bodies, and systems of bodies without considering the forces that cause them to move.' },
+            { title: 'Dynamics', content: 'Dynamics is the branch of physics developed in classical mechanics concerned with the study of forces and their effects on motion.' },
+            { title: 'Work, Energy and Power', content: 'In physics, work is the energy transferred to or from an object via the application of force along a displacement.' }
+        ],
+        quizzes: [
+            {
+                title: 'Physics Fundamentals Quiz',
+                questions: [
                     {
-                        title: 'Physics Fundamentals Quiz',
-                        questions: [
-                            {
-                                text: 'Which of the following is a vector quantity?',
-                                options: ['Mass', 'Speed', 'Velocity', 'Temperature'],
-                                correct: 2
-                            },
-                            {
-                                text: 'What is the SI unit of force?',
-                                options: ['Joule', 'Watt', 'Newton', 'Pascal'],
-                                correct: 2
-                            },
-                            {
-                                text: 'According to Newton\'s first law, an object in motion will:',
-                                options: [
-                                    'Accelerate continuously',
-                                    'Slow down and eventually stop',
-                                    'Remain in motion with constant velocity unless acted upon',
-                                    'Change direction randomly'
-                                ],
-                                correct: 2
-                            }
-                        ]
-                    }
-                ]
-            },
-            'algebra-2': {
-                title: 'Algebra 2',
-                description: 'Advanced algebra concepts including quadratic equations, functions, and complex numbers.',
-                chapters: [
-                    { title: 'Functions and Their Graphs', content: 'A function is a relation between a set of inputs and a set of permissible outputs with the property that each input is related to exactly one output.' },
-                    { title: 'Polynomial Functions', content: 'A polynomial function is a function that can be expressed in the form of a polynomial. The degree of a polynomial is the highest power of the variable in the polynomial.' },
-                    { title: 'Rational Functions', content: 'A rational function is any function which can be written as the ratio of two polynomial functions.' },
-                    { title: 'Exponential and Logarithmic Functions', content: 'Exponential functions model situations where growth or decay is proportional to the current amount.' }
-                ],
-                quizzes: [
+                        text: 'Which of the following is a vector quantity?',
+                        options: ['Mass', 'Speed', 'Velocity', 'Temperature'],
+                        correct: 2
+                    },
                     {
-                        title: 'Algebra Fundamentals Quiz',
-                        questions: [
-                            {
-                                text: 'What is the solution to x² - 5x + 6 = 0?',
-                                options: ['x = 2, 3', 'x = -2, -3', 'x = 1, 6', 'x = -1, -6'],
-                                correct: 0
-                            },
-                            {
-                                text: 'Which of these is a quadratic function?',
-                                options: ['f(x) = 2x + 3', 'f(x) = x³ - 2x', 'f(x) = x² - 4x + 4', 'f(x) = 1/x'],
-                                correct: 2
-                            },
-                            {
-                                text: 'What is the domain of f(x) = √(x-2)?',
-                                options: ['All real numbers', 'x ≥ 0', 'x ≥ 2', 'x > 2'],
-                                correct: 2
-                            }
-                        ]
-                    }
-                ]
-            },
-            'chemistry-grade-10': {
-                title: 'Chemistry Grade 10',
-                description: 'Introduction to chemistry covering atomic structure, chemical reactions, and periodic table.',
-                chapters: [
-                    { title: 'Introduction to Chemistry', content: 'Chemistry is the scientific discipline involved with elements and compounds composed of atoms, molecules and ions.' },
-                    { title: 'Atomic Structure', content: 'An atom is the smallest unit of ordinary matter that forms a chemical element.' },
-                    { title: 'Periodic Table', content: 'The periodic table is a tabular arrangement of chemical elements, organized by their atomic number, electron configuration, and recurring chemical properties.' },
-                    { title: 'Chemical Bonding', content: 'A chemical bond is a lasting attraction between atoms, ions or molecules that enables the formation of chemical compounds.' }
-                ],
-                quizzes: [
+                        text: 'What is the SI unit of force?',
+                        options: ['Joule', 'Watt', 'Newton', 'Pascal'],
+                        correct: 2
+                    },
                     {
-                        title: 'Chemistry Fundamentals Quiz',
-                        questions: [
-                            {
-                                text: 'How many electrons can the first electron shell hold?',
-                                options: ['2', '8', '18', '32'],
-                                correct: 0
-                            },
-                            {
-                                text: 'Which element has the atomic number 1?',
-                                options: ['Helium', 'Hydrogen', 'Oxygen', 'Carbon'],
-                                correct: 1
-                            },
-                            {
-                                text: 'What type of bond involves the sharing of electron pairs?',
-                                options: ['Ionic bond', 'Covalent bond', 'Metallic bond', 'Hydrogen bond'],
-                                correct: 1
-                            }
-                        ]
+                        text: 'According to Newton\'s first law, an object in motion will:',
+                        options: [
+                            'Accelerate continuously',
+                            'Slow down and eventually stop',
+                            'Remain in motion with constant velocity unless acted upon',
+                            'Change direction randomly'
+                        ],
+                        correct: 2
                     }
                 ]
             }
-            'physics-grade-9': {
+        ]
+    },
+    'algebra-2': {
+        title: 'Algebra 2',
+        description: 'Advanced algebra concepts including quadratic equations, functions, and complex numbers.',
+        chapters: [
+            { title: 'Functions and Their Graphs', content: 'A function is a relation between a set of inputs and a set of permissible outputs with the property that each input is related to exactly one output.' },
+            { title: 'Polynomial Functions', content: 'A polynomial function is a function that can be expressed in the form of a polynomial. The degree of a polynomial is the highest power of the variable in the polynomial.' },
+            { title: 'Rational Functions', content: 'A rational function is any function which can be written as the ratio of two polynomial functions.' },
+            { title: 'Exponential and Logarithmic Functions', content: 'Exponential functions model situations where growth or decay is proportional to the current amount.' }
+        ],
+        quizzes: [
+            {
+                title: 'Algebra Fundamentals Quiz',
+                questions: [
+                    {
+                        text: 'What is the solution to x² - 5x + 6 = 0?',
+                        options: ['x = 2, 3', 'x = -2, -3', 'x = 1, 6', 'x = -1, -6'],
+                        correct: 0
+                    },
+                    {
+                        text: 'Which of these is a quadratic function?',
+                        options: ['f(x) = 2x + 3', 'f(x) = x³ - 2x', 'f(x) = x² - 4x + 4', 'f(x) = 1/x'],
+                        correct: 2
+                    },
+                    {
+                        text: 'What is the domain of f(x) = √(x-2)?',
+                        options: ['All real numbers', 'x ≥ 0', 'x ≥ 2', 'x > 2'],
+                        correct: 2
+                    }
+                ]
+            }
+        ]
+    },
+    'chemistry-grade-10': {
+        title: 'Chemistry Grade 10',
+        description: 'Introduction to chemistry covering atomic structure, chemical reactions, and periodic table.',
+        chapters: [
+            { title: 'Introduction to Chemistry', content: 'Chemistry is the scientific discipline involved with elements and compounds composed of atoms, molecules and ions.' },
+            { title: 'Atomic Structure', content: 'An atom is the smallest unit of ordinary matter that forms a chemical element.' },
+            { title: 'Periodic Table', content: 'The periodic table is a tabular arrangement of chemical elements, organized by their atomic number, electron configuration, and recurring chemical properties.' },
+            { title: 'Chemical Bonding', content: 'A chemical bond is a lasting attraction between atoms, ions or molecules that enables the formation of chemical compounds.' }
+        ],
+        quizzes: [
+            {
+                title: 'Chemistry Fundamentals Quiz',
+                questions: [
+                    {
+                        text: 'How many electrons can the first electron shell hold?',
+                        options: ['2', '8', '18', '32'],
+                        correct: 0
+                    },
+                    {
+                        text: 'Which element has the atomic number 1?',
+                        options: ['Helium', 'Hydrogen', 'Oxygen', 'Carbon'],
+                        correct: 1
+                    },
+                    {
+                        text: 'What type of bond involves the sharing of electron pairs?',
+                        options: ['Ionic bond', 'Covalent bond', 'Metallic bond', 'Hydrogen bond'],
+                        correct: 1
+                    }
+                ]
+            }
+        ]
+    },
+    'ap-calculus': {
+        title: 'AP Calculus',
+        description: 'College-level calculus covering limits, derivatives, integrals, and advanced topics in preparation for the AP exam.',
+        chapters: [
+            // We'll use the unit structure for the textbook system
+        ],
+        quizzes: [
+            // Calculus quizzes will be added later
+        ]
+    },
+    'physics-grade-9': {
         title: 'Physics Grade 9',
         description: 'Foundational physics course covering scientific method, motion, forces, energy, waves, and electricity basics.',
         chapters: [
             // We'll use the unit structure for the textbook system
         ],
         quizzes: [
-            // Physics quizzes will be added
+            // Physics Grade 9 quizzes will be added later
         ]
     }
 };
-        };
 
 
         // Enrollment System
@@ -10088,6 +10097,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
