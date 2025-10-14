@@ -4290,27 +4290,6 @@ function getCurrentUnitName() {
     };
     return unitNames[currentTextbookUnit] || 'Current Unit';
 }
-                    <h4>${getUnitTitle(currentTextbookUnit)} Sections</h4>
-                    <div class="textbook-sections" id="textbook-sections">
-                        <!-- Sections will be loaded here -->
-                    </div>
-                </div>
-                
-                <div class="textbook-content" id="textbook-content">
-                    <div style="text-align: center; padding: 60px 20px; color: var(--gray);">
-                        <div class="tool-icon" style="margin: 0 auto 20px;">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <h4 style="color: var(--primary); margin-bottom: 10px;">AP Biology Textbook</h4>
-                        <p>Select a section from the sidebar to start reading.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    loadTextbookSections();
-}
 
 function getUnitTitle(unit) {
     const unitTitles = {
@@ -9426,6 +9405,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
