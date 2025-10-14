@@ -4181,10 +4181,14 @@ let currentTextbookUnit = 'unit1';
 function loadTextbookContent() {
     const resourceContent = document.getElementById('resource-content');
     
+    // Determine which textbook to show based on current course
+    const isCalculus = currentCourseId === 'ap-calculus';
+    const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 'AP Biology Textbook';
+    
     resourceContent.innerHTML = `
         <div class="tool-interface active">
             <div class="tool-header">
-                <h3 class="section-title">AP Biology Textbook</h3>
+                <h3 class="section-title">${textbookTitle}</h3>
                 <button class="tool-back" onclick="openResource('textbook', this)">
                     <i class="fas fa-arrow-left"></i> Back to Resources
                 </button>
@@ -4193,40 +4197,99 @@ function loadTextbookContent() {
             <div class="textbook-container">
                 <div class="textbook-sidebar">
                     <div class="unit-selector">
-    <h4>Select Unit</h4>
-    <div class="unit-buttons">
-        <button class="unit-btn ${currentTextbookUnit === 'unit1' ? 'active' : ''}" onclick="switchTextbookUnit('unit1')">
-            Unit 1: Chemistry of Life
-        </button>
-        <button class="unit-btn ${currentTextbookUnit === 'unit2' ? 'active' : ''}" onclick="switchTextbookUnit('unit2')">
-            Unit 2: Cell Structure & Function
-        </button>
-        <button class="unit-btn ${currentTextbookUnit === 'unit3' ? 'active' : ''}" onclick="switchTextbookUnit('unit3')">
-            Unit 3: Cellular Energetics
-        </button>
-        <button class="unit-btn ${currentTextbookUnit === 'unit4' ? 'active' : ''}" onclick="switchTextbookUnit('unit4')">
-            Unit 4: Cell Communication
-        </button>
-        <button class="unit-btn ${currentTextbookUnit === 'unit5' ? 'active' : ''}" onclick="switchTextbookUnit('unit5')">
-            Unit 5: Review and Practice
-        </button>
-        <button class="unit-btn ${currentTextbookUnit === 'unit6' ? 'active' : ''}" onclick="switchTextbookUnit('unit6')">
-            Unit 6: Mendelian Genetics
-        </button>
-        <button class="unit-btn ${currentTextbookUnit === 'unit7' ? 'active' : ''}" onclick="switchTextbookUnit('unit7')">
-            Unit 7: Molecular Genetics
-        </button>
-        <button class="unit-btn ${currentTextbookUnit === 'unit8' ? 'active' : ''}" onclick="switchTextbookUnit('unit8')">
-            Unit 8: Biotechnology
-        </button>
-        <button class="unit-btn ${currentTextbookUnit === 'unit9' ? 'active' : ''}" onclick="switchTextbookUnit('unit9')">
-            Unit 9: Evolution
-        </button>
-        <button class="unit-btn ${currentTextbookUnit === 'unit10' ? 'active' : ''}" onclick="switchTextbookUnit('unit10')">
-            Unit 10: Final Review
-        </button>
-    </div>
-</div>
+                        <h4>Select Unit</h4>
+                        <div class="unit-buttons">
+                            ${isCalculus ? `
+                                <!-- Calculus Units -->
+                                <button class="unit-btn ${currentTextbookUnit === 'calc-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('calc-unit1')">
+                                    Unit 1: Limits & Continuity
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'calc-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('calc-unit2')">
+                                    Unit 2: Differentiation
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'calc-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('calc-unit3')">
+                                    Unit 3: Integration
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'calc-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('calc-unit4')">
+                                    Unit 4: Advanced Topics
+                                </button>
+                            ` : `
+                                <!-- Biology Units -->
+                                <button class="unit-btn ${currentTextbookUnit === 'unit1' ? 'active' : ''}" onclick="switchTextbookUnit('unit1')">
+                                    Unit 1: Chemistry of Life
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'unit2' ? 'active' : ''}" onclick="switchTextbookUnit('unit2')">
+                                    Unit 2: Cell Structure & Function
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'unit3' ? 'active' : ''}" onclick="switchTextbookUnit('unit3')">
+                                    Unit 3: Cellular Energetics
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'unit4' ? 'active' : ''}" onclick="switchTextbookUnit('unit4')">
+                                    Unit 4: Cell Communication
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'unit5' ? 'active' : ''}" onclick="switchTextbookUnit('unit5')">
+                                    Unit 5: Review and Practice
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'unit6' ? 'active' : ''}" onclick="switchTextbookUnit('unit6')">
+                                    Unit 6: Mendelian Genetics
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'unit7' ? 'active' : ''}" onclick="switchTextbookUnit('unit7')">
+                                    Unit 7: Molecular Genetics
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'unit8' ? 'active' : ''}" onclick="switchTextbookUnit('unit8')">
+                                    Unit 8: Biotechnology
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'unit9' ? 'active' : ''}" onclick="switchTextbookUnit('unit9')">
+                                    Unit 9: Evolution
+                                </button>
+                                <button class="unit-btn ${currentTextbookUnit === 'unit10' ? 'active' : ''}" onclick="switchTextbookUnit('unit10')">
+                                    Unit 10: Final Review
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                    <h4>${getCurrentUnitName()}</h4>
+                    <div class="textbook-sections" id="textbook-sections">
+                        <!-- Sections will be loaded here -->
+                    </div>
+                </div>
+                
+                <div class="textbook-content" id="textbook-content">
+                    <div style="text-align: center; padding: 60px 20px; color: var(--gray);">
+                        <div class="tool-icon" style="margin: 0 auto 20px;">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">${textbookTitle}</h4>
+                        <p>Select a section from the sidebar to start reading.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    loadTextbookSections();
+}
+
+// Keep this helper function to display the current unit name
+function getCurrentUnitName() {
+    const unitNames = {
+        'calc-unit1': 'Unit 1: Limits & Continuity',
+        'calc-unit2': 'Unit 2: Differentiation', 
+        'calc-unit3': 'Unit 3: Integration',
+        'calc-unit4': 'Unit 4: Advanced Topics',
+        'unit1': 'Unit 1: Chemistry of Life',
+        'unit2': 'Unit 2: Cell Structure & Function',
+        'unit3': 'Unit 3: Cellular Energetics',
+        'unit4': 'Unit 4: Cell Communication',
+        'unit5': 'Unit 5: Review and Practice',
+        'unit6': 'Unit 6: Mendelian Genetics',
+        'unit7': 'Unit 7: Molecular Genetics',
+        'unit8': 'Unit 8: Biotechnology',
+        'unit9': 'Unit 9: Evolution',
+        'unit10': 'Unit 10: Final Review'
+    };
+    return unitNames[currentTextbookUnit] || 'Current Unit';
+}
                     <h4>${getUnitTitle(currentTextbookUnit)} Sections</h4>
                     <div class="textbook-sections" id="textbook-sections">
                         <!-- Sections will be loaded here -->
@@ -4921,69 +4984,319 @@ function loadTextbookSections() {
                 description: 'Review of key concepts from Unit 9'
             }
         ],
-        unit10: [
-            {
-                id: 'practice_chemistry_life',
-                title: '10.1 Chemistry of Life',
-                path: 'textbooks/ap-biology/practice/life.json',
-                description: 'Review and practice problems'
-            },
-            {
-                id: 'practice_cell_structure',
-                title: '10.2 Cell Structure and Function',
-                path: 'textbooks/ap-biology/practice/structure.json',
-                description: 'Review and practice problems'
-            },
-            {
-                id: 'practice_diffusion',
-                title: '10.3 Diffusion and Osmosis',
-                path: 'textbooks/ap-biology/practice/diffusion.json',
-                description: 'Review and practice problems'
-            },
-            {
-                id: 'practice_energetics',
-                title: '10.4 Cellular Energetics',
-                path: 'textbooks/ap-biology/practice/energetics.json',
-                description: 'Review and practice problems'
-            },
-            {
-                id: 'practice_cell_cycle',
-                title: '10.5 Cell Communication and Cell Cycle',
-                path: 'textbooks/ap-biology/practice/cell_cycle.json',
-                description: 'Review and practice problems'
-            },
-            {
-                id: 'practice_plants_animals',
-                title: '10.6 Plants and Animals',
-                path: 'textbooks/ap-biology/practice/plants.json',
-                description: 'Review and practice problems'
-            },
-            {
-                id: 'practice_mendelian',
-                title: '10.7 Mendelian Genetics',
-                path: 'textbooks/ap-biology/practice/mendelian.json',
-                description: 'Review and practice problems'
-            },
-            {
-                id: 'practice_molecular',
-                title: '10.8 Molecular Genetics',
-                path: 'textbooks/ap-biology/practice/molecular.json',
-                description: 'Review and practice problems'
-            },
-            {
-                id: 'practice_biotech',
-                title: '10.9 Biotechnology',
-                path: 'textbooks/ap-biology/practice/biotech.json',
-                description: 'Review and practice problems'
-            },
-            {
-                id: 'practice_evolution',
-                title: '10.10 Evolution',
-                path: 'textbooks/ap-biology/practice/evolution.json',
-                description: 'Review and practice problems'
-            }
-        ]
-    };
+           unit10: [
+        {
+            id: 'practice_chemistry_life',
+            title: '10.1 Chemistry of Life',
+            path: 'textbooks/ap-biology/practice/life.json',
+            description: 'Review and practice problems'
+        },
+        {
+            id: 'practice_cell_structure',
+            title: '10.2 Cell Structure and Function',
+            path: 'textbooks/ap-biology/practice/structure.json',
+            description: 'Review and practice problems'
+        },
+        {
+            id: 'practice_diffusion',
+            title: '10.3 Diffusion and Osmosis',
+            path: 'textbooks/ap-biology/practice/diffusion.json',
+            description: 'Review and practice problems'
+        },
+        {
+            id: 'practice_energetics',
+            title: '10.4 Cellular Energetics',
+            path: 'textbooks/ap-biology/practice/energetics.json',
+            description: 'Review and practice problems'
+        },
+        {
+            id: 'practice_cell_cycle',
+            title: '10.5 Cell Communication and Cell Cycle',
+            path: 'textbooks/ap-biology/practice/cell_cycle.json',
+            description: 'Review and practice problems'
+        },
+        {
+            id: 'practice_plants_animals',
+            title: '10.6 Plants and Animals',
+            path: 'textbooks/ap-biology/practice/plants.json',
+            description: 'Review and practice problems'
+        },
+        {
+            id: 'practice_mendelian',
+            title: '10.7 Mendelian Genetics',
+            path: 'textbooks/ap-biology/practice/mendelian.json',
+            description: 'Review and practice problems'
+        },
+        {
+            id: 'practice_molecular',
+            title: '10.8 Molecular Genetics',
+            path: 'textbooks/ap-biology/practice/molecular.json',
+            description: 'Review and practice problems'
+        },
+        {
+            id: 'practice_biotech',
+            title: '10.9 Biotechnology',
+            path: 'textbooks/ap-biology/practice/biotech.json',
+            description: 'Review and practice problems'
+        },
+        {
+            id: 'practice_evolution',
+            title: '10.10 Evolution',
+            path: 'textbooks/ap-biology/practice/evolution.json',
+            description: 'Review and practice problems'
+        }
+    ],
+
+    // AP Calculus Units
+    'calc-unit1': [
+        {
+            id: 'calc_idea_of_limit',
+            title: '1.1 The Idea of a Limit',
+            path: 'textbooks/ap-calculus/limits_&_continuity/idea_of_limit.json',
+            description: 'Understanding the fundamental concept of limits'
+        },
+        {
+            id: 'calc_evaluating_limits',
+            title: '1.2 Evaluating Limits Graphically and Algebraically',
+            path: 'textbooks/ap-calculus/limits_&_continuity/evaluating_limits.json',
+            description: 'Methods for calculating limits'
+        },
+        {
+            id: 'calc_limits_infinity',
+            title: '1.3 Limits at Infinity and Horizontal Asymptotes',
+            path: 'textbooks/ap-calculus/limits_&_continuity/atinfinity.json',
+            description: 'Behavior of functions as x approaches infinity'
+        },
+        {
+            id: 'calc_limits_trig',
+            title: '1.4 Limits (Working with Trigonometry)',
+            path: 'textbooks/ap-calculus/limits_&_continuity/trig.json',
+            description: 'Trigonometric limits and special limits'
+        },
+        {
+            id: 'calc_rationalization',
+            title: '1.5 Limits and Rationalization',
+            path: 'textbooks/ap-calculus/limits_&_continuity/rationalize.json',
+            description: 'Rationalizing techniques for limit evaluation'
+        },
+        {
+            id: 'calc_continuity',
+            title: '1.6 Continuity',
+            path: 'textbooks/ap-calculus/limits_&_continuity/continuity.json',
+            description: 'Continuous functions and discontinuity types'
+        },
+        {
+            id: 'calc_one_sided_limits',
+            title: '1.7 One-Sided and Two-Sided Limits',
+            path: 'textbooks/ap-calculus/limits_&_continuity/two_sided.json',
+            description: 'Left-hand and right-hand limits'
+        },
+        {
+            id: 'calc_piecewise',
+            title: '1.8 Piecewise Functions',
+            path: 'textbooks/ap-calculus/limits_&_continuity/piecewise.json',
+            description: 'Limits and continuity of piecewise functions'
+        },
+        {
+            id: 'calc_ivt',
+            title: '1.9 Intermediate Value Theorem',
+            path: 'textbooks/ap-calculus/limits_&_continuity/ivt.json',
+            description: 'IVT and its applications'
+        },
+        {
+            id: 'calc_infinite_limits',
+            title: '1.10 Infinite Limits',
+            path: 'textbooks/ap-calculus/limits_&_continuity/infinite.json',
+            description: 'Vertical asymptotes and unbounded behavior'
+        },
+        {
+            id: 'calc_squeeze_theorem',
+            title: '1.11 Squeeze Theorem',
+            path: 'textbooks/ap-calculus/limits_&_continuity/squeeze.json',
+            description: 'Sandwich theorem for limit evaluation'
+        },
+        {
+            id: 'calc_limits_revision',
+            title: '1.12 Revision and Problems',
+            path: 'textbooks/ap-calculus/limits_&_continuity/revision.json',
+            description: 'Comprehensive practice and review'
+        }
+    ],
+    'calc-unit2': [
+        {
+            id: 'calc_first_principle',
+            title: '2.1 First Principle Application',
+            path: 'textbooks/ap-calculus/differentiation/first_principle.json',
+            description: 'Derivatives using the limit definition'
+        },
+        {
+            id: 'calc_basic_rules',
+            title: '2.2 Basic Rules of Derivative',
+            path: 'textbooks/ap-calculus/differentiation/basic_rules.json',
+            description: 'Power rule, constant multiple, sum/difference rules'
+        },
+        {
+            id: 'calc_higher_derivatives',
+            title: '2.3 First, Second and Third Derivatives',
+            path: 'textbooks/ap-calculus/differentiation/higher_deriv.json',
+            description: 'Higher order derivatives and their meaning'
+        },
+        {
+            id: 'calc_derivatives_context',
+            title: '2.4 Derivatives in Context',
+            path: 'textbooks/ap-calculus/differentiation/word_prob.json',
+            description: 'Motion, rates of change, and applied problems'
+        },
+        {
+            id: 'calc_chain_rule',
+            title: '2.5 The Chain Rule',
+            path: 'textbooks/ap-calculus/differentiation/chainrule.json',
+            description: 'Derivatives of composite functions'
+        },
+        {
+            id: 'calc_product_rule',
+            title: '2.6 The Product Rule',
+            path: 'textbooks/ap-calculus/differentiation/productrule.json',
+            description: 'Derivatives of products of functions'
+        },
+        {
+            id: 'calc_quotient_rule',
+            title: '2.7 The Quotient Rule',
+            path: 'textbooks/ap-calculus/differentiation/quotientrule.json',
+            description: 'Derivatives of quotients of functions'
+        },
+        {
+            id: 'calc_composite_functions',
+            title: '2.8 Derivatives of Composite Functions',
+            path: 'textbooks/ap-calculus/differentiation/composite.json',
+            description: 'Advanced composite function differentiation'
+        },
+        {
+            id: 'calc_implicit_diff',
+            title: '2.9 Implicit Differentiation',
+            path: 'textbooks/ap-calculus/differentiation/implicit.json',
+            description: 'Differentiating implicitly defined functions'
+        },
+        {
+            id: 'calc_inverse_derivatives',
+            title: '2.10 Derivatives of Inverse Functions',
+            path: 'textbooks/ap-calculus/differentiation/inverse.json',
+            description: 'Derivatives of inverse trigonometric functions'
+        },
+        {
+            id: 'calc_optimization',
+            title: '2.11 Optimization Problems',
+            path: 'textbooks/ap-calculus/differentiation/optimize.json',
+            description: 'Applied maximum and minimum problems'
+        },
+        {
+            id: 'calc_concavity',
+            title: '2.12 Concavity and Points of Inflection',
+            path: 'textbooks/ap-calculus/differentiation/concavity.json',
+            description: 'Second derivative test and curve analysis'
+        }
+    ],
+    'calc-unit3': [
+        {
+            id: 'calc_antiderivatives',
+            title: '3.1 Introduction to Antiderivatives',
+            path: 'textbooks/ap-calculus/integration/antideriv.json',
+            description: 'Reverse process of differentiation'
+        },
+        {
+            id: 'calc_indefinite_integrals',
+            title: '3.2 Indefinite Integrals and Notation',
+            path: 'textbooks/ap-calculus/integration/indefinite.json',
+            description: 'Integral notation and basic integration'
+        },
+        {
+            id: 'calc_definite_integrals',
+            title: '3.3 Definite Integrals',
+            path: 'textbooks/ap-calculus/integration/definite.json',
+            description: 'Area under curves and definite integrals'
+        },
+        {
+            id: 'calc_riemann_sums',
+            title: '3.4 Approximating Area with Riemann Sums',
+            path: 'textbooks/ap-calculus/integration/riemann.json',
+            description: 'Left, right, and midpoint Riemann sums'
+        },
+        {
+            id: 'calc_trapezoidal_rule',
+            title: '3.5 Trapezoidal Rule and Approximations',
+            path: 'textbooks/ap-calculus/integration/trapezoidal.json',
+            description: 'Numerical integration methods'
+        },
+        {
+            id: 'calc_substitution_basics',
+            title: '3.6 Substitution Method (Basics)',
+            path: 'textbooks/ap-calculus/integration/basics.json',
+            description: 'U-substitution fundamentals'
+        },
+        {
+            id: 'calc_substitution_apps',
+            title: '3.7 Substitution Method (Applications)',
+            path: 'textbooks/ap-calculus/integration/applications.json',
+            description: 'Advanced u-substitution problems'
+        },
+        {
+            id: 'calc_fundamental_theorem',
+            title: '3.8 Fundamental Theorem of Calculus',
+            path: 'textbooks/ap-calculus/integration/fundamental.json',
+            description: 'Connecting derivatives and integrals'
+        },
+        {
+            id: 'calc_change_theorem',
+            title: '3.9 Change Theorem',
+            path: 'textbooks/ap-calculus/integration/change.json',
+            description: 'Net change and accumulation'
+        },
+        {
+            id: 'calc_differential_eq',
+            title: '3.10 Introduction to Differential Equations',
+            path: 'textbooks/ap-calculus/integration/differential.json',
+            description: 'Basic differential equations and solutions'
+        },
+        {
+            id: 'calc_growth_decay',
+            title: '3.11 Growth and Decay Models',
+            path: 'textbooks/ap-calculus/integration/growth.json',
+            description: 'Exponential growth and decay applications'
+        },
+        {
+            id: 'calc_volumes',
+            title: '3.12 Volumes of Solids',
+            path: 'textbooks/ap-calculus/integration/volume.json',
+            description: 'Volume by cross-sections and revolution'
+        }
+    ],
+    'calc-unit4': [
+        {
+            id: 'calc_parametric',
+            title: '4.1 Parametric Equations',
+            path: 'textbooks/ap-calculus/advanced_topics/parametric.json',
+            description: 'Curves defined by parametric equations'
+        },
+        {
+            id: 'calc_polar',
+            title: '4.2 Polar Coordinates',
+            path: 'textbooks/ap-calculus/advanced_topics/polar.json',
+            description: 'Polar coordinate system and graphs'
+        },
+        {
+            id: 'calc_vector_functions',
+            title: '4.3 Vector-Valued Functions',
+            path: 'textbooks/ap-calculus/advanced_topics/vector.json',
+            description: 'Calculus of vector functions'
+        },
+        {
+            id: 'calc_sequences_series',
+            title: '4.4 Sequences and Series',
+            path: 'textbooks/ap-calculus/advanced_topics/series.json',
+            description: 'Infinite sequences and series introduction'
+        }
+    ]
+};
     
     const currentSections = unitSections[currentTextbookUnit];
     
@@ -9113,6 +9426,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
