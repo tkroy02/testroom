@@ -4218,11 +4218,13 @@ function loadTextbookContent() {
     const isPhysics10 = currentCourseId === 'physics-grade-10';
     const isPhysics11 = currentCourseId === 'physics-grade-11';
     const isPhysics12 = currentCourseId === 'physics-grade-12';
+    const isAPPhysics1 = currentCourseId === 'ap-physics-1';
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
                      isPhysics10 ? 'Physics Grade 10 Textbook' :
                      isPhysics11 ? 'Physics Grade 11 Textbook' :
                      isPhysics12 ? 'Physics Grade 12 Textbook' : 
+                     isAPPhysics1 ? 'AP Physics 1 Textbook' :
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4271,6 +4273,31 @@ function loadTextbookContent() {
                                 <button class="unit-btn ${currentTextbookUnit === 'physics11-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('physics11-unit10')">
                                     Unit 10: Modern Physics Introduction
                                 </button>
+                                ` : isAPPhysics1 ? `
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics1-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics1-unit1')">
+        Unit 1: Kinematics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics1-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics1-unit2')">
+        Unit 2: Dynamics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics1-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics1-unit3')">
+        Unit 3: Circular Motion & Gravitation
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics1-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics1-unit4')">
+        Unit 4: Energy
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics1-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics1-unit5')">
+        Unit 5: Momentum
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics1-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics1-unit6')">
+        Unit 6: Simple Harmonic Motion
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics1-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics1-unit7')">
+        Unit 7: Rotational Motion
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'ap-physics1-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('ap-physics1-unit8')">
+        Unit 8: Fluid Mechanics
+    </button>
                             ` : isCalculus ? `
                                 <!-- Calculus Units -->
                                 <button class="unit-btn ${currentTextbookUnit === 'calc-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('calc-unit1')">
@@ -4493,6 +4520,16 @@ function getCurrentUnitName() {
 'physics12-unit8': 'Unit 8: Atomic & Nuclear Physics',
 'physics12-unit9': 'Unit 9: Relativity (Intro)',
 'physics12-unit10': 'Unit 10: Review & Capstone Project',
+
+        // Add to getCurrentUnitName function
+'ap-physics1-unit1': 'Unit 1: Kinematics',
+'ap-physics1-unit2': 'Unit 2: Dynamics',
+'ap-physics1-unit3': 'Unit 3: Circular Motion & Gravitation',
+'ap-physics1-unit4': 'Unit 4: Energy',
+'ap-physics1-unit5': 'Unit 5: Momentum',
+'ap-physics1-unit6': 'Unit 6: Simple Harmonic Motion',
+'ap-physics1-unit7': 'Unit 7: Rotational Motion',
+'ap-physics1-unit8': 'Unit 8: Fluid Mechanics',
         
         // Biology units (your original structure)
         'unit1': 'Unit 1: Chemistry of Life',
@@ -5243,6 +5280,511 @@ function loadTextbookSections() {
             description: 'Review and practice problems'
         }
     ],
+
+        // Add to the unitSections object in the loadTextbookSections function
+'ap-physics1-unit1': [
+    {
+        id: 'ap-physics1_introduction_to_motion',
+        title: '1.1 Introduction to Motion',
+        path: 'textbooks/ap-physics-1/kinematics/introduction_to_motion.json',
+        description: 'Basic concepts of motion and position'
+    },
+    {
+        id: 'ap-physics1_velocity',
+        title: '1.2 Velocity',
+        path: 'textbooks/ap-physics-1/kinematics/velocity.json',
+        description: 'Speed, velocity, and rate of position change'
+    },
+    {
+        id: 'ap-physics1_acceleration',
+        title: '1.3 Acceleration',
+        path: 'textbooks/ap-physics-1/kinematics/acceleration.json',
+        description: 'Rate of velocity change and acceleration concepts'
+    },
+    {
+        id: 'ap-physics1_representing_motion_1',
+        title: '1.4 Representing Motion (Part 1)',
+        path: 'textbooks/ap-physics-1/kinematics/representing_motion_1.json',
+        description: 'Position-time graphs and analysis'
+    },
+    {
+        id: 'ap-physics1_representing_motion_2',
+        title: '1.5 Representing Motion (Part 2)',
+        path: 'textbooks/ap-physics-1/kinematics/representing_motion_2.json',
+        description: 'Velocity-time graphs and analysis'
+    },
+    {
+        id: 'ap-physics1_representing_motion_3',
+        title: '1.6 Representing Motion (Part 3)',
+        path: 'textbooks/ap-physics-1/kinematics/representing_motion_3.json',
+        description: 'Acceleration-time graphs and integration'
+    },
+    {
+        id: 'ap-physics1_kinematic_equations_1',
+        title: '1.7 Kinematic Equations (Part 1)',
+        path: 'textbooks/ap-physics-1/kinematics/kinematic_equations_1.json',
+        description: 'Basic kinematic equations for constant acceleration'
+    },
+    {
+        id: 'ap-physics1_kinematic_equations_2',
+        title: '1.8 Kinematic Equations (Part 2)',
+        path: 'textbooks/ap-physics-1/kinematics/kinematic_equations_2.json',
+        description: 'Advanced applications of kinematic equations'
+    },
+    {
+        id: 'ap-physics1_intro_to_2d_motion',
+        title: '1.9 Introduction to 2D Motion',
+        path: 'textbooks/ap-physics-1/kinematics/intro_to_2d_motion.json',
+        description: 'Vector components in two-dimensional motion'
+    },
+    {
+        id: 'ap-physics1_projectile_motion',
+        title: '1.10 Projectile Motion',
+        path: 'textbooks/ap-physics-1/kinematics/projectile_motion.json',
+        description: 'Analysis of objects moving under gravity'
+    }
+],
+
+'ap-physics1-unit2': [
+    {
+        id: 'ap-physics1_forces_and_free_body_diagrams',
+        title: '2.1 Forces and Free Body Diagrams',
+        path: 'textbooks/ap-physics-1/dynamics/forces_and_free_body_diagrams.json',
+        description: 'Identifying forces and drawing FBDs'
+    },
+    {
+        id: 'ap-physics1_newtons_first_law',
+        title: '2.2 Newton\'s First Law',
+        path: 'textbooks/ap-physics-1/dynamics/newtons_first_law.json',
+        description: 'Law of inertia and equilibrium'
+    },
+    {
+        id: 'ap-physics1_newtons_second_law',
+        title: '2.3 Newton\'s Second Law',
+        path: 'textbooks/ap-physics-1/dynamics/newtons_second_law.json',
+        description: 'F=ma and force-acceleration relationship'
+    },
+    {
+        id: 'ap-physics1_newtons_third_law',
+        title: '2.4 Newton\'s Third Law',
+        path: 'textbooks/ap-physics-1/dynamics/newtons_third_law.json',
+        description: 'Action-reaction pairs and force interactions'
+    },
+    {
+        id: 'ap-physics1_systems_of_objects',
+        title: '2.5 Systems of Objects',
+        path: 'textbooks/ap-physics-1/dynamics/systems_of_objects.json',
+        description: 'Analyzing multiple connected objects'
+    },
+    {
+        id: 'ap-physics1_normal_force_and_elevators',
+        title: '2.6 Normal Force and Elevators',
+        path: 'textbooks/ap-physics-1/dynamics/normal_force_and_elevators.json',
+        description: 'Contact forces and accelerating reference frames'
+    },
+    {
+        id: 'ap-physics1_friction_1',
+        title: '2.7 Friction (Part 1)',
+        path: 'textbooks/ap-physics-1/dynamics/friction_1.json',
+        description: 'Static and kinetic friction basics'
+    },
+    {
+        id: 'ap-physics1_friction_2',
+        title: '2.8 Friction (Part 2)',
+        path: 'textbooks/ap-physics-1/dynamics/friction_2.json',
+        description: 'Advanced friction problems and applications'
+    },
+    {
+        id: 'ap-physics1_inclined_planes',
+        title: '2.9 Inclined Planes',
+        path: 'textbooks/ap-physics-1/dynamics/inclined_planes.json',
+        description: 'Forces and motion on slopes'
+    },
+    {
+        id: 'ap-physics1_advanced_system_problems',
+        title: '2.10 Advanced System Problems',
+        path: 'textbooks/ap-physics-1/dynamics/advanced_system_problems.json',
+        description: 'Complex multi-object dynamics'
+    }
+],
+
+'ap-physics1-unit3': [
+    {
+        id: 'ap-physics1_uniform_circular_motion',
+        title: '3.1 Uniform Circular Motion',
+        path: 'textbooks/ap-physics-1/circular_motion_and_gravitation/uniform_circular_motion.json',
+        description: 'Motion in circles with constant speed'
+    },
+    {
+        id: 'ap-physics1_centripetal_force',
+        title: '3.2 Centripetal Force',
+        path: 'textbooks/ap-physics-1/circular_motion_and_gravitation/centripetal_force.json',
+        description: 'Force required for circular motion'
+    },
+    {
+        id: 'ap-physics1_horizontal_circles',
+        title: '3.3 Horizontal Circles',
+        path: 'textbooks/ap-physics-1/circular_motion_and_gravitation/horizontal_circles.json',
+        description: 'Circular motion in horizontal planes'
+    },
+    {
+        id: 'ap-physics1_vertical_circles',
+        title: '3.4 Vertical Circles',
+        path: 'textbooks/ap-physics-1/circular_motion_and_gravitation/vertical_circles.json',
+        description: 'Circular motion in vertical planes'
+    },
+    {
+        id: 'ap-physics1_introduction_to_gravity',
+        title: '3.5 Introduction to Gravity',
+        path: 'textbooks/ap-physics-1/circular_motion_and_gravitation/introduction_to_gravity.json',
+        description: 'Universal gravitation concepts'
+    },
+    {
+        id: 'ap-physics1_gravitational_fields',
+        title: '3.6 Gravitational Fields',
+        path: 'textbooks/ap-physics-1/circular_motion_and_gravitation/gravitational_fields.json',
+        description: 'Field concept and gravitational field strength'
+    },
+    {
+        id: 'ap-physics1_circular_orbits',
+        title: '3.7 Circular Orbits',
+        path: 'textbooks/ap-physics-1/circular_motion_and_gravitation/circular_orbits.json',
+        description: 'Satellite motion and orbital mechanics'
+    },
+    {
+        id: 'ap-physics1_keplers_laws',
+        title: '3.8 Kepler\'s Laws',
+        path: 'textbooks/ap-physics-1/circular_motion_and_gravitation/keplers_laws.json',
+        description: 'Planetary motion laws and applications'
+    },
+    {
+        id: 'ap-physics1_gravitational_potential_energy',
+        title: '3.9 Gravitational Potential Energy',
+        path: 'textbooks/ap-physics-1/circular_motion_and_gravitation/gravitational_potential_energy.json',
+        description: 'Energy in gravitational systems'
+    },
+    {
+        id: 'ap-physics1_synthesis_problems',
+        title: '3.10 Synthesis Problems',
+        path: 'textbooks/ap-physics-1/circular_motion_and_gravitation/synthesis_problems.json',
+        description: 'Combined circular motion and gravity problems'
+    }
+],
+
+'ap-physics1-unit4': [
+    {
+        id: 'ap-physics1_work_and_energy',
+        title: '4.1 Work and Energy',
+        path: 'textbooks/ap-physics-1/energy/work_and_energy.json',
+        description: 'Work definition and energy transfer'
+    },
+    {
+        id: 'ap-physics1_kinetic_energy',
+        title: '4.2 Kinetic Energy',
+        path: 'textbooks/ap-physics-1/energy/kinetic_energy.json',
+        description: 'Energy of motion and work-energy theorem'
+    },
+    {
+        id: 'ap-physics1_gravitational_potential_energy',
+        title: '4.3 Gravitational Potential Energy',
+        path: 'textbooks/ap-physics-1/energy/gravitational_potential_energy.json',
+        description: 'Energy due to position in gravity field'
+    },
+    {
+        id: 'ap-physics1_conservation_of_mechanical_energy_1',
+        title: '4.4 Conservation of Mechanical Energy (Part 1)',
+        path: 'textbooks/ap-physics-1/energy/conservation_of_mechanical_energy_1.json',
+        description: 'Energy conservation in ideal systems'
+    },
+    {
+        id: 'ap-physics1_springs_and_elastic_potential_energy',
+        title: '4.5 Springs and Elastic Potential Energy',
+        path: 'textbooks/ap-physics-1/energy/springs_and_elastic_potential_energy.json',
+        description: 'Hooke\'s law and spring energy'
+    },
+    {
+        id: 'ap-physics1_conservation_of_mechanical_energy_2',
+        title: '4.6 Conservation of Mechanical Energy (Part 2)',
+        path: 'textbooks/ap-physics-1/energy/conservation_of_mechanical_energy_2.json',
+        description: 'Advanced energy conservation problems'
+    },
+    {
+        id: 'ap-physics1_energy_bar_charts_and_lol_diagrams',
+        title: '4.7 Energy Bar Charts and LOL Diagrams',
+        path: 'textbooks/ap-physics-1/energy/energy_bar_charts_and_lol_diagrams.json',
+        description: 'Visual energy representation methods'
+    },
+    {
+        id: 'ap-physics1_work_with_non_conservative_forces',
+        title: '4.8 Work with Non-Conservative Forces',
+        path: 'textbooks/ap-physics-1/energy/work_with_non_conservative_forces.json',
+        description: 'Energy changes with friction and drag'
+    },
+    {
+        id: 'ap-physics1_power',
+        title: '4.9 Power',
+        path: 'textbooks/ap-physics-1/energy/power.json',
+        description: 'Rate of energy transfer and calculations'
+    },
+    {
+        id: 'ap-physics1_energy_problem_synthesis',
+        title: '4.10 Energy Problem Synthesis',
+        path: 'textbooks/ap-physics-1/energy/energy_problem_synthesis.json',
+        description: 'Complex energy conservation scenarios'
+    }
+],
+
+'ap-physics1-unit5': [
+    {
+        id: 'ap-physics1_momentum_and_impulse',
+        title: '5.1 Momentum and Impulse',
+        path: 'textbooks/ap-physics-1/momentum/momentum_and_impulse.json',
+        description: 'Momentum definition and impulse concept'
+    },
+    {
+        id: 'ap-physics1_impulse_momentum_theorem',
+        title: '5.2 Impulse-Momentum Theorem',
+        path: 'textbooks/ap-physics-1/momentum/impulse_momentum_theorem.json',
+        description: 'Relationship between impulse and momentum change'
+    },
+    {
+        id: 'ap-physics1_conservation_of_momentum_1',
+        title: '5.3 Conservation of Momentum (Part 1)',
+        path: 'textbooks/ap-physics-1/momentum/conservation_of_momentum_1.json',
+        description: 'Momentum conservation in isolated systems'
+    },
+    {
+        id: 'ap-physics1_conservation_of_momentum_2',
+        title: '5.4 Conservation of Momentum (Part 2)',
+        path: 'textbooks/ap-physics-1/momentum/conservation_of_momentum_2.json',
+        description: 'Advanced momentum conservation applications'
+    },
+    {
+        id: 'ap-physics1_collision_analysis_1',
+        title: '5.5 Collision Analysis (Part 1)',
+        path: 'textbooks/ap-physics-1/momentum/collision_analysis_1.json',
+        description: 'Elastic and inelastic collisions'
+    },
+    {
+        id: 'ap-physics1_collision_analysis_2',
+        title: '5.6 Collision Analysis (Part 2)',
+        path: 'textbooks/ap-physics-1/momentum/collision_analysis_2.json',
+        description: 'Perfectly inelastic collisions'
+    },
+    {
+        id: 'ap-physics1_collision_analysis_3',
+        title: '5.7 Collision Analysis (Part 3)',
+        path: 'textbooks/ap-physics-1/momentum/collision_analysis_3.json',
+        description: 'Elastic collision analysis'
+    },
+    {
+        id: 'ap-physics1_center_of_mass',
+        title: '5.8 Center of Mass',
+        path: 'textbooks/ap-physics-1/momentum/center_of_mass.json',
+        description: 'Center of mass concept and calculation'
+    },
+    {
+        id: 'ap-physics1_motion_of_center_of_mass',
+        title: '5.9 Motion of Center of Mass',
+        path: 'textbooks/ap-physics-1/momentum/motion_of_center_of_mass.json',
+        description: 'Center of mass motion in systems'
+    },
+    {
+        id: 'ap-physics1_momentum_in_two_dimensions',
+        title: '5.10 Momentum in Two Dimensions',
+        path: 'textbooks/ap-physics-1/momentum/momentum_in_two_dimensions.json',
+        description: 'Vector nature of momentum in 2D collisions'
+    }
+],
+
+'ap-physics1-unit6': [
+    {
+        id: 'ap-physics1_introduction_to_oscillations',
+        title: '6.1 Introduction to Oscillations',
+        path: 'textbooks/ap-physics-1/simple_harmonic_motion/introduction_to_oscillations.json',
+        description: 'Periodic motion and oscillation characteristics'
+    },
+    {
+        id: 'ap-physics1_spring_block_systems',
+        title: '6.2 Spring-Block Systems',
+        path: 'textbooks/ap-physics-1/simple_harmonic_motion/spring_block_systems.json',
+        description: 'Mass-spring oscillators and Hooke\'s law'
+    },
+    {
+        id: 'ap-physics1_kinematics_of_shm',
+        title: '6.3 Kinematics of SHM',
+        path: 'textbooks/ap-physics-1/simple_harmonic_motion/kinematics_of_shm.json',
+        description: 'Position, velocity, acceleration in SHM'
+    },
+    {
+        id: 'ap-physics1_the_pendulum',
+        title: '6.4 The Pendulum',
+        path: 'textbooks/ap-physics-1/simple_harmonic_motion/the_pendulum.json',
+        description: 'Simple pendulum motion and analysis'
+    },
+    {
+        id: 'ap-physics1_energy_in_shm',
+        title: '6.5 Energy in SHM',
+        path: 'textbooks/ap-physics-1/simple_harmonic_motion/energy_in_shm.json',
+        description: 'Energy conservation in oscillating systems'
+    },
+    {
+        id: 'ap-physics1_graphical_analysis_of_shm',
+        title: '6.6 Graphical Analysis of SHM',
+        path: 'textbooks/ap-physics-1/simple_harmonic_motion/graphical_analysis_of_shm.json',
+        description: 'Analyzing SHM through graphs'
+    },
+    {
+        id: 'ap-physics1_period_equation_for_springs',
+        title: '6.7 Period Equation for Springs',
+        path: 'textbooks/ap-physics-1/simple_harmonic_motion/period_equation_for_springs.json',
+        description: 'Calculating period for mass-spring systems'
+    },
+    {
+        id: 'ap-physics1_period_equation_for_pendulums',
+        title: '6.8 Period Equation for Pendulums',
+        path: 'textbooks/ap-physics-1/simple_harmonic_motion/period_equation_for_pendulums.json',
+        description: 'Calculating period for pendulum systems'
+    },
+    {
+        id: 'ap-physics1_comparing_oscillators',
+        title: '6.9 Comparing Oscillators',
+        path: 'textbooks/ap-physics-1/simple_harmonic_motion/comparing_oscillators.json',
+        description: 'Similarities and differences in oscillators'
+    },
+    {
+        id: 'ap-physics1_shm_and_circular_motion',
+        title: '6.10 SHM and Circular Motion',
+        path: 'textbooks/ap-physics-1/simple_harmonic_motion/shm_and_circular_motion.json',
+        description: 'Relationship between SHM and uniform circular motion'
+    }
+],
+
+'ap-physics1-unit7': [
+    {
+        id: 'ap-physics1_rotational_kinematics_1',
+        title: '7.1 Rotational Kinematics (Part 1)',
+        path: 'textbooks/ap-physics-1/rotational_motion/rotational_kinematics_1.json',
+        description: 'Angular position, velocity, and acceleration'
+    },
+    {
+        id: 'ap-physics1_rotational_kinematics_2',
+        title: '7.2 Rotational Kinematics (Part 2)',
+        path: 'textbooks/ap-physics-1/rotational_motion/rotational_kinematics_2.json',
+        description: 'Rotational kinematic equations'
+    },
+    {
+        id: 'ap-physics1_connecting_linear_and_angular',
+        title: '7.3 Connecting Linear and Angular',
+        path: 'textbooks/ap-physics-1/rotational_motion/connecting_linear_and_angular.json',
+        description: 'Relationships between linear and rotational motion'
+    },
+    {
+        id: 'ap-physics1_centripetal_acceleration_revisited',
+        title: '7.4 Centripetal Acceleration Revisited',
+        path: 'textbooks/ap-physics-1/rotational_motion/centripetal_acceleration_revisited.json',
+        description: 'Centripetal acceleration in rotational context'
+    },
+    {
+        id: 'ap-physics1_torque',
+        title: '7.5 Torque',
+        path: 'textbooks/ap-physics-1/rotational_motion/torque.json',
+        description: 'Rotational force and lever arm concept'
+    },
+    {
+        id: 'ap-physics1_rotational_inertia',
+        title: '7.6 Rotational Inertia',
+        path: 'textbooks/ap-physics-1/rotational_motion/rotational_inertia.json',
+        description: 'Moment of inertia and resistance to rotation'
+    },
+    {
+        id: 'ap-physics1_newtons_second_law_for_rotation',
+        title: '7.7 Newton\'s Second Law for Rotation',
+        path: 'textbooks/ap-physics-1/rotational_motion/newtons_second_law_for_rotation.json',
+        description: 'τ = Iα and rotational dynamics'
+    },
+    {
+        id: 'ap-physics1_rotational_kinetic_energy',
+        title: '7.8 Rotational Kinetic Energy',
+        path: 'textbooks/ap-physics-1/rotational_motion/rotational_kinetic_energy.json',
+        description: 'Energy of rotating objects'
+    },
+    {
+        id: 'ap-physics1_rolling_motion',
+        title: '7.9 Rolling Motion',
+        path: 'textbooks/ap-physics-1/rotational_motion/rolling_motion.json',
+        description: 'Combined translation and rotation'
+    },
+    {
+        id: 'ap-physics1_angular_momentum',
+        title: '7.10 Angular Momentum',
+        path: 'textbooks/ap-physics-1/rotational_motion/angular_momentum.json',
+        description: 'Rotational momentum and conservation'
+    }
+],
+
+'ap-physics1-unit8': [
+    {
+        id: 'ap-physics1_density_and_pressure',
+        title: '8.1 Density and Pressure',
+        path: 'textbooks/ap-physics-1/fluid_mechanics/density_and_pressure.json',
+        description: 'Fluid properties and pressure definition'
+    },
+    {
+        id: 'ap-physics1_pressure_at_depth',
+        title: '8.2 Pressure at Depth',
+        path: 'textbooks/ap-physics-1/fluid_mechanics/pressure_at_depth.json',
+        description: 'Hydrostatic pressure in fluids'
+    },
+    {
+        id: 'ap-physics1_pascals_principle',
+        title: '8.3 Pascal\'s Principle',
+        path: 'textbooks/ap-physics-1/fluid_mechanics/pascals_principle.json',
+        description: 'Pressure transmission in confined fluids'
+    },
+    {
+        id: 'ap-physics1_buoyancy_1',
+        title: '8.4 Buoyancy (Part 1)',
+        path: 'textbooks/ap-physics-1/fluid_mechanics/buoyancy_1.json',
+        description: 'Archimedes\' principle and buoyant force'
+    },
+    {
+        id: 'ap-physics1_buoyancy_2',
+        title: '8.5 Buoyancy (Part 2)',
+        path: 'textbooks/ap-physics-1/fluid_mechanics/buoyancy_2.json',
+        description: 'Advanced buoyancy problems'
+    },
+    {
+        id: 'ap-physics1_float_or_sink',
+        title: '8.6 Float or Sink',
+        path: 'textbooks/ap-physics-1/fluid_mechanics/float_or_sink.json',
+        description: 'Conditions for flotation'
+    },
+    {
+        id: 'ap-physics1_continuity_equation',
+        title: '8.7 Continuity Equation',
+        path: 'textbooks/ap-physics-1/fluid_mechanics/continuity_equation.json',
+        description: 'Conservation of mass in fluid flow'
+    },
+    {
+        id: 'ap-physics1_bernoullis_principle_1',
+        title: '8.8 Bernoulli\'s Principle (Part 1)',
+        path: 'textbooks/ap-physics-1/fluid_mechanics/bernoullis_principle_1.json',
+        description: 'Energy conservation in fluid flow'
+    },
+    {
+        id: 'ap-physics1_bernoullis_principle_2',
+        title: '8.9 Bernoulli\'s Principle (Part 2)',
+        path: 'textbooks/ap-physics-1/fluid_mechanics/bernoullis_principle_2.json',
+        description: 'Applications of Bernoulli\'s equation'
+    },
+    {
+        id: 'ap-physics1_synthesis_and_applications',
+        title: '8.10 Synthesis and Applications',
+        path: 'textbooks/ap-physics-1/fluid_mechanics/synthesis_and_applications.json',
+        description: 'Complex fluid mechanics problems'
+    }
+],
 
         // Add to your unitSections object
 'physics10-unit1': [
@@ -12125,6 +12667,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
