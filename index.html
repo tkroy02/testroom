@@ -3322,6 +3322,17 @@ const courseData = {
             }
         ]
     },
+    // Add to your courseData object
+'physics-grade-10': {
+    title: 'Physics Grade 10',
+    description: 'Intermediate physics covering kinematics, forces, energy, momentum, waves, and electricity with mathematical applications.',
+    chapters: [
+        // We'll use the unit structure for the textbook system
+    ],
+    quizzes: [
+        // Physics Grade 10 quizzes will be added later
+    ]
+},
     'ap-calculus': {
         title: 'AP Calculus',
         description: 'College-level calculus covering limits, derivatives, integrals, and advanced topics in preparation for the AP exam.',
@@ -4204,9 +4215,11 @@ function loadTextbookContent() {
     // Determine which textbook to show based on current course
     const isCalculus = currentCourseId === 'ap-calculus';
     const isPhysics9 = currentCourseId === 'physics-grade-9';
+    const isPhysics10 = currentCourseId === 'physics-grade-10';
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
-                         isPhysics9 ? 'Physics Grade 9 Textbook' : 
-                         'AP Biology Textbook';
+                     isPhysics9 ? 'Physics Grade 9 Textbook' :
+                     isPhysics10 ? 'Physics Grade 10 Textbook' :
+                     'AP Biology Textbook';
     
     resourceContent.innerHTML = `
         <div class="tool-interface active">
@@ -4222,6 +4235,39 @@ function loadTextbookContent() {
                     <div class="unit-selector">
                         <h4>Select Unit</h4>
                         <div class="unit-buttons">
+                        ${isPhysics10 ? `
+    <!-- Physics Grade 10 Units -->
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit1')">
+        Unit 1: Measurement & 1D Kinematics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit2')">
+        Unit 2: Forces & Newton's First Law
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit3')">
+        Unit 3: Newton's Second Law & Friction
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit4')">
+        Unit 4: Work, Energy & Power
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit5')">
+        Unit 5: Momentum & Impulse
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit6')">
+        Unit 6: Waves Basic Properties
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit7')">
+        Unit 7: Sound and Its Properties
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit8')">
+        Unit 8: Light Reflection & Mirrors
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit9')">
+        Unit 9: Static & Current Electricity
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'physics10-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('physics10-unit10')">
+        Unit 10: Circuits & Electromagnetism
+    </button>
+` : '
                             ${isCalculus ? `
                                 <!-- Calculus Units -->
                                 <button class="unit-btn ${currentTextbookUnit === 'calc-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('calc-unit1')">
@@ -4345,6 +4391,18 @@ function getCurrentUnitName() {
         'physics9-unit8': 'Unit 8: Waves & Sound',
         'physics9-unit9': 'Unit 9: Light & Reflection',
         'physics9-unit10': 'Unit 10: Electricity',
+
+        // Add Physics Grade 10 units to getCurrentUnitName()
+'physics10-unit1': 'Unit 1: Measurement & 1D Kinematics',
+'physics10-unit2': 'Unit 2: Forces & Newton\'s First Law',
+'physics10-unit3': 'Unit 3: Newton\'s Second Law & Friction',
+'physics10-unit4': 'Unit 4: Work, Energy & Power',
+'physics10-unit5': 'Unit 5: Momentum & Impulse',
+'physics10-unit6': 'Unit 6: Waves Basic Properties',
+'physics10-unit7': 'Unit 7: Sound and Its Properties',
+'physics10-unit8': 'Unit 8: Light Reflection & Mirrors',
+'physics10-unit9': 'Unit 9: Static & Current Electricity',
+'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
         
         // Biology units (your original structure)
         'unit1': 'Unit 1: Chemistry of Life',
@@ -10719,4 +10777,5 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
