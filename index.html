@@ -4262,6 +4262,7 @@ function loadTextbookContent() {
     const isPreCalculus = currentCourseId === 'pre-calculus';
     const isAlgebra1 = currentCourseId === 'algebra-1';
     const isAlgebra2 = currentCourseId === 'algebra-2';
+    const isGeometry = currentCourseId === 'geometry';
     
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
@@ -4278,6 +4279,7 @@ function loadTextbookContent() {
                      isPreCalculus ? 'Pre-Calculus Textbook' : 
                      isAlgebra1 ? 'Algebra 1 Textbook' :
                      isAlgebra2 ? 'Algebra 2 Textbook' :
+                     isGeometry ? 'Geometry Textbook' :
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4327,6 +4329,44 @@ function loadTextbookContent() {
                                     Unit 10: Modern Physics Introduction
                                 </button>
 
+
+` : isGeometry ? `
+    <button class="unit-btn ${currentTextbookUnit === 'geometry-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit1')">
+        Unit 1: Foundations of Geometry
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'geometry-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit2')">
+        Unit 2: Reasoning and Proof
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'geometry-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit3')">
+        Unit 3: Parallel and Perpendicular Lines
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'geometry-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit4')">
+        Unit 4: Triangles and Congruence
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'geometry-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit5')">
+        Unit 5: Relationships in Triangles
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'geometry-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit6')">
+        Unit 6: Polygons and Quadrilaterals
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'geometry-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit7')">
+        Unit 7: Similarity
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'geometry-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit8')">
+        Unit 8: Right Triangles and Trigonometry
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'geometry-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit9')">
+        Unit 9: Circles
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'geometry-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit10')">
+        Unit 10: Area and Perimeter
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'geometry-unit11' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit11')">
+        Unit 11: Surface Area and Volume of Solids
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'geometry-unit12' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit12')">
+        Unit 12: Transformations and Review
+    </button>
 
 ` : isAlgebra2 ? `
     <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit1')">
@@ -4876,6 +4916,20 @@ function getCurrentUnitName() {
 'physics10-unit8': 'Unit 8: Light Reflection & Mirrors',
 'physics10-unit9': 'Unit 9: Static & Current Electricity',
 'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
+
+        // Add to getCurrentUnitName function
+'geometry-unit1': 'Unit 1: Foundations of Geometry',
+'geometry-unit2': 'Unit 2: Reasoning and Proof',
+'geometry-unit3': 'Unit 3: Parallel and Perpendicular Lines',
+'geometry-unit4': 'Unit 4: Triangles and Congruence',
+'geometry-unit5': 'Unit 5: Relationships in Triangles',
+'geometry-unit6': 'Unit 6: Polygons and Quadrilaterals',
+'geometry-unit7': 'Unit 7: Similarity',
+'geometry-unit8': 'Unit 8: Right Triangles and Trigonometry',
+'geometry-unit9': 'Unit 9: Circles',
+'geometry-unit10': 'Unit 10: Area and Perimeter',
+'geometry-unit11': 'Unit 11: Surface Area and Volume of Solids',
+'geometry-unit12': 'Unit 12: Transformations and Review',
 
         // Add to getCurrentUnitName function
 'algebra1-unit1': 'Unit 1: Foundations of Algebra',
@@ -5780,8 +5834,763 @@ function loadTextbookSections() {
         }
     ],
 
-// Add to the unitSections object in the loadTextbookSections function
 
+'geometry-unit1': [
+    {
+        id: 'geometry_points_lines_and_planes',
+        title: '1.1 Points, Lines, and Planes',
+        path: 'textbooks/geometry/foundations_of_geometry/points_lines_and_planes.json',
+        description: 'Undefined terms and basic postulates'
+    },
+    {
+        id: 'geometry_segments_rays_and_length',
+        title: '1.2 Segments, Rays, and Length',
+        path: 'textbooks/geometry/foundations_of_geometry/segments_rays_and_length.json',
+        description: 'Segment Addition Postulate and segment measures'
+    },
+    {
+        id: 'geometry_angles_and_their_measures',
+        title: '1.3 Angles and Their Measures',
+        path: 'textbooks/geometry/foundations_of_geometry/angles_and_their_measures.json',
+        description: 'Angle Addition Postulate and classifying angles'
+    },
+    {
+        id: 'geometry_angle_pairs',
+        title: '1.4 Angle Pairs (Complementary, Supplementary, Vertical)',
+        path: 'textbooks/geometry/foundations_of_geometry/angle_pairs.json',
+        description: 'Relationships between pairs of angles'
+    },
+    {
+        id: 'geometry_midpoint_formula',
+        title: '1.5 Midpoint Formula',
+        path: 'textbooks/geometry/foundations_of_geometry/midpoint_formula.json',
+        description: 'Finding the center point of a segment in the coordinate plane'
+    },
+    {
+        id: 'geometry_distance_formula',
+        title: '1.6 Distance Formula',
+        path: 'textbooks/geometry/foundations_of_geometry/distance_formula.json',
+        description: 'Calculating the length of a segment in the coordinate plane'
+    },
+    {
+        id: 'geometry_basic_geometric_constructions',
+        title: '1.7 Basic Geometric Constructions (Copying a Segment/Angle)',
+        path: 'textbooks/geometry/foundations_of_geometry/basic_geometric_constructions.json',
+        description: 'Using compass and straightedge for fundamental tasks'
+    },
+    {
+        id: 'geometry_constructing_perpendicular_bisectors_and_angle_bisectors',
+        title: '1.8 Constructing Perpendicular Bisectors and Angle Bisectors',
+        path: 'textbooks/geometry/foundations_of_geometry/constructing_perpendicular_bisectors_and_angle_bisectors.json',
+        description: 'Advanced construction techniques'
+    },
+    {
+        id: 'geometry_introduction_to_the_coordinate_plane',
+        title: '1.9 Introduction to the Coordinate Plane',
+        path: 'textbooks/geometry/foundations_of_geometry/introduction_to_the_coordinate_plane.json',
+        description: 'Review of $x$ and $y$ axes, quadrants, and plotting points'
+    },
+    {
+        id: 'geometry_problem_solving_with_foundations',
+        title: '1.10 Problem-Solving with Foundations',
+        path: 'textbooks/geometry/foundations_of_geometry/problem_solving_with_foundations.json',
+        description: 'Review and application of foundational concepts'
+    }
+],
+
+'geometry-unit2': [
+    {
+        id: 'geometry_inductive_reasoning_and_patterns',
+        title: '2.1 Inductive Reasoning and Patterns',
+        path: 'textbooks/geometry/reasoning_and_proof/inductive_reasoning_and_patterns.json',
+        description: 'Making conjectures based on observations'
+    },
+    {
+        id: 'geometry_conditional_statements',
+        title: '2.2 Conditional Statements (If-then, Converse, Inverse, Contrapositive)',
+        path: 'textbooks/geometry/reasoning_and_proof/conditional_statements.json',
+        description: 'Analyzing the truth values of related conditional statements'
+    },
+    {
+        id: 'geometry_deductive_reasoning',
+        title: '2.3 Deductive Reasoning (Law of Detachment, Law of Syllogism)',
+        path: 'textbooks/geometry/reasoning_and_proof/deductive_reasoning.json',
+        description: 'Using facts and rules to draw logical conclusions'
+    },
+    {
+        id: 'geometry_algebraic_properties_of_equality',
+        title: '2.4 Algebraic Properties of Equality',
+        path: 'textbooks/geometry/reasoning_and_proof/algebraic_properties_of_equality.json',
+        description: 'Review of substitution, transitive, and reflexive properties'
+    },
+    {
+        id: 'geometry_introduction_to_geometric_proof',
+        title: '2.5 Introduction to Geometric Proof',
+        path: 'textbooks/geometry/reasoning_and_proof/introduction_to_geometric_proof.json',
+        description: 'Understanding the structure and need for formal proof'
+    },
+    {
+        id: 'geometry_two_column_proofs_segment_and_angle_theorems',
+        title: '2.6 Two-Column Proofs: Segment and Angle Theorems',
+        path: 'textbooks/geometry/reasoning_and_proof/two_column_proofs_segment_and_angle_theorems.json',
+        description: 'Writing formal proofs using geometric postulates and theorems'
+    },
+    {
+        id: 'geometry_properties_of_parallel_lines',
+        title: '2.7 Properties of Parallel Lines',
+        path: 'textbooks/geometry/reasoning_and_proof/properties_of_parallel_lines.json',
+        description: 'Postulates regarding parallel lines and transversals'
+    },
+    {
+        id: 'geometry_proving_lines_parallel',
+        title: '2.8 Proving Lines Parallel',
+        path: 'textbooks/geometry/reasoning_and_proof/proving_lines_parallel.json',
+        description: 'Using angle relationships to establish parallelism'
+    },
+    {
+        id: 'geometry_perpendicular_lines_and_theorems',
+        title: '2.9 Perpendicular Lines and Theorems',
+        path: 'textbooks/geometry/reasoning_and_proof/perpendicular_lines_and_theorems.json',
+        description: 'Theorems regarding lines that intersect at $90^\circ$'
+    },
+    {
+        id: 'geometry_review_and_application_of_proofs',
+        title: '2.10 Review and Application of Proofs',
+        path: 'textbooks/geometry/reasoning_and_proof/review_and_application_of_proofs.json',
+        description: 'Comprehensive practice in deductive reasoning'
+    }
+],
+
+'geometry-unit3': [
+    {
+        id: 'geometry_lines_and_angles_formed_by_a_transversal',
+        title: '3.1 Lines and Angles formed by a Transversal',
+        path: 'textbooks/geometry/parallel_and_perpendicular_lines/lines_and_angles_formed_by_a_transversal.json',
+        description: 'Identifying angle pairs like corresponding, alternate interior, etc.'
+    },
+    {
+        id: 'geometry_parallel_lines_and_corresponding_angles',
+        title: '3.2 Parallel Lines and Corresponding Angles',
+        path: 'textbooks/geometry/parallel_and_perpendicular_lines/parallel_lines_and_corresponding_angles.json',
+        description: 'The Corresponding Angles Postulate'
+    },
+    {
+        id: 'geometry_parallel_lines_and_alternate_interior_angles',
+        title: '3.3 Parallel Lines and Alternate Interior Angles',
+        path: 'textbooks/geometry/parallel_and_perpendicular_lines/parallel_lines_and_alternate_interior_angles.json',
+        description: 'The Alternate Interior Angles Theorem'
+    },
+    {
+        id: 'geometry_parallel_lines_and_same_side_interior_angles',
+        title: '3.4 Parallel Lines and Same-Side Interior Angles',
+        path: 'textbooks/geometry/parallel_and_perpendicular_lines/parallel_lines_and_same_side_interior_angles.json',
+        description: 'The Same-Side Interior Angles Theorem'
+    },
+    {
+        id: 'geometry_proving_lines_are_parallel',
+        title: '3.5 Proving Lines are Parallel',
+        path: 'textbooks/geometry/parallel_and_perpendicular_lines/proving_lines_are_parallel.json',
+        description: 'Using the converses of the angle theorems'
+    },
+    {
+        id: 'geometry_slope_of_a_line',
+        title: '3.6 Slope of a Line (Review and Application)',
+        path: 'textbooks/geometry/parallel_and_perpendicular_lines/slope_of_a_line.json',
+        description: 'Calculating steepness and rate of change'
+    },
+    {
+        id: 'geometry_equations_of_lines',
+        title: '3.7 Equations of Lines (Slope-Intercept, Point-Slope Form)',
+        path: 'textbooks/geometry/parallel_and_perpendicular_lines/equations_of_lines.json',
+        description: 'Writing linear equations in various forms'
+    },
+    {
+        id: 'geometry_slopes_of_parallel_and_perpendicular_lines',
+        title: '3.8 Slopes of Parallel and Perpendicular Lines',
+        path: 'textbooks/geometry/parallel_and_perpendicular_lines/slopes_of_parallel_and_perpendicular_lines.json',
+        description: 'Relationships between the slopes of parallel and perpendicular lines'
+    },
+    {
+        id: 'geometry_writing_equations_for_parallel_and_perpendicular_lines',
+        title: '3.9 Writing Equations for Parallel and Perpendicular Lines',
+        path: 'textbooks/geometry/parallel_and_perpendicular_lines/writing_equations_for_parallel_and_perpendicular_lines.json',
+        description: 'Constructing equations given a point and parallel/perpendicular conditions'
+    },
+    {
+        id: 'geometry_coordinate_proofs_with_parallel_and_perpendicular_lines',
+        title: '3.10 Coordinate Proofs with Parallel and Perpendicular Lines',
+        path: 'textbooks/geometry/parallel_and_perpendicular_lines/coordinate_proofs_with_parallel_and_perpendicular_lines.json',
+        description: 'Using algebraic properties on the coordinate plane to prove geometric theorems'
+    }
+],
+
+'geometry-unit4': [
+    {
+        id: 'geometry_classifying_triangles_by_sides_and_angles',
+        title: '4.1 Classifying Triangles by Sides and Angles',
+        path: 'textbooks/geometry/triangles_and_congruence/classifying_triangles_by_sides_and_angles.json',
+        description: 'Scalene, Isosceles, Equilateral; Acute, Right, Obtuse, Equiangular'
+    },
+    {
+        id: 'geometry_angle_sum_theorem_and_exterior_angle_theorem',
+        title: '4.2 Angle Sum Theorem and Exterior Angle Theorem',
+        path: 'textbooks/geometry/triangles_and_congruence/angle_sum_theorem_and_exterior_angle_theorem.json',
+        description: 'The sum of interior angles and exterior angle relationships'
+    },
+    {
+        id: 'geometry_isosceles_and_equilateral_triangles',
+        title: '4.3 Isosceles and Equilateral Triangles',
+        path: 'textbooks/geometry/triangles_and_congruence/isosceles_and_equilateral_triangles.json',
+        description: 'The Base Angles Theorem and its converse'
+    },
+    {
+        id: 'geometry_congruent_figures_and_corresponding_parts',
+        title: '4.4 Congruent Figures and Corresponding Parts',
+        path: 'textbooks/geometry/triangles_and_congruence/congruent_figures_and_corresponding_parts.json',
+        description: 'Understanding CPCTC'
+    },
+    {
+        id: 'geometry_triangle_congruence_sss_and_sas',
+        title: '4.5 Triangle Congruence: SSS and SAS',
+        path: 'textbooks/geometry/triangles_and_congruence/triangle_congruence_sss_and_sas.json',
+        description: 'Proving congruence using three sides or two sides and the included angle'
+    },
+    {
+        id: 'geometry_triangle_congruence_asa_and_aas',
+        title: '4.6 Triangle Congruence: ASA and AAS',
+        path: 'textbooks/geometry/triangles_and_congruence/triangle_congruence_asa_and_aas.json',
+        description: 'Proving congruence using two angles and a side'
+    },
+    {
+        id: 'geometry_proofs_with_triangle_congruence',
+        title: '4.7 Proofs with Triangle Congruence',
+        path: 'textbooks/geometry/triangles_and_congruence/proofs_with_triangle_congruence.json',
+        description: 'Writing formal proofs to show triangles are congruent'
+    },
+    {
+        id: 'geometry_hypotenuse_leg_hl_theorem',
+        title: '4.8 Hypotenuse-Leg (HL) Theorem',
+        path: 'textbooks/geometry/triangles_and_congruence/hypotenuse_leg_hl_theorem.json',
+        description: 'A special congruence theorem for right triangles'
+    },
+    {
+        id: 'geometry_using_congruent_triangles_in_proofs',
+        title: '4.9 Using Congruent Triangles in Proofs',
+        path: 'textbooks/geometry/triangles_and_congruence/using_congruent_triangles_in_proofs.json',
+        description: 'Applying CPCTC to prove non-congruence statements'
+    },
+    {
+        id: 'geometry_overlapping_triangles_and_proofs',
+        title: '4.10 Overlapping Triangles and Proofs',
+        path: 'textbooks/geometry/triangles_and_congruence/overlapping_triangles_and_proofs.json',
+        description: 'Identifying shared parts and proving congruence in complex diagrams'
+    }
+],
+
+'geometry-unit5': [
+    {
+        id: 'geometry_perpendicular_bisectors_and_circumcenter',
+        title: '5.1 Perpendicular Bisectors and Circumcenter',
+        path: 'textbooks/geometry/relationships_in_triangles/perpendicular_bisectors_and_circumcenter.json',
+        description: 'The location and properties of the circumcenter'
+    },
+    {
+        id: 'geometry_angle_bisectors_and_incenter',
+        title: '5.2 Angle Bisectors and Incenter',
+        path: 'textbooks/geometry/relationships_in_triangles/angle_bisectors_and_incenter.json',
+        description: 'The location and properties of the incenter'
+    },
+    {
+        id: 'geometry_medians_and_centroids',
+        title: '5.3 Medians and Centroids',
+        path: 'textbooks/geometry/relationships_in_triangles/medians_and_centroids.json',
+        description: 'The point of concurrency and its 2:1 division property'
+    },
+    {
+        id: 'geometry_altitudes_and_orthocenters',
+        title: '5.4 Altitudes and Orthocenters',
+        path: 'textbooks/geometry/relationships_in_triangles/altitudes_and_orthocenters.json',
+        description: 'The point of concurrency formed by the altitudes'
+    },
+    {
+        id: 'geometry_midsegments_of_triangles',
+        title: '5.5 Midsegments of Triangles',
+        path: 'textbooks/geometry/relationships_in_triangles/midsegments_of_triangles.json',
+        description: 'Properties of the segment connecting two midpoints'
+    },
+    {
+        id: 'geometry_inequalities_in_one_triangle',
+        title: '5.6 Inequalities in One Triangle',
+        path: 'textbooks/geometry/relationships_in_triangles/inequalities_in_one_triangle.json',
+        description: 'Triangle Inequality Theorem; side-angle relationships'
+    },
+    {
+        id: 'geometry_inequalities_in_two_triangles',
+        title: '5.7 Inequalities in Two Triangles (Hinge Theorem)',
+        path: 'textbooks/geometry/relationships_in_triangles/inequalities_in_two_triangles.json',
+        description: 'Comparing sides and angles between two triangles'
+    },
+    {
+        id: 'geometry_indirect_proof',
+        title: '5.8 Indirect Proof',
+        path: 'textbooks/geometry/relationships_in_triangles/indirect_proof.json',
+        description: 'Proof by contradiction'
+    },
+    {
+        id: 'geometry_review_of_triangle_centers',
+        title: '5.9 Review of Triangle Centers',
+        path: 'textbooks/geometry/relationships_in_triangles/review_of_triangle_centers.json',
+        description: 'Comparing and contrasting circumcenter, incenter, centroid, and orthocenter'
+    },
+    {
+        id: 'geometry_applications_and_problem_solving_triangles',
+        title: '5.10 Applications and Problem Solving',
+        path: 'textbooks/geometry/relationships_in_triangles/applications_and_problem_solving_triangles.json',
+        description: 'Real-world use of triangle theorems'
+    }
+],
+
+'geometry-unit6': [
+    {
+        id: 'geometry_properties_of_polygons_and_angles',
+        title: '6.1 Properties of Polygons and Angles',
+        path: 'textbooks/geometry/polygons_and_quadrilaterals/properties_of_polygons_and_angles.json',
+        description: 'Interior and exterior angle sum formulas'
+    },
+    {
+        id: 'geometry_properties_of_parallelograms',
+        title: '6.2 Properties of Parallelograms',
+        path: 'textbooks/geometry/polygons_and_quadrilaterals/properties_of_parallelograms.json',
+        description: 'Theorems regarding sides, angles, and diagonals'
+    },
+    {
+        id: 'geometry_proving_a_quadrilateral_is_a_parallelogram',
+        title: '6.3 Proving a Quadrilateral is a Parallelogram',
+        path: 'textbooks/geometry/polygons_and_quadrilaterals/proving_a_quadrilateral_is_a_parallelogram.json',
+        description: 'Conditions that guarantee a quadrilateral is a parallelogram'
+    },
+    {
+        id: 'geometry_properties_of_rhombuses_and_rectangles',
+        title: '6.4 Properties of Rhombuses and Rectangles',
+        path: 'textbooks/geometry/polygons_and_quadrilaterals/properties_of_rhombuses_and_rectangles.json',
+        description: 'Diagonal properties and perpendicular/congruent characteristics'
+    },
+    {
+        id: 'geometry_properties_of_squares',
+        title: '6.5 Properties of Squares',
+        path: 'textbooks/geometry/polygons_and_quadrilaterals/properties_of_squares.json',
+        description: 'Combining the properties of rhombuses and rectangles'
+    },
+    {
+        id: 'geometry_properties_of_trapezoids_and_isosceles_trapezoids',
+        title: '6.6 Properties of Trapezoids and Isosceles Trapezoids',
+        path: 'textbooks/geometry/polygons_and_quadrilaterals/properties_of_trapezoids_and_isosceles_trapezoids.json',
+        description: 'Base angles, diagonals, and the midsegment of a trapezoid'
+    },
+    {
+        id: 'geometry_properties_of_kites',
+        title: '6.7 Properties of Kites',
+        path: 'textbooks/geometry/polygons_and_quadrilaterals/properties_of_kites.json',
+        description: 'Properties of diagonals and angle relationships in kites'
+    },
+    {
+        id: 'geometry_classifying_quadrilaterals_in_the_coordinate_plane',
+        title: '6.8 Classifying Quadrilaterals in the Coordinate Plane',
+        path: 'textbooks/geometry/polygons_and_quadrilaterals/classifying_quadrilaterals_in_the_coordinate_plane.json',
+        description: 'Using distance and slope formulas to verify quadrilateral type'
+    },
+    {
+        id: 'geometry_proofs_with_special_quadrilaterals',
+        title: '6.9 Proofs with Special Quadrilaterals',
+        path: 'textbooks/geometry/polygons_and_quadrilaterals/proofs_with_special_quadrilaterals.json',
+        description: 'Proving characteristics of special parallelograms'
+    },
+    {
+        id: 'geometry_review_of_quadrilateral_family_tree',
+        title: '6.10 Review of Quadrilateral Family Tree',
+        path: 'textbooks/geometry/polygons_and_quadrilaterals/review_of_quadrilateral_family_tree.json',
+        description: 'Organizing the hierarchy of quadrilaterals'
+    }
+],
+
+'geometry-unit7': [
+    {
+        id: 'geometry_ratios_proportions_and_geometric_mean',
+        title: '7.1 Ratios, Proportions, and Geometric Mean',
+        path: 'textbooks/geometry/similarity/ratios_proportions_and_geometric_mean.json',
+        description: 'Review of ratio and proportion solving'
+    },
+    {
+        id: 'geometry_similar_polygons_and_scale_factors',
+        title: '7.2 Similar Polygons and Scale Factors',
+        path: 'textbooks/geometry/similarity/similar_polygons_and_scale_factors.json',
+        description: 'Defining similarity and finding the ratio of similarity'
+    },
+    {
+        id: 'geometry_proving_triangles_similar_aa_postulate',
+        title: '7.3 Proving Triangles Similar: AA Postulate',
+        path: 'textbooks/geometry/similarity/proving_triangles_similar_aa_postulate.json',
+        description: 'Using two pairs of congruent angles to show similarity'
+    },
+    {
+        id: 'geometry_proving_triangles_similar_sss_and_sas_theorems',
+        title: '7.4 Proving Triangles Similar: SSS and SAS Theorems',
+        path: 'textbooks/geometry/similarity/proving_triangles_similar_sss_and_sas_theorems.json',
+        description: 'Using side proportionality and side-angle-side proportionality'
+    },
+    {
+        id: 'geometry_proportionality_theorems',
+        title: '7.5 Proportionality Theorems (Triangle Proportionality, Angle Bisector)',
+        path: 'textbooks/geometry/similarity/proportionality_theorems.json',
+        description: 'Theorems that split sides of triangles into proportional segments'
+    },
+    {
+        id: 'geometry_similarity_in_right_triangles',
+        title: '7.6 Similarity in Right Triangles',
+        path: 'textbooks/geometry/similarity/similarity_in_right_triangles.json',
+        description: 'Using the altitude to the hypotenuse to find geometric mean relationships'
+    },
+    {
+        id: 'geometry_proportions_in_parallel_lines_and_overlapping_triangles',
+        title: '7.7 Proportions in Parallel Lines and Overlapping Triangles',
+        path: 'textbooks/geometry/similarity/proportions_in_parallel_lines_and_overlapping_triangles.json',
+        description: 'Solving for unknown lengths using similar figures'
+    },
+    {
+        id: 'geometry_fractals_and_self_similarity',
+        title: '7.8 Fractals and Self-Similarity (Application)',
+        path: 'textbooks/geometry/similarity/fractals_and_self_similarity.json',
+        description: 'Exploring infinitely repeating geometric patterns'
+    },
+    {
+        id: 'geometry_similarity_proofs_and_applications',
+        title: '7.9 Similarity Proofs and Applications',
+        path: 'textbooks/geometry/similarity/similarity_proofs_and_applications.json',
+        description: 'Writing proofs and solving real-world similarity problems'
+    },
+    {
+        id: 'geometry_review_of_similarity_vs_congruence',
+        title: '7.10 Review of Similarity vs. Congruence',
+        path: 'textbooks/geometry/similarity/review_of_similarity_vs_congruence.json',
+        description: 'Key differences between the two types of geometric relationships'
+    }
+],
+
+'geometry-unit8': [
+    {
+        id: 'geometry_the_pythagorean_theorem_and_its_converse',
+        title: '8.1 The Pythagorean Theorem and its Converse',
+        path: 'textbooks/geometry/right_triangles_and_trigonometry/the_pythagorean_theorem_and_its_converse.json',
+        description: 'Using $a^2 + b^2 = c^2$ and classifying triangle types'
+    },
+    {
+        id: 'geometry_special_right_triangles_45_45_90',
+        title: '8.2 Special Right Triangles (45°-45°-90°)',
+        path: 'textbooks/geometry/right_triangles_and_trigonometry/special_right_triangles_45_45_90.json',
+        description: 'Ratios of side lengths in an isosceles right triangle'
+    },
+    {
+        id: 'geometry_special_right_triangles_30_60_90',
+        title: '8.3 Special Right Triangles (30°-60°-90°)',
+        path: 'textbooks/geometry/right_triangles_and_trigonometry/special_right_triangles_30_60_90.json',
+        description: 'Ratios of side lengths in a scalene right triangle'
+    },
+    {
+        id: 'geometry_trigonometric_ratios_sine_cosine_tangent',
+        title: '8.4 Trigonometric Ratios (Sine, Cosine, Tangent)',
+        path: 'textbooks/geometry/right_triangles_and_trigonometry/trigonometric_ratios_sine_cosine_tangent.json',
+        description: 'Defining SOH CAH TOA'
+    },
+    {
+        id: 'geometry_using_trigonometry_to_find_side_lengths',
+        title: '8.5 Using Trigonometry to Find Side Lengths',
+        path: 'textbooks/geometry/right_triangles_and_trigonometry/using_trigonometry_to_find_side_lengths.json',
+        description: 'Solving for unknown sides using trigonometric ratios'
+    },
+    {
+        id: 'geometry_using_trigonometry_to_find_angle_measures',
+        title: '8.6 Using Trigonometry to Find Angle Measures (Inverse Trig)',
+        path: 'textbooks/geometry/right_triangles_and_trigonometry/using_trigonometry_to_find_angle_measures.json',
+        description: 'Using $\\sin^{-1}$, $\\cos^{-1}$, and $\\tan^{-1}$'
+    },
+    {
+        id: 'geometry_solving_right_triangles',
+        title: '8.7 Solving Right Triangles',
+        path: 'textbooks/geometry/right_triangles_and_trigonometry/solving_right_triangles.json',
+        description: 'Finding all unknown side lengths and angle measures'
+    },
+    {
+        id: 'geometry_applications_of_trigonometry_angle_of_elevation',
+        title: '8.8 Applications of Trigonometry (Angle of Elevation)',
+        path: 'textbooks/geometry/right_triangles_and_trigonometry/applications_of_trigonometry_angle_of_elevation.json',
+        description: 'Real-world problems using the angle of elevation'
+    },
+    {
+        id: 'geometry_applications_of_trigonometry_angle_of_depression',
+        title: '8.9 Applications of Trigonometry (Angle of Depression)',
+        path: 'textbooks/geometry/right_triangles_and_trigonometry/applications_of_trigonometry_angle_of_depression.json',
+        description: 'Real-world problems using the angle of depression'
+    },
+    {
+        id: 'geometry_the_law_of_sines_introduction',
+        title: '8.10 The Law of Sines (Introduction)',
+        path: 'textbooks/geometry/right_triangles_and_trigonometry/the_law_of_sines_introduction.json',
+        description: 'Extending trigonometry to non-right triangles'
+    }
+],
+
+'geometry-unit9': [
+    {
+        id: 'geometry_circles_radii_chords_and_diameters',
+        title: '9.1 Circles, Radii, Chords, and Diameters',
+        path: 'textbooks/geometry/circles/circles_radii_chords_and_diameters.json',
+        description: 'Defining and identifying basic parts of a circle'
+    },
+    {
+        id: 'geometry_arcs_and_central_angles',
+        title: '9.2 Arcs and Central Angles',
+        path: 'textbooks/geometry/circles/arcs_and_central_angles.json',
+        description: 'Relationship between central angles and their intercepted arcs'
+    },
+    {
+        id: 'geometry_chords_and_arc_measures',
+        title: '9.3 Chords and Arc Measures',
+        path: 'textbooks/geometry/circles/chords_and_arc_measures.json',
+        description: 'Theorems regarding congruent chords and perpendicular bisectors'
+    },
+    {
+        id: 'geometry_inscribed_angles_and_intercepted_arcs',
+        title: '9.4 Inscribed Angles and Intercepted Arcs',
+        path: 'textbooks/geometry/circles/inscribed_angles_and_intercepted_arcs.json',
+        description: 'The Inscribed Angle Theorem'
+    },
+    {
+        id: 'geometry_angle_relationships_in_circles',
+        title: '9.5 Angle Relationships in Circles',
+        path: 'textbooks/geometry/circles/angle_relationships_in_circles.json',
+        description: 'Angles formed by tangents, secants, and chords'
+    },
+    {
+        id: 'geometry_segment_relationships_in_circles',
+        title: '9.6 Segment Relationships in Circles',
+        path: 'textbooks/geometry/circles/segment_relationships_in_circles.json',
+        description: 'Theorems for intersecting chords, secants, and tangents'
+    },
+    {
+        id: 'geometry_equations_of_a_circle_in_the_coordinate_plane',
+        title: '9.7 Equations of a Circle in the Coordinate Plane',
+        path: 'textbooks/geometry/circles/equations_of_a_circle_in_the_coordinate_plane.json',
+        description: 'The standard form $(x-h)^2 + (y-k)^2 = r^2$'
+    },
+    {
+        id: 'geometry_graphing_circles_from_equations',
+        title: '9.8 Graphing Circles from Equations',
+        path: 'textbooks/geometry/circles/graphing_circles_from_equations.json',
+        description: 'Identifying the center and radius to plot a circle'
+    },
+    {
+        id: 'geometry_proofs_with_circle_theorems',
+        title: '9.9 Proofs with Circle Theorems',
+        path: 'textbooks/geometry/circles/proofs_with_circle_theorems.json',
+        description: 'Writing proofs involving inscribed and central angles'
+    },
+    {
+        id: 'geometry_circle_review_and_constructions',
+        title: '9.10 Circle Review and Constructions',
+        path: 'textbooks/geometry/circles/circle_review_and_constructions.json',
+        description: 'Review of major theorems and tangent/chord constructions'
+    }
+],
+
+'geometry-unit10': [
+    {
+        id: 'geometry_area_and_perimeter_of_squares_rectangles_and_parallelograms',
+        title: '10.1 Area and Perimeter of Squares, Rectangles, and Parallelograms',
+        path: 'textbooks/geometry/area_and_perimeter/area_and_perimeter_of_squares_rectangles_and_parallelograms.json',
+        description: 'Basic area formulas for quadrilaterals'
+    },
+    {
+        id: 'geometry_area_of_triangles_and_rhombuses',
+        title: '10.2 Area of Triangles and Rhombuses',
+        path: 'textbooks/geometry/area_and_perimeter/area_of_triangles_and_rhombuses.json',
+        description: 'Using base and height for triangles; using diagonals for rhombuses'
+    },
+    {
+        id: 'geometry_area_of_trapezoids_and_kites',
+        title: '10.3 Area of Trapezoids and Kites',
+        path: 'textbooks/geometry/area_and_perimeter/area_of_trapezoids_and_kites.json',
+        description: 'Formulas for trapezoids and kites/rhombuses'
+    },
+    {
+        id: 'geometry_area_of_regular_polygons',
+        title: '10.4 Area of Regular Polygons',
+        path: 'textbooks/geometry/area_and_perimeter/area_of_regular_polygons.json',
+        description: 'Using apothem and perimeter'
+    },
+    {
+        id: 'geometry_circumference_and_arc_length',
+        title: '10.5 Circumference and Arc Length',
+        path: 'textbooks/geometry/area_and_perimeter/circumference_and_arc_length.json',
+        description: 'Finding the distance around a circle and a portion of the distance'
+    },
+    {
+        id: 'geometry_areas_of_circles_and_sectors',
+        title: '10.6 Areas of Circles and Sectors',
+        path: 'textbooks/geometry/area_and_perimeter/areas_of_circles_and_sectors.json',
+        description: 'Finding the area of a circle and a portion of the area (sector)'
+    },
+    {
+        id: 'geometry_the_effect_of_scale_on_perimeter_and_area',
+        title: '10.7 The Effect of Scale on Perimeter and Area',
+        path: 'textbooks/geometry/area_and_perimeter/the_effect_of_scale_on_perimeter_and_area.json',
+        description: 'How scale factor affects 1D and 2D measures'
+    },
+    {
+        id: 'geometry_geometric_probability_area_models',
+        title: '10.8 Geometric Probability (Area Models)',
+        path: 'textbooks/geometry/area_and_perimeter/geometric_probability_area_models.json',
+        description: 'Using area to calculate the likelihood of hitting a target region'
+    },
+    {
+        id: 'geometry_area_of_composite_figures',
+        title: '10.9 Area of Composite Figures',
+        path: 'textbooks/geometry/area_and_perimeter/area_of_composite_figures.json',
+        description: 'Calculating area for figures composed of simpler shapes'
+    },
+    {
+        id: 'geometry_optimization_problems_application',
+        title: '10.10 Optimization Problems (Application)',
+        path: 'textbooks/geometry/area_and_perimeter/optimization_problems_application.json',
+        description: 'Finding maximum area or minimum perimeter'
+    }
+],
+
+'geometry-unit11': [
+    {
+        id: 'geometry_space_figures_and_nets',
+        title: '11.1 Space Figures and Nets',
+        path: 'textbooks/geometry/surface_area_and_volume_of_solids/space_figures_and_nets.json',
+        description: 'Identifying 3D figures and their 2D representations'
+    },
+    {
+        id: 'geometry_surface_area_of_prisms_and_cylinders',
+        title: '11.2 Surface Area of Prisms and Cylinders',
+        path: 'textbooks/geometry/surface_area_and_volume_of_solids/surface_area_of_prisms_and_cylinders.json',
+        description: 'Lateral area and total surface area formulas'
+    },
+    {
+        id: 'geometry_surface_area_of_pyramids_and_cones',
+        title: '11.3 Surface Area of Pyramids and Cones',
+        path: 'textbooks/geometry/surface_area_and_volume_of_solids/surface_area_of_pyramids_and_cones.json',
+        description: 'Using slant height in surface area calculations'
+    },
+    {
+        id: 'geometry_volume_of_prisms_and_cylinders',
+        title: '11.4 Volume of Prisms and Cylinders',
+        path: 'textbooks/geometry/surface_area_and_volume_of_solids/volume_of_prisms_and_cylinders.json',
+        description: 'The formula $V=Bh$ and Cavalieri\'s Principle'
+    },
+    {
+        id: 'geometry_volume_of_pyramids_and_cones',
+        title: '11.5 Volume of Pyramids and Cones',
+        path: 'textbooks/geometry/surface_area_and_volume_of_solids/volume_of_pyramids_and_cones.json',
+        description: 'The formula $V=\\frac{1}{3}Bh$'
+    },
+    {
+        id: 'geometry_spheres_surface_area_and_volume',
+        title: '11.6 Spheres: Surface Area and Volume',
+        path: 'textbooks/geometry/surface_area_and_volume_of_solids/spheres_surface_area_and_volume.json',
+        description: 'Formulas for the sphere, including great circles'
+    },
+    {
+        id: 'geometry_areas_and_volumes_of_similar_solids',
+        title: '11.7 Areas and Volumes of Similar Solids',
+        path: 'textbooks/geometry/surface_area_and_volume_of_solids/areas_and_volumes_of_similar_solids.json',
+        description: 'Relating scale factor to $k^2$ and $k^3$ for similar figures'
+    },
+    {
+        id: 'geometry_composite_solids_surface_area',
+        title: '11.8 Composite Solids: Surface Area',
+        path: 'textbooks/geometry/surface_area_and_volume_of_solids/composite_solids_surface_area.json',
+        description: 'Calculating SA of figures composed of multiple solids'
+    },
+    {
+        id: 'geometry_composite_solids_volume',
+        title: '11.9 Composite Solids: Volume',
+        path: 'textbooks/geometry/surface_area_and_volume_of_solids/composite_solids_volume.json',
+        description: 'Calculating volume of combined or hollowed solids'
+    },
+    {
+        id: 'geometry_density_and_design_applications',
+        title: '11.10 Density and Design Applications',
+        path: 'textbooks/geometry/surface_area_and_volume_of_solids/density_and_design_applications.json',
+        description: 'Using volume in real-world problems like mass and density'
+    }
+],
+
+'geometry-unit12': [
+    {
+        id: 'geometry_translations_and_vectors',
+        title: '12.1 Translations and Vectors',
+        path: 'textbooks/geometry/transformations_and_review/translations_and_vectors.json',
+        description: 'Sliding a figure using coordinate notation and vector components'
+    },
+    {
+        id: 'geometry_reflections_and_symmetry',
+        title: '12.2 Reflections and Symmetry',
+        path: 'textbooks/geometry/transformations_and_review/reflections_and_symmetry.json',
+        description: 'Reflecting across lines and axes; line symmetry'
+    },
+    {
+        id: 'geometry_rotations_and_rotational_symmetry',
+        title: '12.3 Rotations and Rotational Symmetry',
+        path: 'textbooks/geometry/transformations_and_review/rotations_and_rotational_symmetry.json',
+        description: 'Rotating figures around a point (especially the origin)'
+    },
+    {
+        id: 'geometry_compositions_of_transformations',
+        title: '12.4 Compositions of Transformations',
+        path: 'textbooks/geometry/transformations_and_review/compositions_of_transformations.json',
+        description: 'Applying two or more transformations sequentially'
+    },
+    {
+        id: 'geometry_dilations_and_scale_factor',
+        title: '12.5 Dilations and Scale Factor',
+        path: 'textbooks/geometry/transformations_and_review/dilations_and_scale_factor.json',
+        description: 'Enlarging or reducing figures from a center point'
+    },
+    {
+        id: 'geometry_similarity_and_transformations',
+        title: '12.6 Similarity and Transformations',
+        path: 'textbooks/geometry/transformations_and_review/similarity_and_transformations.json',
+        description: 'Understanding that similarity is a rigid motion followed by a dilation'
+    },
+    {
+        id: 'geometry_end_of_year_review_proofs_and_congruence',
+        title: '12.7 End-of-Year Review: Proofs and Congruence',
+        path: 'textbooks/geometry/transformations_and_review/end_of_year_review_proofs_and_congruence.json',
+        description: 'Comprehensive review of Units 2, 4, and 5'
+    },
+    {
+        id: 'geometry_end_of_year_review_similarity_and_trigonometry',
+        title: '12.8 End-of-Year Review: Similarity and Trigonometry',
+        path: 'textbooks/geometry/transformations_and_review/end_of_year_review_similarity_and_trigonometry.json',
+        description: 'Comprehensive review of Units 7 and 8'
+    },
+    {
+        id: 'geometry_end_of_year_review_area_and_volume',
+        title: '12.9 End-of-Year Review: Area and Volume',
+        path: 'textbooks/geometry/transformations_and_review/end_of_year_review_area_and_volume.json',
+        description: 'Comprehensive review of Units 10 and 11'
+    },
+    {
+        id: 'geometry_final_assessment_and_portfolio_review',
+        title: '12.10 Final Assessment and Portfolio Review',
+        path: 'textbooks/geometry/transformations_and_review/final_assessment_and_portfolio_review.json',
+        description: 'Final exam preparation and course reflection'
+    }
+],
+        
 'algebra2-unit1': [
     {
         id: 'algebra2_solving_multi_step_equations_and_inequalities',
@@ -18791,6 +19600,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
