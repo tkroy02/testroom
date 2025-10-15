@@ -24404,11 +24404,66 @@ async function loadQuizData(quizPath) {
         if (!response.ok) {
             throw new Error(`Failed to load quiz: ${response.status}`);
         }
-        return await response.json();
+        const quizData = await response.json();
+        
+        // Create a deep copy to avoid mutating original data
+        const processedData = JSON.parse(JSON.stringify(quizData));
+        
+        // Shuffle questions if enabled
+        if (processedData.quiz.settings.shuffleQuestions) {
+            processedData.quiz.questions = shuffleArray(processedData.quiz.questions);
+        }
+        
+        // Shuffle options for each question if enabled
+        if (processedData.quiz.settings.shuffleOptions) {
+            processedData.quiz.questions.forEach(question => {
+                if (question.type === 'mcq') {
+                    shuffleQuestionOptions(question);
+                }
+            });
+        }
+        
+        return processedData;
     } catch (error) {
         console.error('Error loading quiz data:', error);
         return null;
     }
+}
+
+// Helper function to shuffle question options and update answer
+function shuffleQuestionOptions(question) {
+    // Create array of objects with original index and option
+    const optionsWithIndex = question.options.map((option, index) => ({
+        option,
+        originalIndex: index
+    }));
+    
+    // Shuffle the options with their original indices
+    const shuffledOptionsWithIndex = shuffleArray(optionsWithIndex);
+    
+    // Extract just the option texts for the question
+    question.options = shuffledOptionsWithIndex.map(item => item.option);
+    
+    // Update the answer by finding its new position
+    const originalAnswerIndex = question.answer.charCodeAt(0) - 65; // Convert 'A','B','C' to 0,1,2
+    
+    // Find where the original answer moved to
+    const newAnswerIndex = shuffledOptionsWithIndex.findIndex(
+        item => item.originalIndex === originalAnswerIndex
+    );
+    
+    // Convert back to letter (0->'A', 1->'B', etc.)
+    question.answer = String.fromCharCode(65 + newAnswerIndex);
+}
+
+// Your existing shuffleArray function (make sure it's available)
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
 }
 
 // Add this function to map courses and units to quiz files
@@ -28740,4 +28795,5 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
