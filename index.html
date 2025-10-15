@@ -4227,6 +4227,7 @@ function loadTextbookContent() {
     const isAPMicroeconomics = currentCourseId === 'ap-microeconomics';
     const isPreCalculus = currentCourseId === 'pre-calculus';
     const isAlgebra1 = currentCourseId === 'algebra-1';
+    const isAlgebra2 = currentCourseId === 'algebra-2';
     
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
@@ -4242,6 +4243,7 @@ function loadTextbookContent() {
                      isAPMicroeconomics ? 'AP Microeconomics Textbook' : 
                      isPreCalculus ? 'Pre-Calculus Textbook' : 
                      isAlgebra1 ? 'Algebra 1 Textbook' :
+                     isAlgebra2 ? 'Algebra 2 Textbook' :
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4290,6 +4292,54 @@ function loadTextbookContent() {
                                 <button class="unit-btn ${currentTextbookUnit === 'physics11-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('physics11-unit10')">
                                     Unit 10: Modern Physics Introduction
                                 </button>
+
+
+` : isAlgebra2 ? `
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit1')">
+        Unit 1: Algebra 1 Review
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit2')">
+        Unit 2: Quadratic Functions & Complex Numbers
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit3')">
+        Unit 3: Polynomial Functions
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit4')">
+        Unit 4: Rational Functions & Expressions
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit5')">
+        Unit 5: Radical Functions & Inverses
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit6')">
+        Unit 6: Exponential Functions & Models
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit7')">
+        Unit 7: Logarithmic Functions & Equations
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit8')">
+        Unit 8: Sequences, Series & Binomial Theorem
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit9')">
+        Unit 9: Probability & Counting
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit10')">
+        Unit 10: Statistics & Data Analysis
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit11' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit11')">
+        Unit 11: Trigonometric Functions
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit12' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit12')">
+        Unit 12: Trigonometric Identities & Equations
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit13' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit13')">
+        Unit 13: Advanced Systems & Inequalities
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit14' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit14')">
+        Unit 14: Matrices & Determinants
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra2-unit15' ? 'active' : ''}" onclick="switchTextbookUnit('algebra2-unit15')">
+        Unit 15: Conic Sections & Parametrics
+    </button>
 
     ` : isPreCalculus ? `
     <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit1')">
@@ -4810,6 +4860,23 @@ function getCurrentUnitName() {
 'algebra1-unit14': 'Unit 14: Data Analysis and Statistics',
 'algebra1-unit15': 'Unit 15: End-of-Year Review and Capstone',
 
+// Algebra 2 Units
+'algebra2-unit1': 'Unit 1: Algebra 1 Review',
+'algebra2-unit2': 'Unit 2: Quadratic Functions & Complex Numbers',
+'algebra2-unit3': 'Unit 3: Polynomial Functions',
+'algebra2-unit4': 'Unit 4: Rational Functions & Expressions',
+'algebra2-unit5': 'Unit 5: Radical Functions & Inverses',
+'algebra2-unit6': 'Unit 6: Exponential Functions & Models',
+'algebra2-unit7': 'Unit 7: Logarithmic Functions & Equations',
+'algebra2-unit8': 'Unit 8: Sequences, Series & Binomial Theorem',
+'algebra2-unit9': 'Unit 9: Probability & Counting',
+'algebra2-unit10': 'Unit 10: Statistics & Data Analysis',
+'algebra2-unit11': 'Unit 11: Trigonometric Functions',
+'algebra2-unit12': 'Unit 12: Trigonometric Identities & Equations',
+'algebra2-unit13': 'Unit 13: Advanced Systems & Inequalities',
+'algebra2-unit14': 'Unit 14: Matrices & Determinants',
+'algebra2-unit15': 'Unit 15: Conic Sections & Parametrics',
+        
         // Add to getCurrentUnitName function
 'ap-microeconomics-unit1': 'Unit 1: The Fundamentals of Economics',
 'ap-microeconomics-unit2': 'Unit 2: Supply, Demand, and Market Equilibrium',
@@ -5679,6 +5746,953 @@ function loadTextbookSections() {
         }
     ],
 
+// Add to the unitSections object in the loadTextbookSections function
+
+'algebra2-unit1': [
+    {
+        id: 'algebra2_solving_multi_step_equations_and_inequalities',
+        title: '1.1 Solving Multi-Step Equations and Inequalities',
+        path: 'textbooks/algebra_2/review_of_algebra_i_essentials/solving_multi-step_equations_and_inequalities.json',
+        description: 'Review of algebraic problem-solving techniques'
+    },
+    {
+        id: 'algebra2_functions_domain_and_range_review',
+        title: '1.2 Functions, Domain, and Range Review',
+        path: 'textbooks/algebra_2/review_of_algebra_i_essentials/functions_domain_and_range_review.json',
+        description: 'Identifying functions and determining their domains and ranges'
+    },
+    {
+        id: 'algebra2_graphing_linear_equations_and_inequalities',
+        title: '1.3 Graphing Linear Equations and Inequalities',
+        path: 'textbooks/algebra_2/review_of_algebra_i_essentials/graphing_linear_equations_and_inequalities.json',
+        description: 'Graphing lines and shaded regions on the coordinate plane'
+    },
+    {
+        id: 'algebra2_systems_of_linear_equations_and_inequalities',
+        title: '1.4 Systems of Linear Equations and Inequalities',
+        path: 'textbooks/algebra_2/review_of_algebra_i_essentials/systems_of_linear_equations_and_inequalities.json',
+        description: 'Solving 2x2 systems using substitution, elimination, and graphing'
+    },
+    {
+        id: 'algebra2_operations_with_polynomials',
+        title: '1.5 Operations with Polynomials',
+        path: 'textbooks/algebra_2/review_of_algebra_i_essentials/operations_with_polynomials.json',
+        description: 'Adding, subtracting, and multiplying polynomials'
+    },
+    {
+        id: 'algebra2_factoring_polynomials',
+        title: '1.6 Factoring Polynomials (GCF, Trinomials, Special Forms)',
+        path: 'textbooks/algebra_2/review_of_algebra_i_essentials/factoring_polynomials.json',
+        description: 'Techniques for factoring quadratic and cubic expressions'
+    },
+    {
+        id: 'algebra2_quadratic_functions_and_their_graphs_review',
+        title: '1.7 Quadratic Functions and Their Graphs',
+        path: 'textbooks/algebra_2/review_of_algebra_i_essentials/quadratic_functions_and_their_graphs.json',
+        description: 'Basic properties and graphing of parabolas'
+    },
+    {
+        id: 'algebra2_solving_quadratic_equations_review',
+        title: '1.8 Solving Quadratic Equations (Factoring, Square Roots)',
+        path: 'textbooks/algebra_2/review_of_algebra_i_essentials/solving_quadratic_equations.json',
+        description: 'Solving quadratic equations using factoring and the square root method'
+    },
+    {
+        id: 'algebra2_rational_expressions_and_equations_review',
+        title: '1.9 Rational Expressions and Equations',
+        path: 'textbooks/algebra_2/review_of_algebra_i_essentials/rational_expressions_and_equations.json',
+        description: 'Simplifying, multiplying, dividing, and solving basic rational expressions'
+    },
+    {
+        id: 'algebra2_exponential_functions_and_growth_patterns_review',
+        title: '1.10 Exponential Functions and Growth Patterns',
+        path: 'textbooks/algebra_2/review_of_algebra_i_essentials/exponential_functions_and_growth_patterns.json',
+        description: 'Introduction to exponential growth and decay'
+    }
+],
+
+'algebra2-unit2': [
+    {
+        id: 'algebra2_graphing_parabolas',
+        title: '2.1 Graphing Parabolas in Standard, Vertex, and Intercept Forms',
+        path: 'textbooks/algebra_2/quadratic_functions_and_complex_numbers/graphing_parabolas.json',
+        description: 'Mastering the three forms of quadratic equations'
+    },
+    {
+        id: 'algebra2_completing_the_square',
+        title: '2.2 Completing the Square to Find Vertex Form',
+        path: 'textbooks/algebra_2/quadratic_functions_and_complex_numbers/completing_the_square.json',
+        description: 'Converting standard form to vertex form algebraically'
+    },
+    {
+        id: 'algebra2_the_quadratic_formula_and_its_derivation',
+        title: '2.3 The Quadratic Formula and Its Derivation',
+        path: 'textbooks/algebra_2/quadratic_functions_and_complex_numbers/the_quadratic_formula.json',
+        description: 'Solving quadratic equations using the formula and understanding its origin'
+    },
+    {
+        id: 'algebra2_the_discriminant_and_nature_of_roots',
+        title: '2.4 The Discriminant and Nature of Roots',
+        path: 'textbooks/algebra_2/quadratic_functions_and_complex_numbers/the_discriminant_and_nature_of_roots.json',
+        description: 'Using $b^2 - 4ac$ to predict the number and type of solutions'
+    },
+    {
+        id: 'algebra2_introduction_to_complex_numbers',
+        title: '2.5 Introduction to Complex Numbers',
+        path: 'textbooks/algebra_2/quadratic_functions_and_complex_numbers/introduction_to_complex_numbers.json',
+        description: 'Defining $i$ and the standard form $a + bi$'
+    },
+    {
+        id: 'algebra2_operations_with_complex_numbers',
+        title: '2.6 Operations with Complex Numbers (Addition, Subtraction, Multiplication)',
+        path: 'textbooks/algebra_2/quadratic_functions_and_complex_numbers/operations_with_complex_numbers.json',
+        description: 'Performing basic arithmetic on complex numbers'
+    },
+    {
+        id: 'algebra2_complex_conjugates_and_division',
+        title: '2.7 Complex Conjugates and Division',
+        path: 'textbooks/algebra_2/quadratic_functions_and_complex_numbers/complex_conjugates_and_division.json',
+        description: 'Dividing complex numbers using the conjugate'
+    },
+    {
+        id: 'algebra2_solving_quadratic_equations_with_complex_solutions',
+        title: '2.8 Solving Quadratic Equations with Complex Solutions',
+        path: 'textbooks/algebra_2/quadratic_functions_and_complex_numbers/solving_quadratic_equations_with_complex_solutions.json',
+        description: 'Finding non-real roots using the quadratic formula'
+    },
+    {
+        id: 'algebra2_applications_of_quadratic_functions',
+        title: '2.9 Applications of Quadratic Functions (Projectile Motion, Optimization)',
+        path: 'textbooks/algebra_2/quadratic_functions_and_complex_numbers/applications_of_quadratic_functions.json',
+        description: 'Solving maximum/minimum problems using the vertex'
+    },
+    {
+        id: 'algebra2_quadratic_inequalities',
+        title: '2.10 Quadratic Inequalities and Their Solutions',
+        path: 'textbooks/algebra_2/quadratic_functions_and_complex_numbers/quadratic_inequalities.json',
+        description: 'Solving inequalities graphically and algebraically'
+    }
+],
+
+'algebra2-unit3': [
+    {
+        id: 'algebra2_polynomial_functions_definitions_and_basic_graphs',
+        title: '3.1 Polynomial Functions: Definitions and Basic Graphs',
+        path: 'textbooks/algebra_2/polynomial_functions_and_their_graphs/polynomial_functions_definitions_and_basic_graphs.json',
+        description: 'Identifying degree, leading coefficient, and function properties'
+    },
+    {
+        id: 'algebra2_end_behavior',
+        title: '3.2 End Behavior of Polynomial Functions',
+        path: 'textbooks/algebra_2/polynomial_functions_and_their_graphs/end_behavior_of_polynomial_functions.json',
+        description: 'Determining graph behavior as $x \\to \\pm\\infty$'
+    },
+    {
+        id: 'algebra2_graphing_polynomial_functions',
+        title: '3.3 Graphing Polynomial Functions Using Zeros and Multiplicity',
+        path: 'textbooks/algebra_2/polynomial_functions_and_their_graphs/graphing_polynomial_functions_using_zeros_and_multiplicity.json',
+        description: 'Sketching graphs using intercepts and turning points'
+    },
+    {
+        id: 'algebra2_the_remainder_theorem',
+        title: '3.4 The Remainder Theorem and Synthetic Division',
+        path: 'textbooks/algebra_2/polynomial_functions_and_their_graphs/the_remainder_theorem_and_synthetic_division.json',
+        description: 'Dividing polynomials and evaluating functions efficiently'
+    },
+    {
+        id: 'algebra2_the_factor_theorem',
+        title: '3.5 The Factor Theorem and Finding Zeros',
+        path: 'textbooks/algebra_2/polynomial_functions_and_their_graphs/the_factor_theorem_and_finding_zeros.json',
+        description: 'Connecting factors, roots, and x-intercepts'
+    },
+    {
+        id: 'algebra2_the_fundamental_theorem_of_algebra',
+        title: '3.6 The Fundamental Theorem of Algebra',
+        path: 'textbooks/algebra_2/polynomial_functions_and_their_graphs/the_fundamental_theorem_of_algebra.json',
+        description: 'Understanding that a polynomial has $n$ complex roots'
+    },
+    {
+        id: 'algebra2_descartes_rule_of_signs',
+        title: '3.7 Descartes\' Rule of Signs and Bounds on Zeros',
+        path: 'textbooks/algebra_2/polynomial_functions_and_their_graphs/descartes_rule_of_signs_and_bounds_on_zeros.json',
+        description: 'Predicting the number of positive and negative real roots'
+    },
+    {
+        id: 'algebra2_the_rational_root_theorem',
+        title: '3.8 The Rational Root Theorem',
+        path: 'textbooks/algebra_2/polynomial_functions_and_their_graphs/the_rational_root_theorem.json',
+        description: 'Listing possible rational roots of a polynomial equation'
+    },
+    {
+        id: 'algebra2_writing_polynomial_functions_given_zeros',
+        title: '3.9 Writing Polynomial Functions Given Zeros',
+        path: 'textbooks/algebra_2/polynomial_functions_and_their_graphs/writing_polynomial_functions_given_zeros.json',
+        description: 'Constructing the function from its roots (including complex conjugates)'
+    },
+    {
+        id: 'algebra2_solving_polynomial_equations_and_inequalities',
+        title: '3.10 Solving Polynomial Equations and Inequalities',
+        path: 'textbooks/algebra_2/polynomial_functions_and_their_graphs/solving_polynomial_equations_and_inequalities.json',
+        description: 'Finding all real and complex solutions and solving inequalities'
+    }
+],
+
+'algebra2-unit4': [
+    {
+        id: 'algebra2_simplifying_rational_expressions',
+        title: '4.1 Simplifying Rational Expressions',
+        path: 'textbooks/algebra_2/rational_functions_and_expressions/simplifying_rational_expressions.json',
+        description: 'Reducing fractions with polynomial numerators and denominators'
+    },
+    {
+        id: 'algebra2_multiplying_and_dividing_rational_expressions',
+        title: '4.2 Multiplying and Dividing Rational Expressions',
+        path: 'textbooks/algebra_2/rational_functions_and_expressions/multiplying_and_dividing_rational_expressions.json',
+        description: 'Performing multiplication and division of rational expressions'
+    },
+    {
+        id: 'algebra2_adding_and_subtracting_rational_expressions',
+        title: '4.3 Adding and Subtracting Rational Expressions',
+        path: 'textbooks/algebra_2/rational_functions_and_expressions/adding_and_subtracting_rational_expressions.json',
+        description: 'Finding a common denominator to combine expressions'
+    },
+    {
+        id: 'algebra2_complex_rational_expressions',
+        title: '4.4 Complex Rational Expressions',
+        path: 'textbooks/algebra_2/rational_functions_and_expressions/complex_rational_expressions.json',
+        description: 'Simplifying fractions containing rational expressions'
+    },
+    {
+        id: 'algebra2_graphing_rational_functions',
+        title: '4.5 Graphing Rational Functions and Identifying Asymptotes',
+        path: 'textbooks/algebra_2/rational_functions_and_expressions/graphing_rational_functions_and_asymptotes.json',
+        description: 'Finding and interpreting vertical and horizontal asymptotes'
+    },
+    {
+        id: 'algebra2_holes_in_graphs',
+        title: '4.6 Holes in Graphs of Rational Functions',
+        path: 'textbooks/algebra_2/rational_functions_and_expressions/holes_in_graphs_of_rational_functions.json',
+        description: 'Identifying and graphing removable discontinuities'
+    },
+    {
+        id: 'algebra2_solving_rational_equations',
+        title: '4.7 Solving Rational Equations',
+        path: 'textbooks/algebra_2/rational_functions_and_expressions/solving_rational_equations.json',
+        description: 'Solving equations and checking for extraneous solutions'
+    },
+    {
+        id: 'algebra2_solving_rational_inequalities',
+        title: '4.8 Solving Rational Inequalities Using Sign Charts',
+        path: 'textbooks/algebra_2/rational_functions_and_expressions/solving_rational_inequalities.json',
+        description: 'Using test points to determine solution intervals'
+    },
+    {
+        id: 'algebra2_applications_of_rational_functions',
+        title: '4.9 Applications of Rational Functions (Work, Distance-Rate-Time)',
+        path: 'textbooks/algebra_2/rational_functions_and_expressions/applications_of_rational_functions.json',
+        description: 'Solving real-world problems involving rational models'
+    },
+    {
+        id: 'algebra2_variation_direct_inverse_joint_combined',
+        title: '4.10 Variation: Direct, Inverse, Joint, and Combined',
+        path: 'textbooks/algebra_2/rational_functions_and_expressions/variation_direct_inverse_joint_and_combined.json',
+        description: 'Modeling relationships between variables'
+    }
+],
+
+'algebra2-unit5': [
+    {
+        id: 'algebra2_rational_exponents_and_radical_notation',
+        title: '5.1 Rational Exponents and Radical Notation',
+        path: 'textbooks/algebra_2/radical_functions_and_rational_exponents/rational_exponents_and_radical_notation.json',
+        description: 'Converting between exponential and radical forms'
+    },
+    {
+        id: 'algebra2_properties_of_rational_exponents_and_radicals',
+        title: '5.2 Properties of Rational Exponents and Radicals',
+        path: 'textbooks/algebra_2/radical_functions_and_rational_exponents/properties_of_rational_exponents_and_radicals.json',
+        description: 'Applying exponent rules to fractional powers and radicals'
+    },
+    {
+        id: 'algebra2_simplifying_radical_expressions',
+        title: '5.3 Simplifying Radical Expressions',
+        path: 'textbooks/algebra_2/radical_functions_and_rational_exponents/simplifying_radical_expressions.json',
+        description: 'Simplifying $n^{th}$ roots and rationalizing denominators'
+    },
+    {
+        id: 'algebra2_operations_with_radical_expressions',
+        title: '5.4 Operations with Radical Expressions',
+        path: 'textbooks/algebra_2/radical_functions_and_rational_exponents/operations_with_radical_expressions.json',
+        description: 'Adding, subtracting, multiplying, and dividing radicals'
+    },
+    {
+        id: 'algebra2_solving_radical_equations',
+        title: '5.5 Solving Radical Equations',
+        path: 'textbooks/algebra_2/radical_functions_and_rational_exponents/solving_radical_equations.json',
+        description: 'Solving equations involving square and cube roots'
+    },
+    {
+        id: 'algebra2_graphing_square_root_and_cube_root_functions',
+        title: '5.6 Graphing Square Root and Cube Root Functions',
+        path: 'textbooks/algebra_2/radical_functions_and_rational_exponents/graphing_square_root_and_cube_root_functions.json',
+        description: 'Analyzing the domain and shape of radical graphs'
+    },
+    {
+        id: 'algebra2_transformations_of_radical_functions',
+        title: '5.7 Transformations of Radical Functions',
+        path: 'textbooks/algebra_2/radical_functions_and_rational_exponents/transformations_of_radical_functions.json',
+        description: 'Applying shifts, stretches, and reflections to parent functions'
+    },
+    {
+        id: 'algebra2_inverse_functions_and_their_graphs',
+        title: '5.8 Inverse Functions and Their Graphs',
+        path: 'textbooks/algebra_2/radical_functions_and_rational_exponents/inverse_functions_and_their_graphs.json',
+        description: 'Finding inverses algebraically and recognizing their symmetry across $y=x$'
+    },
+    {
+        id: 'algebra2_verifying_inverse_functions_algebraically',
+        title: '5.9 Verifying Inverse Functions Algebraically',
+        path: 'textbooks/algebra_2/radical_functions_and_rational_exponents/verifying_inverse_functions_algebraically.json',
+        description: 'Using function composition to prove that $f(g(x)) = x$'
+    },
+    {
+        id: 'algebra2_applications_of_radical_functions',
+        title: '5.10 Applications of Radical Functions (Geometry, Physics)',
+        path: 'textbooks/algebra_2/radical_functions_and_rational_exponents/applications_of_radical_functions.json',
+        description: 'Solving problems that involve radical models'
+    }
+],
+
+'algebra2-unit6': [
+    {
+        id: 'algebra2_exponential_growth_and_decay_models',
+        title: '6.1 Exponential Growth and Decay Models',
+        path: 'textbooks/algebra_2/exponential_functions_and_models/exponential_growth_and_decay_models.json',
+        description: 'Using the model $y=a(1+r)^t$ to model real-world change'
+    },
+    {
+        id: 'algebra2_the_natural_base_e_and_continuous_growth',
+        title: '6.2 The Natural Base e and Continuous Growth',
+        path: 'textbooks/algebra_2/exponential_functions_and_models/the_natural_base_e_and_continuous_growth.json',
+        description: 'Introducing the base $e$ and the formula $A=Pe^{rt}$'
+    },
+    {
+        id: 'algebra2_graphing_exponential_functions',
+        title: '6.3 Graphing Exponential Functions and Their Transformations',
+        path: 'textbooks/algebra_2/exponential_functions_and_models/graphing_exponential_functions_and_transformations.json',
+        description: 'Identifying and graphing asymptotes, domain, and range'
+    },
+    {
+        id: 'algebra2_compound_interest_and_financial_applications',
+        title: '6.4 Compound Interest and Financial Applications',
+        path: 'textbooks/algebra_2/exponential_functions_and_models/compound_interest_and_financial_applications.json',
+        description: 'Calculating interest compounded $n$ times per year'
+    },
+    {
+        id: 'algebra2_exponential_regression_and_curve_fitting',
+        title: '6.5 Exponential Regression and Curve Fitting',
+        path: 'textbooks/algebra_2/exponential_functions_and_models/exponential_regression_and_curve_fitting.json',
+        description: 'Finding the best-fit exponential model for data'
+    },
+    {
+        id: 'algebra2_solving_exponential_equations_with_common_bases',
+        title: '6.6 Solving Exponential Equations with Common Bases',
+        path: 'textbooks/algebra_2/exponential_functions_and_models/solving_exponential_equations_with_common_bases.json',
+        description: 'Using the property of equality for exponential equations'
+    },
+    {
+        id: 'algebra2_introduction_to_logarithms',
+        title: '6.7 Introduction to Logarithms as Inverses of Exponentials',
+        path: 'textbooks/algebra_2/exponential_functions_and_models/introduction_to_logarithms.json',
+        description: 'Defining logarithms and converting between logarithmic and exponential form'
+    },
+    {
+        id: 'algebra2_graphing_logarithmic_functions',
+        title: '6.8 Graphing Logarithmic Functions',
+        path: 'textbooks/algebra_2/exponential_functions_and_models/graphing_logarithmic_functions.json',
+        description: 'Analyzing vertical asymptotes and domain of log graphs'
+    },
+    {
+        id: 'algebra2_properties_of_logarithms_basic',
+        title: '6.9 Properties of Logarithms (Basic)',
+        path: 'textbooks/algebra_2/exponential_functions_and_models/properties_of_logarithms_basic.json',
+        description: 'Review of simple log properties (e.g., $\\log_b b = 1$)'
+    },
+    {
+        id: 'algebra2_the_number_e_and_natural_logarithms',
+        title: '6.10 The Number e and Natural Logarithms',
+        path: 'textbooks/algebra_2/exponential_functions_and_models/the_number_e_and_natural_logarithms.json',
+        description: 'Introducing $\\ln x$ and its relationship to $e^x$'
+    }
+],
+
+'algebra2-unit7': [
+    {
+        id: 'algebra2_the_change_of_base_formula',
+        title: '7.1 The Change of Base Formula',
+        path: 'textbooks/algebra_2/logarithmic_functions_and_equations/the_change_of_base_formula.json',
+        description: 'Using $\\log_b x = \\frac{\\log x}{\\log b}$ to evaluate logs on a calculator'
+    },
+    {
+        id: 'algebra2_properties_of_logarithms_product_quotient_power_rules',
+        title: '7.2 Properties of Logarithms (Product, Quotient, Power Rules)',
+        path: 'textbooks/algebra_2/logarithmic_functions_and_equations/properties_of_logarithms_product_quotient_power_rules.json',
+        description: 'Mastering the key rules for expanding and condensing logarithms'
+    },
+    {
+        id: 'algebra2_expanding_and_condensing_logarithmic_expressions',
+        title: '7.3 Expanding and Condensing Logarithmic Expressions',
+        path: 'textbooks/algebra_2/logarithmic_functions_and_equations/expanding_and_condensing_logarithmic_expressions.json',
+        description: 'Rewriting single logarithms as sums/differences and vice versa'
+    },
+    {
+        id: 'algebra2_solving_exponential_equations_using_logarithms',
+        title: '7.4 Solving Exponential Equations Using Logarithms',
+        path: 'textbooks/algebra_2/logarithmic_functions_and_equations/solving_exponential_equations_using_logarithms.json',
+        description: 'Solving equations where bases cannot be made common'
+    },
+    {
+        id: 'algebra2_solving_logarithmic_equations',
+        title: '7.5 Solving Logarithmic Equations',
+        path: 'textbooks/algebra_2/logarithmic_functions_and_equations/solving_logarithmic_equations.json',
+        description: 'Solving equations and checking for domain restrictions (extraneous solutions)'
+    },
+    {
+        id: 'algebra2_applications_of_logarithms',
+        title: '7.6 Applications of Logarithms (pH, Richter Scale, Decibel Scale)',
+        path: 'textbooks/algebra_2/logarithmic_functions_and_equations/applications_of_logarithms.json',
+        description: 'Solving problems involving logarithmic scales'
+    },
+    {
+        id: 'algebra2_exponential_and_logarithmic_models',
+        title: '7.7 Exponential and Logarithmic Models',
+        path: 'textbooks/algebra_2/logarithmic_functions_and_equations/exponential_and_logarithmic_models.json',
+        description: 'Analyzing and interpreting various forms of growth and decay models'
+    },
+    {
+        id: 'algebra2_half_life_and_carbon_dating_problems',
+        title: '7.8 Half-Life and Carbon Dating Problems',
+        path: 'textbooks/algebra_2/logarithmic_functions_and_equations/half-life_and_carbon_dating_problems.json',
+        description: 'Solving decay problems using continuous and discrete models'
+    },
+    {
+        id: 'algebra2_newtons_law_of_cooling',
+        title: '7.9 Newton\'s Law of Cooling',
+        path: 'textbooks/algebra_2/logarithmic_functions_and_equations/newtons_law_of_cooling.json',
+        description: 'Modeling temperature change over time'
+    },
+    {
+        id: 'algebra2_comparing_linear_exponential_and_logarithmic_growth',
+        title: '7.10 Comparing Linear, Exponential, and Logarithmic Growth',
+        path: 'textbooks/algebra_2/logarithmic_functions_and_equations/comparing_linear_exponential_and_logarithmic_growth.json',
+        description: 'Distinguishing between the three types of functional growth'
+    }
+],
+
+'algebra2-unit8': [
+    {
+        id: 'algebra2_arithmetic_sequences_explicit_and_recursive_formulas',
+        title: '8.1 Arithmetic Sequences: Explicit and Recursive Formulas',
+        path: 'textbooks/algebra_2/sequences_and_series/arithmetic_sequences_explicit_and_recursive_formulas.json',
+        description: 'Defining and finding terms in sequences with a common difference'
+    },
+    {
+        id: 'algebra2_arithmetic_series_and_summation',
+        title: '8.2 Arithmetic Series and Summation',
+        path: 'textbooks/algebra_2/sequences_and_series/arithmetic_series_and_summation.json',
+        description: 'Finding the sum of a finite arithmetic sequence'
+    },
+    {
+        id: 'algebra2_geometric_sequences_explicit_and_recursive_formulas',
+        title: '8.3 Geometric Sequences: Explicit and Recursive Formulas',
+        path: 'textbooks/algebra_2/sequences_and_series/geometric_sequences_explicit_and_recursive_formulas.json',
+        description: 'Defining and finding terms in sequences with a common ratio'
+    },
+    {
+        id: 'algebra2_geometric_series_and_summation',
+        title: '8.4 Geometric Series and Summation',
+        path: 'textbooks/algebra_2/sequences_and_series/geometric_series_and_summation.json',
+        description: 'Finding the sum of a finite geometric sequence'
+    },
+    {
+        id: 'algebra2_infinite_geometric_series',
+        title: '8.5 Infinite Geometric Series',
+        path: 'textbooks/algebra_2/sequences_and_series/infinite_geometric_series.json',
+        description: 'Determining if an infinite series converges and finding its sum'
+    },
+    {
+        id: 'algebra2_sigma_notation_and_properties_of_summation',
+        title: '8.6 Sigma Notation and Properties of Summation',
+        path: 'textbooks/algebra_2/sequences_and_series/sigma_notation_and_properties_of_summation.json',
+        description: 'Writing and evaluating series using summation notation'
+    },
+    {
+        id: 'algebra2_applications_of_sequences_and_series',
+        title: '8.7 Applications of Sequences and Series (Financial, Population)',
+        path: 'textbooks/algebra_2/sequences_and_series/applications_of_sequences_and_series.json',
+        description: 'Solving real-world problems using series models'
+    },
+    {
+        id: 'algebra2_the_binomial_theorem_and_pascals_triangle',
+        title: '8.8 The Binomial Theorem and Pascal\'s Triangle',
+        path: 'textbooks/algebra_2/sequences_and_series/the_binomial_theorem_and_pascals_triangle.json',
+        description: 'Using Pascal\'s triangle to find binomial coefficients'
+    },
+    {
+        id: 'algebra2_expanding_binomials_using_the_binomial_theorem',
+        title: '8.9 Expanding Binomials Using the Binomial Theorem',
+        path: 'textbooks/algebra_2/sequences_and_series/expanding_binomials_using_the_binomial_theorem.json',
+        description: 'Calculating specific terms and full expansions of $(a+b)^n$'
+    },
+    {
+        id: 'algebra2_mathematical_induction_introduction',
+        title: '8.10 Mathematical Induction (Introduction)',
+        path: 'textbooks/algebra_2/sequences_and_series/mathematical_induction_introduction.json',
+        description: 'Overview of a proof technique for statements involving integers'
+    }
+],
+
+'algebra2-unit9': [
+    {
+        id: 'algebra2_basic_probability_principles',
+        title: '9.1 Basic Probability Principles',
+        path: 'textbooks/algebra_2/probability_and_counting_principles/basic_probability_principles.json',
+        description: 'Defining sample space, events, and calculating probabilities'
+    },
+    {
+        id: 'algebra2_the_addition_rule_for_probability',
+        title: '9.2 The Addition Rule for Probability',
+        path: 'textbooks/algebra_2/probability_and_counting_principles/the_addition_rule_for_probability.json',
+        description: 'Calculating probabilities of combined events (mutually exclusive and non-exclusive)'
+    },
+    {
+        id: 'algebra2_conditional_probability',
+        title: '9.3 Conditional Probability',
+        path: 'textbooks/algebra_2/probability_and_counting_principles/conditional_probability.json',
+        description: 'Calculating $P(A|B)$'
+    },
+    {
+        id: 'algebra2_the_multiplication_rule_for_probability',
+        title: '9.4 The Multiplication Rule for Probability',
+        path: 'textbooks/algebra_2/probability_and_counting_principles/the_multiplication_rule_for_probability.json',
+        description: 'Calculating probabilities of sequential events'
+    },
+    {
+        id: 'algebra2_independent_and_dependent_events',
+        title: '9.5 Independent and Dependent Events',
+        path: 'textbooks/algebra_2/probability_and_counting_principles/independent_and_dependent_events.json',
+        description: 'Distinguishing between events where one outcome affects the other'
+    },
+    {
+        id: 'algebra2_permutations_and_combinations',
+        title: '9.6 Permutations and Combinations',
+        path: 'textbooks/algebra_2/probability_and_counting_principles/permutations_and_combinations.json',
+        description: 'Calculating arrangements where order matters vs. when it does not'
+    },
+    {
+        id: 'algebra2_the_fundamental_counting_principle',
+        title: '9.7 The Fundamental Counting Principle',
+        path: 'textbooks/algebra_2/probability_and_counting_principles/the_fundamental_counting_principle.json',
+        description: 'Using multiplication to find the total number of possibilities'
+    },
+    {
+        id: 'algebra2_probability_with_permutations_and_combinations',
+        title: '9.8 Probability with Permutations and Combinations',
+        path: 'textbooks/algebra_2/probability_and_counting_principles/probability_with_permutations_and_combinations.json',
+        description: 'Using counting techniques to find complex probabilities'
+    },
+    {
+        id: 'algebra2_binomial_probability',
+        title: '9.9 Binomial Probability',
+        path: 'textbooks/algebra_2/probability_and_counting_principles/binomial_probability.json',
+        description: 'Calculating probabilities for sequences of independent Bernoulli trials'
+    },
+    {
+        id: 'algebra2_expected_value_and_its_applications',
+        title: '9.10 Expected Value and Its Applications',
+        path: 'textbooks/algebra_2/probability_and_counting_principles/expected_value_and_its_applications.json',
+        description: 'Calculating the average outcome of a random process'
+    }
+],
+
+'algebra2-unit10': [
+    {
+        id: 'algebra2_measures_of_central_tendency_and_dispersion',
+        title: '10.1 Measures of Central Tendency and Dispersion',
+        path: 'textbooks/algebra_2/statistics_and_data_analysis/measures_of_central_tendency_and_dispersion.json',
+        description: 'Calculating and interpreting mean, median, mode, and standard deviation'
+    },
+    {
+        id: 'algebra2_normal_distributions_and_the_empirical_rule',
+        title: '10.2 Normal Distributions and the Empirical Rule',
+        path: 'textbooks/algebra_2/statistics_and_data_analysis/normal_distributions_and_the_empirical_rule.json',
+        description: 'Understanding the properties of the bell curve and the 68-95-99.7 rule'
+    },
+    {
+        id: 'algebra2_z_scores_and_standard_normal_distribution',
+        title: '10.3 Z-scores and Standard Normal Distribution',
+        path: 'textbooks/algebra_2/statistics_and_data_analysis/z-scores_and_standard_normal_distribution.json',
+        description: 'Standardizing data and calculating probabilities using z-tables'
+    },
+    {
+        id: 'algebra2_sampling_methods_and_bias',
+        title: '10.4 Sampling Methods and Bias',
+        path: 'textbooks/algebra_2/statistics_and_data_analysis/sampling_methods_and_bias.json',
+        description: 'Evaluating different methods for collecting data and recognizing sources of error'
+    },
+    {
+        id: 'algebra2_experimental_design',
+        title: '10.5 Experimental Design',
+        path: 'textbooks/algebra_2/statistics_and_data_analysis/experimental_design.json',
+        description: 'Principles of controlled experiments, randomization, and control groups'
+    },
+    {
+        id: 'algebra2_confidence_intervals_introduction',
+        title: '10.6 Confidence Intervals (Introduction)',
+        path: 'textbooks/algebra_2/statistics_and_data_analysis/confidence_intervals_introduction.json',
+        description: 'Estimating a population parameter using a range of values'
+    },
+    {
+        id: 'algebra2_margin_of_error',
+        title: '10.7 Margin of Error',
+        path: 'textbooks/algebra_2/statistics_and_data_analysis/margin_of_error.json',
+        description: 'Calculating the range of expected random sampling error'
+    },
+    {
+        id: 'algebra2_correlation_and_causation',
+        title: '10.8 Correlation and Causation',
+        path: 'textbooks/algebra_2/statistics_and_data_analysis/correlation_and_causation.json',
+        description: 'Distinguishing between a relationship and a cause-and-effect link'
+    },
+    {
+        id: 'algebra2_linear_regression_and_residuals',
+        title: '10.9 Linear Regression and Residuals',
+        path: 'textbooks/algebra_2/statistics_and_data_analysis/linear_regression_and_residuals.json',
+        description: 'Finding the line of best fit and analyzing prediction errors'
+    },
+    {
+        id: 'algebra2_analyzing_and_interpreting_statistical_studies',
+        title: '10.10 Analyzing and Interpreting Statistical Studies',
+        path: 'textbooks/algebra_2/statistics_and_data_analysis/analyzing_and_interpreting_statistical_studies.json',
+        description: 'Drawing conclusions and critiquing research based on data'
+    }
+],
+
+'algebra2-unit11': [
+    {
+        id: 'algebra2_angles_and_radian_measure',
+        title: '11.1 Angles and Radian Measure',
+        path: 'textbooks/algebra_2/trigonometric_functions/angles_and_radian_measure.json',
+        description: 'Introducing angle measurement using radians'
+    },
+    {
+        id: 'algebra2_arc_length_and_sector_area',
+        title: '11.2 Arc Length and Sector Area',
+        path: 'textbooks/algebra_2/trigonometric_functions/arc_length_and_sector_area.json',
+        description: 'Calculating geometric properties with radian measure'
+    },
+    {
+        id: 'algebra2_the_unit_circle_and_trigonometric_functions',
+        title: '11.3 The Unit Circle and Trigonometric Functions',
+        path: 'textbooks/algebra_2/trigonometric_functions/the_unit_circle_and_trigonometric_functions.json',
+        description: 'Defining sine, cosine, and tangent on the unit circle'
+    },
+    {
+        id: 'algebra2_trigonometric_functions_of_any_angle',
+        title: '11.4 Trigonometric Functions of Any Angle',
+        path: 'textbooks/algebra_2/trigonometric_functions/trigonometric_functions_of_any_angle.json',
+        description: 'Reference angles and finding function values'
+    },
+    {
+        id: 'algebra2_graphs_of_sine_and_cosine_functions',
+        title: '11.5 Graphs of Sine and Cosine Functions',
+        path: 'textbooks/algebra_2/trigonometric_functions/graphs_of_sine_and_cosine_functions.json',
+        description: 'Basic period and amplitude of sinusoidal graphs'
+    },
+    {
+        id: 'algebra2_amplitude_period_and_phase_shift',
+        title: '11.6 Amplitude, Period, and Phase Shift',
+        path: 'textbooks/algebra_2/trigonometric_functions/amplitude_period_and_phase_shift.json',
+        description: 'Transformations of sinusoidal functions'
+    },
+    {
+        id: 'algebra2_graphs_of_other_trigonometric_functions',
+        title: '11.7 Graphs of Tangent, Cotangent, Secant, and Cosecant Functions',
+        path: 'textbooks/algebra_2/trigonometric_functions/graphs_of_other_trigonometric_functions.json',
+        description: 'Graphing reciprocal and quotient trig functions'
+    },
+    {
+        id: 'algebra2_inverse_trigonometric_functions',
+        title: '11.8 Inverse Trigonometric Functions',
+        path: 'textbooks/algebra_2/trigonometric_functions/inverse_trigonometric_functions.json',
+        description: 'Defining and evaluating arcsin, arccos, and arctan'
+    },
+    {
+        id: 'algebra2_applications_of_trigonometric_functions',
+        title: '11.9 Applications of Trigonometric Functions (Simple Harmonic Motion)',
+        path: 'textbooks/algebra_2/trigonometric_functions/applications_of_trigonometric_functions.json',
+        description: 'Using trig functions to model cyclic phenomena'
+    },
+    {
+        id: 'algebra2_modeling_with_trigonometric_functions',
+        title: '11.10 Modeling with Trigonometric Functions',
+        path: 'textbooks/algebra_2/trigonometric_functions/modeling_with_trigonometric_functions.json',
+        description: 'Creating functions from real-world periodic data'
+    }
+],
+
+'algebra2-unit12': [
+    {
+        id: 'algebra2_fundamental_trigonometric_identities',
+        title: '12.1 Fundamental Trigonometric Identities',
+        path: 'textbooks/algebra_2/trigonometric_identities_and_equations/fundamental_trigonometric_identities.json',
+        description: 'Reciprocal, quotient, and Pythagorean identities'
+    },
+    {
+        id: 'algebra2_verifying_trigonometric_identities',
+        title: '12.2 Verifying Trigonometric Identities',
+        path: 'textbooks/algebra_2/trigonometric_identities_and_equations/verifying_trigonometric_identities.json',
+        description: 'Proving trigonometric relationships'
+    },
+    {
+        id: 'algebra2_sum_and_difference_formulas',
+        title: '12.3 Sum and Difference Formulas',
+        path: 'textbooks/algebra_2/trigonometric_identities_and_equations/sum_and_difference_formulas.json',
+        description: 'Formulas for $\\sin(A \\pm B)$ and $\\cos(A \\pm B)$'
+    },
+    {
+        id: 'algebra2_double_angle_and_half_angle_formulas',
+        title: '12.4 Double-Angle and Half-Angle Formulas',
+        path: 'textbooks/algebra_2/trigonometric_identities_and_equations/double_angle_and_half_angle_formulas.json',
+        description: 'Identities for $2\\theta$ and $\\theta/2$'
+    },
+    {
+        id: 'algebra2_product_to_sum_and_sum_to_product_formulas',
+        title: '12.5 Product-to-Sum and Sum-to-Product Formulas',
+        path: 'textbooks/algebra_2/trigonometric_identities_and_equations/product_to_sum_and_sum_to_product_formulas.json',
+        description: 'Converting between sums/differences and products'
+    },
+    {
+        id: 'algebra2_solving_basic_trigonometric_equations',
+        title: '12.6 Solving Basic Trigonometric Equations',
+        path: 'textbooks/algebra_2/trigonometric_identities_and_equations/solving_basic_trigonometric_equations.json',
+        description: 'Finding solutions for simple trig equations'
+    },
+    {
+        id: 'algebra2_solving_trigonometric_equations_with_multiple_angles',
+        title: '12.7 Solving Trigonometric Equations with Multiple Angles',
+        path: 'textbooks/algebra_2/trigonometric_identities_and_equations/solving_trigonometric_equations_with_multiple_angles.json',
+        description: 'Equations involving $\\sin(B\\theta)$ or $\\cos(B\\theta)$'
+    },
+    {
+        id: 'algebra2_solving_trigonometric_equations_quadratic_in_form',
+        title: '12.8 Solving Trigonometric Equations Quadratic in Form',
+        path: 'textbooks/algebra_2/trigonometric_identities_and_equations/solving_trigonometric_equations_quadratic_in_form.json',
+        description: 'Using factoring or the quadratic formula on trig equations'
+    },
+    {
+        id: 'algebra2_solving_trigonometric_equations_using_identities',
+        title: '12.9 Solving Trigonometric Equations Using Identities',
+        path: 'textbooks/algebra_2/trigonometric_identities_and_equations/solving_trigonometric_equations_using_identities.json',
+        description: 'Substituting identities to simplify and solve equations'
+    },
+    {
+        id: 'algebra2_applications_of_trigonometric_equations',
+        title: '12.10 Applications of Trigonometric Equations',
+        path: 'textbooks/algebra_2/trigonometric_identities_and_equations/applications_of_trigonometric_equations.json',
+        description: 'Real-world problem-solving using trigonometric equations'
+    }
+],
+
+'algebra2-unit13': [
+    {
+        id: 'algebra2_systems_of_linear_equations_in_three_variables',
+        title: '13.1 Systems of Linear Equations in Three Variables',
+        path: 'textbooks/algebra_2/advanced_systems_and_inequalities/systems_of_linear_equations_in_three_variables.json',
+        description: 'Solving 3x3 systems using elimination or substitution'
+    },
+    {
+        id: 'algebra2_systems_of_nonlinear_equations',
+        title: '13.2 Systems of Nonlinear Equations',
+        path: 'textbooks/algebra_2/advanced_systems_and_inequalities/systems_of_nonlinear_equations.json',
+        description: 'Solving systems involving quadratics or other non-linear functions'
+    },
+    {
+        id: 'algebra2_systems_of_linear_inequalities_in_two_variables',
+        title: '13.3 Systems of Linear Inequalities in Two Variables',
+        path: 'textbooks/algebra_2/advanced_systems_and_inequalities/systems_of_linear_inequalities_in_two_variables.json',
+        description: 'Graphing and identifying the feasible region'
+    },
+    {
+        id: 'algebra2_systems_of_nonlinear_inequalities',
+        title: '13.4 Systems of Nonlinear Inequalities',
+        path: 'textbooks/algebra_2/advanced_systems_and_inequalities/systems_of_nonlinear_inequalities.json',
+        description: 'Graphing regions defined by non-linear boundaries'
+    },
+    {
+        id: 'algebra2_linear_programming_graphical_method',
+        title: '13.5 Linear Programming (Graphical Method)',
+        path: 'textbooks/algebra_2/advanced_systems_and_inequalities/linear_programming_graphical_method.json',
+        description: 'Introduction to optimizing a linear objective function'
+    },
+    {
+        id: 'algebra2_optimization_problems_using_linear_programming',
+        title: '13.6 Optimization Problems Using Linear Programming',
+        path: 'textbooks/algebra_2/advanced_systems_and_inequalities/optimization_problems_using_linear_programming.json',
+        description: 'Solving real-world max/min problems'
+    },
+    {
+        id: 'algebra2_solving_absolute_value_equations',
+        title: '13.7 Solving Absolute Value Equations',
+        path: 'textbooks/algebra_2/advanced_systems_and_inequalities/solving_absolute_value_equations.json',
+        description: 'Solving equations with absolute values'
+    },
+    {
+        id: 'algebra2_solving_absolute_value_inequalities',
+        title: '13.8 Solving Absolute Value Inequalities',
+        path: 'textbooks/algebra_2/advanced_systems_and_inequalities/solving_absolute_value_inequalities.json',
+        description: 'Solving and graphing absolute value inequalities'
+    },
+    {
+        id: 'algebra2_graphing_absolute_value_functions_and_inequalities',
+        title: '13.9 Graphing Absolute Value Functions and Inequalities',
+        path: 'textbooks/algebra_2/advanced_systems_and_inequalities/graphing_absolute_value_functions_and_inequalities.json',
+        description: 'Analyzing V-shaped graphs and their regions'
+    },
+    {
+        id: 'algebra2_applications_of_systems_and_inequalities',
+        title: '13.10 Applications of Systems and Inequalities',
+        path: 'textbooks/algebra_2/advanced_systems_and_inequalities/applications_of_systems_and_inequalities.json',
+        description: 'Word problems involving multiple equations or constraints'
+    }
+],
+
+'algebra2-unit14': [
+    {
+        id: 'algebra2_matrix_operations_basic',
+        title: '14.1 Matrix Operations: Addition, Subtraction, Scalar Multiplication',
+        path: 'textbooks/algebra_2/matrices_and_determinants/matrix_operations_basic.json',
+        description: 'Performing element-wise operations on matrices'
+    },
+    {
+        id: 'algebra2_matrix_multiplication',
+        title: '14.2 Matrix Multiplication',
+        path: 'textbooks/algebra_2/matrices_and_determinants/matrix_multiplication.json',
+        description: 'Understanding the row-by-column procedure'
+    },
+    {
+        id: 'algebra2_identity_matrices_and_inverse_matrices',
+        title: '14.3 Identity Matrices and Inverse Matrices',
+        path: 'textbooks/algebra_2/matrices_and_determinants/identity_matrices_and_inverse_matrices.json',
+        description: 'Finding the inverse of a 2x2 matrix'
+    },
+    {
+        id: 'algebra2_solving_systems_using_inverse_matrices',
+        title: '14.4 Solving Systems Using Inverse Matrices',
+        path: 'textbooks/algebra_2/matrices_and_determinants/solving_systems_using_inverse_matrices.json',
+        description: 'Using the matrix equation $AX=B$'
+    },
+    {
+        id: 'algebra2_determinants_of_2x2_and_3x3_matrices',
+        title: '14.5 Determinants of 2x2 and 3x3 Matrices',
+        path: 'textbooks/algebra_2/matrices_and_determinants/determinants_of_2x2_and_3x3_matrices.json',
+        description: 'Calculating the scalar value of a square matrix'
+    },
+    {
+        id: 'algebra2_cramers_rule_for_solving_systems',
+        title: '14.6 Cramer\'s Rule for Solving Systems',
+        path: 'textbooks/algebra_2/matrices_and_determinants/cramers_rule_for_solving_systems.json',
+        description: 'Using determinants to solve systems of equations'
+    },
+    {
+        id: 'algebra2_applications_of_matrices_transformations',
+        title: '14.7 Applications of Matrices (Transformations)',
+        path: 'textbooks/algebra_2/matrices_and_determinants/applications_of_matrices_transformations.json',
+        description: 'Representing data and geometric transformations'
+    },
+    {
+        id: 'algebra2_geometric_transformations_using_matrices',
+        title: '14.8 Geometric Transformations Using Matrices',
+        path: 'textbooks/algebra_2/matrices_and_determinants/geometric_transformations_using_matrices.json',
+        description: 'Scaling, rotating, and translating shapes with matrices'
+    },
+    {
+        id: 'algebra2_cryptography_with_matrices_introduction',
+        title: '14.9 Cryptography with Matrices (Introduction)',
+        path: 'textbooks/algebra_2/matrices_and_determinants/cryptography_with_matrices_introduction.json',
+        description: 'Basic encoding and decoding using matrix multiplication'
+    },
+    {
+        id: 'algebra2_matrix_operations_in_real_world_contexts',
+        title: '14.10 Matrix Operations in Real-World Contexts',
+        path: 'textbooks/algebra_2/matrices_and_determinants/matrix_operations_in_real_world_contexts.json',
+        description: 'Applying matrix math to inventory and economics'
+    }
+],
+
+'algebra2-unit15': [
+    {
+        id: 'algebra2_the_parabola_geometric_definition_and_equations',
+        title: '15.1 The Parabola: Geometric Definition and Equations',
+        path: 'textbooks/algebra_2/conic_sections_and_parametric_equations/the_parabola_geometric_definition_and_equations.json',
+        description: 'Focus, directrix, and standard form of a parabola'
+    },
+    {
+        id: 'algebra2_the_ellipse_geometric_definition_and_equations',
+        title: '15.2 The Ellipse: Geometric Definition and Equations',
+        path: 'textbooks/algebra_2/conic_sections_and_parametric_equations/the_ellipse_geometric_definition_and_equations.json',
+        description: 'Foci, major/minor axes, and standard form of an ellipse'
+    },
+    {
+        id: 'algebra2_the_hyperbola_geometric_definition_and_equations',
+        title: '15.3 The Hyperbola: Geometric Definition and Equations',
+        path: 'textbooks/algebra_2/conic_sections_and_parametric_equations/the_hyperbola_geometric_definition_and_equations.json',
+        description: 'Foci, asymptotes, and standard form of a hyperbola'
+    },
+    {
+        id: 'algebra2_the_circle_review_and_general_form',
+        title: '15.4 The Circle: Review and General Form',
+        path: 'textbooks/algebra_2/conic_sections_and_parametric_equations/the_circle_review_and_general_form.json',
+        description: 'Standard and general equation of a circle'
+    },
+    {
+        id: 'algebra2_identifying_conic_sections_from_general_form',
+        title: '15.5 Identifying Conic Sections from General Form',
+        path: 'textbooks/algebra_2/conic_sections_and_parametric_equations/identifying_conic_sections_from_general_form.json',
+        description: 'Using coefficients to classify conic sections'
+    },
+    {
+        id: 'algebra2_rotated_conic_sections_introduction',
+        title: '15.6 Rotated Conic Sections (Introduction)',
+        path: 'textbooks/algebra_2/conic_sections_and_parametric_equations/rotated_conic_sections_introduction.json',
+        description: 'Brief overview of conics whose axes are not parallel to the coordinate axes'
+    },
+    {
+        id: 'algebra2_parametric_equations_and_their_graphs',
+        title: '15.7 Parametric Equations and Their Graphs',
+        path: 'textbooks/algebra_2/conic_sections_and_parametric_equations/parametric_equations_and_their_graphs.json',
+        description: 'Introducing a third variable ($t$) for graphing'
+    },
+    {
+        id: 'algebra2_converting_between_parametric_and_rectangular_forms',
+        title: '15.8 Converting Between Parametric and Rectangular Forms',
+        path: 'textbooks/algebra_2/conic_sections_and_parametric_equations/converting_between_parametric_and_rectangular_forms.json',
+        description: 'Eliminating the parameter to find a Cartesian equation'
+    },
+    {
+        id: 'algebra2_applications_of_parametric_equations',
+        title: '15.9 Applications of Parametric Equations (Projectile Motion)',
+        path: 'textbooks/algebra_2/conic_sections_and_parametric_equations/applications_of_parametric_equations_projectile_motion.json',
+        description: 'Modeling motion over time using parametric equations'
+    },
+    {
+        id: 'algebra2_polar_coordinates_and_equations_introduction',
+        title: '15.10 Polar Coordinates and Equations (Introduction)',
+        path: 'textbooks/algebra_2/conic_sections_and_parametric_equations/polar_coordinates_and_equations_introduction.json',
+        description: 'An alternative coordinate system using radius and angle'
+    }
+],
+        
 // Add to the unitSections object in the loadTextbookSections function
 'algebra1-unit1': [
     {
@@ -17743,6 +18757,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
