@@ -4343,7 +4343,7 @@ function loadTextbookContent() {
                                 </button>
 
 
-` : Biology11 ? `
+` : isBiology11 ? `
     <button class="unit-btn ${currentTextbookUnit === 'biology11-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('biology11-unit1')">
         Unit 1: Advanced Cell Structure & Organelles
     </button>
@@ -23930,6 +23930,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
