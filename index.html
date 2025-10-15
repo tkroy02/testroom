@@ -4268,6 +4268,7 @@ function loadTextbookContent() {
     const isChemistry12 = currentCourseId === 'chemistry-grade-12';
     const isBiology9 = currentCourseId === 'biology-grade-9';
     const isBiology10 = currentCourseId === 'biology-grade-10';
+    const isBiology11 = currentCourseId === 'biology-grade-11';
 
     
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
@@ -4291,6 +4292,7 @@ function loadTextbookContent() {
                      isChemistry12 ? 'Chemistry Grade 12 Textbook' :
                      isBiology9 ? 'Biology Grade 9 Textbook' :
                      isBiology10 ? 'Biology Grade 10 Textbook' : 
+                     isBiology11 ? 'Biology Grade 11 Textbook' :
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4340,6 +4342,35 @@ function loadTextbookContent() {
                                     Unit 10: Modern Physics Introduction
                                 </button>
 
+
+` : Biology11 ? `
+    <button class="unit-btn ${currentTextbookUnit === 'biology11-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('biology11-unit1')">
+        Unit 1: Advanced Cell Structure & Organelles
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology11-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('biology11-unit2')">
+        Unit 2: Membrane Transport & Dynamics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology11-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('biology11-unit3')">
+        Unit 3: Enzyme Kinetics & Catalysis
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology11-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('biology11-unit4')">
+        Unit 4: Cellular Communication & Signaling
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology11-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('biology11-unit5')">
+        Unit 5: Molecular Genetics & DNA Replication
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology11-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('biology11-unit6')">
+        Unit 6: Gene Expression - Transcription & Translation
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology11-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('biology11-unit7')">
+        Unit 7: Biotechnology & Genetic Engineering
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology11-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('biology11-unit8')">
+        Unit 8: Human Physiology - Major Systems
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology11-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('biology11-unit9')">
+        Unit 9: Ecology & Ecosystem Dynamics
+    </button>
 
 // Add Biology 9 unit buttons to the HTML template
 ` : isBiology9 ? `
@@ -5104,6 +5135,17 @@ function getCurrentUnitName() {
 'physics10-unit9': 'Unit 9: Static & Current Electricity',
 'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
 
+// Add to getCurrentUnitName function
+'biology11-unit1': 'Unit 1: Advanced Cell Structure & Organelles',
+'biology11-unit2': 'Unit 2: Membrane Transport & Dynamics',
+'biology11-unit3': 'Unit 3: Enzyme Kinetics & Catalysis',
+'biology11-unit4': 'Unit 4: Cellular Communication & Signaling',
+'biology11-unit5': 'Unit 5: Molecular Genetics & DNA Replication',
+'biology11-unit6': 'Unit 6: Gene Expression - Transcription & Translation',
+'biology11-unit7': 'Unit 7: Biotechnology & Genetic Engineering',
+'biology11-unit8': 'Unit 8: Human Physiology - Major Systems',
+'biology11-unit9': 'Unit 9: Ecology & Ecosystem Dynamics',
+        
 // Add to getCurrentUnitName function
 'biology9-unit1': 'Unit 1: Nature of Biology & Scientific Inquiry',
 'biology9-unit2': 'Unit 2: Cell Theory & Structure',
@@ -6086,6 +6128,574 @@ function loadTextbookSections() {
         }
     ],
 
+// Add to the unitSections object in loadTextbookSections function
+'biology11-unit1': [
+    {
+        id: 'biology11_ultrastructure_eukaryotic',
+        title: '1.1 Ultrastructure of Eukaryotic Cells',
+        path: 'textbooks/biology_11/advanced_cell_structure_organelles/ultrastructure_eukaryotic_cells_detailed_view.json',
+        description: 'Detailed cellular architecture'
+    },
+    {
+        id: 'biology11_endomembrane_system',
+        title: '1.2 Endomembrane System',
+        path: 'textbooks/biology_11/advanced_cell_structure_organelles/endomembrane_system_er_golgi_vesicles.json',
+        description: 'ER, Golgi, and vesicle network'
+    },
+    {
+        id: 'biology11_mitochondria_endosymbiosis',
+        title: '1.3 Mitochondria & Endosymbiosis',
+        path: 'textbooks/biology_11/advanced_cell_structure_organelles/mitochondria_structure_endosymbiotic_theory.json',
+        description: 'Mitochondrial evolution and function'
+    },
+    {
+        id: 'biology11_chloroplast_structure',
+        title: '1.4 Chloroplast Structure',
+        path: 'textbooks/biology_11/advanced_cell_structure_organelles/chloroplast_structure_photosynthetic_membranes.json',
+        description: 'Photosynthetic organelle details'
+    },
+    {
+        id: 'biology11_cytoskeleton',
+        title: '1.5 Cytoskeleton',
+        path: 'textbooks/biology_11/advanced_cell_structure_organelles/cytoskeleton_microtubules_microfilaments_intermediate.json',
+        description: 'Cellular structural framework'
+    },
+    {
+        id: 'biology11_cell_junctions',
+        title: '1.6 Cell Junctions',
+        path: 'textbooks/biology_11/advanced_cell_structure_organelles/cell_junctions_tight_desmosomes_gap.json',
+        description: 'Intercellular connection types'
+    },
+    {
+        id: 'biology11_nucleus_structure',
+        title: '1.7 Nucleus Structure',
+        path: 'textbooks/biology_11/advanced_cell_structure_organelles/nucleus_nuclear_envelope_pores_chromatin.json',
+        description: 'Nuclear architecture and transport'
+    },
+    {
+        id: 'biology11_ribosomes',
+        title: '1.8 Ribosomes',
+        path: 'textbooks/biology_11/advanced_cell_structure_organelles/ribosomes_free_bound_structure_function.json',
+        description: 'Protein synthesis machinery'
+    },
+    {
+        id: 'biology11_specialized_organelles',
+        title: '1.9 Specialized Organelles',
+        path: 'textbooks/biology_11/advanced_cell_structure_organelles/specialized_organelles_lysosomes_peroxisomes_vacuoles.json',
+        description: 'Organelle specialization and functions'
+    },
+    {
+        id: 'biology11_comparative_cell_biology',
+        title: '1.10 Comparative Cell Biology',
+        path: 'textbooks/biology_11/advanced_cell_structure_organelles/comparative_cell_biology_plant_animal_prokaryotic.json',
+        description: 'Cell type comparisons and evolution'
+    }
+],
+
+'biology11-unit2': [
+    {
+        id: 'biology11_membrane_structure',
+        title: '2.1 Membrane Structure',
+        path: 'textbooks/biology_11/membrane_transport_dynamics/detailed_structure_plasma_membrane_fluid_mosaic.json',
+        description: 'Advanced membrane composition'
+    },
+    {
+        id: 'biology11_passive_transport',
+        title: '2.2 Passive Transport',
+        path: 'textbooks/biology_11/membrane_transport_dynamics/passive_transport_diffusion_osmosis_facilitated.json',
+        description: 'Energy-independent transport mechanisms'
+    },
+    {
+        id: 'biology11_active_transport',
+        title: '2.3 Active Transport',
+        path: 'textbooks/biology_11/membrane_transport_dynamics/active_transport_primary_secondary_cotransport.json',
+        description: 'Energy-dependent transport systems'
+    },
+    {
+        id: 'biology11_sodium_potassium_pump',
+        title: '2.4 Sodium-Potassium Pump',
+        path: 'textbooks/biology_11/membrane_transport_dynamics/sodium_potassium_pump_case_study.json',
+        description: 'Key membrane transport protein'
+    },
+    {
+        id: 'biology11_osmotic_balance',
+        title: '2.5 Osmotic Balance',
+        path: 'textbooks/biology_11/membrane_transport_dynamics/osmotic_balance_animal_plant_cells.json',
+        description: 'Water balance in different cell types'
+    },
+    {
+        id: 'biology11_endocytosis',
+        title: '2.6 Endocytosis',
+        path: 'textbooks/biology_11/membrane_transport_dynamics/endocytosis_phagocytosis_pinocytosis_receptor_mediated.json',
+        description: 'Cellular uptake mechanisms'
+    },
+    {
+        id: 'biology11_exocytosis',
+        title: '2.7 Exocytosis',
+        path: 'textbooks/biology_11/membrane_transport_dynamics/exocytosis_process_role_secretion.json',
+        description: 'Cellular export processes'
+    },
+    {
+        id: 'biology11_membrane_potentials',
+        title: '2.8 Membrane Potentials',
+        path: 'textbooks/biology_11/membrane_transport_dynamics/membrane_potentials_electrochemical_gradients.json',
+        description: 'Electrical properties of membranes'
+    },
+    {
+        id: 'biology11_water_potential',
+        title: '2.9 Water Potential',
+        path: 'textbooks/biology_11/membrane_transport_dynamics/bulk_flow_water_potential_plants.json',
+        description: 'Water movement principles in plants'
+    },
+    {
+        id: 'biology11_tonicity',
+        title: '2.10 Tonicity',
+        path: 'textbooks/biology_11/membrane_transport_dynamics/tonicity_effects_cells_various_solutions.json',
+        description: 'Solution concentration effects on cells'
+    }
+],
+
+'biology11-unit3': [
+    {
+        id: 'biology11_enzyme_structure',
+        title: '3.1 Enzyme Structure',
+        path: 'textbooks/biology_11/enzyme_kinetics_catalysis/enzyme_structure_active_site_cofactors_coenzymes.json',
+        description: 'Molecular architecture of enzymes'
+    },
+    {
+        id: 'biology11_energy_activation',
+        title: '3.2 Energy of Activation',
+        path: 'textbooks/biology_11/enzyme_kinetics_catalysis/energy_activation_role_enzymes.json',
+        description: 'Energy barriers in chemical reactions'
+    },
+    {
+        id: 'biology11_enzyme_mechanisms',
+        title: '3.3 Enzyme Mechanisms',
+        path: 'textbooks/biology_11/enzyme_kinetics_catalysis/mechanisms_enzyme_action_induced_fit_model.json',
+        description: 'How enzymes catalyze reactions'
+    },
+    {
+        id: 'biology11_enzyme_factors',
+        title: '3.4 Enzyme Factors',
+        path: 'textbooks/biology_11/enzyme_kinetics_catalysis/factors_affecting_enzyme_activity_temperature_ph.json',
+        description: 'Environmental influences on enzymes'
+    },
+    {
+        id: 'biology11_enzyme_kinetics',
+        title: '3.5 Enzyme Kinetics',
+        path: 'textbooks/biology_11/enzyme_kinetics_catalysis/enzyme_kinetics_substrate_concentration_reaction_rate.json',
+        description: 'Reaction rate analysis'
+    },
+    {
+        id: 'biology11_michaelis_menten',
+        title: '3.6 Michaelis-Menten Kinetics',
+        path: 'textbooks/biology_11/enzyme_kinetics_catalysis/michaelis_menten_kinetics_vmax_km.json',
+        description: 'Quantitative enzyme kinetics'
+    },
+    {
+        id: 'biology11_enzyme_inhibition',
+        title: '3.7 Enzyme Inhibition',
+        path: 'textbooks/biology_11/enzyme_kinetics_catalysis/enzyme_inhibition_competitive_non_competitive.json',
+        description: 'Enzyme regulation mechanisms'
+    },
+    {
+        id: 'biology11_allosteric_regulation',
+        title: '3.8 Allosteric Regulation',
+        path: 'textbooks/biology_11/enzyme_kinetics_catalysis/allosteric_regulation_feedback_inhibition.json',
+        description: 'Regulatory site control of enzymes'
+    },
+    {
+        id: 'biology11_metabolic_pathways',
+        title: '3.9 Metabolic Pathways',
+        path: 'textbooks/biology_11/enzyme_kinetics_catalysis/introduction_metabolic_pathways.json',
+        description: 'Biochemical reaction networks'
+    },
+    {
+        id: 'biology11_energy_carriers',
+        title: '3.10 Energy Carriers',
+        path: 'textbooks/biology_11/enzyme_kinetics_catalysis/role_atp_nad_nadp_metabolism.json',
+        description: 'Cellular energy transfer molecules'
+    }
+],
+
+'biology11-unit4': [
+    {
+        id: 'biology11_cell_signaling_overview',
+        title: '4.1 Cell Signaling Overview',
+        path: 'textbooks/biology_11/cellular_communication_signaling/overview_cell_signaling_local_long_distance.json',
+        description: 'Cellular communication principles'
+    },
+    {
+        id: 'biology11_signaling_stages',
+        title: '4.2 Signaling Stages',
+        path: 'textbooks/biology_11/cellular_communication_signaling/stages_cell_signaling_reception_transduction_response.json',
+        description: 'Three-stage signaling process'
+    },
+    {
+        id: 'biology11_gpcrs',
+        title: '4.3 GPCRs',
+        path: 'textbooks/biology_11/cellular_communication_signaling/types_receptors_g_protein_coupled_gpcrs.json',
+        description: 'G protein-coupled receptors'
+    },
+    {
+        id: 'biology11_rtks',
+        title: '4.4 RTKs',
+        path: 'textbooks/biology_11/cellular_communication_signaling/types_receptors_receptor_tyrosine_kinases_rtks.json',
+        description: 'Receptor tyrosine kinases'
+    },
+    {
+        id: 'biology11_ion_channels',
+        title: '4.5 Ion Channels',
+        path: 'textbooks/biology_11/cellular_communication_signaling/types_receptors_ligand_gated_ion_channels.json',
+        description: 'Ligand-gated ion channels'
+    },
+    {
+        id: 'biology11_signal_transduction',
+        title: '4.6 Signal Transduction',
+        path: 'textbooks/biology_11/cellular_communication_signaling/signal_transduction_pathways_second_messengers.json',
+        description: 'Intracellular signaling pathways'
+    },
+    {
+        id: 'biology11_phosphorylation_cascades',
+        title: '4.7 Phosphorylation Cascades',
+        path: 'textbooks/biology_11/cellular_communication_signaling/phosphorylation_cascades_kinase_networks.json',
+        description: 'Protein kinase signaling networks'
+    },
+    {
+        id: 'biology11_apoptosis',
+        title: '4.8 Apoptosis',
+        path: 'textbooks/biology_11/cellular_communication_signaling/apoptosis_programmed_cell_death.json',
+        description: 'Programmed cell death mechanisms'
+    },
+    {
+        id: 'biology11_hormonal_signaling',
+        title: '4.9 Hormonal Signaling',
+        path: 'textbooks/biology_11/cellular_communication_signaling/hormonal_signaling_animals.json',
+        description: 'Endocrine system communication'
+    },
+    {
+        id: 'biology11_plant_signaling',
+        title: '4.10 Plant Signaling',
+        path: 'textbooks/biology_11/cellular_communication_signaling/plant_signaling_tropisms_phytohormones.json',
+        description: 'Plant communication systems'
+    }
+],
+
+'biology11-unit5': [
+    {
+        id: 'biology11_dna_structure_history',
+        title: '5.1 DNA Structure & History',
+        path: 'textbooks/biology_11/molecular_genetics_dna_replication/dna_structure_double_helix_historical_experiments.json',
+        description: 'DNA discovery and molecular structure'
+    },
+    {
+        id: 'biology11_dna_packaging',
+        title: '5.2 DNA Packaging',
+        path: 'textbooks/biology_11/molecular_genetics_dna_replication/dna_packaging_nucleosomes_chromatin_chromosomes.json',
+        description: 'Chromosome organization'
+    },
+    {
+        id: 'biology11_cell_cycle',
+        title: '5.3 Cell Cycle',
+        path: 'textbooks/biology_11/molecular_genetics_dna_replication/cell_cycle_chromosome_dynamics.json',
+        description: 'Chromosome behavior in cell division'
+    },
+    {
+        id: 'biology11_dna_replication',
+        title: '5.4 DNA Replication',
+        path: 'textbooks/biology_11/molecular_genetics_dna_replication/dna_replication_semi_conservative_model.json',
+        description: 'DNA copying mechanism'
+    },
+    {
+        id: 'biology11_replication_enzymes',
+        title: '5.5 Replication Enzymes',
+        path: 'textbooks/biology_11/molecular_genetics_dna_replication/enzymes_replication_dna_polymerase_helicase_primase_ligase.json',
+        description: 'Molecular machinery of replication'
+    },
+    {
+        id: 'biology11_replication_fork',
+        title: '5.6 Replication Fork',
+        path: 'textbooks/biology_11/molecular_genetics_dna_replication/replication_fork_leading_lagging_strands.json',
+        description: 'DNA synthesis at replication fork'
+    },
+    {
+        id: 'biology11_telomeres',
+        title: '5.7 Telomeres & Telomerase',
+        path: 'textbooks/biology_11/molecular_genetics_dna_replication/telomeres_telomerase.json',
+        description: 'Chromosome end maintenance'
+    },
+    {
+        id: 'biology11_dna_repair',
+        title: '5.8 DNA Repair',
+        path: 'textbooks/biology_11/molecular_genetics_dna_replication/dna_proofreading_repair_mechanisms.json',
+        description: 'DNA damage correction systems'
+    },
+    {
+        id: 'biology11_mutations',
+        title: '5.9 Mutations',
+        path: 'textbooks/biology_11/molecular_genetics_dna_replication/mutations_causes_types_consequences.json',
+        description: 'Genetic variation and disease'
+    },
+    {
+        id: 'biology11_central_dogma',
+        title: '5.10 Central Dogma',
+        path: 'textbooks/biology_11/molecular_genetics_dna_replication/central_dogma_molecular_biology.json',
+        description: 'Genetic information flow'
+    }
+],
+
+'biology11-unit6': [
+    {
+        id: 'biology11_genetic_code',
+        title: '6.1 Genetic Code',
+        path: 'textbooks/biology_11/gene_expression_transcription_translation/genetic_code_triplet_codons_universality.json',
+        description: 'Codon-amino acid relationships'
+    },
+    {
+        id: 'biology11_transcription',
+        title: '6.2 Transcription',
+        path: 'textbooks/biology_11/gene_expression_transcription_translation/transcription_initiation_elongation_termination.json',
+        description: 'RNA synthesis process'
+    },
+    {
+        id: 'biology11_rna_processing',
+        title: '6.3 RNA Processing',
+        path: 'textbooks/biology_11/gene_expression_transcription_translation/rna_processing_eukaryotes_capping_poly_a_tail.json',
+        description: 'Eukaryotic mRNA modification'
+    },
+    {
+        id: 'biology11_rna_splicing',
+        title: '6.4 RNA Splicing',
+        path: 'textbooks/biology_11/gene_expression_transcription_translation/rna_splicing_introns_exons_spliceosomes.json',
+        description: 'Intron removal and exon joining'
+    },
+    {
+        id: 'biology11_rna_types',
+        title: '6.5 RNA Types',
+        path: 'textbooks/biology_11/gene_expression_transcription_translation/mrna_trna_rrna_structure_function.json',
+        description: 'Different RNA molecule functions'
+    },
+    {
+        id: 'biology11_translation',
+        title: '6.6 Translation',
+        path: 'textbooks/biology_11/gene_expression_transcription_translation/translation_initiation_elongation_termination.json',
+        description: 'Protein synthesis process'
+    },
+    {
+        id: 'biology11_ribosome_structure',
+        title: '6.7 Ribosome Structure',
+        path: 'textbooks/biology_11/gene_expression_transcription_translation/ribosome_molecular_machine_protein_synthesis.json',
+        description: 'Ribosomal architecture and function'
+    },
+    {
+        id: 'biology11_post_translational',
+        title: '6.8 Post-Translational Modification',
+        path: 'textbooks/biology_11/gene_expression_transcription_translation/post_translational_modification_proteins.json',
+        description: 'Protein processing after synthesis'
+    },
+    {
+        id: 'biology11_prokaryotic_regulation',
+        title: '6.9 Prokaryotic Regulation',
+        path: 'textbooks/biology_11/gene_expression_transcription_translation/regulation_gene_expression_prokaryotes_operon.json',
+        description: 'Bacterial gene control systems'
+    },
+    {
+        id: 'biology11_eukaryotic_regulation',
+        title: '6.10 Eukaryotic Regulation',
+        path: 'textbooks/biology_11/gene_expression_transcription_translation/introduction_gene_regulation_eukaryotes.json',
+        description: 'Complex gene control in eukaryotes'
+    }
+],
+
+'biology11-unit7': [
+    {
+        id: 'biology11_dna_cloning',
+        title: '7.1 DNA Cloning',
+        path: 'textbooks/biology_11/biotechnology_genetic_engineering/dna_cloning_restriction_enzymes_ligase.json',
+        description: 'Molecular cloning techniques'
+    },
+    {
+        id: 'biology11_recombinant_dna',
+        title: '7.2 Recombinant DNA',
+        path: 'textbooks/biology_11/biotechnology_genetic_engineering/recombinant_dna_technology_plasmid_vectors.json',
+        description: 'DNA recombination methods'
+    },
+    {
+        id: 'biology11_pcr',
+        title: '7.3 PCR',
+        path: 'textbooks/biology_11/biotechnology_genetic_engineering/polymerase_chain_reaction_principles_applications.json',
+        description: 'DNA amplification technology'
+    },
+    {
+        id: 'biology11_gel_electrophoresis',
+        title: '7.4 Gel Electrophoresis',
+        path: 'textbooks/biology_11/biotechnology_genetic_engineering/gel_electrophoresis_separating_analyzing_dna.json',
+        description: 'DNA separation and analysis'
+    },
+    {
+        id: 'biology11_dna_sequencing',
+        title: '7.5 DNA Sequencing',
+        path: 'textbooks/biology_11/biotechnology_genetic_engineering/dna_sequencing_sanger_next_generation.json',
+        description: 'Genetic sequence determination'
+    },
+    {
+        id: 'biology11_medical_biotech',
+        title: '7.6 Medical Biotechnology',
+        path: 'textbooks/biology_11/biotechnology_genetic_engineering/genetic_engineering_medicine_gene_therapy_pharmaceuticals.json',
+        description: 'Biotech in healthcare'
+    },
+    {
+        id: 'biology11_gmos',
+        title: '7.7 GMOs',
+        path: 'textbooks/biology_11/biotechnology_genetic_engineering/genetically_modified_organisms_gmos_agriculture.json',
+        description: 'Genetically modified organisms'
+    },
+    {
+        id: 'biology11_crispr',
+        title: '7.8 CRISPR-Cas9',
+        path: 'textbooks/biology_11/biotechnology_genetic_engineering/crispr_cas9_gene_editing_technology.json',
+        description: 'Gene editing technology'
+    },
+    {
+        id: 'biology11_dna_profiling',
+        title: '7.9 DNA Profiling',
+        path: 'textbooks/biology_11/biotechnology_genetic_engineering/dna_profiling_forensic_science.json',
+        description: 'Forensic DNA analysis'
+    },
+    {
+        id: 'biology11_biotech_ethics',
+        title: '7.10 Biotech Ethics',
+        path: 'textbooks/biology_11/biotechnology_genetic_engineering/ethical_considerations_biotechnology.json',
+        description: 'Ethical implications of biotechnology'
+    }
+],
+
+'biology11-unit8': [
+    {
+        id: 'biology11_circulatory_system',
+        title: '8.1 Circulatory System',
+        path: 'textbooks/biology_11/human_physiology_major_systems/circulatory_system_heart_structure_cardiac_cycle.json',
+        description: 'Cardiovascular anatomy and function'
+    },
+    {
+        id: 'biology11_blood_vessels',
+        title: '8.2 Blood Vessels',
+        path: 'textbooks/biology_11/human_physiology_major_systems/blood_vessels_arteries_veins_capillaries.json',
+        description: 'Vascular system structure'
+    },
+    {
+        id: 'biology11_respiratory_system',
+        title: '8.3 Respiratory System',
+        path: 'textbooks/biology_11/human_physiology_major_systems/respiratory_system_mechanics_breathing_gas_exchange.json',
+        description: 'Breathing mechanics and gas exchange'
+    },
+    {
+        id: 'biology11_excretory_system',
+        title: '8.4 Excretory System',
+        path: 'textbooks/biology_11/human_physiology_major_systems/excretory_system_kidney_structure_nephron_function.json',
+        description: 'Kidney structure and function'
+    },
+    {
+        id: 'biology11_urine_formation',
+        title: '8.5 Urine Formation',
+        path: 'textbooks/biology_11/human_physiology_major_systems/urine_formation_filtration_reabsorption_secretion.json',
+        description: 'Nephron processing stages'
+    },
+    {
+        id: 'biology11_reproductive_system',
+        title: '8.6 Reproductive System',
+        path: 'textbooks/biology_11/human_physiology_major_systems/reproductive_system_gametogenesis_hormonal_control.json',
+        description: 'Reproductive biology'
+    },
+    {
+        id: 'biology11_homeostasis',
+        title: '8.7 Homeostasis',
+        path: 'textbooks/biology_11/human_physiology_major_systems/homeostasis_negative_feedback_loops.json',
+        description: 'Physiological balance mechanisms'
+    },
+    {
+        id: 'biology11_liver_function',
+        title: '8.8 Liver Function',
+        path: 'textbooks/biology_11/human_physiology_major_systems/role_liver_metabolism_detoxification.json',
+        description: 'Hepatic metabolic roles'
+    },
+    {
+        id: 'biology11_system_integration',
+        title: '8.9 System Integration',
+        path: 'textbooks/biology_11/human_physiology_major_systems/integration_body_systems_stress_response.json',
+        description: 'Inter-system coordination'
+    },
+    {
+        id: 'biology11_common_disorders',
+        title: '8.10 Common Disorders',
+        path: 'textbooks/biology_11/human_physiology_major_systems/common_disorders_circulatory_respiratory_excretory.json',
+        description: 'Major system pathologies'
+    }
+],
+
+'biology11-unit9': [
+    {
+        id: 'biology11_ecological_levels',
+        title: '9.1 Ecological Levels',
+        path: 'textbooks/biology_11/ecology_ecosystem_dynamics/levels_ecological_study_organismal_landscape.json',
+        description: 'Hierarchy of ecological organization'
+    },
+    {
+        id: 'biology11_population_ecology',
+        title: '9.2 Population Ecology',
+        path: 'textbooks/biology_11/ecology_ecosystem_dynamics/population_ecology_growth_models_limiting_factors.json',
+        description: 'Population dynamics and modeling'
+    },
+    {
+        id: 'biology11_community_ecology',
+        title: '9.3 Community Ecology',
+        path: 'textbooks/biology_11/ecology_ecosystem_dynamics/community_ecology_species_interactions_niches.json',
+        description: 'Species interactions and niches'
+    },
+    {
+        id: 'biology11_ecosystem_structure',
+        title: '9.4 Ecosystem Structure',
+        path: 'textbooks/biology_11/ecology_ecosystem_dynamics/ecosystem_structure_trophic_levels_food_webs.json',
+        description: 'Trophic organization'
+    },
+    {
+        id: 'biology11_energy_flow',
+        title: '9.5 Energy Flow',
+        path: 'textbooks/biology_11/ecology_ecosystem_dynamics/energy_flow_ecosystems_productivity_efficiency.json',
+        description: 'Energy transfer efficiency'
+    },
+    {
+        id: 'biology11_carbon_cycle',
+        title: '9.6 Carbon Cycle',
+        path: 'textbooks/biology_11/ecology_ecosystem_dynamics/biogeochemical_cycles_carbon_cycle.json',
+        description: 'Global carbon cycling'
+    },
+    {
+        id: 'biology11_nitrogen_cycle',
+        title: '9.7 Nitrogen Cycle',
+        path: 'textbooks/biology_11/ecology_ecosystem_dynamics/biogeochemical_cycles_nitrogen_cycle.json',
+        description: 'Nitrogen transformation processes'
+    },
+    {
+        id: 'biology11_other_cycles',
+        title: '9.8 Other Biogeochemical Cycles',
+        path: 'textbooks/biology_11/ecology_ecosystem_dynamics/biogeochemical_cycles_phosphorus_water_cycles.json',
+        description: 'Phosphorus and water cycles'
+    },
+    {
+        id: 'biology11_biodiversity_stability',
+        title: '9.9 Biodiversity & Stability',
+        path: 'textbooks/biology_11/ecology_ecosystem_dynamics/biodiversity_ecosystem_stability.json',
+        description: 'Species diversity and ecosystem resilience'
+    },
+    {
+        id: 'biology11_human_impact',
+        title: '9.10 Human Impact & Conservation',
+        path: 'textbooks/biology_11/ecology_ecosystem_dynamics/human_impact_ecosystems_climate_change_conservation.json',
+        description: 'Environmental challenges and solutions'
+    }
+],
+        
 // Add to the unitSections object in loadTextbookSections function
 'biology10-unit1': [
     {
@@ -23320,6 +23930,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
