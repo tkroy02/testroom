@@ -4226,6 +4226,7 @@ function loadTextbookContent() {
     const isAPMacroeconomics = currentCourseId === 'ap-macroeconomics';
     const isAPMicroeconomics = currentCourseId === 'ap-microeconomics';
     const isPreCalculus = currentCourseId === 'pre-calculus';
+    const isAlgebra1 = currentCourseId === 'algebra-1';
     
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
@@ -4240,6 +4241,7 @@ function loadTextbookContent() {
                      isAPMacroeconomics ? 'AP Macroeconomics Textbook' :
                      isAPMicroeconomics ? 'AP Microeconomics Textbook' : 
                      isPreCalculus ? 'Pre-Calculus Textbook' : 
+                     isAlgebra1 ? 'Algebra 1 Textbook' :
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4334,6 +4336,53 @@ function loadTextbookContent() {
     </button>
     <button class="unit-btn ${currentTextbookUnit === 'pre-calculus-unit15' ? 'active' : ''}" onclick="switchTextbookUnit('pre-calculus-unit15')">
         Unit 15: Introduction to Calculus
+    </button>
+
+        ` : isAlgebra1 ? `
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit1')">
+        Unit 1: Foundations of Algebra
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit2')">
+        Unit 2: Solving One-Variable Equations
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit3')">
+        Unit 3: Introduction to Functions and Relations
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit4')">
+        Unit 4: Graphing Linear Equations
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit5')">
+        Unit 5: Writing Linear Equations
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit6')">
+        Unit 6: Linear Inequalities in One Variable
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit7')">
+        Unit 7: Systems of Linear Equations
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit8')">
+        Unit 8: Systems of Linear Inequalities
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit9')">
+        Unit 9: Exponents and Exponential Functions
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit10')">
+        Unit 10: Polynomials
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit11' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit11')">
+        Unit 11: Factoring Polynomials
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit12' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit12')">
+        Unit 12: Quadratic Functions
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit13' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit13')">
+        Unit 13: Radicals and Irrational Numbers
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit14' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit14')">
+        Unit 14: Data Analysis and Statistics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'algebra1-unit15' ? 'active' : ''}" onclick="switchTextbookUnit('algebra1-unit15')">
+        Unit 15: End-of-Year Review and Capstone
     </button>
 
 ` : isEconomics ? `
@@ -4743,6 +4792,23 @@ function getCurrentUnitName() {
 'physics10-unit8': 'Unit 8: Light Reflection & Mirrors',
 'physics10-unit9': 'Unit 9: Static & Current Electricity',
 'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
+
+        // Add to getCurrentUnitName function
+'algebra1-unit1': 'Unit 1: Foundations of Algebra',
+'algebra1-unit2': 'Unit 2: Solving One-Variable Equations',
+'algebra1-unit3': 'Unit 3: Introduction to Functions and Relations',
+'algebra1-unit4': 'Unit 4: Graphing Linear Equations',
+'algebra1-unit5': 'Unit 5: Writing Linear Equations',
+'algebra1-unit6': 'Unit 6: Linear Inequalities in One Variable',
+'algebra1-unit7': 'Unit 7: Systems of Linear Equations',
+'algebra1-unit8': 'Unit 8: Systems of Linear Inequalities',
+'algebra1-unit9': 'Unit 9: Exponents and Exponential Functions',
+'algebra1-unit10': 'Unit 10: Polynomials',
+'algebra1-unit11': 'Unit 11: Factoring Polynomials',
+'algebra1-unit12': 'Unit 12: Quadratic Functions',
+'algebra1-unit13': 'Unit 13: Radicals and Irrational Numbers',
+'algebra1-unit14': 'Unit 14: Data Analysis and Statistics',
+'algebra1-unit15': 'Unit 15: End-of-Year Review and Capstone',
 
         // Add to getCurrentUnitName function
 'ap-microeconomics-unit1': 'Unit 1: The Fundamentals of Economics',
@@ -5613,6 +5679,953 @@ function loadTextbookSections() {
         }
     ],
 
+// Add to the unitSections object in the loadTextbookSections function
+'algebra1-unit1': [
+    {
+        id: 'algebra1_real_number_system',
+        title: '1.1 The Real Number System',
+        path: 'textbooks/algebra_1/foundations_of_algebra/the_real_number_system.json',
+        description: 'Understanding real numbers and their subsets'
+    },
+    {
+        id: 'algebra1_properties_real_numbers',
+        title: '1.2 Properties of Real Numbers',
+        path: 'textbooks/algebra_1/foundations_of_algebra/properties_of_real_numbers.json',
+        description: 'Commutative, associative, distributive properties'
+    },
+    {
+        id: 'algebra1_order_of_operations',
+        title: '1.3 Order of Operations',
+        path: 'textbooks/algebra_1/foundations_of_algebra/order_of_operations.json',
+        description: 'PEMDAS and evaluating expressions'
+    },
+    {
+        id: 'algebra1_translating_words_expressions',
+        title: '1.4 Translating Words into Algebraic Expressions',
+        path: 'textbooks/algebra_1/foundations_of_algebra/translating_words_into_algebraic_expressions.json',
+        description: 'Converting word problems to algebraic expressions'
+    },
+    {
+        id: 'algebra1_evaluating_expressions',
+        title: '1.5 Evaluating Algebraic Expressions',
+        path: 'textbooks/algebra_1/foundations_of_algebra/evaluating_algebraic_expressions.json',
+        description: 'Substituting values into expressions'
+    },
+    {
+        id: 'algebra1_combining_like_terms',
+        title: '1.6 Combining Like Terms',
+        path: 'textbooks/algebra_1/foundations_of_algebra/combining_like_terms.json',
+        description: 'Simplifying expressions by combining similar terms'
+    },
+    {
+        id: 'algebra1_distributive_property',
+        title: '1.7 Distributive Property',
+        path: 'textbooks/algebra_1/foundations_of_algebra/distributive_property.json',
+        description: 'Applying distributive property to simplify expressions'
+    },
+    {
+        id: 'algebra1_intro_exponents',
+        title: '1.8 Introduction to Exponents',
+        path: 'textbooks/algebra_1/foundations_of_algebra/introduction_to_exponents.json',
+        description: 'Understanding exponents and exponential notation'
+    },
+    {
+        id: 'algebra1_square_cube_roots',
+        title: '1.9 Square and Cube Roots',
+        path: 'textbooks/algebra_1/foundations_of_algebra/square_and_cube_roots.json',
+        description: 'Finding square roots and cube roots'
+    },
+    {
+        id: 'algebra1_problem_solving_strategies',
+        title: '1.10 Problem Solving Strategies',
+        path: 'textbooks/algebra_1/foundations_of_algebra/problem_solving_strategies.json',
+        description: 'Systematic approaches to solving algebraic problems'
+    }
+],
+
+'algebra1-unit2': [
+    {
+        id: 'algebra1_one_step_equations',
+        title: '2.1 Solving One-Step Equations',
+        path: 'textbooks/algebra_1/solving_one_variable_equations/solving_one_step_equations.json',
+        description: 'Basic equation solving with one operation'
+    },
+    {
+        id: 'algebra1_two_step_equations',
+        title: '2.2 Solving Two-Step Equations',
+        path: 'textbooks/algebra_1/solving_one_variable_equations/solving_two_step_equations.json',
+        description: 'Equations requiring two operations to solve'
+    },
+    {
+        id: 'algebra1_multi_step_equations',
+        title: '2.3 Solving Multi-Step Equations',
+        path: 'textbooks/algebra_1/solving_one_variable_equations/solving_multi_step_equations.json',
+        description: 'Complex equations with multiple steps'
+    },
+    {
+        id: 'algebra1_variables_both_sides',
+        title: '2.4 Equations with Variables on Both Sides',
+        path: 'textbooks/algebra_1/solving_one_variable_equations/equations_with_variables_on_both_sides.json',
+        description: 'Solving equations where variables appear on both sides'
+    },
+    {
+        id: 'algebra1_equations_fractions_decimals',
+        title: '2.5 Solving Equations with Fractions and Decimals',
+        path: 'textbooks/algebra_1/solving_one_variable_equations/solving_equations_with_fractions_and_decimals.json',
+        description: 'Working with fractional and decimal coefficients'
+    },
+    {
+        id: 'algebra1_identities_no_solution',
+        title: '2.6 Identities and No Solution Equations',
+        path: 'textbooks/algebra_1/solving_one_variable_equations/identities_and_no_solution_equations.json',
+        description: 'Special cases in equation solving'
+    },
+    {
+        id: 'algebra1_writing_solving_word_problems',
+        title: '2.7 Writing and Solving Equations from Word Problems',
+        path: 'textbooks/algebra_1/solving_one_variable_equations/writing_and_solving_equations_from_word_problems.json',
+        description: 'Translating real-world problems into equations'
+    },
+    {
+        id: 'algebra1_ratios_rates_unit_rates',
+        title: '2.8 Ratios, Rates, and Unit Rates',
+        path: 'textbooks/algebra_1/solving_one_variable_equations/ratios_rates_and_unit_rates.json',
+        description: 'Understanding and working with ratios and rates'
+    },
+    {
+        id: 'algebra1_solving_proportions',
+        title: '2.9 Solving Proportions',
+        path: 'textbooks/algebra_1/solving_one_variable_equations/solving_proportions.json',
+        description: 'Solving proportional relationships'
+    },
+    {
+        id: 'algebra1_literal_equations',
+        title: '2.10 Literal Equations and Formulas',
+        path: 'textbooks/algebra_1/solving_one_variable_equations/literal_equations_and_formulas.json',
+        description: 'Solving equations for specific variables'
+    }
+],
+
+'algebra1-unit3': [
+    {
+        id: 'algebra1_coordinate_plane',
+        title: '3.1 Coordinate Plane',
+        path: 'textbooks/algebra_1/introduction_to_functions_and_relations/coordinate_plane.json',
+        description: 'Understanding the Cartesian coordinate system'
+    },
+    {
+        id: 'algebra1_relations_functions',
+        title: '3.2 Relations and Functions',
+        path: 'textbooks/algebra_1/introduction_to_functions_and_relations/relations_and_functions.json',
+        description: 'Distinguishing between relations and functions'
+    },
+    {
+        id: 'algebra1_function_notation',
+        title: '3.3 Function Notation',
+        path: 'textbooks/algebra_1/introduction_to_functions_and_relations/function_notation.json',
+        description: 'Using f(x) notation for functions'
+    },
+    {
+        id: 'algebra1_domain_range',
+        title: '3.4 Domain and Range',
+        path: 'textbooks/algebra_1/introduction_to_functions_and_relations/domain_and_range.json',
+        description: 'Determining input and output values of functions'
+    },
+    {
+        id: 'algebra1_graphing_linear_functions',
+        title: '3.5 Graphing and Writing Linear Functions',
+        path: 'textbooks/algebra_1/introduction_to_functions_and_relations/graphing_and_writing_linear_functions.json',
+        description: 'Creating graphs from linear equations'
+    },
+    {
+        id: 'algebra1_intercepts',
+        title: '3.6 Intercepts',
+        path: 'textbooks/algebra_1/introduction_to_functions_and_relations/intercepts.json',
+        description: 'Finding x and y intercepts of graphs'
+    },
+    {
+        id: 'algebra1_discrete_continuous',
+        title: '3.7 Discrete vs Continuous Relationships',
+        path: 'textbooks/algebra_1/introduction_to_functions_and_relations/discrete_vs_continuous_relationships.json',
+        description: 'Understanding different types of data relationships'
+    },
+    {
+        id: 'algebra1_analyzing_graphs',
+        title: '3.8 Analyzing Graphs',
+        path: 'textbooks/algebra_1/introduction_to_functions_and_relations/analyzing_graphs.json',
+        description: 'Interpreting information from graphs'
+    },
+    {
+        id: 'algebra1_real_world_graphs',
+        title: '3.9 Real World Graphs',
+        path: 'textbooks/algebra_1/introduction_to_functions_and_relations/real_world_graphs.json',
+        description: 'Applying graph analysis to practical situations'
+    },
+    {
+        id: 'algebra1_function_operations',
+        title: '3.10 Function Operations',
+        path: 'textbooks/algebra_1/introduction_to_functions_and_relations/function_operations.json',
+        description: 'Adding, subtracting, and composing functions'
+    }
+],
+
+'algebra1-unit4': [
+    {
+        id: 'algebra1_slope_of_line',
+        title: '4.1 Slope of a Line',
+        path: 'textbooks/algebra_1/graphing_linear_equations/slope_of_a_line.json',
+        description: 'Calculating and understanding slope'
+    },
+    {
+        id: 'algebra1_slope_rate_change',
+        title: '4.2 Slope as Rate of Change',
+        path: 'textbooks/algebra_1/graphing_linear_equations/slope_as_rate_of_change.json',
+        description: 'Interpreting slope in real-world contexts'
+    },
+    {
+        id: 'algebra1_graphing_slope_intercept',
+        title: '4.3 Graphing Lines in Slope-Intercept Form',
+        path: 'textbooks/algebra_1/graphing_linear_equations/graphing_lines_in_slope_intercept_form.json',
+        description: 'Using y = mx + b form for graphing'
+    },
+    {
+        id: 'algebra1_horizontal_vertical_lines',
+        title: '4.4 Graphing Horizontal and Vertical Lines',
+        path: 'textbooks/algebra_1/graphing_linear_equations/graphing_horizontal_and_vertical_lines.json',
+        description: 'Special cases of linear equations'
+    },
+    {
+        id: 'algebra1_graphing_standard_form',
+        title: '4.5 Graphing Lines in Standard Form',
+        path: 'textbooks/algebra_1/graphing_linear_equations/graphing_lines_in_standard_form.json',
+        description: 'Using Ax + By = C form for graphing'
+    },
+    {
+        id: 'algebra1_comparing_rates_change',
+        title: '4.6 Comparing Rates of Change',
+        path: 'textbooks/algebra_1/graphing_linear_equations/comparing_rates_of_change.json',
+        description: 'Analyzing different slopes and their meanings'
+    },
+    {
+        id: 'algebra1_graphing_from_tables',
+        title: '4.7 Graphing from Tables',
+        path: 'textbooks/algebra_1/graphing_linear_equations/graphing_from_tables.json',
+        description: 'Creating graphs from data tables'
+    },
+    {
+        id: 'algebra1_applications_graphs',
+        title: '4.8 Applications of Graphs',
+        path: 'textbooks/algebra_1/graphing_linear_equations/applications_of_graphs.json',
+        description: 'Real-world applications of linear graphs'
+    },
+    {
+        id: 'algebra1_graphing_fractional_slopes',
+        title: '4.9 Graphing Fractional Slopes',
+        path: 'textbooks/algebra_1/graphing_linear_equations/graphing_fractional_slopes.json',
+        description: 'Working with non-integer slopes'
+    },
+    {
+        id: 'algebra1_parallel_lines',
+        title: '4.10 Parallel Lines',
+        path: 'textbooks/algebra_1/graphing_linear_equations/parallel_lines.json',
+        description: 'Understanding and identifying parallel lines'
+    }
+],
+
+'algebra1-unit5': [
+    {
+        id: 'algebra1_writing_from_graph',
+        title: '5.1 Writing Equations from Graph',
+        path: 'textbooks/algebra_1/writing_linear_equations/from_graph.json',
+        description: 'Deriving equations from graphical representations'
+    },
+    {
+        id: 'algebra1_given_slope_point',
+        title: '5.2 Given Slope and Point',
+        path: 'textbooks/algebra_1/writing_linear_equations/given_slope_and_point.json',
+        description: 'Writing equations with known slope and point'
+    },
+    {
+        id: 'algebra1_given_two_points',
+        title: '5.3 Given Two Points',
+        path: 'textbooks/algebra_1/writing_linear_equations/given_two_points.json',
+        description: 'Writing equations through two given points'
+    },
+    {
+        id: 'algebra1_point_slope_form',
+        title: '5.4 Point-Slope Form',
+        path: 'textbooks/algebra_1/writing_linear_equations/point_slope_form.json',
+        description: 'Using point-slope form of linear equations'
+    },
+    {
+        id: 'algebra1_convert_between_forms',
+        title: '5.5 Convert Between Forms',
+        path: 'textbooks/algebra_1/writing_linear_equations/convert_between_forms.json',
+        description: 'Converting between different linear equation forms'
+    },
+    {
+        id: 'algebra1_parallel_lines_equations',
+        title: '5.6 Parallel Lines Equations',
+        path: 'textbooks/algebra_1/writing_linear_equations/parallel_lines_equations.json',
+        description: 'Writing equations of parallel lines'
+    },
+    {
+        id: 'algebra1_perpendicular_lines_equations',
+        title: '5.7 Perpendicular Lines Equations',
+        path: 'textbooks/algebra_1/writing_linear_equations/perpendicular_lines_equations.json',
+        description: 'Writing equations of perpendicular lines'
+    },
+    {
+        id: 'algebra1_standard_form',
+        title: '5.8 Standard Form',
+        path: 'textbooks/algebra_1/writing_linear_equations/standard_form.json',
+        description: 'Working with standard form equations'
+    },
+    {
+        id: 'algebra1_from_word_problems',
+        title: '5.9 From Word Problems',
+        path: 'textbooks/algebra_1/writing_linear_equations/from_word_problems.json',
+        description: 'Creating equations from verbal descriptions'
+    },
+    {
+        id: 'algebra1_line_of_best_fit',
+        title: '5.10 Line of Best Fit',
+        path: 'textbooks/algebra_1/writing_linear_equations/line_of_best_fit.json',
+        description: 'Finding the best-fit line for data sets'
+    }
+],
+
+'algebra1-unit6': [
+    {
+        id: 'algebra1_graphing_inequalities_number_line',
+        title: '6.1 Graphing Inequalities on Number Line',
+        path: 'textbooks/algebra_1/linear_inequalities_one_variable/graphing_inequalities_number_line.json',
+        description: 'Representing inequalities on number lines'
+    },
+    {
+        id: 'algebra1_writing_inequalities',
+        title: '6.2 Writing Inequalities',
+        path: 'textbooks/algebra_1/linear_inequalities_one_variable/writing_inequalities.json',
+        description: 'Translating verbal descriptions into inequalities'
+    },
+    {
+        id: 'algebra1_solving_one_step_inequalities',
+        title: '6.3 Solving One-Step Inequalities',
+        path: 'textbooks/algebra_1/linear_inequalities_one_variable/solving_one_step_inequalities.json',
+        description: 'Basic inequality solving with one operation'
+    },
+    {
+        id: 'algebra1_solving_two_step_inequalities',
+        title: '6.4 Solving Two-Step Inequalities',
+        path: 'textbooks/algebra_1/linear_inequalities_one_variable/solving_two_step_inequalities.json',
+        description: 'Inequalities requiring two operations to solve'
+    },
+    {
+        id: 'algebra1_solving_multi_step_inequalities',
+        title: '6.5 Solving Multi-Step Inequalities',
+        path: 'textbooks/algebra_1/linear_inequalities_one_variable/solving_multi_step_inequalities.json',
+        description: 'Complex inequalities with multiple steps'
+    },
+    {
+        id: 'algebra1_compound_inequalities_and',
+        title: '6.6 Compound Inequalities (AND)',
+        path: 'textbooks/algebra_1/linear_inequalities_one_variable/compound_inequalities_and.json',
+        description: 'Solving AND compound inequalities'
+    },
+    {
+        id: 'algebra1_compound_inequalities_or',
+        title: '6.7 Compound Inequalities (OR)',
+        path: 'textbooks/algebra_1/linear_inequalities_one_variable/compound_inequalities_or.json',
+        description: 'Solving OR compound inequalities'
+    },
+    {
+        id: 'algebra1_special_cases_inequalities',
+        title: '6.8 Special Cases in Inequalities',
+        path: 'textbooks/algebra_1/linear_inequalities_one_variable/special_cases_inequalities.json',
+        description: 'No solution and all real numbers cases'
+    },
+    {
+        id: 'algebra1_applications_inequalities',
+        title: '6.9 Applications of Inequalities',
+        path: 'textbooks/algebra_1/linear_inequalities_one_variable/applications_inequalities.json',
+        description: 'Real-world inequality problems'
+    },
+    {
+        id: 'algebra1_review_equations_inequalities',
+        title: '6.10 Review: Equations and Inequalities',
+        path: 'textbooks/algebra_1/linear_inequalities_one_variable/review_equations_inequalities.json',
+        description: 'Comprehensive review of solving techniques'
+    }
+],
+
+// Continuing with units 7-15 following the same pattern...
+'algebra1-unit7': [
+    {
+        id: 'algebra1_solving_by_graphing',
+        title: '7.1 Solving by Graphing',
+        path: 'textbooks/algebra_1/systems_of_linear_equations/solving_by_graphing.json',
+        description: 'Solving systems by graphing'
+    },
+    {
+        id: 'algebra1_classifying_systems',
+        title: '7.2 Classifying Systems',
+        path: 'textbooks/algebra_1/systems_of_linear_equations/classifying_systems.json',
+        description: 'Consistent, inconsistent, dependent systems'
+    },
+    {
+        id: 'algebra1_solving_by_substitution',
+        title: '7.3 Solving by Substitution',
+        path: 'textbooks/algebra_1/systems_of_linear_equations/solving_by_substitution.json',
+        description: 'Basic substitution method'
+    },
+    {
+        id: 'algebra1_solving_by_substitution_advanced',
+        title: '7.4 Solving by Substitution (Advanced)',
+        path: 'textbooks/algebra_1/systems_of_linear_equations/solving_by_substitution_advanced.json',
+        description: 'Complex substitution problems'
+    },
+    {
+        id: 'algebra1_solving_by_elimination',
+        title: '7.5 Solving by Elimination',
+        path: 'textbooks/algebra_1/systems_of_linear_equations/solving_by_elimination.json',
+        description: 'Basic elimination method'
+    },
+    {
+        id: 'algebra1_solving_by_elimination_advanced',
+        title: '7.6 Solving by Elimination (Advanced)',
+        path: 'textbooks/algebra_1/systems_of_linear_equations/solving_by_elimination_advanced.json',
+        description: 'Complex elimination problems'
+    },
+    {
+        id: 'algebra1_choosing_solution_methods',
+        title: '7.7 Choosing Solution Methods',
+        path: 'textbooks/algebra_1/systems_of_linear_equations/choosing_solution_methods.json',
+        description: 'Selecting the most efficient method'
+    },
+    {
+        id: 'algebra1_applications_systems',
+        title: '7.8 Applications of Systems',
+        path: 'textbooks/algebra_1/systems_of_linear_equations/applications_systems.json',
+        description: 'Real-world system problems'
+    },
+    {
+        id: 'algebra1_distance_rate_time_problems',
+        title: '7.9 Distance-Rate-Time Problems',
+        path: 'textbooks/algebra_1/systems_of_linear_equations/distance_rate_time_problems.json',
+        description: 'DRT problems with systems'
+    },
+    {
+        id: 'algebra1_writing_systems_word_problems',
+        title: '7.10 Writing Systems from Word Problems',
+        path: 'textbooks/algebra_1/systems_of_linear_equations/writing_systems_word_problems.json',
+        description: 'Creating systems from verbal descriptions'
+    }
+],
+        
+'algebra1-unit8': [
+    {
+        id: 'algebra1_graphing_linear_inequalities',
+        title: '8.1 Graphing Linear Inequalities',
+        path: 'textbooks/algebra_1/systems_of_linear_inequalities/graphing_linear_inequalities.json',
+        description: 'Graphing single linear inequalities'
+    },
+    {
+        id: 'algebra1_horizontal_vertical_boundaries',
+        title: '8.2 Horizontal and Vertical Boundaries',
+        path: 'textbooks/algebra_1/systems_of_linear_inequalities/horizontal_vertical_boundaries.json',
+        description: 'Special cases in inequality graphing'
+    },
+    {
+        id: 'algebra1_checking_solutions',
+        title: '8.3 Checking Solutions',
+        path: 'textbooks/algebra_1/systems_of_linear_inequalities/checking_solutions.json',
+        description: 'Verifying points in solution regions'
+    },
+    {
+        id: 'algebra1_graphing_systems_inequalities',
+        title: '8.4 Graphing Systems of Inequalities',
+        path: 'textbooks/algebra_1/systems_of_linear_inequalities/graphing_systems_inequalities.json',
+        description: 'Graphing multiple inequalities'
+    },
+    {
+        id: 'algebra1_interpreting_solution_regions',
+        title: '8.5 Interpreting Solution Regions',
+        path: 'textbooks/algebra_1/systems_of_linear_inequalities/interpreting_solution_regions.json',
+        description: 'Understanding overlapping regions'
+    },
+    {
+        id: 'algebra1_applications_systems_inequalities',
+        title: '8.6 Applications of Systems of Inequalities',
+        path: 'textbooks/algebra_1/systems_of_linear_inequalities/applications_systems_inequalities.json',
+        description: 'Real-world inequality system problems'
+    },
+    {
+        id: 'algebra1_linear_programming_intro',
+        title: '8.7 Linear Programming Introduction',
+        path: 'textbooks/algebra_1/systems_of_linear_inequalities/linear_programming_intro.json',
+        description: 'Optimization with constraints'
+    },
+    {
+        id: 'algebra1_review_systems_equations_inequalities',
+        title: '8.8 Review: Systems of Equations and Inequalities',
+        path: 'textbooks/algebra_1/systems_of_linear_inequalities/review_systems_equations_inequalities.json',
+        description: 'Comprehensive systems review'
+    },
+    {
+        id: 'algebra1_real_world_project',
+        title: '8.9 Real World Project',
+        path: 'textbooks/algebra_1/systems_of_linear_inequalities/real_world_project.json',
+        description: 'Applied systems project'
+    },
+    {
+        id: 'algebra1_budgeting_constraints',
+        title: '8.10 Budgeting Constraints',
+        path: 'textbooks/algebra_1/systems_of_linear_inequalities/budgeting_constraints.json',
+        description: 'Financial applications of inequalities'
+    }
+],
+
+'algebra1-unit9': [
+    {
+        id: 'algebra1_exponent_properties',
+        title: '9.1 Exponent Properties',
+        path: 'textbooks/algebra_1/exponents_exponential_functions/exponent_properties.json',
+        description: 'Basic rules of exponents'
+    },
+    {
+        id: 'algebra1_exponent_properties_advanced',
+        title: '9.2 Exponent Properties (Advanced)',
+        path: 'textbooks/algebra_1/exponents_exponential_functions/exponent_properties_advanced.json',
+        description: 'Complex exponent rules'
+    },
+    {
+        id: 'algebra1_zero_negative_exponents',
+        title: '9.3 Zero and Negative Exponents',
+        path: 'textbooks/algebra_1/exponents_exponential_functions/zero_negative_exponents.json',
+        description: 'Special exponent cases'
+    },
+    {
+        id: 'algebra1_exponential_growth',
+        title: '9.4 Exponential Growth',
+        path: 'textbooks/algebra_1/exponents_exponential_functions/exponential_growth.json',
+        description: 'Modeling growth with exponents'
+    },
+    {
+        id: 'algebra1_exponential_decay',
+        title: '9.5 Exponential Decay',
+        path: 'textbooks/algebra_1/exponents_exponential_functions/exponential_decay.json',
+        description: 'Modeling decay with exponents'
+    },
+    {
+        id: 'algebra1_graphing_exponential_functions',
+        title: '9.6 Graphing Exponential Functions',
+        path: 'textbooks/algebra_1/exponents_exponential_functions/graphing_exponential_functions.json',
+        description: 'Graphing exponential curves'
+    },
+    {
+        id: 'algebra1_writing_exponential_functions',
+        title: '9.7 Writing Exponential Functions',
+        path: 'textbooks/algebra_1/exponents_exponential_functions/writing_exponential_functions.json',
+        description: 'Creating exponential models'
+    },
+    {
+        id: 'algebra1_compound_interest',
+        title: '9.8 Compound Interest',
+        path: 'textbooks/algebra_1/exponents_exponential_functions/compound_interest.json',
+        description: 'Financial applications of exponents'
+    },
+    {
+        id: 'algebra1_geometric_sequences',
+        title: '9.9 Geometric Sequences',
+        path: 'textbooks/algebra_1/exponents_exponential_functions/geometric_sequences.json',
+        description: 'Sequences with constant ratios'
+    },
+    {
+        id: 'algebra1_comparing_linear_exponential',
+        title: '9.10 Comparing Linear and Exponential',
+        path: 'textbooks/algebra_1/exponents_exponential_functions/comparing_linear_exponential.json',
+        description: 'Different growth patterns'
+    }
+],
+
+'algebra1-unit10': [
+    {
+        id: 'algebra1_polynomial_vocabulary',
+        title: '10.1 Polynomial Vocabulary',
+        path: 'textbooks/algebra_1/polynomials/polynomial_vocabulary.json',
+        description: 'Terms, degrees, and classification'
+    },
+    {
+        id: 'algebra1_adding_subtracting_polynomials',
+        title: '10.2 Adding and Subtracting Polynomials',
+        path: 'textbooks/algebra_1/polynomials/adding_subtracting_polynomials.json',
+        description: 'Polynomial arithmetic basics'
+    },
+    {
+        id: 'algebra1_multiplying_polynomial_monomial',
+        title: '10.3 Multiplying Polynomial by Monomial',
+        path: 'textbooks/algebra_1/polynomials/multiplying_polynomial_monomial.json',
+        description: 'Distributive property with polynomials'
+    },
+    {
+        id: 'algebra1_multiplying_binomials',
+        title: '10.4 Multiplying Binomials',
+        path: 'textbooks/algebra_1/polynomials/multiplying_binomials.json',
+        description: 'FOIL method and area models'
+    },
+    {
+        id: 'algebra1_multiplying_binomial_trinomial',
+        title: '10.5 Multiplying Binomial by Trinomial',
+        path: 'textbooks/algebra_1/polynomials/multiplying_binomial_trinomial.json',
+        description: 'Extended multiplication'
+    },
+    {
+        id: 'algebra1_special_products_squares',
+        title: '10.6 Special Products: Perfect Squares',
+        path: 'textbooks/algebra_1/polynomials/special_products_squares.json',
+        description: 'Square of binomial patterns'
+    },
+    {
+        id: 'algebra1_special_products_difference_squares',
+        title: '10.7 Special Products: Difference of Squares',
+        path: 'textbooks/algebra_1/polynomials/special_products_difference_squares.json',
+        description: 'Conjugate binomial products'
+    },
+    {
+        id: 'algebra1_applications_polynomials',
+        title: '10.8 Applications of Polynomials',
+        path: 'textbooks/algebra_1/polynomials/applications_polynomials.json',
+        description: 'Real-world polynomial problems'
+    },
+    {
+        id: 'algebra1_dividing_polynomials',
+        title: '10.9 Dividing Polynomials',
+        path: 'textbooks/algebra_1/polynomials/dividing_polynomials.json',
+        description: 'Polynomial division basics'
+    },
+    {
+        id: 'algebra1_review_polynomial_operations',
+        title: '10.10 Review: Polynomial Operations',
+        path: 'textbooks/algebra_1/polynomials/review_polynomial_operations.json',
+        description: 'Comprehensive polynomial review'
+    }
+],
+
+'algebra1-unit11': [
+    {
+        id: 'algebra1_factoring_gcf',
+        title: '11.1 Factoring: Greatest Common Factor',
+        path: 'textbooks/algebra_1/factoring_polynomials/factoring_gcf.json',
+        description: 'Factoring out common factors'
+    },
+    {
+        id: 'algebra1_factoring_by_grouping',
+        title: '11.2 Factoring by Grouping',
+        path: 'textbooks/algebra_1/factoring_polynomials/factoring_by_grouping.json',
+        description: 'Grouping method for factoring'
+    },
+    {
+        id: 'algebra1_factoring_trinomials_simple',
+        title: '11.3 Factoring Trinomials (Simple)',
+        path: 'textbooks/algebra_1/factoring_polynomials/factoring_trinomials_simple.json',
+        description: 'Basic trinomial factoring'
+    },
+    {
+        id: 'algebra1_factoring_trinomials_complex',
+        title: '11.4 Factoring Trinomials (Complex)',
+        path: 'textbooks/algebra_1/factoring_polynomials/factoring_trinomials_complex.json',
+        description: 'Advanced trinomial factoring'
+    },
+    {
+        id: 'algebra1_factoring_perfect_squares',
+        title: '11.5 Factoring Perfect Squares',
+        path: 'textbooks/algebra_1/factoring_polynomials/factoring_perfect_squares.json',
+        description: 'Perfect square trinomials'
+    },
+    {
+        id: 'algebra1_factoring_difference_squares',
+        title: '11.6 Factoring Difference of Squares',
+        path: 'textbooks/algebra_1/factoring_polynomials/factoring_difference_squares.json',
+        description: 'Difference of squares pattern'
+    },
+    {
+        id: 'algebra1_mixed_factoring_strategies',
+        title: '11.7 Mixed Factoring Strategies',
+        path: 'textbooks/algebra_1/factoring_polynomials/mixed_factoring_strategies.json',
+        description: 'Choosing appropriate methods'
+    },
+    {
+        id: 'algebra1_solving_quadratics_factoring',
+        title: '11.8 Solving Quadratics by Factoring',
+        path: 'textbooks/algebra_1/factoring_polynomials/solving_quadratics_factoring.json',
+        description: 'Zero product property'
+    },
+    {
+        id: 'algebra1_applications_quadratics',
+        title: '11.9 Applications of Quadratics',
+        path: 'textbooks/algebra_1/factoring_polynomials/applications_quadratics.json',
+        description: 'Real-world quadratic problems'
+    },
+    {
+        id: 'algebra1_factoring_simplify_rationals',
+        title: '11.10 Factoring to Simplify Rationals',
+        path: 'textbooks/algebra_1/factoring_polynomials/factoring_simplify_rationals.json',
+        description: 'Using factoring in rational expressions'
+    }
+],
+
+'algebra1-unit12': [
+    {
+        id: 'algebra1_graphing_quadratics_basic',
+        title: '12.1 Graphing Quadratics (Basic)',
+        path: 'textbooks/algebra_1/quadratic_functions/graphing_quadratics_basic.json',
+        description: 'Basic parabola graphing'
+    },
+    {
+        id: 'algebra1_graphing_quadratics_standard',
+        title: '12.2 Graphing Quadratics (Standard Form)',
+        path: 'textbooks/algebra_1/quadratic_functions/graphing_quadratics_standard.json',
+        description: 'Graphing from standard form'
+    },
+    {
+        id: 'algebra1_properties_parabolas',
+        title: '12.3 Properties of Parabolas',
+        path: 'textbooks/algebra_1/quadratic_functions/properties_parabolas.json',
+        description: 'Vertex, axis of symmetry, intercepts'
+    },
+    {
+        id: 'algebra1_graphing_intercept_form',
+        title: '12.4 Graphing (Intercept Form)',
+        path: 'textbooks/algebra_1/quadratic_functions/graphing_intercept_form.json',
+        description: 'Using x-intercepts to graph'
+    },
+    {
+        id: 'algebra1_solving_by_graphing',
+        title: '12.5 Solving by Graphing',
+        path: 'textbooks/algebra_1/quadratic_functions/solving_by_graphing.json',
+        description: 'Finding roots graphically'
+    },
+    {
+        id: 'algebra1_quadratic_formula',
+        title: '12.6 Quadratic Formula',
+        path: 'textbooks/algebra_1/quadratic_functions/quadratic_formula.json',
+        description: 'Deriving and using quadratic formula'
+    },
+    {
+        id: 'algebra1_the_discriminant',
+        title: '12.7 The Discriminant',
+        path: 'textbooks/algebra_1/quadratic_functions/the_discriminant.json',
+        description: 'Nature of quadratic solutions'
+    },
+    {
+        id: 'algebra1_comparing_solution_methods',
+        title: '12.8 Comparing Solution Methods',
+        path: 'textbooks/algebra_1/quadratic_functions/comparing_solution_methods.json',
+        description: 'Choosing best solution approach'
+    },
+    {
+        id: 'algebra1_applications_quadratic_functions',
+        title: '12.9 Applications of Quadratic Functions',
+        path: 'textbooks/algebra_1/quadratic_functions/applications_quadratic_functions.json',
+        description: 'Real-world quadratic applications'
+    },
+    {
+        id: 'algebra1_quadratic_project',
+        title: '12.10 Quadratic Project',
+        path: 'textbooks/algebra_1/quadratic_functions/quadratic_project.json',
+        description: 'Applied quadratic modeling'
+    }
+],
+
+'algebra1-unit13': [
+    {
+        id: 'algebra1_review_roots',
+        title: '13.1 Review: Square Roots',
+        path: 'textbooks/algebra_1/radicals_irrational_numbers/review_roots.json',
+        description: 'Square root fundamentals'
+    },
+    {
+        id: 'algebra1_pythagorean_theorem_hypotenuse',
+        title: '13.2 Pythagorean Theorem (Hypotenuse)',
+        path: 'textbooks/algebra_1/radicals_irrational_numbers/pythagorean_theorem_hypotenuse.json',
+        description: 'Finding hypotenuse length'
+    },
+    {
+        id: 'algebra1_pythagorean_theorem_leg',
+        title: '13.3 Pythagorean Theorem (Leg)',
+        path: 'textbooks/algebra_1/radicals_irrational_numbers/pythagorean_theorem_leg.json',
+        description: 'Finding leg lengths'
+    },
+    {
+        id: 'algebra1_applications_pythagorean',
+        title: '13.4 Applications of Pythagorean Theorem',
+        path: 'textbooks/algebra_1/radicals_irrational_numbers/applications_pythagorean.json',
+        description: 'Real-world right triangle problems'
+    },
+    {
+        id: 'algebra1_simplifying_radicals',
+        title: '13.5 Simplifying Radicals',
+        path: 'textbooks/algebra_1/radicals_irrational_numbers/simplifying_radicals.json',
+        description: 'Radical simplification techniques'
+    },
+    {
+        id: 'algebra1_operations_radicals',
+        title: '13.6 Operations with Radicals',
+        path: 'textbooks/algebra_1/radicals_irrational_numbers/operations_radicals.json',
+        description: 'Adding and subtracting radicals'
+    },
+    {
+        id: 'algebra1_multiplying_dividing_radicals',
+        title: '13.7 Multiplying and Dividing Radicals',
+        path: 'textbooks/algebra_1/radicals_irrational_numbers/multiplying_dividing_radicals.json',
+        description: 'Radical multiplication and division'
+    },
+    {
+        id: 'algebra1_solving_radical_equations',
+        title: '13.8 Solving Radical Equations',
+        path: 'textbooks/algebra_1/radicals_irrational_numbers/solving_radical_equations.json',
+        description: 'Equations with radicals'
+    },
+    {
+        id: 'algebra1_rational_irrational_numbers',
+        title: '13.9 Rational and Irrational Numbers',
+        path: 'textbooks/algebra_1/radicals_irrational_numbers/rational_irrational_numbers.json',
+        description: 'Number classification'
+    },
+    {
+        id: 'algebra1_distance_formula',
+        title: '13.10 Distance Formula',
+        path: 'textbooks/algebra_1/radicals_irrational_numbers/distance_formula.json',
+        description: 'Distance between points in coordinate plane'
+    }
+],
+
+'algebra1-unit14': [
+    {
+        id: 'algebra1_measures_central_tendency',
+        title: '14.1 Measures of Central Tendency',
+        path: 'textbooks/algebra_1/data_analysis_statistics/measures_central_tendency.json',
+        description: 'Mean, median, mode'
+    },
+    {
+        id: 'algebra1_measures_spread',
+        title: '14.2 Measures of Spread',
+        path: 'textbooks/algebra_1/data_analysis_statistics/measures_spread.json',
+        description: 'Range, IQR, standard deviation'
+    },
+    {
+        id: 'algebra1_box_whisker_plots',
+        title: '14.3 Box and Whisker Plots',
+        path: 'textbooks/algebra_1/data_analysis_statistics/box_whisker_plots.json',
+        description: 'Creating and interpreting box plots'
+    },
+    {
+        id: 'algebra1_histograms_frequency',
+        title: '14.4 Histograms and Frequency',
+        path: 'textbooks/algebra_1/data_analysis_statistics/histograms_frequency.json',
+        description: 'Data distribution visualization'
+    },
+    {
+        id: 'algebra1_dot_plots_stem_leaf',
+        title: '14.5 Dot Plots and Stem-and-Leaf',
+        path: 'textbooks/algebra_1/data_analysis_statistics/dot_plots_stem_leaf.json',
+        description: 'Alternative data displays'
+    },
+    {
+        id: 'algebra1_scatter_plots',
+        title: '14.6 Scatter Plots',
+        path: 'textbooks/algebra_1/data_analysis_statistics/scatter_plots.json',
+        description: 'Bivariate data relationships'
+    },
+    {
+        id: 'algebra1_line_of_best_fit',
+        title: '14.7 Line of Best Fit',
+        path: 'textbooks/algebra_1/data_analysis_statistics/line_of_best_fit.json',
+        description: 'Trend lines and correlation'
+    },
+    {
+        id: 'algebra1_two_way_frequency_tables',
+        title: '14.8 Two-Way Frequency Tables',
+        path: 'textbooks/algebra_1/data_analysis_statistics/two_way_frequency_tables.json',
+        description: 'Categorical data analysis'
+    },
+    {
+        id: 'algebra1_conditional_relative_frequency',
+        title: '14.9 Conditional Relative Frequency',
+        path: 'textbooks/algebra_1/data_analysis_statistics/conditional_relative_frequency.json',
+        description: 'Probability in two-way tables'
+    },
+    {
+        id: 'algebra1_data_inferences_arguments',
+        title: '14.10 Data Inferences and Arguments',
+        path: 'textbooks/algebra_1/data_analysis_statistics/data_inferences_arguments.json',
+        description: 'Drawing conclusions from data'
+    }
+],
+
+'algebra1-unit15': [
+    {
+        id: 'algebra1_review_equations_inequalities',
+        title: '15.1 Review: Equations and Inequalities',
+        path: 'textbooks/algebra_1/end_of_year_review/review_equations_inequalities.json',
+        description: 'Comprehensive equation solving review'
+    },
+    {
+        id: 'algebra1_review_linear_functions',
+        title: '15.2 Review: Linear Functions',
+        path: 'textbooks/algebra_1/end_of_year_review/review_linear_functions.json',
+        description: 'Linear concepts review'
+    },
+    {
+        id: 'algebra1_review_exponential_functions',
+        title: '15.3 Review: Exponential Functions',
+        path: 'textbooks/algebra_1/end_of_year_review/review_exponential_functions.json',
+        description: 'Exponential concepts review'
+    },
+    {
+        id: 'algebra1_review_polynomials',
+        title: '15.4 Review: Polynomials',
+        path: 'textbooks/algebra_1/end_of_year_review/review_polynomials.json',
+        description: 'Polynomial operations review'
+    },
+    {
+        id: 'algebra1_review_quadratic_functions',
+        title: '15.5 Review: Quadratic Functions',
+        path: 'textbooks/algebra_1/end_of_year_review/review_quadratic_functions.json',
+        description: 'Quadratic concepts review'
+    },
+    {
+        id: 'algebra1_review_radicals',
+        title: '15.6 Review: Radicals',
+        path: 'textbooks/algebra_1/end_of_year_review/review_radicals.json',
+        description: 'Radical operations review'
+    },
+    {
+        id: 'algebra1_multi_step_problem_solving',
+        title: '15.7 Multi-Step Problem Solving',
+        path: 'textbooks/algebra_1/end_of_year_review/multi_step_problem_solving.json',
+        description: 'Complex algebraic problems'
+    },
+    {
+        id: 'algebra1_final_project',
+        title: '15.8 Final Project',
+        path: 'textbooks/algebra_1/end_of_year_review/final_project.json',
+        description: 'Cumulative application project'
+    },
+    {
+        id: 'algebra1_practice_final_exam',
+        title: '15.9 Practice Final Exam',
+        path: 'textbooks/algebra_1/end_of_year_review/practice_final_exam.json',
+        description: 'Comprehensive exam preparation'
+    },
+    {
+        id: 'algebra1_mathematical_reflection',
+        title: '15.10 Mathematical Reflection',
+        path: 'textbooks/algebra_1/end_of_year_review/mathematical_reflection.json',
+        description: 'Course synthesis and future connections'
+    }
+],
+        
 // Add to the unitSections object in the loadTextbookSections function
 'pre-calculus-unit1': [
     {
@@ -16730,6 +17743,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
