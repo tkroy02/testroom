@@ -4269,7 +4269,7 @@ function loadTextbookContent() {
     const isBiology9 = currentCourseId === 'biology-grade-9';
     const isBiology10 = currentCourseId === 'biology-grade-10';
     const isBiology11 = currentCourseId === 'biology-grade-11';
-
+    const isBiology12 = currentCourseId === 'biology-grade-12';
     
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
@@ -4293,6 +4293,7 @@ function loadTextbookContent() {
                      isBiology9 ? 'Biology Grade 9 Textbook' :
                      isBiology10 ? 'Biology Grade 10 Textbook' : 
                      isBiology11 ? 'Biology Grade 11 Textbook' :
+                     isBiology12 ? 'Biology Grade 12 Textbook' : 
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4342,6 +4343,35 @@ function loadTextbookContent() {
                                     Unit 10: Modern Physics Introduction
                                 </button>
 
+
+` : isBiology12 ? `
+    <button class="unit-btn ${currentTextbookUnit === 'biology12-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('biology12-unit1')">
+        Unit 1: Advanced Biochemistry & Protein Function
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology12-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('biology12-unit2')">
+        Unit 2: Cellular Respiration - Detailed Mechanisms
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology12-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('biology12-unit3')">
+        Unit 3: Photosynthesis - Detailed Mechanisms
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology12-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('biology12-unit4')">
+        Unit 4: Molecular Genetics & Gene Regulation
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology12-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('biology12-unit5')">
+        Unit 5: Advanced Human Physiology & Control Systems
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology12-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('biology12-unit6')">
+        Unit 6: Biotechnology & Genetic Engineering
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology12-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('biology12-unit7')">
+        Unit 7: Environmental Biology & Bioethics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology12-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('biology12-unit8')">
+        Unit 8: Advanced Ecology
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology12-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('biology12-unit9')">
+        Unit 9: Evolution & Phylogenetics
+    </button>
 
 ` : isBiology11 ? `
     <button class="unit-btn ${currentTextbookUnit === 'biology11-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('biology11-unit1')">
@@ -5134,6 +5164,17 @@ function getCurrentUnitName() {
 'physics10-unit9': 'Unit 9: Static & Current Electricity',
 'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
 
+// Add to getCurrentUnitName function
+'biology12-unit1': 'Unit 1: Advanced Biochemistry & Protein Function',
+'biology12-unit2': 'Unit 2: Cellular Respiration - Detailed Mechanisms',
+'biology12-unit3': 'Unit 3: Photosynthesis - Detailed Mechanisms',
+'biology12-unit4': 'Unit 4: Molecular Genetics & Gene Regulation',
+'biology12-unit5': 'Unit 5: Advanced Human Physiology & Control Systems',
+'biology12-unit6': 'Unit 6: Biotechnology & Genetic Engineering',
+'biology12-unit7': 'Unit 7: Environmental Biology & Bioethics',
+'biology12-unit8': 'Unit 8: Advanced Ecology',
+'biology12-unit9': 'Unit 9: Evolution & Phylogenetics',
+        
 // Add to getCurrentUnitName function
 'biology11-unit1': 'Unit 1: Advanced Cell Structure & Organelles',
 'biology11-unit2': 'Unit 2: Membrane Transport & Dynamics',
@@ -6127,6 +6168,574 @@ function loadTextbookSections() {
         }
     ],
 
+// Add to the unitSections object in loadTextbookSections function
+'biology12-unit1': [
+    {
+        id: 'biology12_protein_structure',
+        title: '1.1 Protein Structure',
+        path: 'textbooks/biology_12/advanced_biochemistry_protein_function/protein_structure_primary_secondary_tertiary_quaternary.json',
+        description: 'Four levels of protein organization'
+    },
+    {
+        id: 'biology12_protein_folding',
+        title: '1.2 Protein Folding',
+        path: 'textbooks/biology_12/advanced_biochemistry_protein_function/protein_folding_role_chaperonins.json',
+        description: 'Folding mechanisms and chaperone assistance'
+    },
+    {
+        id: 'biology12_denaturation_misfolding',
+        title: '1.3 Denaturation & Misfolding',
+        path: 'textbooks/biology_12/advanced_biochemistry_protein_function/denaturation_misfolding_prion_diseases.json',
+        description: 'Protein structure disruption and diseases'
+    },
+    {
+        id: 'biology12_enzyme_mechanisms',
+        title: '1.4 Enzyme Mechanisms',
+        path: 'textbooks/biology_12/advanced_biochemistry_protein_function/enzyme_mechanisms_catalytic_strategies_cofactors.json',
+        description: 'Molecular mechanisms of enzyme catalysis'
+    },
+    {
+        id: 'biology12_enzyme_kinetics',
+        title: '1.5 Enzyme Kinetics',
+        path: 'textbooks/biology_12/advanced_biochemistry_protein_function/enzyme_kinetics_michaelis_menten_lineweaver_burk.json',
+        description: 'Quantitative analysis of enzyme activity'
+    },
+    {
+        id: 'biology12_enzyme_regulation',
+        title: '1.6 Enzyme Regulation',
+        path: 'textbooks/biology_12/advanced_biochemistry_protein_function/allosteric_regulation_covalent_modification_enzymes.json',
+        description: 'Control mechanisms for enzyme activity'
+    },
+    {
+        id: 'biology12_metabolic_pathways',
+        title: '1.7 Metabolic Pathways',
+        path: 'textbooks/biology_12/advanced_biochemistry_protein_function/metabolic_pathways_anabolism_catabolism.json',
+        description: 'Biochemical reaction networks'
+    },
+    {
+        id: 'biology12_bioenergetics',
+        title: '1.8 Bioenergetics',
+        path: 'textbooks/biology_12/advanced_biochemistry_protein_function/bioenergetics_laws_thermodynamics_biological_systems.json',
+        description: 'Energy transformations in living systems'
+    },
+    {
+        id: 'biology12_atp_cycle',
+        title: '1.9 ATP Cycle',
+        path: 'textbooks/biology_12/advanced_biochemistry_protein_function/atp_cycle_energy_coupling_reactions.json',
+        description: 'Cellular energy currency and coupling'
+    },
+    {
+        id: 'biology12_lipid_signaling',
+        title: '1.10 Lipid Signaling',
+        path: 'textbooks/biology_12/advanced_biochemistry_protein_function/structure_function_lipids_cell_signaling.json',
+        description: 'Lipids in cellular communication'
+    }
+],
+
+'biology12-unit2': [
+    {
+        id: 'biology12_glycolysis_detail',
+        title: '2.1 Glycolysis Detail',
+        path: 'textbooks/biology_12/cellular_respiration_detailed_mechanisms/glycolysis_detailed_steps_energy_investment_payoff.json',
+        description: 'Step-by-step glycolytic pathway'
+    },
+    {
+        id: 'biology12_pyruvate_fate',
+        title: '2.2 Pyruvate Fate',
+        path: 'textbooks/biology_12/cellular_respiration_detailed_mechanisms/fate_pyruvate_link_reaction_acetyl_coa.json',
+        description: 'Pyruvate conversion to acetyl-CoA'
+    },
+    {
+        id: 'biology12_krebs_cycle',
+        title: '2.3 Krebs Cycle',
+        path: 'textbooks/biology_12/cellular_respiration_detailed_mechanisms/krebs_cycle_steps_amphibolic_nature.json',
+        description: 'Citric acid cycle mechanisms'
+    },
+    {
+        id: 'biology12_electron_transport',
+        title: '2.4 Electron Transport Chain',
+        path: 'textbooks/biology_12/cellular_respiration_detailed_mechanisms/electron_transport_chain_complexes_proton_motive_force.json',
+        description: 'Membrane protein complexes and proton gradient'
+    },
+    {
+        id: 'biology12_chemiosmosis',
+        title: '2.5 Chemiosmosis',
+        path: 'textbooks/biology_12/cellular_respiration_detailed_mechanisms/chemiosmosis_atp_synthesis_atp_synthase.json',
+        description: 'ATP synthesis mechanism'
+    },
+    {
+        id: 'biology12_anaerobic_respiration',
+        title: '2.6 Anaerobic Respiration',
+        path: 'textbooks/biology_12/cellular_respiration_detailed_mechanisms/anaerobic_respiration_lactate_ethanol_fermentation.json',
+        description: 'Respiration without oxygen'
+    },
+    {
+        id: 'biology12_respiration_regulation',
+        title: '2.7 Respiration Regulation',
+        path: 'textbooks/biology_12/cellular_respiration_detailed_mechanisms/regulation_cellular_respiration_key_control_points.json',
+        description: 'Metabolic control of respiration'
+    },
+    {
+        id: 'biology12_metabolic_pool',
+        title: '2.8 Metabolic Pool',
+        path: 'textbooks/biology_12/cellular_respiration_detailed_mechanisms/metabolic_pool_interconnections_carb_fat_protein.json',
+        description: 'Interconnected metabolic pathways'
+    },
+    {
+        id: 'biology12_mitochondrial_apoptosis',
+        title: '2.9 Mitochondria & Apoptosis',
+        path: 'textbooks/biology_12/cellular_respiration_detailed_mechanisms/mitochondrial_structure_role_apoptosis.json',
+        description: 'Mitochondria in programmed cell death'
+    },
+    {
+        id: 'biology12_measuring_respiration',
+        title: '2.10 Measuring Respiration',
+        path: 'textbooks/biology_12/cellular_respiration_detailed_mechanisms/measuring_respiration_rates_organisms.json',
+        description: 'Techniques for respiration measurement'
+    }
+],
+
+'biology12-unit3': [
+    {
+        id: 'biology12_photosynthetic_pigments',
+        title: '3.1 Photosynthetic Pigments',
+        path: 'textbooks/biology_12/photosynthesis_detailed_mechanisms/photosynthetic_pigments_chlorophylls_carotenoids.json',
+        description: 'Light-absorbing molecules'
+    },
+    {
+        id: 'biology12_photosystems',
+        title: '3.2 Photosystems',
+        path: 'textbooks/biology_12/photosynthesis_detailed_mechanisms/photosystems_i_ii_structure_function.json',
+        description: 'Photosynthetic reaction centers'
+    },
+    {
+        id: 'biology12_light_dependent',
+        title: '3.3 Light Dependent Reactions',
+        path: 'textbooks/biology_12/photosynthesis_detailed_mechanisms/light_dependent_reactions_non_cyclic_cyclic_electron_flow.json',
+        description: 'Light energy conversion processes'
+    },
+    {
+        id: 'biology12_photophosphorylation',
+        title: '3.4 Photophosphorylation',
+        path: 'textbooks/biology_12/photosynthesis_detailed_mechanisms/photophosphorylation_z_scheme.json',
+        description: 'ATP synthesis in chloroplasts'
+    },
+    {
+        id: 'biology12_calvin_cycle',
+        title: '3.5 Calvin Cycle',
+        path: 'textbooks/biology_12/photosynthesis_detailed_mechanisms/calvin_cycle_carbon_fixation_reduction_regeneration.json',
+        description: 'Carbon fixation pathway'
+    },
+    {
+        id: 'biology12_rubisco_photorespiration',
+        title: '3.6 Rubisco & Photorespiration',
+        path: 'textbooks/biology_12/photosynthesis_detailed_mechanisms/role_rubisco_photorespiration.json',
+        description: 'Key enzyme and its limitations'
+    },
+    {
+        id: 'biology12_c4_cam_pathways',
+        title: '3.7 C4 & CAM Pathways',
+        path: 'textbooks/biology_12/photosynthesis_detailed_mechanisms/c4_cam_photosynthetic_pathways.json',
+        description: 'Alternative photosynthetic strategies'
+    },
+    {
+        id: 'biology12_leaf_adaptations',
+        title: '3.8 Leaf Adaptations',
+        path: 'textbooks/biology_12/photosynthesis_detailed_mechanisms/adaptations_leaves_efficient_photosynthesis.json',
+        description: 'Structural adaptations for photosynthesis'
+    },
+    {
+        id: 'biology12_photosynthesis_factors',
+        title: '3.9 Photosynthesis Factors',
+        path: 'textbooks/biology_12/photosynthesis_detailed_mechanisms/factors_affecting_rate_photosynthesis_limiting_factors.json',
+        description: 'Environmental influences on photosynthesis'
+    },
+    {
+        id: 'biology12_comparing_processes',
+        title: '3.10 Comparing Processes',
+        path: 'textbooks/biology_12/photosynthesis_detailed_mechanisms/comparing_respiration_photosynthesis.json',
+        description: 'Respiration vs photosynthesis comparison'
+    }
+],
+
+'biology12-unit4': [
+    {
+        id: 'biology12_chromosome_structure',
+        title: '4.1 Chromosome Structure',
+        path: 'textbooks/biology_12/molecular_genetics_gene_regulation/eukaryotic_chromosome_structure_euchromatin_heterochromatin.json',
+        description: 'Eukaryotic chromosome organization'
+    },
+    {
+        id: 'biology12_lac_operon',
+        title: '4.2 Lac Operon',
+        path: 'textbooks/biology_12/molecular_genetics_gene_regulation/lac_operon_model_prokaryotic_gene_regulation.json',
+        description: 'Classic prokaryotic gene regulation model'
+    },
+    {
+        id: 'biology12_transcriptional_control',
+        title: '4.3 Transcriptional Control',
+        path: 'textbooks/biology_12/molecular_genetics_gene_regulation/eukaryotic_gene_regulation_transcriptional_control.json',
+        description: 'Eukaryotic transcription regulation'
+    },
+    {
+        id: 'biology12_post_transcriptional',
+        title: '4.4 Post-Transcriptional Control',
+        path: 'textbooks/biology_12/molecular_genetics_gene_regulation/eukaryotic_gene_regulation_post_transcriptional_control.json',
+        description: 'RNA processing and regulation'
+    },
+    {
+        id: 'biology12_epigenetics',
+        title: '4.5 Epigenetics',
+        path: 'textbooks/biology_12/molecular_genetics_gene_regulation/epigenetics_dna_methylation_histone_modification.json',
+        description: 'Heritable changes without DNA sequence alteration'
+    },
+    {
+        id: 'biology12_non_coding_rna',
+        title: '4.6 Non-Coding RNA',
+        path: 'textbooks/biology_12/molecular_genetics_gene_regulation/non_coding_rnas_mirna_sirna_gene_silencing.json',
+        description: 'RNA molecules in gene regulation'
+    },
+    {
+        id: 'biology12_cancer_genetics',
+        title: '4.7 Cancer Genetics',
+        path: 'textbooks/biology_12/molecular_genetics_gene_regulation/genetics_cancer_oncogenes_tumor_suppressor_genes.json',
+        description: 'Genetic basis of cancer'
+    },
+    {
+        id: 'biology12_viral_genetics',
+        title: '4.8 Viral Genetics',
+        path: 'textbooks/biology_12/molecular_genetics_gene_regulation/viral_genetics_lytic_lysogenic_cycles.json',
+        description: 'Virus replication strategies'
+    },
+    {
+        id: 'biology12_genomics_proteomics',
+        title: '4.9 Genomics & Proteomics',
+        path: 'textbooks/biology_12/molecular_genetics_gene_regulation/genomics_proteomics_introduction.json',
+        description: 'Large-scale biological data analysis'
+    },
+    {
+        id: 'biology12_molecular_techniques',
+        title: '4.10 Molecular Techniques',
+        path: 'textbooks/biology_12/molecular_genetics_gene_regulation/techniques_molecular_biology_southern_northern_western_blotting.json',
+        description: 'Essential molecular biology methods'
+    }
+],
+
+'biology12-unit5': [
+    {
+        id: 'biology12_neuron_structure',
+        title: '5.1 Neuron Structure',
+        path: 'textbooks/biology_12/advanced_human_physiology_control_systems/nervous_system_neuron_structure_resting_potential.json',
+        description: 'Neuronal anatomy and membrane potential'
+    },
+    {
+        id: 'biology12_action_potentials',
+        title: '5.2 Action Potentials',
+        path: 'textbooks/biology_12/advanced_human_physiology_control_systems/generation_propagation_action_potentials.json',
+        description: 'Nerve impulse generation and conduction'
+    },
+    {
+        id: 'biology12_synaptic_transmission',
+        title: '5.3 Synaptic Transmission',
+        path: 'textbooks/biology_12/advanced_human_physiology_control_systems/synaptic_transmission_neurotransmitters_receptors.json',
+        description: 'Chemical communication between neurons'
+    },
+    {
+        id: 'biology12_brain_structure',
+        title: '5.4 Brain Structure',
+        path: 'textbooks/biology_12/advanced_human_physiology_control_systems/central_nervous_system_brain_structure_function.json',
+        description: 'Brain anatomy and functional areas'
+    },
+    {
+        id: 'biology12_endocrine_system',
+        title: '5.5 Endocrine System',
+        path: 'textbooks/biology_12/advanced_human_physiology_control_systems/endocrine_system_hormone_action_signal_transduction.json',
+        description: 'Hormonal communication systems'
+    },
+    {
+        id: 'biology12_hypothalamus_pituitary',
+        title: '5.6 Hypothalamus & Pituitary',
+        path: 'textbooks/biology_12/advanced_human_physiology_control_systems/hypothalamus_pituitary_gland_master_control.json',
+        description: 'Master control of endocrine system'
+    },
+    {
+        id: 'biology12_immune_system',
+        title: '5.7 Immune System',
+        path: 'textbooks/biology_12/advanced_human_physiology_control_systems/immune_system_innate_adaptive_immunity.json',
+        description: 'Immune defense mechanisms'
+    },
+    {
+        id: 'biology12_b_t_cells',
+        title: '5.8 B & T Cells',
+        path: 'textbooks/biology_12/advanced_human_physiology_control_systems/b_cells_t_cells_humoral_cell_mediated_responses.json',
+        description: 'Adaptive immune responses'
+    },
+    {
+        id: 'biology12_reproductive_hormones',
+        title: '5.9 Reproductive Hormones',
+        path: 'textbooks/biology_12/advanced_human_physiology_control_systems/reproductive_system_hormonal_control_menstrual_cycle.json',
+        description: 'Hormonal control of reproduction'
+    },
+    {
+        id: 'biology12_homeostatic_imbalances',
+        title: '5.10 Homeostatic Imbalances',
+        path: 'textbooks/biology_12/advanced_human_physiology_control_systems/homeostatic_imbalances_diabetes_autoimmune_neurodegenerative.json',
+        description: 'Physiological disorders and diseases'
+    }
+],
+
+'biology12-unit6': [
+    {
+        id: 'biology12_recombinant_dna',
+        title: '6.1 Recombinant DNA',
+        path: 'textbooks/biology_12/biotechnology_genetic_engineering/recombinant_dna_technology_restriction_enzymes_ligase.json',
+        description: 'DNA recombination techniques'
+    },
+    {
+        id: 'biology12_cloning_vectors',
+        title: '6.2 Cloning Vectors',
+        path: 'textbooks/biology_12/biotechnology_genetic_engineering/cloning_vectors_plasmids_bacs_yacs.json',
+        description: 'DNA delivery systems'
+    },
+    {
+        id: 'biology12_pcr',
+        title: '6.3 PCR',
+        path: 'textbooks/biology_12/biotechnology_genetic_engineering/polymerase_chain_reaction_principles_applications.json',
+        description: 'DNA amplification technology'
+    },
+    {
+        id: 'biology12_gel_electrophoresis',
+        title: '6.4 Gel Electrophoresis',
+        path: 'textbooks/biology_12/biotechnology_genetic_engineering/gel_electrophoresis_dna_profiling.json',
+        description: 'DNA separation and analysis'
+    },
+    {
+        id: 'biology12_dna_sequencing',
+        title: '6.5 DNA Sequencing',
+        path: 'textbooks/biology_12/biotechnology_genetic_engineering/dna_sequencing_sanger_next_generation.json',
+        description: 'Genetic sequence determination'
+    },
+    {
+        id: 'biology12_crispr_cas9',
+        title: '6.6 CRISPR-Cas9',
+        path: 'textbooks/biology_12/biotechnology_genetic_engineering/crispr_cas9_mechanism_applications_gene_editing.json',
+        description: 'Precision gene editing technology'
+    },
+    {
+        id: 'biology12_gene_therapy',
+        title: '6.7 Gene Therapy',
+        path: 'textbooks/biology_12/biotechnology_genetic_engineering/gene_therapy_approaches_ethical_considerations.json',
+        description: 'Therapeutic genetic interventions'
+    },
+    {
+        id: 'biology12_transgenic_organisms',
+        title: '6.8 Transgenic Organisms',
+        path: 'textbooks/biology_12/biotechnology_genetic_engineering/transgenic_organisms_agriculture_medicine.json',
+        description: 'Genetically modified organisms'
+    },
+    {
+        id: 'biology12_stem_cells',
+        title: '6.9 Stem Cell Technology',
+        path: 'textbooks/biology_12/biotechnology_genetic_engineering/stem_cell_technology_therapeutic_cloning.json',
+        description: 'Stem cell applications and cloning'
+    },
+    {
+        id: 'biology12_forensic_biology',
+        title: '6.10 Forensic Biology',
+        path: 'textbooks/biology_12/biotechnology_genetic_engineering/forensic_biology_dna_databases.json',
+        description: 'DNA in criminal investigations'
+    }
+],
+
+'biology12-unit7': [
+    {
+        id: 'biology12_human_population',
+        title: '7.1 Human Population',
+        path: 'textbooks/biology_12/environmental_biology_bioethics/human_population_growth_demographic_transition.json',
+        description: 'Population dynamics and trends'
+    },
+    {
+        id: 'biology12_biogeochemical_impact',
+        title: '7.2 Biogeochemical Impact',
+        path: 'textbooks/biology_12/environmental_biology_bioethics/human_impact_biogeochemical_cycles.json',
+        description: 'Human effects on natural cycles'
+    },
+    {
+        id: 'biology12_pollution',
+        title: '7.3 Pollution',
+        path: 'textbooks/biology_12/environmental_biology_bioethics/pollution_eutrophication_acid_rain_plastic_waste.json',
+        description: 'Environmental contamination types'
+    },
+    {
+        id: 'biology12_climate_change',
+        title: '7.4 Climate Change',
+        path: 'textbooks/biology_12/environmental_biology_bioethics/climate_change_causes_evidence_biological_impacts.json',
+        description: 'Global warming causes and effects'
+    },
+    {
+        id: 'biology12_conservation_biology',
+        title: '7.5 Conservation Biology',
+        path: 'textbooks/biology_12/environmental_biology_bioethics/conservation_biology_biodiversity_hotspots_endangered_species.json',
+        description: 'Species and habitat protection'
+    },
+    {
+        id: 'biology12_habitat_destruction',
+        title: '7.6 Habitat Destruction',
+        path: 'textbooks/biology_12/environmental_biology_bioethics/habitat_destruction_fragmentation_restoration.json',
+        description: 'Ecosystem degradation and recovery'
+    },
+    {
+        id: 'biology12_sustainable_management',
+        title: '7.7 Sustainable Management',
+        path: 'textbooks/biology_12/environmental_biology_bioethics/sustainable_resource_management.json',
+        description: 'Sustainable resource use strategies'
+    },
+    {
+        id: 'biology12_genetic_ethics',
+        title: '7.8 Genetic Ethics',
+        path: 'textbooks/biology_12/environmental_biology_bioethics/bioethics_ethical_issues_genetic_engineering_cloning.json',
+        description: 'Ethical considerations in genetics'
+    },
+    {
+        id: 'biology12_healthcare_ethics',
+        title: '7.9 Healthcare Ethics',
+        path: 'textbooks/biology_12/environmental_biology_bioethics/bioethics_access_healthcare_genetic_information.json',
+        description: 'Medical ethics and genetic privacy'
+    },
+    {
+        id: 'biology12_science_policy',
+        title: '7.10 Science & Policy',
+        path: 'textbooks/biology_12/environmental_biology_bioethics/role_science_public_policy_decision_making.json',
+        description: 'Science in policy development'
+    }
+],
+
+'biology12-unit8': [
+    {
+        id: 'biology12_population_ecology',
+        title: '8.1 Population Ecology',
+        path: 'textbooks/biology_12/advanced_ecology/population_ecology_life_history_strategies_survivorship_curves.json',
+        description: 'Population dynamics and life histories'
+    },
+    {
+        id: 'biology12_population_growth',
+        title: '8.2 Population Growth',
+        path: 'textbooks/biology_12/advanced_ecology/population_growth_models_exponential_logistic_growth.json',
+        description: 'Mathematical population models'
+    },
+    {
+        id: 'biology12_community_ecology',
+        title: '8.3 Community Ecology',
+        path: 'textbooks/biology_12/advanced_ecology/community_ecology_species_interactions_competition_predation_symbiosis.json',
+        description: 'Species interactions and relationships'
+    },
+    {
+        id: 'biology12_ecological_succession',
+        title: '8.4 Ecological Succession',
+        path: 'textbooks/biology_12/advanced_ecology/ecological_succession_primary_secondary_succession.json',
+        description: 'Community development over time'
+    },
+    {
+        id: 'biology12_ecosystem_ecology',
+        title: '8.5 Ecosystem Ecology',
+        path: 'textbooks/biology_12/advanced_ecology/ecosystem_ecology_energy_flow_ecological_pyramids.json',
+        description: 'Energy transfer in ecosystems'
+    },
+    {
+        id: 'biology12_biogeochemical_cycles',
+        title: '8.6 Biogeochemical Cycles',
+        path: 'textbooks/biology_12/advanced_ecology/biogeochemical_cycles_water_carbon_nitrogen_phosphorus.json',
+        description: 'Element cycling in ecosystems'
+    },
+    {
+        id: 'biology12_biomes',
+        title: '8.7 Biomes',
+        path: 'textbooks/biology_12/advanced_ecology/biomes_distribution_characteristics_major_terrestrial_biomes.json',
+        description: 'Global ecosystem types'
+    },
+    {
+        id: 'biology12_aquatic_ecosystems',
+        title: '8.8 Aquatic Ecosystems',
+        path: 'textbooks/biology_12/advanced_ecology/aquatic_ecosystems_freshwater_marine_zones.json',
+        description: 'Water-based ecosystems'
+    },
+    {
+        id: 'biology12_behavioral_ecology',
+        title: '8.9 Behavioral Ecology',
+        path: 'textbooks/biology_12/advanced_ecology/behavioral_ecology_foraging_altruism_sexual_selection.json',
+        description: 'Evolution of animal behavior'
+    },
+    {
+        id: 'biology12_global_biodiversity',
+        title: '8.10 Global Biodiversity',
+        path: 'textbooks/biology_12/advanced_ecology/global_patterns_biodiversity_latitudinal_gradients.json',
+        description: 'Worldwide biodiversity patterns'
+    }
+],
+
+'biology12-unit9': [
+    {
+        id: 'biology12_evolution_evidence',
+        title: '9.1 Evolution Evidence',
+        path: 'textbooks/biology_12/evolution_phylogenetics/evidence_evolution_fossil_record_biogeography_comparative_anatomy.json',
+        description: 'Multiple lines of evolutionary evidence'
+    },
+    {
+        id: 'biology12_natural_selection_modes',
+        title: '9.2 Natural Selection Modes',
+        path: 'textbooks/biology_12/evolution_phylogenetics/natural_selection_modes_stabilizing_directional_disruptive.json',
+        description: 'Patterns of natural selection'
+    },
+    {
+        id: 'biology12_genetic_variation',
+        title: '9.3 Genetic Variation',
+        path: 'textbooks/biology_12/evolution_phylogenetics/genetic_variation_hardy_weinberg_principle.json',
+        description: 'Population genetics principles'
+    },
+    {
+        id: 'biology12_evolution_mechanisms',
+        title: '9.4 Evolution Mechanisms',
+        path: 'textbooks/biology_12/evolution_phylogenetics/mechanisms_evolution_genetic_drift_gene_flow_mutation.json',
+        description: 'Forces driving evolutionary change'
+    },
+    {
+        id: 'biology12_speciation',
+        title: '9.5 Speciation',
+        path: 'textbooks/biology_12/evolution_phylogenetics/speciation_allopatric_sympatric_parapatric.json',
+        description: 'Species formation processes'
+    },
+    {
+        id: 'biology12_reproductive_isolation',
+        title: '9.6 Reproductive Isolation',
+        path: 'textbooks/biology_12/evolution_phylogenetics/reproductive_isolation_prezygotic_postzygotic_barriers.json',
+        description: 'Barriers to gene flow'
+    },
+    {
+        id: 'biology12_evolution_patterns',
+        title: '9.7 Evolution Patterns',
+        path: 'textbooks/biology_12/evolution_phylogenetics/patterns_evolution_adaptive_radiation_convergent_evolution.json',
+        description: 'Macroevolutionary patterns'
+    },
+    {
+        id: 'biology12_phylogenetics',
+        title: '9.8 Phylogenetics',
+        path: 'textbooks/biology_12/evolution_phylogenetics/phylogenetics_building_interpreting_phylogenetic_trees.json',
+        description: 'Evolutionary relationship analysis'
+    },
+    {
+        id: 'biology12_molecular_clocks',
+        title: '9.9 Molecular Clocks',
+        path: 'textbooks/biology_12/evolution_phylogenetics/molecular_clocks_horizontal_gene_transfer.json',
+        description: 'Molecular evolution timing'
+    },
+    {
+        id: 'biology12_human_evolution',
+        title: '9.10 Human Evolution',
+        path: 'textbooks/biology_12/evolution_phylogenetics/human_evolution_summary_major_hominin_developments.json',
+        description: 'Human evolutionary history'
+    }
+],
+        
 // Add to the unitSections object in loadTextbookSections function
 'biology11-unit1': [
     {
@@ -23929,6 +24538,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
