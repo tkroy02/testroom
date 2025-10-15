@@ -4265,6 +4265,7 @@ function loadTextbookContent() {
     const isGeometry = currentCourseId === 'geometry';
     const isChemistry10 = currentCourseId === 'chemistry-grade-10';
     const isChemistry11 = currentCourseId === 'chemistry-grade-11';
+    const isChemistry12 = currentCourseId === 'chemistry-grade-12';
     
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
@@ -4284,6 +4285,7 @@ function loadTextbookContent() {
                      isGeometry ? 'Geometry Textbook' :
                      isChemistry10 ? 'Chemistry Grade 10 Textbook' :
                      isChemistry11 ? 'Chemistry Grade 11 Textbook' :
+                     isChemistry12 ? 'Chemistry Grade 12 Textbook' :
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4333,6 +4335,47 @@ function loadTextbookContent() {
                                     Unit 10: Modern Physics Introduction
                                 </button>
 
+
+` : isChemistry12 ? `
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit1')">
+        Unit 1: Foundations of Organic Chemistry
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit2')">
+        Unit 2: Alkanes and Cycloalkanes
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit3')">
+        Unit 3: Alkenes and Alkynes
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit4')">
+        Unit 4: Haloalkanes & Reaction Mechanisms
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit5')">
+        Unit 5: Alcohols, Ethers & Phenols
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit6')">
+        Unit 6: Aldehydes & Ketones
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit7')">
+        Unit 7: Carboxylic Acids & Derivatives
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit8')">
+        Unit 8: Analytical Techniques & Polymers
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit9')">
+        Unit 9: Electrochemistry
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit10')">
+        Unit 10: Chemical Thermodynamics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit11' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit11')">
+        Unit 11: Acid-Base Equilibria
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit12' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit12')">
+        Unit 12: Advanced Kinetics & Coordination
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit13' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit13')">
+        Unit 13: Nuclear Chemistry & Review
+    </button>
 
 ` : isChemistry11 ? `
     <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit1')">
@@ -4997,6 +5040,21 @@ function getCurrentUnitName() {
 'physics10-unit9': 'Unit 9: Static & Current Electricity',
 'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
 
+// Add to getCurrentUnitName function
+'chemistry12-unit1': 'Unit 1: Foundations of Organic Chemistry',
+'chemistry12-unit2': 'Unit 2: Alkanes and Cycloalkanes', 
+'chemistry12-unit3': 'Unit 3: Alkenes and Alkynes',
+'chemistry12-unit4': 'Unit 4: Haloalkanes & Reaction Mechanisms',
+'chemistry12-unit5': 'Unit 5: Alcohols, Ethers & Phenols',
+'chemistry12-unit6': 'Unit 6: Aldehydes & Ketones',
+'chemistry12-unit7': 'Unit 7: Carboxylic Acids & Derivatives',
+'chemistry12-unit8': 'Unit 8: Analytical Techniques & Polymers',
+'chemistry12-unit9': 'Unit 9: Electrochemistry',
+'chemistry12-unit10': 'Unit 10: Chemical Thermodynamics',
+'chemistry12-unit11': 'Unit 11: Acid-Base Equilibria',
+'chemistry12-unit12': 'Unit 12: Advanced Kinetics & Coordination',
+'chemistry12-unit13': 'Unit 13: Nuclear Chemistry & Review',
+        
 // Add to getCurrentUnitName function
 'chemistry11-unit1': 'Unit 1: Quantum Mechanical Model',
 'chemistry11-unit2': 'Unit 2: Electron Configuration & Periodicity',
@@ -10101,6 +10159,825 @@ function loadTextbookSections() {
         title: '15.10 Mathematical Reflection',
         path: 'textbooks/algebra_1/end_of_year_review/mathematical_reflection.json',
         description: 'Course synthesis and future connections'
+    }
+],
+
+'chemistry12-unit1': [
+    {
+        id: 'chemistry12_foundations_organic_chemistry',
+        title: '1.1 Foundations of Organic Chemistry',
+        path: 'textbooks/chemistry_12/foundations_of_organic_chemistry/unique_properties_of_carbon_and_catenation.json',
+        description: 'Carbon properties and bonding fundamentals'
+    },
+    {
+        id: 'chemistry12_hybridization_orbitals',
+        title: '1.2 Hybridization and Orbitals',
+        path: 'textbooks/chemistry_12/foundations_of_organic_chemistry/hybridization_sp3_sp2_sp_orbitals_in_carbon.json',
+        description: 'Atomic orbital mixing and geometry'
+    },
+    {
+        id: 'chemistry12_structural_formulas',
+        title: '1.3 Structural Formulas',
+        path: 'textbooks/chemistry_12/foundations_of_organic_chemistry/drawing_and_interpreting_structural_formulas.json',
+        description: 'Molecular representation methods'
+    },
+    {
+        id: 'chemistry12_functional_groups',
+        title: '1.4 Functional Groups',
+        path: 'textbooks/chemistry_12/foundations_of_organic_chemistry/functional_groups_identification_and_naming.json',
+        description: 'Reactive group identification'
+    },
+    {
+        id: 'chemistry12_iupac_basic_rules',
+        title: '1.5 IUPAC Basic Rules',
+        path: 'textbooks/chemistry_12/foundations_of_organic_chemistry/iupac_nomenclature_basic_rules_and_parent_chains.json',
+        description: 'Systematic naming fundamentals'
+    },
+    {
+        id: 'chemistry12_naming_alkanes',
+        title: '1.6 Naming Alkanes',
+        path: 'textbooks/chemistry_12/foundations_of_organic_chemistry/iupac_nomenclature_naming_simple_alkanes.json',
+        description: 'Alkane nomenclature practice'
+    },
+    {
+        id: 'chemistry12_organic_reactions',
+        title: '1.7 Organic Reactions Overview',
+        path: 'textbooks/chemistry_12/foundations_of_organic_chemistry/types_of_organic_reactions_overview.json',
+        description: 'Reaction type classification'
+    },
+    {
+        id: 'chemistry12_isomerism',
+        title: '1.8 Isomerism Introduction',
+        path: 'textbooks/chemistry_12/foundations_of_organic_chemistry/isomerism_structural_and_stereoisomerism_introduction.json',
+        description: 'Molecular structure variations'
+    },
+    {
+        id: 'chemistry12_homologous_series',
+        title: '1.9 Homologous Series',
+        path: 'textbooks/chemistry_12/foundations_of_organic_chemistry/homologous_series_trends_physical_properties.json',
+        description: 'Trends in organic families'
+    },
+    {
+        id: 'chemistry12_spectroscopic_methods',
+        title: '1.10 Spectroscopic Methods',
+        path: 'textbooks/chemistry_12/foundations_of_organic_chemistry/introduction_spectroscopic_methods_ir_ms.json',
+        description: 'IR and mass spectrometry basics'
+    }
+],
+
+'chemistry12-unit2': [
+    {
+        id: 'chemistry12_alkanes_properties',
+        title: '2.1 Alkanes Properties',
+        path: 'textbooks/chemistry_12/alkanes_and_cycloalkanes/structures_and_properties_of_alkanes.json',
+        description: 'Alkane structure and characteristics'
+    },
+    {
+        id: 'chemistry12_branched_alkanes',
+        title: '2.2 Branched Alkanes',
+        path: 'textbooks/chemistry_12/alkanes_and_cycloalkanes/iupac_nomenclature_branched_alkanes.json',
+        description: 'Complex alkane naming'
+    },
+    {
+        id: 'chemistry12_conformational_analysis',
+        title: '2.3 Conformational Analysis',
+        path: 'textbooks/chemistry_12/alkanes_and_cycloalkanes/conformational_analysis_ethane_butane.json',
+        description: 'Molecular rotation and stability'
+    },
+    {
+        id: 'chemistry12_combustion_alkanes',
+        title: '2.4 Combustion of Alkanes',
+        path: 'textbooks/chemistry_12/alkanes_and_cycloalkanes/combustion_of_alkanes_energy_applications.json',
+        description: 'Energy applications and reactions'
+    },
+    {
+        id: 'chemistry12_free_radical_substitution',
+        title: '2.5 Free Radical Substitution',
+        path: 'textbooks/chemistry_12/alkanes_and_cycloalkanes/free_radical_substitution_mechanism.json',
+        description: 'Radical reaction mechanisms'
+    },
+    {
+        id: 'chemistry12_halogenation_alkanes',
+        title: '2.6 Halogenation of Alkanes',
+        path: 'textbooks/chemistry_12/alkanes_and_cycloalkanes/halogenation_of_alkanes_reactivity_selectivity.json',
+        description: 'Reactivity patterns in halogenation'
+    },
+    {
+        id: 'chemistry12_industrial_processes',
+        title: '2.7 Industrial Processes',
+        path: 'textbooks/chemistry_12/alkanes_and_cycloalkanes/cracking_reforming_alkanes_industrial_context.json',
+        description: 'Industrial alkane processing'
+    },
+    {
+        id: 'chemistry12_cycloalkanes',
+        title: '2.8 Cycloalkanes',
+        path: 'textbooks/chemistry_12/alkanes_and_cycloalkanes/nomenclature_stability_cycloalkanes.json',
+        description: 'Cyclic alkane properties'
+    },
+    {
+        id: 'chemistry12_ring_strain',
+        title: '2.9 Ring Strain Theory',
+        path: 'textbooks/chemistry_12/alkanes_and_cycloalkanes/ring_strain_cycloalkanes_baeyers_strain_theory.json',
+        description: 'Cycloalkane stability analysis'
+    },
+    {
+        id: 'chemistry12_cyclohexane_conformations',
+        title: '2.10 Cyclohexane Conformations',
+        path: 'textbooks/chemistry_12/alkanes_and_cycloalkanes/conformations_cyclohexane_chair_boat_forms.json',
+        description: 'Ring conformation analysis'
+    }
+],
+
+'chemistry12-unit3': [
+    {
+        id: 'chemistry12_alkenes_structure',
+        title: '3.1 Alkenes Structure',
+        path: 'textbooks/chemistry_12/alkenes_and_alkynes/structure_bonding_alkenes_pi_bond.json',
+        description: 'Alkene bonding and geometry'
+    },
+    {
+        id: 'chemistry12_naming_alkenes_alkynes',
+        title: '3.2 Naming Alkenes & Alkynes',
+        path: 'textbooks/chemistry_12/alkenes_and_alkynes/iupac_nomenclature_alkenes_alkynes.json',
+        description: 'Unsaturated hydrocarbon naming'
+    },
+    {
+        id: 'chemistry12_geometric_isomerism',
+        title: '3.3 Geometric Isomerism',
+        path: 'textbooks/chemistry_12/alkenes_and_alkynes/ez_geometric_isomerism_alkenes.json',
+        description: 'Cis-trans isomerism'
+    },
+    {
+        id: 'chemistry12_electrophilic_addition',
+        title: '3.4 Electrophilic Addition',
+        path: 'textbooks/chemistry_12/alkenes_and_alkynes/electrophilic_addition_mechanism_markovnikovs_rule.json',
+        description: 'Addition reaction mechanisms'
+    },
+    {
+        id: 'chemistry12_addition_reactions',
+        title: '3.5 Addition Reactions',
+        path: 'textbooks/chemistry_12/alkenes_and_alkynes/addition_reactions_hydrogenation_halogenation_hydrohalogenation.json',
+        description: 'Various addition reactions'
+    },
+    {
+        id: 'chemistry12_hydration_alkenes',
+        title: '3.6 Hydration of Alkenes',
+        path: 'textbooks/chemistry_12/alkenes_and_alkynes/hydration_of_alkenes_formation_alcohols.json',
+        description: 'Alcohol synthesis from alkenes'
+    },
+    {
+        id: 'chemistry12_polymerization',
+        title: '3.7 Polymerization',
+        path: 'textbooks/chemistry_12/alkenes_and_alkynes/polymerization_of_alkenes_addition_polymers.json',
+        description: 'Polymer formation mechanisms'
+    },
+    {
+        id: 'chemistry12_alkynes_structure',
+        title: '3.8 Alkynes Structure',
+        path: 'textbooks/chemistry_12/alkenes_and_alkynes/structure_acidity_alkynes.json',
+        description: 'Alkyne properties and acidity'
+    },
+    {
+        id: 'chemistry12_alkynes_reactions',
+        title: '3.9 Alkynes Reactions',
+        path: 'textbooks/chemistry_12/alkenes_and_alkynes/reactions_of_alkynes_hydrogenation_halogenation.json',
+        description: 'Alkyne chemical behavior'
+    },
+    {
+        id: 'chemistry12_hydration_alkynes',
+        title: '3.10 Hydration of Alkynes',
+        path: 'textbooks/chemistry_12/alkenes_and_alkynes/hydration_of_alkynes_formation_carbonyl_compounds.json',
+        description: 'Carbonyl compound synthesis'
+    }
+],
+
+'chemistry12-unit4': [
+    {
+        id: 'chemistry12_haloalkanes_classification',
+        title: '4.1 Haloalkanes Classification',
+        path: 'textbooks/chemistry_12/haloalkanes_and_reaction_mechanisms/classification_nomenclature_haloalkanes.json',
+        description: 'Haloalkane types and naming'
+    },
+    {
+        id: 'chemistry12_haloalkanes_properties',
+        title: '4.2 Haloalkanes Properties',
+        path: 'textbooks/chemistry_12/haloalkanes_and_reaction_mechanisms/physical_properties_polarity_haloalkanes.json',
+        description: 'Physical characteristics'
+    },
+    {
+        id: 'chemistry12_sn1_mechanism',
+        title: '4.3 SN1 Mechanism',
+        path: 'textbooks/chemistry_12/haloalkanes_and_reaction_mechanisms/nucleophilic_substitution_sn1_mechanism.json',
+        description: 'Unimolecular substitution'
+    },
+    {
+        id: 'chemistry12_sn2_mechanism',
+        title: '4.4 SN2 Mechanism',
+        path: 'textbooks/chemistry_12/haloalkanes_and_reaction_mechanisms/nucleophilic_substitution_sn2_mechanism.json',
+        description: 'Bimolecular substitution'
+    },
+    {
+        id: 'chemistry12_sn1_vs_sn2',
+        title: '4.5 SN1 vs SN2 Factors',
+        path: 'textbooks/chemistry_12/haloalkanes_and_reaction_mechanisms/factors_affecting_sn1_vs_sn2.json',
+        description: 'Reaction condition effects'
+    },
+    {
+        id: 'chemistry12_elimination_reactions',
+        title: '4.6 Elimination Reactions',
+        path: 'textbooks/chemistry_12/haloalkanes_and_reaction_mechanisms/elimination_reactions_e1_e2_mechanisms.json',
+        description: 'E1 and E2 mechanisms'
+    },
+    {
+        id: 'chemistry12_substitution_elimination',
+        title: '4.7 Competition Analysis',
+        path: 'textbooks/chemistry_12/haloalkanes_and_reaction_mechanisms/competition_substitution_elimination.json',
+        description: 'Reaction pathway competition'
+    },
+    {
+        id: 'chemistry12_grignard_reagents',
+        title: '4.8 Grignard Reagents',
+        path: 'textbooks/chemistry_12/haloalkanes_and_reaction_mechanisms/organometallic_compounds_grignard_reagents.json',
+        description: 'Organometallic synthesis'
+    },
+    {
+        id: 'chemistry12_synthesis_strategies',
+        title: '4.9 Synthesis Strategies',
+        path: 'textbooks/chemistry_12/haloalkanes_and_reaction_mechanisms/synthesis_strategies_using_haloalkanes.json',
+        description: 'Multi-step synthesis planning'
+    },
+    {
+        id: 'chemistry12_environmental_impact',
+        title: '4.10 Environmental Impact',
+        path: 'textbooks/chemistry_12/haloalkanes_and_reaction_mechanisms/environmental_impact_halogenated_organics.json',
+        description: 'Environmental considerations'
+    }
+],
+
+        'chemistry12-unit5': [
+    {
+        id: 'chemistry12_alcohols_classification',
+        title: '5.1 Alcohols Classification',
+        path: 'textbooks/chemistry_12/alcohols_ethers_phenols/classification_nomenclature_alcohols.json',
+        description: 'Alcohol types and naming'
+    },
+    {
+        id: 'chemistry12_alcohols_properties',
+        title: '5.2 Alcohols Properties',
+        path: 'textbooks/chemistry_12/alcohols_ethers_phenols/physical_properties_hydrogen_bonding_alcohols.json',
+        description: 'Hydrogen bonding effects'
+    },
+    {
+        id: 'chemistry12_alcohols_acidity',
+        title: '5.3 Alcohols Acidity',
+        path: 'textbooks/chemistry_12/alcohols_ethers_phenols/acidity_basicity_alcohols.json',
+        description: 'Acid-base properties of alcohols'
+    },
+    {
+        id: 'chemistry12_alcohols_preparation',
+        title: '5.4 Alcohols Preparation',
+        path: 'textbooks/chemistry_12/alcohols_ethers_phenols/preparation_alcohols_hydrolysis_reduction.json',
+        description: 'Synthesis methods for alcohols'
+    },
+    {
+        id: 'chemistry12_alcohols_reactions',
+        title: '5.5 Alcohols Reactions',
+        path: 'textbooks/chemistry_12/alcohols_ethers_phenols/reactions_alcohols_oxidation_dehydration.json',
+        description: 'Oxidation and dehydration reactions'
+    },
+    {
+        id: 'chemistry12_alcohols_conversion',
+        title: '5.6 Alcohols Conversion',
+        path: 'textbooks/chemistry_12/alcohols_ethers_phenols/conversion_alcohols_haloalkanes_esters.json',
+        description: 'Functional group interconversion'
+    },
+    {
+        id: 'chemistry12_ethers',
+        title: '5.7 Ethers',
+        path: 'textbooks/chemistry_12/alcohols_ethers_phenols/nomenclature_properties_synthesis_ethers.json',
+        description: 'Ether properties and synthesis'
+    },
+    {
+        id: 'chemistry12_ethers_reactions',
+        title: '5.8 Ethers Reactions',
+        path: 'textbooks/chemistry_12/alcohols_ethers_phenols/reactions_ethers_cleavage_epoxide_ring_opening.json',
+        description: 'Ether cleavage and epoxide chemistry'
+    },
+    {
+        id: 'chemistry12_phenols',
+        title: '5.9 Phenols',
+        path: 'textbooks/chemistry_12/alcohols_ethers_phenols/structure_acidity_preparation_phenols.json',
+        description: 'Phenol structure and properties'
+    },
+    {
+        id: 'chemistry12_phenols_reactions',
+        title: '5.10 Phenols Reactions',
+        path: 'textbooks/chemistry_12/alcohols_ethers_phenols/electrophilic_aromatic_substitution_phenols.json',
+        description: 'Electrophilic substitution in phenols'
+    }
+],
+
+'chemistry12-unit6': [
+    {
+        id: 'chemistry12_carbonyl_structure',
+        title: '6.1 Carbonyl Structure',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_i_aldehydes_ketones/structure_nomenclature_aldehydes_ketones.json',
+        description: 'Aldehyde and ketone fundamentals'
+    },
+    {
+        id: 'chemistry12_carbonyl_properties',
+        title: '6.2 Carbonyl Properties',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_i_aldehydes_ketones/physical_properties_bonding_carbonyls.json',
+        description: 'Physical properties and bonding'
+    },
+    {
+        id: 'chemistry12_nucleophilic_addition',
+        title: '6.3 Nucleophilic Addition',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_i_aldehydes_ketones/nucleophilic_addition_core_carbonyl_mechanism.json',
+        description: 'Core carbonyl reaction mechanism'
+    },
+    {
+        id: 'chemistry12_hydrate_formation',
+        title: '6.4 Hydrate Formation',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_i_aldehydes_ketones/addition_water_hydrate_formation.json',
+        description: 'Water addition to carbonyls'
+    },
+    {
+        id: 'chemistry12_acetal_formation',
+        title: '6.5 Acetal Formation',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_i_aldehydes_ketones/addition_alcohols_acetal_ketal_formation.json',
+        description: 'Acetal and ketal chemistry'
+    },
+    {
+        id: 'chemistry12_cyanohydrin_formation',
+        title: '6.6 Cyanohydrin Formation',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_i_aldehydes_ketones/addition_hydrogen_cyanide_cyanohydrin_formation.json',
+        description: 'HCN addition reactions'
+    },
+    {
+        id: 'chemistry12_oxidation_reduction',
+        title: '6.7 Oxidation & Reduction',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_i_aldehydes_ketones/oxidation_reduction_reactions.json',
+        description: 'Redox reactions of carbonyls'
+    },
+    {
+        id: 'chemistry12_aldehyde_tests',
+        title: '6.8 Aldehyde Tests',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_i_aldehydes_ketones/tests_aldehydes_tollens_fehling_reagents.json',
+        description: 'Qualitative tests for aldehydes'
+    },
+    {
+        id: 'chemistry12_carbonyl_preparation',
+        title: '6.9 Carbonyl Preparation',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_i_aldehydes_ketones/preparation_aldehydes_ketones.json',
+        description: 'Synthesis methods'
+    },
+    {
+        id: 'chemistry12_grignard_alcohols',
+        title: '6.10 Grignard to Alcohols',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_i_aldehydes_ketones/use_grignard_reagents_form_alcohols.json',
+        description: 'Alcohol synthesis via Grignard'
+    }
+],
+
+'chemistry12-unit7': [
+    {
+        id: 'chemistry12_carboxylic_acids',
+        title: '7.1 Carboxylic Acids',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_ii_carboxylic_acids_derivatives/structure_nomenclature_acidity_carboxylic_acids.json',
+        description: 'Acid structure and properties'
+    },
+    {
+        id: 'chemistry12_acids_preparation',
+        title: '7.2 Acids Preparation',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_ii_carboxylic_acids_derivatives/preparation_carboxylic_acids_oxidation_hydrolysis.json',
+        description: 'Synthesis of carboxylic acids'
+    },
+    {
+        id: 'chemistry12_acids_reactions',
+        title: '7.3 Acids Reactions',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_ii_carboxylic_acids_derivatives/reactions_carboxylic_acids_esterification_salt_formation.json',
+        description: 'Esterification and salt formation'
+    },
+    {
+        id: 'chemistry12_acid_derivatives',
+        title: '7.4 Acid Derivatives',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_ii_carboxylic_acids_derivatives/structure_nomenclature_acid_derivatives.json',
+        description: 'Derivative types and naming'
+    },
+    {
+        id: 'chemistry12_derivatives_reactivity',
+        title: '7.5 Derivatives Reactivity',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_ii_carboxylic_acids_derivatives/relative_reactivity_carboxylic_acid_derivatives.json',
+        description: 'Reactivity trends in derivatives'
+    },
+    {
+        id: 'chemistry12_acyl_substitution',
+        title: '7.6 Acyl Substitution',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_ii_carboxylic_acids_derivatives/nucleophilic_acyl_substitution_core_mechanism.json',
+        description: 'Core mechanism for derivatives'
+    },
+    {
+        id: 'chemistry12_hydrolysis',
+        title: '7.7 Hydrolysis',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_ii_carboxylic_acids_derivatives/hydrolysis_esters_amides.json',
+        description: 'Ester and amide hydrolysis'
+    },
+    {
+        id: 'chemistry12_ester_amide_synthesis',
+        title: '7.8 Ester & Amide Synthesis',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_ii_carboxylic_acids_derivatives/transesterification_amide_synthesis.json',
+        description: 'Synthesis methods for derivatives'
+    },
+    {
+        id: 'chemistry12_condensation_polymers',
+        title: '7.9 Condensation Polymers',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_ii_carboxylic_acids_derivatives/polyesters_polyamides_condensation_polymers.json',
+        description: 'Polymer formation mechanisms'
+    },
+    {
+        id: 'chemistry12_lipids_saponification',
+        title: '7.10 Lipids & Saponification',
+        path: 'textbooks/chemistry_12/carbonyl_compounds_ii_carboxylic_acids_derivatives/fats_oils_triglycerides_saponification.json',
+        description: 'Fats, oils, and soap making'
+    }
+],
+
+'chemistry12-unit8': [
+    {
+        id: 'chemistry12_chromatography_principles',
+        title: '8.1 Chromatography Principles',
+        path: 'textbooks/chemistry_12/analytical_techniques_polymers/principles_chromatography_stationary_mobile_phases.json',
+        description: 'Separation technique fundamentals'
+    },
+    {
+        id: 'chemistry12_tlc_analysis',
+        title: '8.2 TLC Analysis',
+        path: 'textbooks/chemistry_12/analytical_techniques_polymers/thin_layer_chromatography_tlc_rf_values_analysis.json',
+        description: 'Thin layer chromatography'
+    },
+    {
+        id: 'chemistry12_gc_hplc',
+        title: '8.3 GC & HPLC',
+        path: 'textbooks/chemistry_12/analytical_techniques_polymers/gas_chromatography_gc_hplc.json',
+        description: 'Advanced chromatography methods'
+    },
+    {
+        id: 'chemistry12_ir_spectroscopy',
+        title: '8.4 IR Spectroscopy',
+        path: 'textbooks/chemistry_12/analytical_techniques_polymers/infrared_ir_spectroscopy_identifying_functional_groups.json',
+        description: 'Functional group identification'
+    },
+    {
+        id: 'chemistry12_mass_spectrometry',
+        title: '8.5 Mass Spectrometry',
+        path: 'textbooks/chemistry_12/analytical_techniques_polymers/mass_spectrometry_molecular_mass_fragmentation.json',
+        description: 'Molecular mass determination'
+    },
+    {
+        id: 'chemistry12_nmr_spectroscopy',
+        title: '8.6 NMR Spectroscopy',
+        path: 'textbooks/chemistry_12/analytical_techniques_polymers/introduction_nmr_spectroscopy.json',
+        description: 'Nuclear magnetic resonance basics'
+    },
+    {
+        id: 'chemistry12_addition_polymerization',
+        title: '8.7 Addition Polymerization',
+        path: 'textbooks/chemistry_12/analytical_techniques_polymers/addition_polymerization_mechanism_examples.json',
+        description: 'Chain-growth polymers'
+    },
+    {
+        id: 'chemistry12_condensation_polymerization',
+        title: '8.8 Condensation Polymerization',
+        path: 'textbooks/chemistry_12/analytical_techniques_polymers/condensation_polymerization_mechanism_examples.json',
+        description: 'Step-growth polymers'
+    },
+    {
+        id: 'chemistry12_polymer_properties',
+        title: '8.9 Polymer Properties',
+        path: 'textbooks/chemistry_12/analytical_techniques_polymers/structure_property_relationships_polymers.json',
+        description: 'Structure-property relationships'
+    },
+    {
+        id: 'chemistry12_polymer_environment',
+        title: '8.10 Polymer Environment',
+        path: 'textbooks/chemistry_12/analytical_techniques_polymers/environmental_issues_plastic_recycling_biodegradability.json',
+        description: 'Environmental impact and recycling'
+    }
+],
+
+'chemistry12-unit9': [
+    {
+        id: 'chemistry12_redox_review',
+        title: '9.1 Redox Review',
+        path: 'textbooks/chemistry_12/electrochemistry_redox_applications/review_redox_oxidation_numbers_half_reactions.json',
+        description: 'Redox fundamentals review'
+    },
+    {
+        id: 'chemistry12_electrode_potentials',
+        title: '9.2 Electrode Potentials',
+        path: 'textbooks/chemistry_12/electrochemistry_redox_applications/standard_electrode_potentials_emf_series.json',
+        description: 'Standard reduction potentials'
+    },
+    {
+        id: 'chemistry12_cell_potential',
+        title: '9.3 Cell Potential',
+        path: 'textbooks/chemistry_12/electrochemistry_redox_applications/calculating_cell_potential_standard_conditions.json',
+        description: 'EMF calculations'
+    },
+    {
+        id: 'chemistry12_nernst_equation',
+        title: '9.4 Nernst Equation',
+        path: 'textbooks/chemistry_12/electrochemistry_redox_applications/nernst_equation_non_standard_conditions.json',
+        description: 'Non-standard conditions'
+    },
+    {
+        id: 'chemistry12_thermodynamics_relationship',
+        title: '9.5 Thermodynamics Relationship',
+        path: 'textbooks/chemistry_12/electrochemistry_redox_applications/relationship_ecell_deltag_equilibrium_constant.json',
+        description: 'EMF and thermodynamics connection'
+    },
+    {
+        id: 'chemistry12_batteries',
+        title: '9.6 Batteries',
+        path: 'textbooks/chemistry_12/electrochemistry_redox_applications/primary_secondary_cells_batteries_principles_examples.json',
+        description: 'Battery types and principles'
+    },
+    {
+        id: 'chemistry12_fuel_cells',
+        title: '9.7 Fuel Cells',
+        path: 'textbooks/chemistry_12/electrochemistry_redox_applications/fuel_cells_construction_operation.json',
+        description: 'Fuel cell technology'
+    },
+    {
+        id: 'chemistry12_corrosion',
+        title: '9.8 Corrosion',
+        path: 'textbooks/chemistry_12/electrochemistry_redox_applications/corrosion_electrochemistry_rusting_prevention.json',
+        description: 'Electrochemical corrosion'
+    },
+    {
+        id: 'chemistry12_electrolysis',
+        title: '9.9 Electrolysis',
+        path: 'textbooks/chemistry_12/electrochemistry_redox_applications/electrolysis_molten_salts_aqueous_solutions.json',
+        description: 'Electrolytic processes'
+    },
+    {
+        id: 'chemistry12_faradays_laws',
+        title: '9.10 Faraday\'s Laws',
+        path: 'textbooks/chemistry_12/electrochemistry_redox_applications/faradays_laws_electrolysis_quantitative_calculations.json',
+        description: 'Quantitative electrolysis'
+    }
+],
+
+'chemistry12-unit10': [
+    {
+        id: 'chemistry12_thermodynamics_fundamentals',
+        title: '10.1 Thermodynamics Fundamentals',
+        path: 'textbooks/chemistry_12/chemical_thermodynamics/state_functions_first_law_thermodynamics.json',
+        description: 'State functions and first law'
+    },
+    {
+        id: 'chemistry12_enthalpy_changes',
+        title: '10.2 Enthalpy Changes',
+        path: 'textbooks/chemistry_12/chemical_thermodynamics/enthalpy_changes_calorimetry_standard_enthalpies.json',
+        description: 'Heat measurement and enthalpy'
+    },
+    {
+        id: 'chemistry12_hesss_law',
+        title: '10.3 Hess\'s Law',
+        path: 'textbooks/chemistry_12/chemical_thermodynamics/hesss_law_enthalpy_cycles.json',
+        description: 'Enthalpy cycle calculations'
+    },
+    {
+        id: 'chemistry12_bond_enthalpy',
+        title: '10.4 Bond Enthalpy',
+        path: 'textbooks/chemistry_12/chemical_thermodynamics/bond_enthalpy_calculations.json',
+        description: 'Bond energy calculations'
+    },
+    {
+        id: 'chemistry12_entropy',
+        title: '10.5 Entropy',
+        path: 'textbooks/chemistry_12/chemical_thermodynamics/entropy_measure_of_disorder.json',
+        description: 'Entropy concept and measurement'
+    },
+    {
+        id: 'chemistry12_entropy_predictions',
+        title: '10.6 Entropy Predictions',
+        path: 'textbooks/chemistry_12/chemical_thermodynamics/predicting_sign_entropy_change.json',
+        description: 'Predicting entropy changes'
+    },
+    {
+        id: 'chemistry12_gibbs_free_energy',
+        title: '10.7 Gibbs Free Energy',
+        path: 'textbooks/chemistry_12/chemical_thermodynamics/gibbs_free_energy_criterion_spontaneity.json',
+        description: 'Spontaneity criterion'
+    },
+    {
+        id: 'chemistry12_gibbs_calculations',
+        title: '10.8 Gibbs Calculations',
+        path: 'textbooks/chemistry_12/chemical_thermodynamics/calculating_deltag_from_deltah_deltas.json',
+        description: 'Free energy calculations'
+    },
+    {
+        id: 'chemistry12_equilibrium_relationship',
+        title: '10.9 Equilibrium Relationship',
+        path: 'textbooks/chemistry_12/chemical_thermodynamics/relationship_deltag_equilibrium_constant.json',
+        description: 'Free energy and equilibrium'
+    },
+    {
+        id: 'chemistry12_temperature_dependence',
+        title: '10.10 Temperature Dependence',
+        path: 'textbooks/chemistry_12/chemical_thermodynamics/temperature_dependence_spontaneity.json',
+        description: 'Temperature effects on spontaneity'
+    }
+],
+
+'chemistry12-unit11': [
+    {
+        id: 'chemistry12_bronsted_lowry',
+        title: '11.1 Brønsted-Lowry Theory',
+        path: 'textbooks/chemistry_12/acid_base_solution_equilibria/bronsted_lowry_acids_bases_conjugate_pairs.json',
+        description: 'Acid-base definitions'
+    },
+    {
+        id: 'chemistry12_ph_scale',
+        title: '11.2 pH Scale',
+        path: 'textbooks/chemistry_12/acid_base_solution_equilibria/ph_scale_autoionization_water_kw.json',
+        description: 'pH and water autoionization'
+    },
+    {
+        id: 'chemistry12_strong_weak_acids',
+        title: '11.3 Strong & Weak Acids',
+        path: 'textbooks/chemistry_12/acid_base_solution_equilibria/strong_weak_acids_bases_ka_kb.json',
+        description: 'Acid/base strength and constants'
+    },
+    {
+        id: 'chemistry12_weak_acid_calculations',
+        title: '11.4 Weak Acid Calculations',
+        path: 'textbooks/chemistry_12/acid_base_solution_equilibria/calculating_ph_weak_acid_weak_base_solutions.json',
+        description: 'pH calculations for weak acids/bases'
+    },
+    {
+        id: 'chemistry12_polyprotic_acids',
+        title: '11.5 Polyprotic Acids',
+        path: 'textbooks/chemistry_12/acid_base_solution_equilibria/polyprotic_acids_stepwise_dissociation.json',
+        description: 'Multiple proton donation'
+    },
+    {
+        id: 'chemistry12_buffers',
+        title: '11.6 Buffers',
+        path: 'textbooks/chemistry_12/acid_base_solution_equilibria/common_ion_effect_buffers_henderson_hasselbalch.json',
+        description: 'Buffer solutions and calculations'
+    },
+    {
+        id: 'chemistry12_buffer_capacity',
+        title: '11.7 Buffer Capacity',
+        path: 'textbooks/chemistry_12/acid_base_solution_equilibria/buffer_capacity_preparation_buffer_solutions.json',
+        description: 'Buffer preparation and capacity'
+    },
+    {
+        id: 'chemistry12_titration_curves',
+        title: '11.8 Titration Curves',
+        path: 'textbooks/chemistry_12/acid_base_solution_equilibria/acid_base_titration_curves_strong_weak.json',
+        description: 'Titration curve analysis'
+    },
+    {
+        id: 'chemistry12_indicators',
+        title: '11.9 Indicators',
+        path: 'textbooks/chemistry_12/acid_base_solution_equilibria/titration_curves_selection_indicators.json',
+        description: 'Indicator selection and use'
+    },
+    {
+        id: 'chemistry12_solubility_equilibria',
+        title: '11.10 Solubility Equilibria',
+        path: 'textbooks/chemistry_12/acid_base_solution_equilibria/solubility_equilibria_solubility_product_constant_ksp.json',
+        description: 'Ksp and precipitation'
+    }
+],
+
+'chemistry12-unit12': [
+    {
+        id: 'chemistry12_rate_laws',
+        title: '12.1 Rate Laws',
+        path: 'textbooks/chemistry_12/advanced_kinetics_coordination_chemistry/determining_rate_laws_experimental_data.json',
+        description: 'Experimental determination of rates'
+    },
+    {
+        id: 'chemistry12_integrated_rate_laws',
+        title: '12.2 Integrated Rate Laws',
+        path: 'textbooks/chemistry_12/advanced_kinetics_coordination_chemistry/integrated_rate_laws_first_second_order.json',
+        description: 'First and second order kinetics'
+    },
+    {
+        id: 'chemistry12_reaction_mechanisms',
+        title: '12.3 Reaction Mechanisms',
+        path: 'textbooks/chemistry_12/advanced_kinetics_coordination_chemistry/reaction_mechanisms_elementary_steps_rate_determining.json',
+        description: 'Mechanism analysis'
+    },
+    {
+        id: 'chemistry12_arrhenius_equation',
+        title: '12.4 Arrhenius Equation',
+        path: 'textbooks/chemistry_12/advanced_kinetics_coordination_chemistry/arrhenius_equation_determining_activation_energy.json',
+        description: 'Temperature dependence of rates'
+    },
+    {
+        id: 'chemistry12_catalysis',
+        title: '12.5 Catalysis',
+        path: 'textbooks/chemistry_12/advanced_kinetics_coordination_chemistry/catalysis_homogeneous_heterogeneous_enzymes.json',
+        description: 'Catalyst types and mechanisms'
+    },
+    {
+        id: 'chemistry12_transition_metals',
+        title: '12.6 Transition Metals',
+        path: 'textbooks/chemistry_12/advanced_kinetics_coordination_chemistry/introduction_transition_metals_electronic_configurations.json',
+        description: 'Transition metal properties'
+    },
+    {
+        id: 'chemistry12_coordination_compounds',
+        title: '12.7 Coordination Compounds',
+        path: 'textbooks/chemistry_12/advanced_kinetics_coordination_chemistry/coordination_compounds_ligands_coordination_number.json',
+        description: 'Coordination chemistry basics'
+    },
+    {
+        id: 'chemistry12_coordination_nomenclature',
+        title: '12.8 Coordination Nomenclature',
+        path: 'textbooks/chemistry_12/advanced_kinetics_coordination_chemistry/iupac_nomenclature_coordination_compounds.json',
+        description: 'Naming coordination compounds'
+    },
+    {
+        id: 'chemistry12_coordination_isomerism',
+        title: '12.9 Coordination Isomerism',
+        path: 'textbooks/chemistry_12/advanced_kinetics_coordination_chemistry/isomerism_coordination_compounds_structural_stereo.json',
+        description: 'Isomerism in complexes'
+    },
+    {
+        id: 'chemistry12_crystal_field_theory',
+        title: '12.10 Crystal Field Theory',
+        path: 'textbooks/chemistry_12/advanced_kinetics_coordination_chemistry/crystal_field_theory_splitting_d_orbitals.json',
+        description: 'Crystal field splitting'
+    }
+],
+
+'chemistry12-unit13': [
+    {
+        id: 'chemistry12_nuclear_stability',
+        title: '13.1 Nuclear Stability',
+        path: 'textbooks/chemistry_12/nuclear_chemistry_organic_mechanisms_review/stability_nucleus_neutron_proton_ratio.json',
+        description: 'Nuclear stability factors'
+    },
+    {
+        id: 'chemistry12_radioactive_decay',
+        title: '13.2 Radioactive Decay',
+        path: 'textbooks/chemistry_12/nuclear_chemistry_organic_mechanisms_review/types_radioactive_decay_alpha_beta_gamma.json',
+        description: 'Decay types and mechanisms'
+    },
+    {
+        id: 'chemistry12_nuclear_equations',
+        title: '13.3 Nuclear Equations',
+        path: 'textbooks/chemistry_12/nuclear_chemistry_organic_mechanisms_review/writing_balancing_nuclear_equations.json',
+        description: 'Balancing nuclear reactions'
+    },
+    {
+        id: 'chemistry12_decay_kinetics',
+        title: '13.4 Decay Kinetics',
+        path: 'textbooks/chemistry_12/nuclear_chemistry_organic_mechanisms_review/kinetics_radioactive_decay_half_life_calculations.json',
+        description: 'Half-life calculations'
+    },
+    {
+        id: 'chemistry12_radioactive_dating',
+        title: '13.5 Radioactive Dating',
+        path: 'textbooks/chemistry_12/nuclear_chemistry_organic_mechanisms_review/radioactive_dating_methods_carbon_14.json',
+        description: 'Dating methods and applications'
+    },
+    {
+        id: 'chemistry12_nuclear_energy',
+        title: '13.6 Nuclear Energy',
+        path: 'textbooks/chemistry_12/nuclear_chemistry_organic_mechanisms_review/nuclear_fission_fusion_processes_applications.json',
+        description: 'Fission and fusion processes'
+    },
+    {
+        id: 'chemistry12_medical_isotopes',
+        title: '13.7 Medical Isotopes',
+        path: 'textbooks/chemistry_12/nuclear_chemistry_organic_mechanisms_review/medical_applications_radioisotopes.json',
+        description: 'Medical applications of radioactivity'
+    },
+    {
+        id: 'chemistry12_organic_mechanisms_review',
+        title: '13.8 Organic Mechanisms Review',
+        path: 'textbooks/chemistry_12/nuclear_chemistry_organic_mechanisms_review/review_core_organic_mechanisms.json',
+        description: 'Comprehensive mechanism review'
+    },
+    {
+        id: 'chemistry12_synthesis_planning',
+        title: '13.9 Synthesis Planning',
+        path: 'textbooks/chemistry_12/nuclear_chemistry_organic_mechanisms_review/multi_step_organic_synthesis_planning_strategy.json',
+        description: 'Multi-step synthesis strategies'
+    },
+    {
+        id: 'chemistry12_comprehensive_review',
+        title: '13.10 Comprehensive Review',
+        path: 'textbooks/chemistry_12/nuclear_chemistry_organic_mechanisms_review/end_of_year_comprehensive_review_exam_preparation.json',
+        description: 'Final exam preparation'
     }
 ],
         
@@ -21221,6 +22098,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
