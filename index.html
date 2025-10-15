@@ -4263,6 +4263,7 @@ function loadTextbookContent() {
     const isAlgebra1 = currentCourseId === 'algebra-1';
     const isAlgebra2 = currentCourseId === 'algebra-2';
     const isGeometry = currentCourseId === 'geometry';
+    const isChemistry10 = currentCourseId === 'chemistry-10';
     
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
@@ -4280,6 +4281,7 @@ function loadTextbookContent() {
                      isAlgebra1 ? 'Algebra 1 Textbook' :
                      isAlgebra2 ? 'Algebra 2 Textbook' :
                      isGeometry ? 'Geometry Textbook' :
+                     ischemistry10 ? 'Chemistry Grade 10 Textbook' :
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4329,6 +4331,44 @@ function loadTextbookContent() {
                                     Unit 10: Modern Physics Introduction
                                 </button>
 
+
+` : isChemistry10 ? `
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit1')">
+        Unit 1: Introduction to Chemistry & Lab Safety
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit2')">
+        Unit 2: Properties & States of Matter
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit3')">
+        Unit 3: Atomic Structure & The Nucleus
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit4')">
+        Unit 4: The Periodic Table & Periodicity
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit5')">
+        Unit 5: Chemical Bonding I: Ionic & Metallic
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit6')">
+        Unit 6: Chemical Bonding II: Covalent & Intermolecular Forces
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit7')">
+        Unit 7: Chemical Reactions & Equations
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit8')">
+        Unit 8: The Mole Concept & Stoichiometry
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit9')">
+        Unit 9: Acids, Bases & Salts
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit10')">
+        Unit 10: Chemical Energetics & Reaction Rates
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit11' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit11')">
+        Unit 11: Water, Solutions & Environmental Chemistry
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit12' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit12')">
+        Unit 12: Review, Applications & Final Assessment
+    </button>
 
 ` : isGeometry ? `
     <button class="unit-btn ${currentTextbookUnit === 'geometry-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('geometry-unit1')">
@@ -4917,6 +4957,20 @@ function getCurrentUnitName() {
 'physics10-unit9': 'Unit 9: Static & Current Electricity',
 'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
 
+// Add to getCurrentUnitName function
+'chemistry10-unit1': 'Unit 1: Introduction to Chemistry & Lab Safety',
+'chemistry10-unit2': 'Unit 2: Properties & States of Matter',
+'chemistry10-unit3': 'Unit 3: Atomic Structure & The Nucleus',
+'chemistry10-unit4': 'Unit 4: The Periodic Table & Periodicity',
+'chemistry10-unit5': 'Unit 5: Chemical Bonding I: Ionic & Metallic',
+'chemistry10-unit6': 'Unit 6: Chemical Bonding II: Covalent & Intermolecular Forces',
+'chemistry10-unit7': 'Unit 7: Chemical Reactions & Equations',
+'chemistry10-unit8': 'Unit 8: The Mole Concept & Stoichiometry',
+'chemistry10-unit9': 'Unit 9: Acids, Bases & Salts',
+'chemistry10-unit10': 'Unit 10: Chemical Energetics & Reaction Rates',
+'chemistry10-unit11': 'Unit 11: Water, Solutions & Environmental Chemistry',
+'chemistry10-unit12': 'Unit 12: Review, Applications & Final Assessment',
+    
         // Add to getCurrentUnitName function
 'geometry-unit1': 'Unit 1: Foundations of Geometry',
 'geometry-unit2': 'Unit 2: Reasoning and Proof',
@@ -5834,6 +5888,512 @@ function loadTextbookSections() {
         }
     ],
 
+
+        // Add to the unitSections object in the loadTextbookSections function
+'chemistry10-unit1': [
+    {
+        id: 'chemistry10_what_is_chemistry',
+        title: '1.1 What is Chemistry: Study of Matter',
+        path: 'textbooks/chemistry_10/introduction_to_chemistry_lab_safety/what_is_chemistry_study_of_matter.json',
+        description: 'Introduction to chemistry and matter'
+    },
+    {
+        id: 'chemistry10_scientific_method',
+        title: '1.2 Scientific Method in Chemistry',
+        path: 'textbooks/chemistry_10/introduction_to_chemistry_lab_safety/scientific_method_in_chemistry.json',
+        description: 'Applying scientific method to chemical investigations'
+    },
+    {
+        id: 'chemistry10_lab_safety_rules',
+        title: '1.3 Laboratory Safety Rules and Procedures',
+        path: 'textbooks/chemistry_10/introduction_to_chemistry_lab_safety/laboratory_safety_rules_and_procedures.json',
+        description: 'Essential safety protocols for chemistry labs'
+    },
+    {
+        id: 'chemistry10_lab_equipment',
+        title: '1.4 Common Lab Equipment and Their Uses',
+        path: 'textbooks/chemistry_10/introduction_to_chemistry_lab_safety/common_lab_equipment_and_their_uses.json',
+        description: 'Identifying and using laboratory apparatus'
+    },
+    {
+        id: 'chemistry10_hazard_symbols',
+        title: '1.5 Hazard Symbols and Chemical Safety',
+        path: 'textbooks/chemistry_10/introduction_to_chemistry_lab_safety/hazard_symbols_and_chemical_safety.json',
+        description: 'Understanding chemical hazard warnings'
+    },
+    {
+        id: 'chemistry10_measuring_volume',
+        title: '1.6 Measuring Volume: Graduated Cylinders, Beakers, Flasks',
+        path: 'textbooks/chemistry_10/introduction_to_chemistry_lab_safety/measuring_volume_graduated_cylinders_beakers_flasks.json',
+        description: 'Volume measurement techniques'
+    },
+    {
+        id: 'chemistry10_measuring_mass',
+        title: '1.7 Measuring Mass Using Electronic Balance',
+        path: 'textbooks/chemistry_10/introduction_to_chemistry_lab_safety/measuring_mass_using_an_electronic_balance.json',
+        description: 'Precise mass measurement methods'
+    },
+    {
+        id: 'chemistry10_heating_techniques',
+        title: '1.8 Heating Techniques: Bunsen Burners and Hot Plates',
+        path: 'textbooks/chemistry_10/introduction_to_chemistry_lab_safety/heating_techniques_bunsen_burners_and_hot_plates.json',
+        description: 'Safe heating procedures in the lab'
+    },
+    {
+        id: 'chemistry10_lab_report_writing',
+        title: '1.9 Lab Report Writing and Data Recording',
+        path: 'textbooks/chemistry_10/introduction_to_chemistry_lab_safety/lab_report_writing_and_data_recording.json',
+        description: 'Documenting experiments and results'
+    },
+    {
+        id: 'chemistry10_first_aid_emergency',
+        title: '1.10 First Aid and Emergency Procedures in the Lab',
+        path: 'textbooks/chemistry_10/introduction_to_chemistry_lab_safety/first_aid_and_emergency_procedures_in_the_lab.json',
+        description: 'Emergency response and first aid protocols'
+    }
+],
+
+'chemistry10-unit2': [
+    {
+        id: 'chemistry10_definition_matter',
+        title: '2.1 Definition of Matter and Physical Properties',
+        path: 'textbooks/chemistry_10/properties_states_of_matter/definition_of_matter_and_physical_properties.json',
+        description: 'Fundamental properties of matter'
+    },
+    {
+        id: 'chemistry10_chemical_properties',
+        title: '2.2 Chemical Properties and Changes',
+        path: 'textbooks/chemistry_10/properties_states_of_matter/chemical_properties_and_changes.json',
+        description: 'Chemical characteristics and transformations'
+    },
+    {
+        id: 'chemistry10_three_states_matter',
+        title: '2.3 Three States of Matter: Solid, Liquid, Gas',
+        path: 'textbooks/chemistry_10/properties_states_of_matter/three_states_of_matter_solid_liquid_gas.json',
+        description: 'Characteristics of different states of matter'
+    },
+    {
+        id: 'chemistry10_changes_of_state',
+        title: '2.4 Changes of State: Melting, Freezing, Vaporization, Condensation',
+        path: 'textbooks/chemistry_10/properties_states_of_matter/changes_of_state_melting_freezing_vaporization_condensation.json',
+        description: 'Phase transitions and energy changes'
+    },
+    {
+        id: 'chemistry10_gas_laws_intro',
+        title: '2.5 Gas Laws Introduction: Pressure, Volume, Temperature',
+        path: 'textbooks/chemistry_10/properties_states_of_matter/gas_laws_introduction_pressure_volume_temperature.json',
+        description: 'Basic gas behavior principles'
+    },
+    {
+        id: 'chemistry10_mixtures_vs_pure',
+        title: '2.6 Mixtures vs Pure Substances',
+        path: 'textbooks/chemistry_10/properties_states_of_matter/mixtures_vs_pure_substances.json',
+        description: 'Classifying matter by composition'
+    },
+    {
+        id: 'chemistry10_homogeneous_heterogeneous',
+        title: '2.7 Homogeneous and Heterogeneous Mixtures',
+        path: 'textbooks/chemistry_10/properties_states_of_matter/homogeneous_and_heterogeneous_mixtures.json',
+        description: 'Types of mixtures and their properties'
+    },
+    {
+        id: 'chemistry10_separation_filtration_evaporation',
+        title: '2.8 Separation Techniques: Filtration and Evaporation',
+        path: 'textbooks/chemistry_10/properties_states_of_matter/separation_techniques_filtration_and_evaporation.json',
+        description: 'Basic separation methods'
+    },
+    {
+        id: 'chemistry10_separation_distillation_chromatography',
+        title: '2.9 Separation Techniques: Distillation and Chromatography',
+        path: 'textbooks/chemistry_10/properties_states_of_matter/separation_techniques_distillation_and_chromatography.json',
+        description: 'Advanced separation techniques'
+    },
+    {
+        id: 'chemistry10_separation_magnetism_decanting',
+        title: '2.10 Separation Techniques: Magnetism and Decanting',
+        path: 'textbooks/chemistry_10/properties_states_of_matter/separation_techniques_magnetism_and_decanting.json',
+        description: 'Physical separation methods'
+    }
+],
+
+'chemistry10-unit3': [
+    {
+        id: 'chemistry10_history_atom',
+        title: '3.1 History of the Atom: Dalton, Thomson, Rutherford',
+        path: 'textbooks/chemistry_10/atomic_structure_the_nucleus/history_of_the_atom_dalton_thomson_rutherford.json',
+        description: 'Evolution of atomic theory'
+    },
+    {
+        id: 'chemistry10_subatomic_particles',
+        title: '3.2 Subatomic Particles: Protons, Neutrons, Electrons',
+        path: 'textbooks/chemistry_10/atomic_structure_the_nucleus/subatomic_particles_protons_neutrons_electrons.json',
+        description: 'Fundamental particles of atoms'
+    },
+    {
+        id: 'chemistry10_atomic_number_mass',
+        title: '3.3 Atomic Number and Mass Number',
+        path: 'textbooks/chemistry_10/atomic_structure_the_nucleus/atomic_number_and_mass_number.json',
+        description: 'Identifying elements and isotopes'
+    },
+    {
+        id: 'chemistry10_isotopes_atomic_mass',
+        title: '3.4 Isotopes and Atomic Mass',
+        path: 'textbooks/chemistry_10/atomic_structure_the_nucleus/isotopes_and_atomic_mass.json',
+        description: 'Variations in atomic structure'
+    },
+    {
+        id: 'chemistry10_bohr_model',
+        title: '3.5 Bohr Model of the Atom',
+        path: 'textbooks/chemistry_10/atomic_structure_the_nucleus/bohr_model_of_the_atom.json',
+        description: 'Early quantum atomic model'
+    },
+    {
+        id: 'chemistry10_electron_configuration_intro',
+        title: '3.6 Introduction to Electron Configuration',
+        path: 'textbooks/chemistry_10/atomic_structure_the_nucleus/introduction_to_electron_configuration.json',
+        description: 'Electron arrangement in atoms'
+    },
+    {
+        id: 'chemistry10_quantum_mechanical_model',
+        title: '3.7 Modern Quantum Mechanical Model',
+        path: 'textbooks/chemistry_10/atomic_structure_the_nucleus/modern_quantum_mechanical_model.json',
+        description: 'Current understanding of atomic structure'
+    },
+    {
+        id: 'chemistry10_radioactivity',
+        title: '3.8 Radioactivity: Alpha, Beta, Gamma Decay',
+        path: 'textbooks/chemistry_10/atomic_structure_the_nucleus/radioactivity_alpha_beta_gamma_decay.json',
+        description: 'Types of radioactive decay'
+    },
+    {
+        id: 'chemistry10_nuclear_fission_fusion',
+        title: '3.9 Nuclear Fission and Fusion',
+        path: 'textbooks/chemistry_10/atomic_structure_the_nucleus/nuclear_fission_and_fusion.json',
+        description: 'Nuclear reactions and energy'
+    },
+    {
+        id: 'chemistry10_radioactive_isotopes_applications',
+        title: '3.10 Applications and Dangers of Radioactive Isotopes',
+        path: 'textbooks/chemistry_10/atomic_structure_the_nucleus/applications_and_dangers_of_radioactive_isotopes.json',
+        description: 'Practical uses and risks of radioactivity'
+    }
+],
+
+'chemistry10-unit4': [
+    {
+        id: 'chemistry10_development_periodic_table',
+        title: '4.1 Development of Periodic Table: Mendeleev',
+        path: 'textbooks/chemistry_10/periodic_table_periodicity/development_of_periodic_table_mendeleev.json',
+        description: 'Historical development of periodic law'
+    },
+    {
+        id: 'chemistry10_organization_periodic_table',
+        title: '4.2 Organization of Modern Periodic Table',
+        path: 'textbooks/chemistry_10/periodic_table_periodicity/organization_of_modern_periodic_table.json',
+        description: 'Structure and arrangement of elements'
+    },
+    {
+        id: 'chemistry10_metals_nonmetals_metalloids',
+        title: '4.3 Metals, Nonmetals, and Metalloids',
+        path: 'textbooks/chemistry_10/periodic_table_periodicity/metals_nonmetals_and_metalloids.json',
+        description: 'Classification of elements by properties'
+    },
+    {
+        id: 'chemistry10_groups_families_periods',
+        title: '4.4 Groups, Families, and Periods',
+        path: 'textbooks/chemistry_10/periodic_table_periodicity/groups_families_and_periods.json',
+        description: 'Periodic table organization'
+    },
+    {
+        id: 'chemistry10_alkali_metals',
+        title: '4.5 Alkali Metals and Alkaline Earth Metals',
+        path: 'textbooks/chemistry_10/periodic_table_periodicity/alkali_metals_and_alkaline_earth_metals.json',
+        description: 'Group 1 and 2 elements'
+    },
+    {
+        id: 'chemistry10_halogens_noble_gases',
+        title: '4.6 Halogens and Noble Gases',
+        path: 'textbooks/chemistry_10/periodic_table_periodicity/halogens_and_noble_gases.json',
+        description: 'Group 17 and 18 elements'
+    },
+    {
+        id: 'chemistry10_transition_metals',
+        title: '4.7 Transition Metals and Inner Transition Metals',
+        path: 'textbooks/chemistry_10/periodic_table_periodicity/transition_metals_and_inner_transition_metals.json',
+        description: 'd-block and f-block elements'
+    },
+    {
+        id: 'chemistry10_periodic_trends_atomic_radius',
+        title: '4.8 Periodic Trends: Atomic Radius',
+        path: 'textbooks/chemistry_10/periodic_table_periodicity/periodic_trends_atomic_radius.json',
+        description: 'Size trends across the periodic table'
+    },
+    {
+        id: 'chemistry10_periodic_trends_ionization_energy',
+        title: '4.9 Periodic Trends: Ionization Energy and Electron Affinity',
+        path: 'textbooks/chemistry_10/periodic_table_periodicity/periodic_trends_ionization_energy_and_electron_affinity.json',
+        description: 'Energy trends in the periodic table'
+    },
+    {
+        id: 'chemistry10_periodic_trends_electronegativity',
+        title: '4.10 Periodic Trends: Electronegativity and Reactivity',
+        path: 'textbooks/chemistry_10/periodic_table_periodicity/periodic_trends_electronegativity_and_reactivity.json',
+        description: 'Bonding and reactivity trends'
+    }
+],
+
+'chemistry10-unit5': [
+    {
+        id: 'chemistry10_chemical_bonds_valence',
+        title: '5.1 Chemical Bonds and Valence Electrons',
+        path: 'textbooks/chemistry_10/chemical_bonding_ionic_metallic/chemical_bonds_and_valence_electrons.json',
+        description: 'Fundamentals of chemical bonding'
+    },
+    {
+        id: 'chemistry10_stable_electron_configurations',
+        title: '5.2 Stable Electron Configurations: Octet Rule',
+        path: 'textbooks/chemistry_10/chemical_bonding_ionic_metallic/stable_electron_configurations_octet_rule.json',
+        description: 'Achieving stable electron arrangements'
+    },
+    {
+        id: 'chemistry10_formation_positive_ions',
+        title: '5.3 Formation of Positive Ions (Cations)',
+        path: 'textbooks/chemistry_10/chemical_bonding_ionic_metallic/formation_of_positive_ions_cations.json',
+        description: 'Cation formation and properties'
+    },
+    {
+        id: 'chemistry10_formation_negative_ions',
+        title: '5.4 Formation of Negative Ions (Anions)',
+        path: 'textbooks/chemistry_10/chemical_bonding_ionic_metallic/formation_of_negative_ions_anions.json',
+        description: 'Anion formation and properties'
+    },
+    {
+        id: 'chemistry10_ionic_bonding_lattice',
+        title: '5.5 Ionic Bonding and Lattice Structures',
+        path: 'textbooks/chemistry_10/chemical_bonding_ionic_metallic/ionic_bonding_and_lattice_structures.json',
+        description: 'Ionic compound structure'
+    },
+    {
+        id: 'chemistry10_properties_ionic_compounds',
+        title: '5.6 Properties of Ionic Compounds',
+        path: 'textbooks/chemistry_10/chemical_bonding_ionic_metallic/properties_of_ionic_compounds.json',
+        description: 'Characteristics of ionic substances'
+    },
+    {
+        id: 'chemistry10_writing_ionic_formulas',
+        title: '5.7 Writing Formulas for Ionic Compounds',
+        path: 'textbooks/chemistry_10/chemical_bonding_ionic_metallic/writing_formulas_for_ionic_compounds.json',
+        description: 'Formula writing for ionic compounds'
+    },
+    {
+        id: 'chemistry10_naming_ionic_compounds',
+        title: '5.8 Naming Ionic Compounds',
+        path: 'textbooks/chemistry_10/chemical_bonding_ionic_metallic/naming_ionic_compounds.json',
+        description: 'Nomenclature for ionic compounds'
+    },
+    {
+        id: 'chemistry10_metallic_bonding',
+        title: '5.9 Metallic Bonding and Sea of Electrons Model',
+        path: 'textbooks/chemistry_10/chemical_bonding_ionic_metallic/metallic_bonding_and_sea_of_electrons_model.json',
+        description: 'Bonding in metals'
+    },
+    {
+        id: 'chemistry10_properties_metals',
+        title: '5.10 Properties of Metals: Malleability, Ductility, Conductivity',
+        path: 'textbooks/chemistry_10/chemical_bonding_ionic_metallic/properties_of_metals_malleability_ductility_conductivity.json',
+        description: 'Characteristic metallic properties'
+    }
+],
+
+'chemistry10-unit6': [
+    {
+        id: 'chemistry10_covalent_bond_formation',
+        title: '6.1 Covalent Bond Formation and Molecule Structure',
+        path: 'textbooks/chemistry_10/chemical_bonding_covalent_intermolecular/covalent_bond_formation_and_molecule_structure.json',
+        description: 'Sharing electrons in covalent bonds'
+    },
+    {
+        id: 'chemistry10_single_double_triple_bonds',
+        title: '6.2 Single, Double, Triple Covalent Bonds',
+        path: 'textbooks/chemistry_10/chemical_bonding_covalent_intermolecular/single_double_triple_covalent_bonds.json',
+        description: 'Types of covalent bonds'
+    },
+    {
+        id: 'chemistry10_naming_covalent_compounds',
+        title: '6.3 Naming Covalent Compounds and Molecular Formulas',
+        path: 'textbooks/chemistry_10/chemical_bonding_covalent_intermolecular/naming_covalent_compounds_and_molecular_formulas.json',
+        description: 'Nomenclature for molecular compounds'
+    },
+    {
+        id: 'chemistry10_lewis_dot_structures',
+        title: '6.4 Lewis Dot Structures for Molecules',
+        path: 'textbooks/chemistry_10/chemical_bonding_covalent_intermolecular/lewis_dot_structures_for_molecules.json',
+        description: 'Electron dot diagrams for molecules'
+    },
+    {
+        id: 'chemistry10_molecular_geometry_vsepr',
+        title: '6.5 Molecular Geometry and VSEPR Theory',
+        path: 'textbooks/chemistry_10/chemical_bonding_covalent_intermolecular/molecular_geometry_and_vsepr_theory.json',
+        description: 'Predicting molecular shapes'
+    },
+    {
+        id: 'chemistry10_polar_nonpolar_bonds',
+        title: '6.6 Polar and Nonpolar Covalent Bonds',
+        path: 'textbooks/chemistry_10/chemical_bonding_covalent_intermolecular/polar_and_nonpolar_covalent_bonds.json',
+        description: 'Bond polarity and electronegativity'
+    },
+    {
+        id: 'chemistry10_london_dispersion_forces',
+        title: '6.7 Intermolecular Forces: London Dispersion Forces',
+        path: 'textbooks/chemistry_10/chemical_bonding_covalent_intermolecular/intermolecular_forces_london_dispersion_forces.json',
+        description: 'Weakest intermolecular forces'
+    },
+    {
+        id: 'chemistry10_dipole_dipole_interactions',
+        title: '6.8 Intermolecular Forces: Dipole-Dipole Interactions',
+        path: 'textbooks/chemistry_10/chemical_bonding_covalent_intermolecular/intermolecular_forces_dipole_dipole_interactions.json',
+        description: 'Polar molecule interactions'
+    },
+    {
+        id: 'chemistry10_hydrogen_bonding',
+        title: '6.9 Hydrogen Bonding and Its Special Properties',
+        path: 'textbooks/chemistry_10/chemical_bonding_covalent_intermolecular/hydrogen_bonding_and_its_special_properties.json',
+        description: 'Strong dipole-dipole interactions'
+    },
+    {
+        id: 'chemistry10_comparing_ionic_covalent',
+        title: '6.10 Comparing Properties: Ionic and Covalent Compounds',
+        path: 'textbooks/chemistry_10/chemical_bonding_covalent_intermolecular/comparing_properties_ionic_and_covalent_compounds.json',
+        description: 'Contrasting compound types'
+    }
+],
+
+// Continuing with units 7-12 following the same pattern...
+'chemistry10-unit7': [
+    {
+        id: 'chemistry10_evidence_chemical_reaction',
+        title: '7.1 Evidence of a Chemical Reaction',
+        path: 'textbooks/chemistry_10/chemical_reactions_equations/evidence_of_a_chemical_reaction.json',
+        description: 'Signs that a chemical reaction has occurred'
+    },
+    {
+        id: 'chemistry10_writing_equations',
+        title: '7.2 Writing Word Equations and Skeleton Equations',
+        path: 'textbooks/chemistry_10/chemical_reactions_equations/writing_word_equations_and_skeleton_equations.json',
+        description: 'Representing chemical reactions'
+    },
+    {
+        id: 'chemistry10_law_conservation_mass',
+        title: '7.3 Law of Conservation of Mass',
+        path: 'textbooks/chemistry_10/chemical_reactions_equations/law_of_conservation_of_mass.json',
+        description: 'Mass conservation in chemical reactions'
+    },
+    {
+        id: 'chemistry10_balancing_equations',
+        title: '7.4 Balancing Chemical Equations',
+        path: 'textbooks/chemistry_10/chemical_reactions_equations/balancing_chemical_equations.json',
+        description: 'Stoichiometric balancing techniques'
+    },
+    {
+        id: 'chemistry10_synthesis_reactions',
+        title: '7.5 Synthesis (Combination) Reactions',
+        path: 'textbooks/chemistry_10/chemical_reactions_equations/synthesis_combination_reactions.json',
+        description: 'A + B → AB type reactions'
+    },
+    {
+        id: 'chemistry10_decomposition_reactions',
+        title: '7.6 Decomposition Reactions',
+        path: 'textbooks/chemistry_10/chemical_reactions_equations/decomposition_reactions.json',
+        description: 'AB → A + B type reactions'
+    },
+    {
+        id: 'chemistry10_single_replacement',
+        title: '7.7 Single Replacement (Displacement) Reactions',
+        path: 'textbooks/chemistry_10/chemical_reactions_equations/single_replacement_displacement_reactions.json',
+        description: 'A + BC → AC + B type reactions'
+    },
+    {
+        id: 'chemistry10_double_replacement',
+        title: '7.8 Double Replacement (Precipitation) Reactions',
+        path: 'textbooks/chemistry_10/chemical_reactions_equations/double_replacement_precipitation_reactions.json',
+        description: 'AB + CD → AD + CB type reactions'
+    },
+    {
+        id: 'chemistry10_combustion_reactions',
+        title: '7.9 Combustion Reactions',
+        path: 'textbooks/chemistry_10/chemical_reactions_equations/combustion_reactions.json',
+        description: 'Reactions with oxygen producing heat and light'
+    },
+    {
+        id: 'chemistry10_predicting_products',
+        title: '7.10 Predicting Products of Simple Reactions',
+        path: 'textbooks/chemistry_10/chemical_reactions_equations/predicting_products_of_simple_reactions.json',
+        description: 'Reaction prediction skills'
+    }
+],
+
+'chemistry10-unit8': [
+    {
+        id: 'chemistry10_what_is_mole',
+        title: '8.1 What is a Mole: Avogadro\'s Number',
+        path: 'textbooks/chemistry_10/mole_concept_stoichiometry/what_is_a_mole_avogadros_number.json',
+        description: 'Understanding the mole concept'
+    },
+    {
+        id: 'chemistry10_molar_mass',
+        title: '8.2 Molar Mass and Calculations',
+        path: 'textbooks/chemistry_10/mole_concept_stoichiometry/molar_mass_and_calculations.json',
+        description: 'Calculating mass per mole'
+    },
+    {
+        id: 'chemistry10_converting_moles_mass_particles',
+        title: '8.3 Converting Between Moles, Mass, and Particles',
+        path: 'textbooks/chemistry_10/mole_concept_stoichiometry/converting_between_moles_mass_and_particles.json',
+        description: 'Mole conversion calculations'
+    },
+    {
+        id: 'chemistry10_mole_volume_relationships',
+        title: '8.4 Mole-Volume Relationships for Gases',
+        path: 'textbooks/chemistry_10/mole_concept_stoichiometry/mole_volume_relationships_for_gases.json',
+        description: 'Gas volume at STP'
+    },
+    {
+        id: 'chemistry10_percent_composition',
+        title: '8.5 Calculating Percent Composition',
+        path: 'textbooks/chemistry_10/mole_concept_stoichiometry/calculating_percent_composition.json',
+        description: 'Elemental composition by mass'
+    },
+    {
+        id: 'chemistry10_empirical_formulas',
+        title: '8.6 Empirical Formulas from Percent Composition',
+        path: 'textbooks/chemistry_10/mole_concept_stoichiometry/empirical_formulas_from_percent_composition.json',
+        description: 'Simplest formula determination'
+    },
+    {
+        id: 'chemistry10_molecular_formulas',
+        title: '8.7 Molecular Formulas from Empirical Formulas',
+        path: 'textbooks/chemistry_10/mole_concept_stoichiometry/molecular_formulas_from_empirical_formulas.json',
+        description: 'Actual formula determination'
+    },
+    {
+        id: 'chemistry10_stoichiometry_mole_ratios',
+        title: '8.8 Stoichiometry: Mole-to-Mole Ratios',
+        path: 'textbooks/chemistry_10/mole_concept_stoichiometry/stoichiometry_mole_to_mole_ratios.json',
+        description: 'Reactant and product relationships'
+    },
+    {
+        id: 'chemistry10_stoichiometry_mass_calculations',
+        title: '8.9 Stoichiometry: Mass-to-Mass Calculations',
+        path: 'textbooks/chemistry_10/mole_concept_stoichiometry/stoichiometry_mass_to_mass_calculations.json',
+        description: 'Mass relationships in reactions'
+    },
+    {
+        id: 'chemistry10_limiting_reactants',
+        title: '8.10 Limiting Reactants and Percent Yield',
+        path: 'textbooks/chemistry_10/mole_concept_stoichiometry/limiting_reactants_and_percent_yield.json',
+        description: 'Reaction efficiency calculations'
+    }
+],
 
 'geometry-unit1': [
     {
