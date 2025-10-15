@@ -4264,6 +4264,7 @@ function loadTextbookContent() {
     const isAlgebra2 = currentCourseId === 'algebra-2';
     const isGeometry = currentCourseId === 'geometry';
     const isChemistry10 = currentCourseId === 'chemistry-10';
+    const isChemistry11 = currentCourseId === 'chemistry-11';
     
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
@@ -4282,6 +4283,7 @@ function loadTextbookContent() {
                      isAlgebra2 ? 'Algebra 2 Textbook' :
                      isGeometry ? 'Geometry Textbook' :
                      ischemistry10 ? 'Chemistry Grade 10 Textbook' :
+                     ischemistry11 ? 'Chemistry Grade 11 Textbook' :
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4331,6 +4333,44 @@ function loadTextbookContent() {
                                     Unit 10: Modern Physics Introduction
                                 </button>
 
+
+` : isChemistry11 ? `
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit1')">
+        Unit 1: Quantum Mechanical Model
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit2')">
+        Unit 2: Electron Configuration & Periodicity
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit3')">
+        Unit 3: Advanced Chemical Bonding I
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit4')">
+        Unit 4: Advanced Chemical Bonding II
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit5')">
+        Unit 5: Intermolecular Forces & Properties
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit6')">
+        Unit 6: Thermochemistry Basics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit7')">
+        Unit 7: Quantitative Chemistry & The Mole
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit8')">
+        Unit 8: Gas Laws & Kinetic Theory
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit9')">
+        Unit 9: Acids, Bases & Titrations
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit10' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit10')">
+        Unit 10: Redox Reactions & Electrochemistry
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit11' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit11')">
+        Unit 11: Chemical Kinetics & Mechanisms
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'chemistry11-unit12' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry11-unit12')">
+        Unit 12: Chemical Equilibrium
+    </button>
 
 ` : isChemistry10 ? `
     <button class="unit-btn ${currentTextbookUnit === 'chemistry10-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry10-unit1')">
@@ -4957,6 +4997,20 @@ function getCurrentUnitName() {
 'physics10-unit9': 'Unit 9: Static & Current Electricity',
 'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
 
+// Add to getCurrentUnitName function
+'chemistry11-unit1': 'Unit 1: Quantum Mechanical Model',
+'chemistry11-unit2': 'Unit 2: Electron Configuration & Periodicity',
+'chemistry11-unit3': 'Unit 3: Advanced Chemical Bonding I',
+'chemistry11-unit4': 'Unit 4: Advanced Chemical Bonding II',
+'chemistry11-unit5': 'Unit 5: Intermolecular Forces & Properties',
+'chemistry11-unit6': 'Unit 6: Thermochemistry Basics',
+'chemistry11-unit7': 'Unit 7: Quantitative Chemistry & The Mole',
+'chemistry11-unit8': 'Unit 8: Gas Laws & Kinetic Theory',
+'chemistry11-unit9': 'Unit 9: Acids, Bases & Titrations',
+'chemistry11-unit10': 'Unit 10: Redox Reactions & Electrochemistry',
+'chemistry11-unit11': 'Unit 11: Chemical Kinetics & Mechanisms',
+'chemistry11-unit12': 'Unit 12: Chemical Equilibrium',
+        
 // Add to getCurrentUnitName function
 'chemistry10-unit1': 'Unit 1: Introduction to Chemistry & Lab Safety',
 'chemistry10-unit2': 'Unit 2: Properties & States of Matter',
@@ -5888,7 +5942,385 @@ function loadTextbookSections() {
         }
     ],
 
+'chemistry11-unit1': [
+    {
+        id: 'chemistry11_limitations_bohr_model',
+        title: '1.1 Limitations of the Bohr Model',
+        path: 'textbooks/chemistry_11/quantum_mechanical_model/limitations_of_the_bohr_model.json',
+        description: 'Understanding where the Bohr model fails'
+    },
+    {
+        id: 'chemistry11_wave_particle_duality',
+        title: '1.2 Wave-Particle Duality of Electrons',
+        path: 'textbooks/chemistry_11/quantum_mechanical_model/wave_particle_duality_of_electrons.json',
+        description: 'Dual nature of electrons as waves and particles'
+    },
+    {
+        id: 'chemistry11_heisenberg_uncertainty',
+        title: '1.3 Heisenberg\'s Uncertainty Principle',
+        path: 'textbooks/chemistry_11/quantum_mechanical_model/heisenbergs_uncertainty_principle.json',
+        description: 'Fundamental limits on measuring position and momentum'
+    },
+    {
+        id: 'chemistry11_intro_quantum_mechanics',
+        title: '1.4 Introduction to Quantum Mechanics',
+        path: 'textbooks/chemistry_11/quantum_mechanical_model/introduction_to_quantum_mechanics.json',
+        description: 'Basic principles of quantum theory'
+    },
+    {
+        id: 'chemistry11_atomic_orbitals_quantum_numbers',
+        title: '1.5 Atomic Orbitals and Quantum Numbers',
+        path: 'textbooks/chemistry_11/quantum_mechanical_model/atomic_orbitals_and_quantum_numbers.json',
+        description: 'Describing electron locations with quantum numbers'
+    },
+    {
+        id: 'chemistry11_principal_angular_momentum',
+        title: '1.6 Principal and Angular Momentum Quantum Numbers',
+        path: 'textbooks/chemistry_11/quantum_mechanical_model/principal_and_angular_momentum_quantum_numbers.json',
+        description: 'n and l quantum numbers and their significance'
+    },
+    {
+        id: 'chemistry11_magnetic_spin_quantum_numbers',
+        title: '1.7 Magnetic and Spin Quantum Numbers',
+        path: 'textbooks/chemistry_11/quantum_mechanical_model/magnetic_and_spin_quantum_numbers.json',
+        description: 'm_l and m_s quantum numbers and electron spin'
+    },
+    {
+        id: 'chemistry11_orbital_shapes_energies',
+        title: '1.8 Orbital Shapes and Energies: s, p, d, f',
+        path: 'textbooks/chemistry_11/quantum_mechanical_model/orbital_shapes_and_energies_s_p_d_f.json',
+        description: 'Characteristics of different orbital types'
+    },
+    {
+        id: 'chemistry11_multi_electron_atoms',
+        title: '1.9 Multi-Electron Atoms and Orbital Filling',
+        path: 'textbooks/chemistry_11/quantum_mechanical_model/multi_electron_atoms_and_orbital_filling.json',
+        description: 'Electron configurations in complex atoms'
+    },
+    {
+        id: 'chemistry11_schrodinger_equation',
+        title: '1.10 Schrödinger Equation Conceptual Overview',
+        path: 'textbooks/chemistry_11/quantum_mechanical_model/schrodinger_equation_conceptual_overview.json',
+        description: 'Fundamental equation of quantum mechanics'
+    }
+],
 
+'chemistry11-unit2': [
+    {
+        id: 'chemistry11_aufbau_principle',
+        title: '2.1 Aufbau Principle and Orbital Filling Order',
+        path: 'textbooks/chemistry_11/electron_configuration_periodicity/aufbau_principle_and_orbital_filling_order.json',
+        description: 'Rules for electron configuration building'
+    },
+    {
+        id: 'chemistry11_hunds_rule_pauli',
+        title: '2.2 Hund\'s Rule and Pauli Exclusion Principle',
+        path: 'textbooks/chemistry_11/electron_configuration_periodicity/hunds_rule_and_pauli_exclusion_principle.json',
+        description: 'Rules governing electron arrangement in orbitals'
+    },
+    {
+        id: 'chemistry11_writing_electron_configurations',
+        title: '2.3 Writing Electron Configurations',
+        path: 'textbooks/chemistry_11/electron_configuration_periodicity/writing_electron_configurations.json',
+        description: 'Systematic approach to electron configuration notation'
+    },
+    {
+        id: 'chemistry11_valence_electrons_core_notation',
+        title: '2.4 Valence Electrons and Core Notation',
+        path: 'textbooks/chemistry_11/electron_configuration_periodicity/valence_electrons_and_core_notation.json',
+        description: 'Identifying reactive electrons and noble gas shorthand'
+    },
+    {
+        id: 'chemistry11_electron_configurations_ions',
+        title: '2.5 Electron Configurations of Ions',
+        path: 'textbooks/chemistry_11/electron_configuration_periodicity/electron_configurations_of_ions.json',
+        description: 'Electron arrangements in charged species'
+    },
+    {
+        id: 'chemistry11_periodic_trends_atomic_ionic_radii',
+        title: '2.6 Periodic Trends: Atomic and Ionic Radii',
+        path: 'textbooks/chemistry_11/electron_configuration_periodicity/periodic_trends_atomic_and_ionic_radii.json',
+        description: 'Size trends across the periodic table'
+    },
+    {
+        id: 'chemistry11_periodic_trends_ionization_energy',
+        title: '2.7 Periodic Trends: Ionization Energy',
+        path: 'textbooks/chemistry_11/electron_configuration_periodicity/periodic_trends_ionization_energy.json',
+        description: 'Energy required to remove electrons'
+    },
+    {
+        id: 'chemistry11_periodic_trends_electron_affinity',
+        title: '2.8 Periodic Trends: Electron Affinity',
+        path: 'textbooks/chemistry_11/electron_configuration_periodicity/periodic_trends_electron_affinity.json',
+        description: 'Energy change when adding electrons'
+    },
+    {
+        id: 'chemistry11_periodic_trends_electronegativity',
+        title: '2.9 Periodic Trends: Electronegativity',
+        path: 'textbooks/chemistry_11/electron_configuration_periodicity/periodic_trends_electronegativity.json',
+        description: 'Atom\'s ability to attract bonding electrons'
+    },
+    {
+        id: 'chemistry11_periodicity_chemical_reactivity',
+        title: '2.10 Periodicity and Chemical Reactivity',
+        path: 'textbooks/chemistry_11/electron_configuration_periodicity/periodicity_and_chemical_reactivity.json',
+        description: 'Predicting chemical behavior from position'
+    }
+],
+
+'chemistry11-unit3': [
+    {
+        id: 'chemistry11_lewis_structures_complex',
+        title: '3.1 Lewis Structures for Complex Molecules',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_i/lewis_structures_for_complex_molecules.json',
+        description: 'Drawing Lewis structures for larger molecules'
+    },
+    {
+        id: 'chemistry11_formal_charge_resonance',
+        title: '3.2 Formal Charge and Resonance Structures',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_i/formal_charge_and_resonance_structures.json',
+        description: 'Evaluating and representing molecular structures'
+    },
+    {
+        id: 'chemistry11_exceptions_octet_rule',
+        title: '3.3 Exceptions to the Octet Rule',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_i/exceptions_to_the_octet_rule.json',
+        description: 'Molecules with incomplete or expanded octets'
+    },
+    {
+        id: 'chemistry11_vsepr_theory',
+        title: '3.4 Valence Shell Electron Pair Repulsion (VSEPR) Theory',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_i/valence_shell_electron_pair_repulsion_vsepr_theory.json',
+        description: 'Predicting molecular geometry from electron pairs'
+    },
+    {
+        id: 'chemistry11_molecular_geometry_basic',
+        title: '3.5 Molecular Geometry: Linear, Trigonal Planar, Tetrahedral',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_i/molecular_geometry_linear_trigonal_planar_tetrahedral.json',
+        description: 'Basic molecular shapes and bond angles'
+    },
+    {
+        id: 'chemistry11_molecular_geometry_advanced',
+        title: '3.6 Molecular Geometry: Trigonal Bipyramidal, Octahedral',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_i/molecular_geometry_trigonal_bipyramidal_octahedral.json',
+        description: 'Advanced molecular shapes with higher coordination'
+    },
+    {
+        id: 'chemistry11_bond_angles_distortion',
+        title: '3.7 Bond Angles and Distortion from Ideal Geometry',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_i/bond_angles_and_distortion_from_ideal_geometry.json',
+        description: 'Factors affecting bond angles'
+    },
+    {
+        id: 'chemistry11_polarity_molecules',
+        title: '3.8 Polarity of Molecules',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_i/polarity_of_molecules.json',
+        description: 'Determining molecular polarity from geometry'
+    },
+    {
+        id: 'chemistry11_valence_bond_basic',
+        title: '3.9 Valence Bond Theory: Hybridization sp, sp², sp³',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_i/valence_bond_theory_hybridization_sp_sp2_sp3.json',
+        description: 'Basic hybridization concepts'
+    },
+    {
+        id: 'chemistry11_valence_bond_advanced',
+        title: '3.10 Valence Bond Theory: Hybridization sp³d, sp³d²',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_i/valence_bond_theory_hybridization_sp3d_sp3d2.json',
+        description: 'Advanced hybridization for expanded octets'
+    }
+],
+
+'chemistry11-unit4': [
+    {
+        id: 'chemistry11_sigma_pi_bonds',
+        title: '4.1 Sigma and Pi Bonds',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_ii/sigma_and_pi_bonds.json',
+        description: 'Types of covalent bonds and their properties'
+    },
+    {
+        id: 'chemistry11_molecular_orbital_basic',
+        title: '4.2 Molecular Orbital Theory Basic Concepts',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_ii/molecular_orbital_theory_basic_concepts.json',
+        description: 'Introduction to molecular orbital theory'
+    },
+    {
+        id: 'chemistry11_mo_diagrams_h2_he2',
+        title: '4.3 Molecular Orbital Diagrams: Diatomic H₂, He₂',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_ii/molecular_orbital_diagrams_diatomic_h2_he2.json',
+        description: 'Simple diatomic molecular orbital diagrams'
+    },
+    {
+        id: 'chemistry11_mo_diagrams_period2_first',
+        title: '4.4 MO Diagrams: Period 2 Homonuclear B₂, C₂, N₂',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_ii/molecular_orbital_diagrams_period2_homonuclear_b2_c2_n2.json',
+        description: 'Molecular orbitals for early period 2 elements'
+    },
+    {
+        id: 'chemistry11_mo_diagrams_period2_second',
+        title: '4.5 MO Diagrams: Period 2 Homonuclear O₂, F₂, Ne₂',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_ii/molecular_orbital_diagrams_period2_homonuclear_o2_f2_ne2.json',
+        description: 'Molecular orbitals for late period 2 elements'
+    },
+    {
+        id: 'chemistry11_bond_order_magnetic_properties',
+        title: '4.6 Bond Order, Magnetic Properties (MO Theory)',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_ii/bond_order_magnetic_properties_mo_theory.json',
+        description: 'Predicting properties from molecular orbitals'
+    },
+    {
+        id: 'chemistry11_metallic_bonding_band_theory',
+        title: '4.7 Metallic Bonding and Band Theory',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_ii/metallic_bonding_and_band_theory.json',
+        description: 'Quantum mechanical view of metallic bonding'
+    },
+    {
+        id: 'chemistry11_conductors_semiconductors_insulators',
+        title: '4.8 Conductors, Semiconductors, Insulators',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_ii/conductors_semiconductors_insulators.json',
+        description: 'Electrical properties based on band theory'
+    },
+    {
+        id: 'chemistry11_coordination_compounds_intro',
+        title: '4.9 Coordination Compounds Introduction',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_ii/coordination_compounds_introduction.json',
+        description: 'Complex ions and coordination chemistry basics'
+    },
+    {
+        id: 'chemistry11_isomerism_coordination_compounds',
+        title: '4.10 Isomerism in Coordination Compounds',
+        path: 'textbooks/chemistry_11/advanced_chemical_bonding_ii/isomerism_in_coordination_compounds.json',
+        description: 'Structural and stereoisomerism in complexes'
+    }
+],
+
+'chemistry11-unit5': [
+    {
+        id: 'chemistry11_states_matter_kinetic_theory',
+        title: '5.1 States of Matter: Kinetic Molecular Theory',
+        path: 'textbooks/chemistry_11/intermolecular_forces_properties/states_of_matter_kinetic_molecular_theory.json',
+        description: 'Particle behavior in different states'
+    },
+    {
+        id: 'chemistry11_types_intermolecular_forces',
+        title: '5.2 Types of Intermolecular Forces',
+        path: 'textbooks/chemistry_11/intermolecular_forces_properties/types_of_intermolecular_forces.json',
+        description: 'London dispersion, dipole-dipole, hydrogen bonding'
+    },
+    {
+        id: 'chemistry11_intermolecular_forces_physical_properties',
+        title: '5.3 Relating Intermolecular Forces to Physical Properties',
+        path: 'textbooks/chemistry_11/intermolecular_forces_properties/relating_intermolecular_forces_physical_properties.json',
+        description: 'Predicting properties from intermolecular forces'
+    },
+    {
+        id: 'chemistry11_vapor_pressure_boiling_point',
+        title: '5.4 Vapor Pressure and Boiling Point',
+        path: 'textbooks/chemistry_11/intermolecular_forces_properties/vapor_pressure_and_boiling_point.json',
+        description: 'Phase transition temperatures and pressures'
+    },
+    {
+        id: 'chemistry11_surface_tension_viscosity_capillary',
+        title: '5.5 Surface Tension, Viscosity, Capillary Action',
+        path: 'textbooks/chemistry_11/intermolecular_forces_properties/surface_tension_viscosity_capillary_action.json',
+        description: 'Liquid properties from intermolecular forces'
+    },
+    {
+        id: 'chemistry11_phase_diagrams',
+        title: '5.6 Phase Diagrams: Interpretation and Application',
+        path: 'textbooks/chemistry_11/intermolecular_forces_properties/phase_diagrams_interpretation_application.json',
+        description: 'Reading and using phase diagrams'
+    },
+    {
+        id: 'chemistry11_heating_cooling_curves',
+        title: '5.7 Heating and Cooling Curves',
+        path: 'textbooks/chemistry_11/intermolecular_forces_properties/heating_and_cooling_curves.json',
+        description: 'Temperature changes during phase transitions'
+    },
+    {
+        id: 'chemistry11_calculations_heat_phase_changes',
+        title: '5.8 Calculations: Heat of Phase Changes',
+        path: 'textbooks/chemistry_11/intermolecular_forces_properties/calculations_heat_phase_changes.json',
+        description: 'Quantitative analysis of phase change energy'
+    },
+    {
+        id: 'chemistry11_crystal_lattices_unit_cells',
+        title: '5.9 Crystal Lattices and Unit Cells',
+        path: 'textbooks/chemistry_11/intermolecular_forces_properties/crystal_lattices_and_unit_cells.json',
+        description: 'Structure of crystalline solids'
+    },
+    {
+        id: 'chemistry11_types_crystalline_solids',
+        title: '5.10 Types of Crystalline Solids',
+        path: 'textbooks/chemistry_11/intermolecular_forces_properties/types_of_crystalline_solids.json',
+        description: 'Ionic, molecular, covalent network, metallic crystals'
+    }
+],
+
+// Continuing with units 6-12 following the same pattern...
+'chemistry11-unit6': [
+    {
+        id: 'chemistry11_energy_system_surroundings',
+        title: '6.1 Energy: System and Surroundings',
+        path: 'textbooks/chemistry_11/thermochemistry_basics/energy_system_and_surroundings.json',
+        description: 'Defining thermodynamic systems'
+    },
+    {
+        id: 'chemistry11_endothermic_exothermic',
+        title: '6.2 Endothermic and Exothermic Processes',
+        path: 'textbooks/chemistry_11/thermochemistry_basics/endothermic_and_exothermic_processes.json',
+        description: 'Energy flow in chemical processes'
+    },
+    {
+        id: 'chemistry11_state_path_functions',
+        title: '6.3 State Functions and Path Functions',
+        path: 'textbooks/chemistry_11/thermochemistry_basics/state_functions_and_path_functions.json',
+        description: 'Properties dependent only on current state'
+    },
+    {
+        id: 'chemistry11_internal_energy_first_law',
+        title: '6.4 Internal Energy and First Law of Thermodynamics',
+        path: 'textbooks/chemistry_11/thermochemistry_basics/internal_energy_first_law_thermodynamics.json',
+        description: 'Conservation of energy in chemical systems'
+    },
+    {
+        id: 'chemistry11_work_heat_chemical_reactions',
+        title: '6.5 Work and Heat in Chemical Reactions',
+        path: 'textbooks/chemistry_11/thermochemistry_basics/work_and_heat_chemical_reactions.json',
+        description: 'Energy transfer mechanisms'
+    },
+    {
+        id: 'chemistry11_calorimetry_heat_flow',
+        title: '6.6 Calorimetry: Measuring Heat Flow',
+        path: 'textbooks/chemistry_11/thermochemistry_basics/calorimetry_measuring_heat_flow.json',
+        description: 'Experimental determination of heat changes'
+    },
+    {
+        id: 'chemistry11_enthalpy_enthalpy_changes',
+        title: '6.7 Enthalpy and Enthalpy Changes',
+        path: 'textbooks/chemistry_11/thermochemistry_basics/enthalpy_and_enthalpy_changes.json',
+        description: 'Heat content at constant pressure'
+    },
+    {
+        id: 'chemistry11_thermochemical_equations',
+        title: '6.8 Thermochemical Equations',
+        path: 'textbooks/chemistry_11/thermochemistry_basics/thermochemical_equations.json',
+        description: 'Balanced equations with enthalpy information'
+    },
+    {
+        id: 'chemistry11_standard_enthalpies_formation',
+        title: '6.9 Standard Enthalpies of Formation',
+        path: 'textbooks/chemistry_11/thermochemistry_basics/standard_enthalpies_of_formation.json',
+        description: 'Reference states for enthalpy calculations'
+    },
+    {
+        id: 'chemistry11_hesss_law',
+        title: '6.10 Hess\'s Law: Enthalpy Calculations',
+        path: 'textbooks/chemistry_11/thermochemistry_basics/hesss_law_enthalpy_calculations.json',
+        description: 'Path independence of enthalpy changes'
+    }
+],
+        
         // Add to the unitSections object in the loadTextbookSections function
 'chemistry10-unit1': [
     {
@@ -20160,6 +20592,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
