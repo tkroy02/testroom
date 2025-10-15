@@ -4266,6 +4266,7 @@ function loadTextbookContent() {
     const isChemistry10 = currentCourseId === 'chemistry-grade-10';
     const isChemistry11 = currentCourseId === 'chemistry-grade-11';
     const isChemistry12 = currentCourseId === 'chemistry-grade-12';
+    const isBiology9 = currentCourseId === 'biology-grade-9';
     
     const textbookTitle = isCalculus ? 'AP Calculus Textbook' : 
                      isPhysics9 ? 'Physics Grade 9 Textbook' :
@@ -4286,6 +4287,7 @@ function loadTextbookContent() {
                      isChemistry10 ? 'Chemistry Grade 10 Textbook' :
                      isChemistry11 ? 'Chemistry Grade 11 Textbook' :
                      isChemistry12 ? 'Chemistry Grade 12 Textbook' :
+                     isBiology9 ? 'Biology Grade 9 Textbook' :
                      'AP Biology Textbook';
     
     resourceContent.innerHTML = `
@@ -4335,6 +4337,36 @@ function loadTextbookContent() {
                                     Unit 10: Modern Physics Introduction
                                 </button>
 
+
+// Add Biology 9 unit buttons to the HTML template
+` : isBiology9 ? `
+    <button class="unit-btn ${currentTextbookUnit === 'biology9-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('biology9-unit1')">
+        Unit 1: Nature of Biology & Scientific Inquiry
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology9-unit2' ? 'active' : ''}" onclick="switchTextbookUnit('biology9-unit2')">
+        Unit 2: Cell Theory & Structure
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology9-unit3' ? 'active' : ''}" onclick="switchTextbookUnit('biology9-unit3')">
+        Unit 3: Cell Membrane & Transport
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology9-unit4' ? 'active' : ''}" onclick="switchTextbookUnit('biology9-unit4')">
+        Unit 4: Cell Division & Reproduction
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology9-unit5' ? 'active' : ''}" onclick="switchTextbookUnit('biology9-unit5')">
+        Unit 5: Introduction to Genetics
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology9-unit6' ? 'active' : ''}" onclick="switchTextbookUnit('biology9-unit6')">
+        Unit 6: Variation & Natural Selection
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology9-unit7' ? 'active' : ''}" onclick="switchTextbookUnit('biology9-unit7')">
+        Unit 7: Ecology & Ecosystems
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology9-unit8' ? 'active' : ''}" onclick="switchTextbookUnit('biology9-unit8')">
+        Unit 8: Plant Biology
+    </button>
+    <button class="unit-btn ${currentTextbookUnit === 'biology9-unit9' ? 'active' : ''}" onclick="switchTextbookUnit('biology9-unit9')">
+        Unit 9: Human Biology & Health
+    </button>
 
 ` : isChemistry12 ? `
     <button class="unit-btn ${currentTextbookUnit === 'chemistry12-unit1' ? 'active' : ''}" onclick="switchTextbookUnit('chemistry12-unit1')">
@@ -5040,6 +5072,17 @@ function getCurrentUnitName() {
 'physics10-unit9': 'Unit 9: Static & Current Electricity',
 'physics10-unit10': 'Unit 10: Circuits & Electromagnetism',
 
+// Add to getCurrentUnitName function
+'biology9-unit1': 'Unit 1: Nature of Biology & Scientific Inquiry',
+'biology9-unit2': 'Unit 2: Cell Theory & Structure',
+'biology9-unit3': 'Unit 3: Cell Membrane & Transport',
+'biology9-unit4': 'Unit 4: Cell Division & Reproduction',
+'biology9-unit5': 'Unit 5: Introduction to Genetics',
+'biology9-unit6': 'Unit 6: Variation & Natural Selection',
+'biology9-unit7': 'Unit 7: Ecology & Ecosystems',
+'biology9-unit8': 'Unit 8: Plant Biology',
+'biology9-unit9': 'Unit 9: Human Biology & Health'
+        
 // Add to getCurrentUnitName function
 'chemistry12-unit1': 'Unit 1: Foundations of Organic Chemistry',
 'chemistry12-unit2': 'Unit 2: Alkanes and Cycloalkanes', 
@@ -6000,6 +6043,574 @@ function loadTextbookSections() {
         }
     ],
 
+// Add to the unitSections object in loadTextbookSections function
+'biology9-unit1': [
+    {
+        id: 'biology9_what_is_biology',
+        title: '1.1 What is Biology?',
+        path: 'textbooks/biology_9/nature_of_biology_scientific_inquiry/what_is_biology_study_of_life.json',
+        description: 'Introduction to the study of life'
+    },
+    {
+        id: 'biology9_characteristics_life',
+        title: '1.2 Characteristics of Life',
+        path: 'textbooks/biology_9/nature_of_biology_scientific_inquiry/characteristics_of_living_organisms_mrs_gren.json',
+        description: 'MRS GREN characteristics of living things'
+    },
+    {
+        id: 'biology9_lab_safety',
+        title: '1.3 Laboratory Safety',
+        path: 'textbooks/biology_9/nature_of_biology_scientific_inquiry/laboratory_safety_rules_and_procedures.json',
+        description: 'Safe laboratory practices and procedures'
+    },
+    {
+        id: 'biology9_microscope_parts',
+        title: '1.4 Microscope Parts',
+        path: 'textbooks/biology_9/nature_of_biology_scientific_inquiry/introduction_microscope_parts_functions.json',
+        description: 'Microscope components and functions'
+    },
+    {
+        id: 'biology9_using_microscope',
+        title: '1.5 Using Microscope',
+        path: 'textbooks/biology_9/nature_of_biology_scientific_inquiry/using_light_microscope_preparation_focusing.json',
+        description: 'Proper microscope techniques'
+    },
+    {
+        id: 'biology9_scientific_method',
+        title: '1.6 Scientific Method',
+        path: 'textbooks/biology_9/nature_of_biology_scientific_inquiry/scientific_method_observation_question_hypothesis.json',
+        description: 'Steps of scientific inquiry'
+    },
+    {
+        id: 'biology9_experiment_design',
+        title: '1.7 Experiment Design',
+        path: 'textbooks/biology_9/nature_of_biology_scientific_inquiry/designing_simple_experiment_variables_controls.json',
+        description: 'Variables and experimental controls'
+    },
+    {
+        id: 'biology9_data_presentation',
+        title: '1.8 Data Presentation',
+        path: 'textbooks/biology_9/nature_of_biology_scientific_inquiry/recording_presenting_data_tables_graphs.json',
+        description: 'Data organization and visualization'
+    },
+    {
+        id: 'biology9_biological_drawing',
+        title: '1.9 Biological Drawing',
+        path: 'textbooks/biology_9/nature_of_biology_scientific_inquiry/drawing_biological_specimens_rules_labels.json',
+        description: 'Scientific drawing techniques'
+    },
+    {
+        id: 'biology9_famous_biologists',
+        title: '1.10 Famous Biologists',
+        path: 'textbooks/biology_9/nature_of_biology_scientific_inquiry/famous_biologists_their_discoveries.json',
+        description: 'Historical contributions to biology'
+    }
+],
+
+'biology9-unit2': [
+    {
+        id: 'biology9_cell_discovery',
+        title: '2.1 Cell Discovery',
+        path: 'textbooks/biology_9/cell_theory_structure/discovery_of_cells_hooke_leeuwenhoek.json',
+        description: 'Hooke and Leeuwenhoek contributions'
+    },
+    {
+        id: 'biology9_cell_theory',
+        title: '2.2 Cell Theory',
+        path: 'textbooks/biology_9/cell_theory_structure/cell_theory_three_main_principles.json',
+        description: 'Fundamental principles of cell theory'
+    },
+    {
+        id: 'biology9_prokaryotic_eukaryotic',
+        title: '2.3 Prokaryotic vs Eukaryotic',
+        path: 'textbooks/biology_9/cell_theory_structure/prokaryotic_vs_eukaryotic_cells.json',
+        description: 'Comparison of cell types'
+    },
+    {
+        id: 'biology9_plant_animal_cells',
+        title: '2.4 Plant vs Animal Cells',
+        path: 'textbooks/biology_9/cell_theory_structure/plant_vs_animal_cells_comparison.json',
+        description: 'Structural differences between cell types'
+    },
+    {
+        id: 'biology9_organelles_nucleus_mitochondria',
+        title: '2.5 Nucleus & Mitochondria',
+        path: 'textbooks/biology_9/cell_theory_structure/cell_organelles_nucleus_mitochondria.json',
+        description: 'Key organelles and functions'
+    },
+    {
+        id: 'biology9_organelles_er_golgi',
+        title: '2.6 ER & Golgi Apparatus',
+        path: 'textbooks/biology_9/cell_theory_structure/cell_organelles_endoplasmic_reticulum_golgi.json',
+        description: 'Protein processing organelles'
+    },
+    {
+        id: 'biology9_organelles_ribosomes_lysosomes',
+        title: '2.7 Ribosomes & Lysosomes',
+        path: 'textbooks/biology_9/cell_theory_structure/cell_organelles_ribosomes_lysosomes_vacuoles.json',
+        description: 'Protein synthesis and digestion'
+    },
+    {
+        id: 'biology9_specialized_structures',
+        title: '2.8 Specialized Structures',
+        path: 'textbooks/biology_9/cell_theory_structure/specialized_structures_chloroplasts_cell_wall.json',
+        description: 'Plant-specific organelles'
+    },
+    {
+        id: 'biology9_organization_levels',
+        title: '2.9 Organization Levels',
+        path: 'textbooks/biology_9/cell_theory_structure/levels_organization_cells_tissues_organs.json',
+        description: 'Hierarchy of biological organization'
+    },
+    {
+        id: 'biology9_staining_techniques',
+        title: '2.10 Staining Techniques',
+        path: 'textbooks/biology_9/cell_theory_structure/staining_techniques_cell_observation.json',
+        description: 'Microscopy preparation methods'
+    }
+],
+
+'biology9-unit3': [
+    {
+        id: 'biology9_cell_membrane_structure',
+        title: '3.1 Cell Membrane Structure',
+        path: 'textbooks/biology_9/cell_membrane_transport/structure_cell_membrane_fluid_mosaic_model.json',
+        description: 'Fluid mosaic model components'
+    },
+    {
+        id: 'biology9_membrane_functions',
+        title: '3.2 Membrane Functions',
+        path: 'textbooks/biology_9/cell_membrane_transport/role_cell_membrane_barrier_gateway.json',
+        description: 'Barrier and gateway functions'
+    },
+    {
+        id: 'biology9_diffusion',
+        title: '3.3 Diffusion',
+        path: 'textbooks/biology_9/cell_membrane_transport/diffusion_movement_concentration_gradient.json',
+        description: 'Passive movement of particles'
+    },
+    {
+        id: 'biology9_osmosis',
+        title: '3.4 Osmosis',
+        path: 'textbooks/biology_9/cell_membrane_transport/osmosis_diffusion_of_water.json',
+        description: 'Water movement across membranes'
+    },
+    {
+        id: 'biology9_osmosis_cells',
+        title: '3.5 Osmosis in Cells',
+        path: 'textbooks/biology_9/cell_membrane_transport/osmosis_animal_plant_cells.json',
+        description: 'Effects on plant and animal cells'
+    },
+    {
+        id: 'biology9_active_transport',
+        title: '3.6 Active Transport',
+        path: 'textbooks/biology_9/cell_membrane_transport/active_transport_moving_against_gradient.json',
+        description: 'Energy-requiring transport'
+    },
+    {
+        id: 'biology9_facilitated_diffusion',
+        title: '3.7 Facilitated Diffusion',
+        path: 'textbooks/biology_9/cell_membrane_transport/facilitated_diffusion_transport_proteins.json',
+        description: 'Protein-assisted passive transport'
+    },
+    {
+        id: 'biology9_bulk_transport',
+        title: '3.8 Bulk Transport',
+        path: 'textbooks/biology_9/cell_membrane_transport/endocytosis_exocytosis_bulk_transport.json',
+        description: 'Large particle transport mechanisms'
+    },
+    {
+        id: 'biology9_turgor_plasmolysis',
+        title: '3.9 Turgor & Plasmolysis',
+        path: 'textbooks/biology_9/cell_membrane_transport/turgor_pressure_plasmolysis_plants.json',
+        description: 'Plant cell pressure phenomena'
+    },
+    {
+        id: 'biology9_homeostasis',
+        title: '3.10 Homeostasis',
+        path: 'textbooks/biology_9/cell_membrane_transport/homeostasis_maintaining_stable_environment.json',
+        description: 'Maintaining internal balance'
+    }
+],
+
+'biology9-unit4': [
+    {
+        id: 'biology9_cell_cycle',
+        title: '4.1 Cell Cycle',
+        path: 'textbooks/biology_9/cell_division_reproduction/cell_cycle_interphase_mitosis_cytokinesis.json',
+        description: 'Stages of cell division cycle'
+    },
+    {
+        id: 'biology9_why_cells_divide',
+        title: '4.2 Why Cells Divide',
+        path: 'textbooks/biology_9/cell_division_reproduction/why_cells_divide_growth_repair.json',
+        description: 'Purposes of cell division'
+    },
+    {
+        id: 'biology9_mitosis_stages1',
+        title: '4.3 Mitosis Stages 1',
+        path: 'textbooks/biology_9/cell_division_reproduction/stages_mitosis_prophase_metaphase.json',
+        description: 'Prophase and metaphase'
+    },
+    {
+        id: 'biology9_mitosis_stages2',
+        title: '4.4 Mitosis Stages 2',
+        path: 'textbooks/biology_9/cell_division_reproduction/stages_mitosis_anaphase_telophase.json',
+        description: 'Anaphase and telophase'
+    },
+    {
+        id: 'biology9_cytokinesis',
+        title: '4.5 Cytokinesis',
+        path: 'textbooks/biology_9/cell_division_reproduction/cytokinesis_dividing_cytoplasm.json',
+        description: 'Cytoplasmic division process'
+    },
+    {
+        id: 'biology9_dna_chromosomes',
+        title: '4.6 DNA & Chromosomes',
+        path: 'textbooks/biology_9/cell_division_reproduction/dna_chromosomes_genetic_material.json',
+        description: 'Genetic material structure'
+    },
+    {
+        id: 'biology9_reproduction_types',
+        title: '4.7 Reproduction Types',
+        path: 'textbooks/biology_9/cell_division_reproduction/asexual_vs_sexual_reproduction.json',
+        description: 'Asexual vs sexual reproduction'
+    },
+    {
+        id: 'biology9_asexual_types',
+        title: '4.8 Asexual Types',
+        path: 'textbooks/biology_9/cell_division_reproduction/types_asexual_reproduction_binary_fission_budding.json',
+        description: 'Methods of asexual reproduction'
+    },
+    {
+        id: 'biology9_cancer',
+        title: '4.9 Cancer',
+        path: 'textbooks/biology_9/cell_division_reproduction/cancer_uncontrolled_cell_division.json',
+        description: 'Uncontrolled cell growth'
+    },
+    {
+        id: 'biology9_stem_cells',
+        title: '4.10 Stem Cells',
+        path: 'textbooks/biology_9/cell_division_reproduction/stem_cells_differentiation.json',
+        description: 'Cell specialization and potential'
+    }
+],
+
+'biology9-unit5': [
+    {
+        id: 'biology9_gregor_mendel',
+        title: '5.1 Gregor Mendel',
+        path: 'textbooks/biology_9/introduction_genetics/work_gregor_mendel_father_genetics.json',
+        description: 'Mendel\'s pea plant experiments'
+    },
+    {
+        id: 'biology9_genetic_terms',
+        title: '5.2 Genetic Terms',
+        path: 'textbooks/biology_9/introduction_genetics/basic_genetic_terms_traits_genes_alleles.json',
+        description: 'Fundamental genetics vocabulary'
+    },
+    {
+        id: 'biology9_dominant_recessive',
+        title: '5.3 Dominant & Recessive',
+        path: 'textbooks/biology_9/introduction_genetics/dominant_recessive_alleles.json',
+        description: 'Allele inheritance patterns'
+    },
+    {
+        id: 'biology9_genotype_phenotype',
+        title: '5.4 Genotype & Phenotype',
+        path: 'textbooks/biology_9/introduction_genetics/genotype_phenotype.json',
+        description: 'Genetic vs observable traits'
+    },
+    {
+        id: 'biology9_homozygous_heterozygous',
+        title: '5.5 Homozygous & Heterozygous',
+        path: 'textbooks/biology_9/introduction_genetics/homozygous_heterozygous_genotypes.json',
+        description: 'Genetic combination types'
+    },
+    {
+        id: 'biology9_punnett_squares',
+        title: '5.6 Punnett Squares',
+        path: 'textbooks/biology_9/introduction_genetics/using_punnett_squares_monohybrid_crosses.json',
+        description: 'Genetic prediction tool'
+    },
+    {
+        id: 'biology9_probability_ratios',
+        title: '5.7 Probability & Ratios',
+        path: 'textbooks/biology_9/introduction_genetics/predicting_probabilities_ratios.json',
+        description: 'Calculating genetic outcomes'
+    },
+    {
+        id: 'biology9_incomplete_codominance',
+        title: '5.8 Incomplete & Codominance',
+        path: 'textbooks/biology_9/introduction_genetics/incomplete_dominance_codominance.json',
+        description: 'Non-Mendelian inheritance'
+    },
+    {
+        id: 'biology9_human_traits',
+        title: '5.9 Human Traits',
+        path: 'textbooks/biology_9/introduction_genetics/human_genetic_traits_tongue_rolling_earlobes.json',
+        description: 'Common human genetic characteristics'
+    },
+    {
+        id: 'biology9_pedigree_charts',
+        title: '5.10 Pedigree Charts',
+        path: 'textbooks/biology_9/introduction_genetics/introduction_pedigree_charts.json',
+        description: 'Family inheritance diagrams'
+    }
+],
+
+'biology9-unit6': [
+    {
+        id: 'biology9_genetic_variation',
+        title: '6.1 Genetic Variation',
+        path: 'textbooks/biology_9/variation_natural_selection/genetic_variation_raw_material_evolution.json',
+        description: 'Basis for evolutionary change'
+    },
+    {
+        id: 'biology9_variation_sources',
+        title: '6.2 Variation Sources',
+        path: 'textbooks/biology_9/variation_natural_selection/sources_variation_mutation_sexual_reproduction.json',
+        description: 'Mutation and genetic recombination'
+    },
+    {
+        id: 'biology9_adaptations',
+        title: '6.3 Adaptations',
+        path: 'textbooks/biology_9/variation_natural_selection/adaptations_structural_behavioral_physiological.json',
+        description: 'Types of biological adaptations'
+    },
+    {
+        id: 'biology9_darwin_voyage',
+        title: '6.4 Darwin\'s Voyage',
+        path: 'textbooks/biology_9/variation_natural_selection/charles_darwin_voyage_beagle.json',
+        description: 'Darwin\'s journey and observations'
+    },
+    {
+        id: 'biology9_natural_selection',
+        title: '6.5 Natural Selection',
+        path: 'textbooks/biology_9/variation_natural_selection/darwins_theory_natural_selection.json',
+        description: 'Mechanism of evolution'
+    },
+    {
+        id: 'biology9_fossil_evidence',
+        title: '6.6 Fossil Evidence',
+        path: 'textbooks/biology_9/variation_natural_selection/evidence_evolution_fossil_record.json',
+        description: 'Fossil record as evidence'
+    },
+    {
+        id: 'biology9_structural_evidence',
+        title: '6.7 Structural Evidence',
+        path: 'textbooks/biology_9/variation_natural_selection/evidence_evolution_homologous_analogous_structures.json',
+        description: 'Comparative anatomy evidence'
+    },
+    {
+        id: 'biology9_artificial_selection',
+        title: '6.8 Artificial Selection',
+        path: 'textbooks/biology_9/variation_natural_selection/artificial_selection_selective_breeding.json',
+        description: 'Human-directed selection'
+    },
+    {
+        id: 'biology9_antibiotic_resistance',
+        title: '6.9 Antibiotic Resistance',
+        path: 'textbooks/biology_9/variation_natural_selection/antibiotic_resistance_bacteria_case_study.json',
+        description: 'Evolution in action case study'
+    },
+    {
+        id: 'biology9_biodiversity',
+        title: '6.10 Biodiversity',
+        path: 'textbooks/biology_9/variation_natural_selection/introduction_biodiversity.json',
+        description: 'Variety of life on Earth'
+    }
+],
+
+'biology9-unit7': [
+    {
+        id: 'biology9_ecological_levels',
+        title: '7.1 Ecological Levels',
+        path: 'textbooks/biology_9/ecology_ecosystems/levels_ecological_organization_organism_biosphere.json',
+        description: 'Hierarchy of ecological organization'
+    },
+    {
+        id: 'biology9_abiotic_biotic',
+        title: '7.2 Abiotic & Biotic Factors',
+        path: 'textbooks/biology_9/ecology_ecosystems/abiotic_biotic_factors_ecosystem.json',
+        description: 'Living and non-living components'
+    },
+    {
+        id: 'biology9_habitat_niche',
+        title: '7.3 Habitat vs Niche',
+        path: 'textbooks/biology_9/ecology_ecosystems/habitat_vs_niche.json',
+        description: 'Where vs how organisms live'
+    },
+    {
+        id: 'biology9_producers_consumers',
+        title: '7.4 Producers & Consumers',
+        path: 'textbooks/biology_9/ecology_ecosystems/producers_consumers_decomposers.json',
+        description: 'Energy roles in ecosystems'
+    },
+    {
+        id: 'biology9_food_chains',
+        title: '7.5 Food Chains',
+        path: 'textbooks/biology_9/ecology_ecosystems/food_chains_energy_transfer_sun_carnivore.json',
+        description: 'Linear energy pathways'
+    },
+    {
+        id: 'biology9_food_webs',
+        title: '7.6 Food Webs',
+        path: 'textbooks/biology_9/ecology_ecosystems/food_webs_interconnected_food_chains.json',
+        description: 'Complex feeding relationships'
+    },
+    {
+        id: 'biology9_energy_pyramids',
+        title: '7.7 Energy Pyramids',
+        path: 'textbooks/biology_9/ecology_ecosystems/energy_pyramids_10_percent_rule.json',
+        description: 'Energy transfer efficiency'
+    },
+    {
+        id: 'biology9_water_cycle',
+        title: '7.8 Water Cycle',
+        path: 'textbooks/biology_9/ecology_ecosystems/cycling_matter_water_cycle.json',
+        description: 'Hydrological cycle processes'
+    },
+    {
+        id: 'biology9_carbon_cycle',
+        title: '7.9 Carbon Cycle',
+        path: 'textbooks/biology_9/ecology_ecosystems/cycling_matter_carbon_cycle.json',
+        description: 'Carbon movement through ecosystems'
+    },
+    {
+        id: 'biology9_human_impact',
+        title: '7.10 Human Impact',
+        path: 'textbooks/biology_9/ecology_ecosystems/human_impact_ecosystems_introduction.json',
+        description: 'Human effects on environments'
+    }
+],
+
+'biology9-unit8': [
+    {
+        id: 'biology9_plant_cell_structure',
+        title: '8.1 Plant Cell Structure',
+        path: 'textbooks/biology_9/plant_biology/structure_plant_cell_vs_animal_cell.json',
+        description: 'Unique plant cell features'
+    },
+    {
+        id: 'biology9_plant_tissues',
+        title: '8.2 Plant Tissues',
+        path: 'textbooks/biology_9/plant_biology/plant_tissues_dermal_vascular_ground.json',
+        description: 'Types of plant tissue systems'
+    },
+    {
+        id: 'biology9_root_systems',
+        title: '8.3 Root Systems',
+        path: 'textbooks/biology_9/plant_biology/root_systems_structure_function.json',
+        description: 'Root structure and functions'
+    },
+    {
+        id: 'biology9_stem_structure',
+        title: '8.4 Stem Structure',
+        path: 'textbooks/biology_9/plant_biology/stem_structure_function_transport_support.json',
+        description: 'Stem functions and transport'
+    },
+    {
+        id: 'biology9_leaf_structure',
+        title: '8.5 Leaf Structure',
+        path: 'textbooks/biology_9/plant_biology/leaf_structure_adaptations_photosynthesis.json',
+        description: 'Leaf adaptations for photosynthesis'
+    },
+    {
+        id: 'biology9_photosynthesis',
+        title: '8.6 Photosynthesis',
+        path: 'textbooks/biology_9/plant_biology/process_photosynthesis_overview.json',
+        description: 'Light energy conversion process'
+    },
+    {
+        id: 'biology9_stomata',
+        title: '8.7 Stomata',
+        path: 'textbooks/biology_9/plant_biology/stomata_gas_exchange.json',
+        description: 'Gas exchange regulation'
+    },
+    {
+        id: 'biology9_plant_reproduction',
+        title: '8.8 Plant Reproduction',
+        path: 'textbooks/biology_9/plant_biology/plant_reproduction_pollination_fertilization.json',
+        description: 'Sexual reproduction in plants'
+    },
+    {
+        id: 'biology9_seed_dispersal',
+        title: '8.9 Seed Dispersal',
+        path: 'textbooks/biology_9/plant_biology/seed_dispersal_wind_water_animals.json',
+        description: 'Seed distribution methods'
+    },
+    {
+        id: 'biology9_asexual_plants',
+        title: '8.10 Asexual Plant Reproduction',
+        path: 'textbooks/biology_9/plant_biology/asexual_reproduction_plants_runners_tubers.json',
+        description: 'Vegetative propagation methods'
+    }
+],
+
+'biology9-unit9': [
+    {
+        id: 'biology9_digestive_system',
+        title: '9.1 Digestive System',
+        path: 'textbooks/biology_9/human_biology_health/digestive_system_mouth_anus.json',
+        description: 'Human digestive tract'
+    },
+    {
+        id: 'biology9_enzymes_digestion',
+        title: '9.2 Enzymes in Digestion',
+        path: 'textbooks/biology_9/human_biology_health/enzymes_digestion_breaking_down_food.json',
+        description: 'Digestive enzyme functions'
+    },
+    {
+        id: 'biology9_circulatory_system',
+        title: '9.3 Circulatory System',
+        path: 'textbooks/biology_9/human_biology_health/circulatory_system_heart_blood_vessels.json',
+        description: 'Heart and blood vessel system'
+    },
+    {
+        id: 'biology9_blood_components',
+        title: '9.4 Blood Components',
+        path: 'textbooks/biology_9/human_biology_health/components_blood_red_cells_white_cells_platelets_plasma.json',
+        description: 'Composition of blood'
+    },
+    {
+        id: 'biology9_respiratory_system',
+        title: '9.5 Respiratory System',
+        path: 'textbooks/biology_9/human_biology_health/respiratory_system_lungs_gas_exchange.json',
+        description: 'Lung structure and function'
+    },
+    {
+        id: 'biology9_air_pathway',
+        title: '9.6 Air Pathway',
+        path: 'textbooks/biology_9/human_biology_health/pathway_air_nose_alveoli.json',
+        description: 'Respiratory tract anatomy'
+    },
+    {
+        id: 'biology9_respiration_circulation',
+        title: '9.7 Respiration & Circulation',
+        path: 'textbooks/biology_9/human_biology_health/connection_respiration_circulation.json',
+        description: 'Interconnection of body systems'
+    },
+    {
+        id: 'biology9_health_disease',
+        title: '9.8 Health & Disease',
+        path: 'textbooks/biology_9/human_biology_health/health_disease_pathogens_immune_system.json',
+        description: 'Pathogens and immune response'
+    },
+    {
+        id: 'biology9_diet_nutrition',
+        title: '9.9 Diet & Nutrition',
+        path: 'textbooks/biology_9/human_biology_health/diet_nutrition_macronutrients_micronutrients.json',
+        description: 'Nutritional requirements'
+    },
+    {
+        id: 'biology9_final_review',
+        title: '9.10 Final Review',
+        path: 'textbooks/biology_9/human_biology_health/practical_skills_review_final_assessment_preparation.json',
+        description: 'Comprehensive review and assessment'
+    }
+],
+        
 'chemistry11-unit1': [
     {
         id: 'chemistry11_limitations_bohr_model',
@@ -22098,6 +22709,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
