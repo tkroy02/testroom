@@ -3878,6 +3878,40 @@ function calculateFunction(func) {
     }
 }
 
+function calculate() {
+    try {
+        // Replace caret (^) with JavaScript exponentiation operator (**)
+        let expression = currentCalculation.replace(/\^/g, '**');
+        
+        // Handle percentage calculations
+        expression = expression.replace(/(\d+(\.\d+)?)%/g, '($1/100)');
+        
+        // Evaluate the expression
+        let result = eval(expression);
+        
+        // Handle division by zero and other mathematical errors
+        if (!isFinite(result)) {
+            if (isNaN(result)) {
+                currentCalculation = 'Error: NaN';
+            } else {
+                currentCalculation = 'Error: Division by zero';
+            }
+        } else {
+            // Round to avoid floating point precision issues
+            result = Math.round(result * 1e12) / 1e12;
+            currentCalculation = result.toString();
+        }
+        
+        calcDisplay.value = currentCalculation;
+        shouldClearOnNextInput = true;
+        
+    } catch (error) {
+        calcDisplay.value = 'Error';
+        currentCalculation = '0';
+        shouldClearOnNextInput = true;
+    }
+}
+        
 // Add keyboard support
 document.addEventListener('keydown', function(event) {
     if (currentTool === 'calculator') {
@@ -18757,6 +18791,7 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
+
 
 
 
