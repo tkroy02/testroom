@@ -3885,6 +3885,11 @@ function calculate() {
         
         // Handle percentage calculations
         expression = expression.replace(/(\d+(\.\d+)?)%/g, '($1/100)');
+
+        // 🔥 ADD THIS: Handle implicit multiplication (number followed by parenthesis)
+        expression = expression.replace(/(\d)(\()/g, '$1*$2');
+        expression = expression.replace(/(\))(\d)/g, '$1*$2');
+        expression = expression.replace(/(\))(\()/g, '$1*$2');
         
         // Evaluate the expression
         let result = eval(expression);
