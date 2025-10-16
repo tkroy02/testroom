@@ -4113,25 +4113,19 @@ function openResource(resourceType, element) {
     resourceContent.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Update the openExamQuiz function to reset and clear previous content
+// Examination Quiz Functions - COMPLETE WORKING VERSION
 function openExamQuiz() {
     const courseTitle = document.getElementById('detail-course-title').textContent;
     const quizCount = getQuizCountForCourse(currentCourseId);
     const questionCount = getQuestionCountForCourse(currentCourseId);
     const timeLimit = getTimeLimitForCourse(currentCourseId);
 
-    // Clear any existing quiz data
-    const quizGrid = document.getElementById('exam-quiz-grid');
-    if (quizGrid) {
-        quizGrid.innerHTML = '';
-    }
-
     document.getElementById('resource-content').innerHTML = `
         <div id="exam-quiz-section" class="tool-interface active">
             <div class="tool-header">
                 <h3 class="section-title">Examination Quiz - ${courseTitle}</h3>
                 <button class="tool-back" onclick="closeExamQuiz()">
-                    <i class="fas fa-arrow-left"></i> Back to Course
+                    <i class="fas fa-arrow-left"></i> Back to My Courses
                 </button>
             </div>
             
@@ -4159,7 +4153,7 @@ function openExamQuiz() {
                 </div>
                 
                 <div class="quiz-grid-container">
-                    <h4 class="quiz-grid-title">Select a Quiz for ${courseTitle}</h4>
+                    <h4 class="quiz-grid-title">Select a Quiz</h4>
                     <div class="quiz-grid" id="exam-quiz-grid">
                         <!-- Quiz buttons will be generated here -->
                     </div>
@@ -4168,31 +4162,77 @@ function openExamQuiz() {
         </div>
     `;
     
-    // Generate fresh course-specific quiz buttons
+    // Generate course-specific quiz buttons
     generateExamQuizButtons(currentCourseId);
 }
 
-// Update the generateExamQuizButtons function to ensure fresh generation
+// Helper functions to get course-specific quiz data
+function getQuizCountForCourse(courseId) {
+    const quizCounts = {
+        'ap-physics-1': 100,
+        'ap-physics-2': 80,
+        'ap-physics-c-mechanics': 75,
+        'ap-physics-c-em': 75,
+        'physics-grade-9': 60,
+        'physics-grade-10': 70,
+        'physics-grade-11': 85,
+        'physics-grade-12': 90,
+        'algebra-1': 70,
+        'algebra-2': 80,
+        'geometry': 65,
+        'pre-calculus': 85,
+        'ap-calculus': 100,
+        'chemistry-grade-10': 60,
+        'chemistry-grade-11': 75,
+        'chemistry-grade-12': 85,
+        'biology-grade-9': 55,
+        'biology-grade-10': 65,
+        'biology-grade-11': 75,
+        'biology-grade-12': 85,
+        'ap-biology': 95,
+        'economics': 50,
+        'ap-macroeconomics': 70,
+        'ap-microeconomics': 70
+    };
+    return quizCounts[courseId] || 50;
+}
+
+function getQuestionCountForCourse(courseId) {
+    const questionCounts = {
+        'ap-physics-1': 50,
+        'ap-physics-2': 50,
+        'ap-physics-c-mechanics': 35,
+        'ap-physics-c-em': 35,
+        'ap-calculus': 45,
+        'ap-biology': 60,
+        'ap-macroeconomics': 60,
+        'ap-microeconomics': 60,
+        'default': 40
+    };
+    return questionCounts[courseId] || questionCounts['default'];
+}
+
+function getTimeLimitForCourse(courseId) {
+    const timeLimits = {
+        'ap-physics-1': '90min',
+        'ap-physics-2': '90min',
+        'ap-physics-c-mechanics': '90min',
+        'ap-physics-c-em': '90min',
+        'ap-calculus': '105min',
+        'ap-biology': '160min',
+        'ap-macroeconomics': '130min',
+        'ap-microeconomics': '130min',
+        'default': '60min'
+    };
+    return timeLimits[courseId] || timeLimits['default'];
+}
+
+// Generate quiz buttons for all courses
 function generateExamQuizButtons(courseId) {
     const quizGrid = document.getElementById('exam-quiz-grid');
-    if (!quizGrid) return;
-    
-    quizGrid.innerHTML = ''; // Clear any existing content
+    quizGrid.innerHTML = '';
     
     const quizCount = getQuizCountForCourse(courseId);
-    const courseTitle = document.getElementById('detail-course-title').textContent;
-    
-    // Add a header showing which course these quizzes belong to
-    const header = document.createElement('div');
-    header.style.gridColumn = '1 / -1';
-    header.style.textAlign = 'center';
-    header.style.padding = '10px';
-    header.style.color = 'var(--primary)';
-    header.style.fontWeight = '600';
-    header.style.fontSize = '1.1rem';
-    header.style.marginBottom = '10px';
-    header.textContent = `${courseTitle} Quizzes`;
-    quizGrid.appendChild(header);
     
     for (let i = 1; i <= quizCount; i++) {
         const quizBtn = document.createElement('button');
@@ -4203,13 +4243,260 @@ function generateExamQuizButtons(courseId) {
     }
 }
 
-// Update the closeExamQuiz function to properly reset
-function closeExamQuiz() {
-    // If you want the button to take you back to My Courses, change it to:
-   showPage('my-courses', document.querySelector('.sidebar-menu li:nth-child(2) a'));
+// MAIN FUNCTION THAT LOADS FROM JSON FILES
+async function startExamQuiz(quizNumber, courseId) {
+    console.log(`🎯 Loading quiz ${quizNumber} for ${courseId}`);
     
-    // Then re-open the exam quiz section fresh
-    openResource('exam-quiz');
+    try {
+        const courseTitle = document.getElementById('detail-course-title').textContent;
+        
+        // Show loading state
+        document.getElementById('resource-content').innerHTML = `
+            <div class="tool-interface active">
+                <div class="tool-header">
+                    <h3 class="section-title">${courseTitle} - Quiz ${quizNumber}</h3>
+                    <div style="display: flex; gap: 15px;">
+                        <div style="background: var(--light-bg); padding: 8px 15px; border-radius: var(--border-radius-sm); color: var(--primary); font-weight: 600;">
+                            <i class="fas fa-clock"></i> <span id="quiz-timer">${getTimeLimitForCourse(courseId)}</span>
+                        </div>
+                        <button class="tool-back" onclick="openExamQuiz()">
+                            <i class="fas fa-times"></i> Exit Quiz
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="quiz-container">
+                    <div style="text-align: center; padding: 60px 20px;">
+                        <div class="tool-icon" style="margin: 0 auto 20px;">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                        <h4 style="color: var(--primary); margin-bottom: 10px;">Loading Quiz ${quizNumber}...</h4>
+                        <p style="color: var(--gray;">Fetching from: exams/${courseId}/quiz${quizNumber}.json</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // ACTUALLY LOAD FROM JSON FILE
+        const quizData = await loadExamQuizData(courseId, quizNumber);
+        
+        if (quizData) {
+            displayExamQuiz(quizData, courseId, quizNumber);
+        } else {
+            displayDefaultExamQuiz(courseId, quizNumber);
+        }
+        
+    } catch (error) {
+        console.error('Error starting exam quiz:', error);
+        displayDefaultExamQuiz(courseId, quizNumber);
+    }
+}
+
+// LOAD FROM JSON FILE - CORE FUNCTION
+async function loadExamQuizData(courseId, quizNumber) {
+    try {
+        const quizPath = `exams/${courseId}/quiz${quizNumber}.json`;
+        console.log('🔍 Loading exam quiz from:', quizPath);
+        
+        const response = await fetch(quizPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load quiz: ${response.status}`);
+        }
+        
+        const quizData = await response.json();
+        console.log('✅ Successfully loaded exam quiz with', quizData.questions?.length || 0, 'questions');
+        return quizData;
+        
+    } catch (error) {
+        console.error('❌ Error loading exam quiz:', error);
+        return null;
+    }
+}
+
+// DISPLAY QUIZ FROM JSON DATA
+function displayExamQuiz(quizData, courseId, quizNumber) {
+    const courseTitle = document.getElementById('detail-course-title').textContent;
+    
+    document.getElementById('resource-content').innerHTML = `
+        <div class="tool-interface active">
+            <div class="tool-header">
+                <h3 class="section-title">${courseTitle} - ${quizData.title || `Quiz ${quizNumber}`}</h3>
+                <div style="display: flex; gap: 15px;">
+                    <div style="background: var(--light-bg); padding: 8px 15px; border-radius: var(--border-radius-sm); color: var(--primary); font-weight: 600;">
+                        <i class="fas fa-clock"></i> <span id="quiz-timer">${getTimeLimitForCourse(courseId)}</span>
+                    </div>
+                    <div style="background: var(--light-bg); padding: 8px 15px; border-radius: var(--border-radius-sm); color: var(--primary); font-weight: 600;">
+                        <i class="fas fa-question-circle"></i> ${quizData.questions ? quizData.questions.length : 0} Questions
+                    </div>
+                    <button class="tool-back" onclick="openExamQuiz()">
+                        <i class="fas fa-times"></i> Exit Quiz
+                    </button>
+                </div>
+            </div>
+            
+            <div class="quiz-container">
+                <div class="quiz-info" style="background: var(--light-bg); padding: 20px; border-radius: var(--border-radius-sm); margin-bottom: 25px;">
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">${quizData.title || `Quiz ${quizNumber}`}</h4>
+                    <p style="color: var(--gray); margin-bottom: 0;">${quizData.description || 'Full-length exam simulation'}</p>
+                    ${quizData.duration ? `<div style="margin-top: 10px;"><strong>Duration:</strong> ${quizData.duration}</div>` : ''}
+                    ${quizData.passingScore ? `<div style="margin-top: 5px;"><strong>Passing Score:</strong> ${quizData.passingScore}%</div>` : ''}
+                </div>
+                
+                <div id="exam-questions-container">
+                    ${quizData.questions && quizData.questions.length > 0 ? 
+                        renderExamQuestions(quizData.questions) : 
+                        '<p style="text-align: center; padding: 40px; color: var(--gray);">No questions available in this quiz.</p>'
+                    }
+                </div>
+                
+                <div class="quiz-actions" style="margin-top: 30px; justify-content: center;">
+                    <button class="btn" style="background: var(--success);" onclick="submitExamQuiz()">
+                        <i class="fas fa-check-circle"></i> Submit Exam
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    startQuizTimer(courseId);
+}
+
+// RENDER QUESTIONS FROM JSON
+function renderExamQuestions(questions) {
+    return questions.map((question, index) => `
+        <div class="question" style="margin-bottom: 40px; padding: 25px; background: white; border-radius: var(--border-radius-sm); box-shadow: var(--shadow); border-left: 4px solid var(--primary-light);">
+            <div class="question-header" style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+                <div class="question-text" style="font-weight: 600; color: var(--primary); flex: 1;">
+                    <strong>Question ${index + 1}:</strong> ${renderMarkdown(question.question)}
+                </div>
+                ${question.points ? `
+                    <div style="background: var(--primary); color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem; font-weight: 600;">
+                        ${question.points} pts
+                    </div>
+                ` : ''}
+            </div>
+            
+            ${question.image ? `
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <img src="${question.image}" alt="Question diagram" style="max-width: 100%; max-height: 300px; border-radius: var(--border-radius-sm);">
+                </div>
+            ` : ''}
+            
+            <div class="options" style="display: flex; flex-direction: column; gap: 12px;">
+                ${question.options.map((option, optionIndex) => `
+                    <div class="option" onclick="selectExamOption(${index}, ${optionIndex})" 
+                         style="padding: 15px; border: 2px solid var(--light-gray); border-radius: var(--border-radius-sm); cursor: pointer; transition: var(--transition);"
+                         id="exam-option-${index}-${optionIndex}">
+                         <span style="font-weight: 600; margin-right: 10px;">${String.fromCharCode(65 + optionIndex)}.</span>
+                         <span>${renderMarkdown(option)}</span>
+                    </div>
+                `).join('')}
+            </div>
+            
+            <div class="selection-status" style="margin-top: 15px; font-size: 0.9rem; color: var(--success); display: none;" id="exam-status-${index}">
+                <i class="fas fa-check"></i> Answer Selected
+            </div>
+        </div>
+    `).join('');
+}
+
+// OPTION SELECTION
+function selectExamOption(questionIndex, optionIndex) {
+    const questionElement = document.querySelectorAll('.question')[questionIndex];
+    const options = questionElement.querySelectorAll('.option');
+    const statusElement = document.getElementById(`exam-status-${questionIndex}`);
+    
+    // Remove selected class from all options in this question
+    options.forEach(opt => {
+        opt.classList.remove('selected');
+        opt.style.borderColor = 'var(--light-gray)';
+        opt.style.background = 'white';
+    });
+    
+    // Add selected class to clicked option
+    options[optionIndex].classList.add('selected');
+    options[optionIndex].style.borderColor = 'var(--primary)';
+    options[optionIndex].style.background = 'var(--light-bg)';
+    
+    // Show selection status
+    if (statusElement) {
+        statusElement.style.display = 'block';
+    }
+}
+
+// FALLBACK WHEN JSON FILES DON'T EXIST
+function displayDefaultExamQuiz(courseId, quizNumber) {
+    const courseTitle = document.getElementById('detail-course-title').textContent;
+    
+    document.getElementById('resource-content').innerHTML = `
+        <div class="tool-interface active">
+            <div class="tool-header">
+                <h3 class="section-title">${courseTitle} - Quiz ${quizNumber}</h3>
+                <div style="display: flex; gap: 15px;">
+                    <button class="tool-back" onclick="openExamQuiz()">
+                        <i class="fas fa-arrow-left"></i> Back to Quizzes
+                    </button>
+                </div>
+            </div>
+            
+            <div class="quiz-container">
+                <div style="text-align: center; padding: 60px 20px;">
+                    <div class="tool-icon" style="background: var(--warning); margin: 0 auto 20px;">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">Quiz Coming Soon</h4>
+                    <p style="color: var(--gray); margin-bottom: 30px;">
+                        The exam quiz for ${courseTitle} - Quiz ${quizNumber} is being prepared and will be available soon.
+                    </p>
+                    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 30px;">
+                        File not found: exams/${courseId}/quiz${quizNumber}.json
+                    </p>
+                    <button class="btn" onclick="openExamQuiz()">
+                        <i class="fas fa-arrow-left"></i> Back to Available Quizzes
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// QUIZ SUBMISSION
+function submitExamQuiz() {
+    alert('Exam quiz submitted! In a real implementation, this would calculate your score and show detailed results.');
+}
+
+// TIMER FUNCTION
+function startQuizTimer(courseId) {
+    const timeLimit = getTimeLimitForCourse(courseId);
+    let totalMinutes = parseInt(timeLimit);
+    let minutes = totalMinutes - 1;
+    let seconds = 0;
+    
+    const timerElement = document.getElementById('quiz-timer');
+    if (!timerElement) return;
+    
+    timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    const timer = setInterval(() => {
+        if (seconds === 0) {
+            if (minutes === 0) {
+                clearInterval(timer);
+                alert("Time's up! Submitting your quiz.");
+                return;
+            }
+            minutes--;
+            seconds = 59;
+        } else {
+            seconds--;
+        }
+        
+        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }, 1000);
+}
+
+// CLOSE EXAM QUIZ
+function closeExamQuiz() {
+    showPage('my-courses', document.querySelector('.sidebar-menu li:nth-child(2) a'));
 }
 
 // Also update the showCourseDetail function to ensure currentCourseId is properly set
@@ -24298,15 +24585,86 @@ function generateExamQuizButtons(courseId) {
 }
 
 // Update the startExamQuiz function to include courseId
-function startExamQuiz(quizNumber, courseId) {
+async function startExamQuiz(quizNumber, courseId) {
+    try {
+        const courseTitle = document.getElementById('detail-course-title').textContent;
+        
+        // Show loading state
+        document.getElementById('exam-quiz-section').innerHTML = `
+            <div class="tool-header">
+                <h3 class="section-title">${courseTitle} - Quiz ${quizNumber}</h3>
+                <div style="display: flex; gap: 15px;">
+                    <div style="background: var(--light-bg); padding: 8px 15px; border-radius: var(--border-radius-sm); color: var(--primary); font-weight: 600;">
+                        <i class="fas fa-clock"></i> <span id="quiz-timer">${getTimeLimitForCourse(courseId)}</span>
+                    </div>
+                    <button class="tool-back" onclick="openExamQuiz()">
+                        <i class="fas fa-times"></i> Exit Quiz
+                    </button>
+                </div>
+            </div>
+            
+            <div class="quiz-container">
+                <div style="text-align: center; padding: 60px 20px;">
+                    <div class="tool-icon" style="margin: 0 auto 20px;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </div>
+                    <h4 style="color: var(--primary); margin-bottom: 10px;">Loading Quiz...</h4>
+                    <p style="color: var(--gray);">Preparing your exam quiz...</p>
+                </div>
+            </div>
+        `;
+
+        // Load quiz data from JSON file
+        const quizData = await loadExamQuizData(courseId, quizNumber);
+        
+        if (quizData) {
+            displayExamQuiz(quizData, courseId, quizNumber);
+        } else {
+            // Fallback to default quiz if file not found
+            displayDefaultExamQuiz(courseId, quizNumber);
+        }
+        
+    } catch (error) {
+        console.error('Error starting exam quiz:', error);
+        displayDefaultExamQuiz(courseId, quizNumber);
+    }
+}
+
+// Add this function to load exam quiz data from JSON files
+async function loadExamQuizData(courseId, quizNumber) {
+    try {
+        // Construct the path to the quiz JSON file
+        const quizPath = `exams/${courseId}/quiz${quizNumber}.json`;
+        console.log('🔍 Loading exam quiz from:', quizPath);
+        
+        const response = await fetch(quizPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load quiz: ${response.status}`);
+        }
+        
+        const quizData = await response.json();
+        console.log('✅ Successfully loaded exam quiz:', quizData);
+        return quizData;
+        
+    } catch (error) {
+        console.error('❌ Error loading exam quiz:', error);
+        return null;
+    }
+}
+
+// Add this function to display the loaded quiz data
+function displayExamQuiz(quizData, courseId, quizNumber) {
     const courseTitle = document.getElementById('detail-course-title').textContent;
     
     document.getElementById('exam-quiz-section').innerHTML = `
         <div class="tool-header">
-            <h3 class="section-title">${courseTitle} - Quiz ${quizNumber}</h3>
+            <h3 class="section-title">${courseTitle} - ${quizData.title || `Quiz ${quizNumber}`}</h3>
             <div style="display: flex; gap: 15px;">
                 <div style="background: var(--light-bg); padding: 8px 15px; border-radius: var(--border-radius-sm); color: var(--primary); font-weight: 600;">
                     <i class="fas fa-clock"></i> <span id="quiz-timer">${getTimeLimitForCourse(courseId)}</span>
+                </div>
+                <div style="background: var(--light-bg); padding: 8px 15px; border-radius: var(--border-radius-sm); color: var(--primary); font-weight: 600;">
+                    <i class="fas fa-question-circle"></i> ${quizData.questions ? quizData.questions.length : 0} Questions
                 </div>
                 <button class="tool-back" onclick="openExamQuiz()">
                     <i class="fas fa-times"></i> Exit Quiz
@@ -24315,87 +24673,153 @@ function startExamQuiz(quizNumber, courseId) {
         </div>
         
         <div class="quiz-container">
-            <div class="question">
-                <div class="question-text">
-                    This is a sample question from ${courseTitle} - Quiz ${quizNumber}. This quiz is specifically designed for ${courseTitle} and contains ${getQuestionCountForCourse(courseId)} questions with a ${getTimeLimitForCourse(courseId)} time limit.
-                </div>
-                <div class="options">
-                    <div class="option" onclick="selectOption(this)">
-                        Option A - ${courseTitle} specific
-                    </div>
-                    <div class="option" onclick="selectOption(this)">
-                        Option B - ${courseTitle} specific
-                    </div>
-                    <div class="option" onclick="selectOption(this)">
-                        Option C - ${courseTitle} specific
-                    </div>
-                    <div class="option" onclick="selectOption(this)">
-                        Option D - ${courseTitle} specific
-                    </div>
-                </div>
+            <div class="quiz-info" style="background: var(--light-bg); padding: 20px; border-radius: var(--border-radius-sm); margin-bottom: 25px;">
+                <h4 style="color: var(--primary); margin-bottom: 10px;">${quizData.title || `Quiz ${quizNumber}`}</h4>
+                <p style="color: var(--gray); margin-bottom: 0;">${quizData.description || 'Full-length exam simulation'}</p>
+                ${quizData.duration ? `<div style="margin-top: 10px;"><strong>Duration:</strong> ${quizData.duration}</div>` : ''}
+                ${quizData.passingScore ? `<div style="margin-top: 5px;"><strong>Passing Score:</strong> ${quizData.passingScore}%</div>` : ''}
             </div>
             
-            <div class="quiz-navigation">
-                <button class="btn btn-outline">
-                    <i class="fas fa-arrow-left"></i> Previous
-                </button>
-                <div style="display: flex; gap: 5px;">
-                    <span style="padding: 8px 12px; background: var(--light-bg); border-radius: 5px;">1/${getQuestionCountForCourse(courseId)}</span>
-                </div>
-                <button class="btn">
-                    Next <i class="fas fa-arrow-right"></i>
-                </button>
+            <div id="exam-questions-container">
+                <!-- Questions will be loaded here -->
             </div>
             
             <div class="quiz-actions" style="margin-top: 30px; justify-content: center;">
-                <button class="btn" style="background: var(--success);">
-                    <i class="fas fa-check-circle"></i> Submit Quiz
+                <button class="btn" style="background: var(--success);" onclick="submitExamQuiz()">
+                    <i class="fas fa-check-circle"></i> Submit Exam
                 </button>
             </div>
         </div>
     `;
     
+    // Load the questions
+    if (quizData.questions && quizData.questions.length > 0) {
+        displayExamQuestions(quizData.questions);
+    } else {
+        document.getElementById('exam-questions-container').innerHTML = `
+            <div style="text-align: center; padding: 40px 20px; color: var(--gray);">
+                <i class="fas fa-exclamation-circle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                <h4>No Questions Available</h4>
+                <p>This exam quiz doesn't contain any questions yet.</p>
+            </div>
+        `;
+    }
+    
     startQuizTimer(courseId);
 }
 
-// Update timer function to be course-specific
-function startQuizTimer(courseId) {
-    const timeLimit = getTimeLimitForCourse(courseId);
-    let totalMinutes = parseInt(timeLimit);
-    let minutes = totalMinutes - 1; // Start counting down from (limit-1):00
-    let seconds = 0;
+// Add this function to display exam questions
+function displayExamQuestions(questions) {
+    const container = document.getElementById('exam-questions-container');
     
-    const timerElement = document.getElementById('quiz-timer');
-    if (!timerElement) return;
-    
-    // Initial display
-    timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    
-    const timer = setInterval(() => {
-        if (seconds === 0) {
-            if (minutes === 0) {
-                clearInterval(timer);
-                alert("Time's up! Submitting your quiz.");
-                return;
-            }
-            minutes--;
-            seconds = 59;
-        } else {
-            seconds--;
+    container.innerHTML = questions.map((question, index) => `
+        <div class="question" style="margin-bottom: 40px; padding: 25px; background: white; border-radius: var(--border-radius-sm); box-shadow: var(--shadow); border-left: 4px solid var(--primary-light);">
+            <div class="question-header" style="display: flex; justify-content: between; align-items: start; margin-bottom: 20px;">
+                <div class="question-text" style="font-weight: 600; color: var(--primary); flex: 1;">
+                    <strong>Question ${index + 1}:</strong> <span id="question-text-${index}">${renderMarkdown(question.question)}</span>
+                </div>
+                ${question.points ? `
+                    <div style="background: var(--primary); color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem; font-weight: 600;">
+                        ${question.points} pts
+                    </div>
+                ` : ''}
+            </div>
+            
+            ${question.image ? `
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <img src="${question.image}" alt="Question diagram" style="max-width: 100%; max-height: 300px; border-radius: var(--border-radius-sm);">
+                </div>
+            ` : ''}
+            
+            <div class="options" style="display: flex; flex-direction: column; gap: 12px;">
+                ${question.options.map((option, optionIndex) => `
+                    <div class="option" onclick="selectExamOption(${index}, ${optionIndex})" 
+                         style="padding: 15px; border: 2px solid var(--light-gray); border-radius: var(--border-radius-sm); cursor: pointer; transition: var(--transition);"
+                         id="exam-option-${index}-${optionIndex}">
+                         <span style="font-weight: 600; margin-right: 10px;">${String.fromCharCode(65 + optionIndex)}.</span>
+                         <span>${renderMarkdown(option)}</span>
+                    </div>
+                `).join('')}
+            </div>
+            
+            <div class="selection-status" style="margin-top: 15px; font-size: 0.9rem; color: var(--success); display: none;" id="exam-status-${index}">
+                <i class="fas fa-check"></i> Answer Selected
+            </div>
+        </div>
+    `).join('');
+
+    // Render MathJax after questions are loaded
+    setTimeout(() => {
+        if (window.MathJax) {
+            MathJax.typesetPromise().catch(console.error);
         }
-        
-        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }, 1000);
+    }, 100);
 }
 
-function selectOption(optionElement) {
+// Add this function for exam option selection
+function selectExamOption(questionIndex, optionIndex) {
+    const questionElement = document.querySelectorAll('.question')[questionIndex];
+    const options = questionElement.querySelectorAll('.option');
+    const statusElement = document.getElementById(`exam-status-${questionIndex}`);
+    
     // Remove selected class from all options in this question
-    const options = optionElement.parentElement.querySelectorAll('.option');
-    options.forEach(opt => opt.classList.remove('selected'));
+    options.forEach(opt => {
+        opt.classList.remove('selected');
+        opt.style.borderColor = 'var(--light-gray)';
+        opt.style.background = 'white';
+    });
     
     // Add selected class to clicked option
-    optionElement.classList.add('selected');
+    options[optionIndex].classList.add('selected');
+    options[optionIndex].style.borderColor = 'var(--primary)';
+    options[optionIndex].style.background = 'var(--light-bg)';
+    
+    // Show selection status
+    if (statusElement) {
+        statusElement.style.display = 'block';
+    }
 }
+
+// Add fallback function for when JSON files are not available
+function displayDefaultExamQuiz(courseId, quizNumber) {
+    const courseTitle = document.getElementById('detail-course-title').textContent;
+    
+    document.getElementById('exam-quiz-section').innerHTML = `
+        <div class="tool-header">
+            <h3 class="section-title">${courseTitle} - Quiz ${quizNumber}</h3>
+            <div style="display: flex; gap: 15px;">
+                <button class="tool-back" onclick="openExamQuiz()">
+                    <i class="fas fa-arrow-left"></i> Back to Quizzes
+                </button>
+            </div>
+        </div>
+        
+        <div class="quiz-container">
+            <div style="text-align: center; padding: 60px 20px;">
+                <div class="tool-icon" style="background: var(--warning); margin: 0 auto 20px;">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h4 style="color: var(--primary); margin-bottom: 10px;">Quiz Coming Soon</h4>
+                <p style="color: var(--gray); margin-bottom: 30px;">
+                    The exam quiz for ${courseTitle} - Quiz ${quizNumber} is being prepared and will be available soon.
+                </p>
+                <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 30px;">
+                    Check back later for full exam simulations with detailed questions and explanations.
+                </p>
+                <button class="btn" onclick="openExamQuiz()">
+                    <i class="fas fa-arrow-left"></i> Back to Available Quizzes
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Add submit function for exam quizzes
+function submitExamQuiz() {
+    alert('Exam quiz submitted! In a real implementation, this would calculate your score and show detailed results.');
+    // You can implement scoring logic similar to your topic quizzes
+}
+
 
 // Add this function to load quiz data from JSON files
 async function loadQuizData(quizPath) {
