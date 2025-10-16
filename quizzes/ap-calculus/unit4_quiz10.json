@@ -8,123 +8,123 @@
     "questions": [
       {
         "type": "mcq",
-        "question": "If y = sin x + x^2, what is y''?",
+        "question": "If \\(y = \\sin x + x^2\\), what is \\(y''\\)?",
         "options": [
-          "-sin x + 2",
-          "cos x + 2",
-          "-cos x + 2",
-          "sin x + 2"
+          "\\(-\\sin x + 2\\)",
+          "\\(\\cos x + 2\\)",
+          "\\(-\\cos x + 2\\)",
+          "\\(\\sin x + 2\\)"
         ],
         "answer": "A",
-        "explanation": "y' = cos x + 2x → y'' = -sin x + 2"
+        "explanation": "\\(y' = \\cos x + 2x \\rightarrow y'' = -\\sin x + 2\\)"
       },
       {
         "type": "mcq",
-        "question": "If y = cos x + 3x, what is y''?",
+        "question": "If \\(y = \\cos x + 3x\\), what is \\(y''\\)?",
         "options": [
-          "cos x",
-          "-cos x",
-          "-sin x + 3",
-          "sin x"
+          "\\(\\cos x\\)",
+          "\\(-\\cos x\\)",
+          "\\(-\\sin x + 3\\)",
+          "\\(\\sin x\\)"
         ],
         "answer": "B",
-        "explanation": "y' = -sin x + 3 → y'' = -cos x"
+        "explanation": "\\(y' = -\\sin x + 3 \\rightarrow y'' = -\\cos x\\)"
       },
       {
         "type": "mcq",
-        "question": "If y = e^x + x^3, what is y''?",
+        "question": "If \\(y = e^x + x^3\\), what is \\(y''\\)?",
         "options": [
-          "e^x + 6x",
-          "e^x + 3x^2",
-          "6x^2 + e^x",
-          "3x^2 + e^x"
+          "\\(e^x + 6x\\)",
+          "\\(e^x + 3x^2\\)",
+          "\\(6x^2 + e^x\\)",
+          "\\(3x^2 + e^x\\)"
         ],
         "answer": "A",
-        "explanation": "y' = e^x + 3x^2 → y'' = e^x + 6x"
+        "explanation": "\\(y' = e^x + 3x^2 \\rightarrow y'' = e^x + 6x\\)"
       },
       {
         "type": "mcq",
-        "question": "If y = ln x + x^2, what is y''?",
+        "question": "If \\(y = \\ln x + x^2\\), what is \\(y''\\)?",
         "options": [
-          "-1/x^2 + 2",
-          "1/x^2 + 2",
-          "2x - 1/x",
-          "1/x + 2"
+          "\\(-\\frac{1}{x^2} + 2\\)",
+          "\\(\\frac{1}{x^2} + 2\\)",
+          "\\(2x - \\frac{1}{x}\\)",
+          "\\(\\frac{1}{x} + 2\\)"
         ],
         "answer": "A",
-        "explanation": "y' = 1/x + 2x → y'' = -1/x^2 + 2"
+        "explanation": "\\(y' = \\frac{1}{x} + 2x \\rightarrow y'' = -\\frac{1}{x^2} + 2\\)"
       },
       {
         "type": "mcq",
-        "question": "If y = e^x + sin x, what is y''?",
+        "question": "If \\(y = e^x + \\sin x\\), what is \\(y''\\)?",
         "options": [
-          "e^x - sin x",
-          "e^x + cos x",
-          "e^x - cos x",
-          "e^x + sin x"
+          "\\(e^x - \\sin x\\)",
+          "\\(e^x + \\cos x\\)",
+          "\\(e^x - \\cos x\\)",
+          "\\(e^x + \\sin x\\)"
         ],
         "answer": "A",
-        "explanation": "y' = e^x + cos x → y'' = e^x - sin x"
+        "explanation": "\\(y' = e^x + \\cos x \\rightarrow y'' = e^x - \\sin x\\)"
       },
       {
         "type": "mcq",
-        "question": "If y = cos x + x^4, what is y'''?",
+        "question": "If \\(y = \\cos x + x^4\\), what is \\(y'''\\)?",
         "options": [
-          "sin x + 24x",
-          "24x^3 - sin x",
-          "12x^2 - cos x",
-          "24x - cos x"
+          "\\(\\sin x + 24x\\)",
+          "\\(24x^3 - \\sin x\\)",
+          "\\(12x^2 - \\cos x\\)",
+          "\\(24x - \\cos x\\)"
         ],
         "answer": "A",
-        "explanation": "y' = -sin x + 4x^3, y'' = -cos x + 12x^2, y''' = sin x + 24x"
+        "explanation": "\\(y' = -\\sin x + 4x^3\\), \\(y'' = -\\cos x + 12x^2\\), \\(y''' = \\sin x + 24x\\)"
       },
       {
         "type": "mcq",
-        "question": "If y = ln x + e^x, what is y'''?",
+        "question": "If \\(y = \\ln x + e^x\\), what is \\(y'''\\)?",
         "options": [
-          "2/x^3 + e^x",
-          "-2/x^3 + e^x",
-          "2/x^2 + e^x",
-          "2/x^3 - e^x"
+          "\\(\\frac{2}{x^3} + e^x\\)",
+          "\\(-\\frac{2}{x^3} + e^x\\)",
+          "\\(\\frac{2}{x^2} + e^x\\)",
+          "\\(\\frac{2}{x^3} - e^x\\)"
         ],
         "answer": "A",
-        "explanation": "y' = 1/x + e^x, y'' = -1/x^2 + e^x, y''' = 2/x^3 + e^x"
+        "explanation": "\\(y' = \\frac{1}{x} + e^x\\), \\(y'' = -\\frac{1}{x^2} + e^x\\), \\(y''' = \\frac{2}{x^3} + e^x\\)"
       },
       {
         "type": "mcq",
-        "question": "If y = x + sin x, what is y'''?",
+        "question": "If \\(y = x + \\sin x\\), what is \\(y'''\\)?",
         "options": [
-          "-cos x",
-          "cos x",
-          "sin x",
-          "-sin x"
+          "\\(-\\cos x\\)",
+          "\\(\\cos x\\)",
+          "\\(\\sin x\\)",
+          "\\(-\\sin x\\)"
         ],
         "answer": "A",
-        "explanation": "y' = 1 + cos x, y'' = -sin x, y''' = -cos x"
+        "explanation": "\\(y' = 1 + \\cos x\\), \\(y'' = -\\sin x\\), \\(y''' = -\\cos x\\)"
       },
       {
         "type": "mcq",
-        "question": "If y = x^2 + cos x, what is y'''?",
+        "question": "If \\(y = x^2 + \\cos x\\), what is \\(y'''\\)?",
         "options": [
-          "sin x",
-          "-sin x",
-          "cos x",
-          "-cos x"
+          "\\(\\sin x\\)",
+          "\\(-\\sin x\\)",
+          "\\(\\cos x\\)",
+          "\\(-\\cos x\\)"
         ],
         "answer": "A",
-        "explanation": "y' = 2x - sin x, y'' = 2 - cos x, y''' = sin x"
+        "explanation": "\\(y' = 2x - \\sin x\\), \\(y'' = 2 - \\cos x\\), \\(y''' = \\sin x\\)"
       },
       {
         "type": "mcq",
-        "question": "If y = e^x + ln x, what is y''?",
+        "question": "If \\(y = e^x + \\ln x\\), what is \\(y''\\)?",
         "options": [
-          "e^x - 1/x^2",
-          "e^x + 1/x^2",
-          "e^x - 1/x",
-          "e^x + 1/x"
+          "\\(e^x - \\frac{1}{x^2}\\)",
+          "\\(e^x + \\frac{1}{x^2}\\)",
+          "\\(e^x - \\frac{1}{x}\\)",
+          "\\(e^x + \\frac{1}{x}\\)"
         ],
         "answer": "A",
-        "explanation": "y' = e^x + 1/x, y'' = e^x - 1/x^2"
+        "explanation": "\\(y' = e^x + \\frac{1}{x}\\), \\(y'' = e^x - \\frac{1}{x^2}\\)"
       }
     ],
     "settings": {
