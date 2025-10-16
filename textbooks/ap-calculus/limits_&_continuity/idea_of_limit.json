@@ -2,40 +2,48 @@
   "topic": "1.1 The Idea of a Limit",
   "expanded_description": "The concept of a limit is the cornerstone of calculus, representing the fundamental shift from static algebra to the dynamic analysis of change. It provides a precise mathematical language to describe the behavior of a function as its input approaches a particular value, even if the function itself is not defined at that point. This section introduces the limit not as a mere procedure, but as a powerful intuitive idea for predicting trends, resolving indeterminacies, and laying the groundwork for defining instantaneous rates of change and areas under curves.",
   "core_concept": {
-    "principle": "A limit describes the intended output value (L) that a function f(x) approaches as the input (x) gets arbitrarily close to a target value (a), from both sides, regardless of the function's actual value at x=a.",
+    "principle": "A limit describes the intended output value ($L$) that a function $f(x)$ approaches as the input ($x$) gets arbitrarily close to a target value ($a$), from both sides, regardless of the function's actual value at $x=a$.",
     "explanation": "Think of a limit as the 'destiny' of the function as it nears a point. We are not concerned with the function's value at the destination itself, but with the consistent, predictable path it takes to get there. This allows us to analyze points of discontinuity, model instantaneous phenomena, and handle values that are otherwise undefined in basic algebra. A limit exists when the function's values exhibit a clear, single trend as we zoom in infinitely close to the point of interest."
   },
   "sections": [
     {
       "section_title": "The Intuitive Foundation: Approaching a Value",
       "key_concept": {
-        "definition": "Informally, we say the limit of f(x) as x approaches a is L if we can make f(x) as close as we desire to L by taking x sufficiently close to a, from both the left and the right, without actually letting x equal a.",
-        "biological_context": "This is analogous to predicting the exact population of a bacterial colony at a precise moment (e.g., t=10 hours) by observing its population at 9.9, 9.99, 10.01, and 10.1 hours. Even if a measurement at exactly 10 hours is missing, the trend from the surrounding data allows for a confident prediction of the limit."
+        "definition": "Informally, we say the limit of $f(x)$ as $x$ approaches $a$ is $L$ if we can make $f(x)$ as close as we desire to $L$ by taking $x$ sufficiently close to $a$, from both the left and the right, without actually letting $x$ equal $a$.",
+        "mathematical_context": "This concept resolves situations where direct substitution fails. For example, when investigating instantaneous velocity, we cannot use the formula 'distance over time' at a single instant (as time interval would be zero), but we can examine what value this ratio approaches as the time interval shrinks to zero."
       },
       "foundational_concepts": [
         {
           "type": "The Language of 'Approach'",
           "description": "The entire concept hinges on the idea of values getting 'closer and closer' to a specific number.",
-          "detailed_mechanism": "We imagine a sequence of x-values that converge on 'a' (like 2.1, 2.01, 2.001, ...). We then observe the corresponding sequence of f(x) values. If this second sequence consistently homes in on a single number 'L', then L is the limit. The actual value f(a) is irrelevant to this process.",
+          "detailed_mechanism": "We imagine a sequence of $x$-values that converge on '$a$' (like $2.1$, $2.01$, $2.001$, $\\dots$). We then observe the corresponding sequence of $f(x)$ values. If this second sequence consistently homes in on a single number '$L$', then $L$ is the limit. The actual value $f(a)$ is irrelevant to this process.",
           "examples": [
             {
               "process": "Predicting a 'Hole' in a Graph",
-              "explanation": "Consider f(x) = (x² - 1)/(x - 1). This function simplifies to f(x) = x + 1 for all x ≠ 1, but is undefined at x=1, creating a hole in the graph. By evaluating f(0.9)=1.9, f(0.99)=1.99, f(1.01)=2.01, f(1.1)=2.1, we see the outputs clearly approach 2. Thus, lim_{x→1} f(x) = 2, despite f(1) being undefined."
+              "explanation": "Consider $f(x) = \\frac{x^2 - 1}{x - 1}$. This function simplifies to $f(x) = x + 1$ for all $x \\ne 1$, but is undefined at $x=1$, creating a hole in the graph. By evaluating $f(0.9)=1.9$, $f(0.99)=1.99$, $f(1.01)=2.01$, $f(1.1)=2.1$, we see the outputs clearly approach $2$. Thus, $\\lim_{x \\to 1} f(x) = 2$, despite $f(1)$ being undefined."
             },
             {
               "process": "The Paradox of Motion (Zeno's Paradox)",
-              "explanation": "To reach a wall, you must first cover half the distance, then half the remaining distance, and so on, creating an infinite number of steps. The limit concept resolves this: the sum of this infinite series of distances (1/2 + 1/4 + 1/8 + ...) has a limit of 1, meaning you do, in fact, reach the wall. The limit describes the completion of an infinite process."
+              "explanation": "To reach a wall, you must first cover half the distance, then half the remaining distance, and so on, creating an infinite number of steps. The limit concept resolves this: the sum of this infinite series of distances ($\\frac{1}{2} + \\frac{1}{4} + \\frac{1}{8} + \\dots$) has a limit of $1$, meaning you do, in fact, reach the wall. The limit describes the completion of an infinite process."
+            },
+            {
+              "process": "Approaching a Constant Function",
+              "explanation": "For the constant function $f(x) = 5$, as $x$ approaches any value $a$, the function value remains $5$. Thus, $\\lim_{x \\to a} 5 = 5$ for all $a$. This demonstrates that for continuous functions, the limit equals the function value."
             }
           ]
         },
         {
           "type": "Limit Notation",
           "description": "A specific and concise notation is used to express the limit concept.",
-          "detailed_mechanism": "We write 'lim_{x→a} f(x) = L'. This is read as 'the limit of f(x), as x approaches a, equals L.' The arrow '→' symbolizes the process of approach.",
+          "detailed_mechanism": "We write '$\\lim_{x \\to a} f(x) = L$'. This is read as 'the limit of $f(x)$, as $x$ approaches $a$, equals $L$.' The arrow '$\\to$' symbolizes the process of approach. For one-sided limits, we write $\\lim_{x \\to a^-} f(x)$ for the left-hand limit and $\\lim_{x \\to a^+} f(x)$ for the right-hand limit.",
           "examples": [
             {
               "process": "Formal Statement for a Simple Function",
-              "explanation": "For the function f(x) = 2x + 3, we can write lim_{x→2} (2x + 3) = 7. This formally captures the idea that as x gets closer to 2, the value of 2x+3 gets closer to 7."
+              "explanation": "For the function $f(x) = 2x + 3$, we can write $\\lim_{x \\to 2} (2x + 3) = 7$. This formally captures the idea that as $x$ gets closer to $2$, the value of $2x+3$ gets closer to $7$."
+            },
+            {
+              "process": "One-Sided Limit Example",
+              "explanation": "For $f(x) = \\sqrt{x}$, the limit as $x$ approaches $0$ from the right is $0$: $\\lim_{x \\to 0^+} \\sqrt{x} = 0$. The left-hand limit does not exist since the function is undefined for $x < 0$."
             }
           ]
         }
@@ -48,19 +56,23 @@
         {
           "concept": "Handling Points of Discontinuity",
           "principle": "A limit can exist at a point where the function is undefined or has a value different from the limit.",
-          "statement": "The existence and value of lim_{x→a} f(x) is independent of f(a).",
-          "biological_implication": "Just as the long-term trend of a stock price can be predicted despite daily volatility, a function's trend near a point can be stable even if the point itself is anomalous.",
-          "example": "A piecewise function defined as f(x) = { x² for x ≠ 3; 10 for x = 3 }. As x approaches 3, f(x) approaches 9. Therefore, lim_{x→3} f(x) = 9, even though the actual value at x=3 is f(3)=10. The limit predicts the value the function 'should' have had based on its surrounding behavior."
+          "statement": "The existence and value of $\\lim_{x \\to a} f(x)$ is independent of $f(a)$.",
+          "mathematical_implication": "This allows us to analyze and classify different types of discontinuities, and to define continuous functions as those where $\\lim_{x \\to a} f(x) = f(a)$ for all $a$ in the domain.",
+          "example": "A piecewise function defined as $f(x) = \\begin{cases} x^2 & \\text{for } x \\ne 3 \\\\ 10 & \\text{for } x = 3 \\end{cases}$. As $x$ approaches $3$, $f(x)$ approaches $9$. Therefore, $\\lim_{x \\to 3} f(x) = 9$, even though the actual value at $x=3$ is $f(3)=10$. The limit predicts the value the function 'should' have had based on its surrounding behavior."
         },
         {
           "concept": "Instantaneous Rate of Change",
           "principle": "The derivative, which measures an instantaneous rate of change, is itself defined as a limit.",
           "statement": "The slope of the tangent line at a point is the limit of the slopes of secant lines as the second point approaches the first.",
-          "analogy": "You cannot calculate your car's speed at a single instant from a single photo (position). But by taking average speeds over shorter and shorter time intervals (e.g., 1 second, 0.1 seconds, 0.01 seconds), the limit of these average speeds gives you the instantaneous speed.",
+          "analogy": "You cannot calculate your car's speed at a single instant from a single photo (position). But by taking average speeds over shorter and shorter time intervals (e.g., $1$ second, $0.1$ seconds, $0.01$ seconds), the limit of these average speeds gives you the instantaneous speed.",
           "scenarios": [
             {
               "scenario": "Finding Velocity",
-              "explanation": "If a car's position is given by s(t), its average velocity from time t to time t+h is [s(t+h) - s(t)] / h. The instantaneous velocity at time t is the limit of this average velocity as h, the time interval, approaches zero: v(t) = lim_{h→0} [s(t+h) - s(t)] / h."
+              "explanation": "If a car's position is given by $s(t)$, its average velocity from time $t$ to time $t+h$ is $\\frac{s(t+h) - s(t)}{h}$. The instantaneous velocity at time $t$ is the limit of this average velocity as $h$, the time interval, approaches zero: $v(t) = \\lim_{h \\to 0} \\frac{s(t+h) - s(t)}{h}$."
+            },
+            {
+              "scenario": "Slope of a Curve",
+              "explanation": "For $f(x) = x^2$, the slope at $x = 1$ is found by $\\lim_{h \\to 0} \\frac{(1+h)^2 - 1^2}{h} = \\lim_{h \\to 0} \\frac{1 + 2h + h^2 - 1}{h} = \\lim_{h \\to 0} (2 + h) = 2$."
             }
           ]
         }
@@ -68,7 +80,7 @@
     },
     {
       "section_title": "The Non-Existence of a Limit",
-      "key_concept": "A limit fails to exist when the function does not approach a single, finite number as x approaches a.",
+      "key_concept": "A limit fails to exist when the function does not approach a single, finite number as $x$ approaches $a$.",
       "non_existence_conditions": {
         "definition": "For a limit to exist, the function must settle into a predictable pattern, approaching one specific value from both the left and right. If this condition is violated, we say the limit Does Not Exist (DNE).",
         "key_indicators": "Unbounded behavior, oscillating behavior, or a disagreement between left-side and right-side approaches.",
@@ -77,25 +89,47 @@
       "failure_types": [
         {
           "type": "Unbounded Behavior",
-          "delta_g": "The function values increase or decrease without bound.",
+          "description": "The function values increase or decrease without bound.",
           "characteristics": ["The graph shoots up towards infinity or down towards negative infinity.", "Associated with vertical asymptotes."],
-          "energy_flow": "As x gets closer to 'a', |f(x)| becomes arbitrarily large.",
-          "biological_example": {
-            "process": "Modeling a Population Explosion",
-            "equation": "A simple model like P(t) = 1/(t_c - t), where t_c is a critical time.",
-            "explanation": "As time t approaches the critical time t_c from the left, the denominator approaches zero and the population P(t) grows infinitely large. lim_{t→t_c⁻} P(t) = ∞. The limit does not exist as a finite number."
-          }
+          "mathematical_condition": "As $x$ gets closer to '$a$', $|f(x)|$ becomes arbitrarily large.",
+          "examples": [
+            {
+              "function": "$f(x) = \\frac{1}{x}$ as $x \\to 0$",
+              "explanation": "As $x$ approaches $0$ from the right, $f(x) \\to \\infty$. As $x$ approaches $0$ from the left, $f(x) \\to -\\infty$. Since the behavior differs from each side and is unbounded, $\\lim_{x \\to 0} \\frac{1}{x}$ DNE."
+            },
+            {
+              "function": "$g(x) = \\frac{1}{(x-2)^2}$ as $x \\to 2$",
+              "explanation": "As $x$ approaches $2$ from either side, $(x-2)^2$ approaches $0$ from the positive side, so $g(x) \\to \\infty$. While both one-sided limits are infinite, the limit still DNE as a finite number."
+            }
+          ]
         },
         {
           "type": "Oscillating Behavior",
-          "delta_g": "The function fails to settle down and oscillates between two or more values.",
-          "characteristics": ["No single value is approached.", "The fluctuations do not dampen as x gets closer to a."],
-          "energy_flow": "The y-values bounce around indefinitely within a range.",
-          "biological_example": {
-            "process": "A Pathological Case",
-            "function": "f(x) = sin(1/x) as x→0",
-            "explanation": "As x approaches 0, the term 1/x becomes very large. The sine function oscillates between -1 and 1 infinitely often. There is no single number L that the function approaches; it endlessly fluctuates. Therefore, lim_{x→0} sin(1/x) DNE."
-          }
+          "description": "The function fails to settle down and oscillates between two or more values.",
+          "characteristics": ["No single value is approached.", "The fluctuations do not dampen as $x$ gets closer to $a$."],
+          "mathematical_condition": "The $y$-values bounce around indefinitely within a range.",
+          "examples": [
+            {
+              "function": "$f(x) = \\sin(\\frac{1}{x})$ as $x \\to 0$",
+              "explanation": "As $x$ approaches $0$, the term $\\frac{1}{x}$ becomes very large. The sine function oscillates between $-1$ and $1$ infinitely often. There is no single number $L$ that the function approaches; it endlessly fluctuates. Therefore, $\\lim_{x \\to 0} \\sin(\\frac{1}{x})$ DNE."
+            },
+            {
+              "function": "$g(x) = \\begin{cases} 1 & \\text{if } x \\text{ is rational} \\\\ 0 & \\text{if } x \\text{ is irrational} \\end{cases}$",
+              "explanation": "This Dirichlet function oscillates infinitely between $0$ and $1$ near every point, so $\\lim_{x \\to a} g(x)$ DNE for any $a$."
+            }
+          ]
+        },
+        {
+          "type": "Different Left and Right Behavior",
+          "description": "The function approaches different values from the left and right sides.",
+          "characteristics": ["The left-hand limit $\\ne$ right-hand limit.", "Common in piecewise functions with jumps."],
+          "mathematical_condition": "$\\lim_{x \\to a^-} f(x) \\ne \\lim_{x \\to a^+} f(x)$",
+          "examples": [
+            {
+              "function": "$f(x) = \\frac{|x|}{x}$ as $x \\to 0$",
+              "explanation": "For $x > 0$, $f(x) = 1$. For $x < 0$, $f(x) = -1$. Thus $\\lim_{x \\to 0^+} f(x) = 1$ and $\\lim_{x \\to 0^-} f(x) = -1$. Since these one-sided limits differ, $\\lim_{x \\to 0} f(x)$ DNE."
+            }
+          ]
         }
       ]
     },
@@ -133,12 +167,13 @@
   ],
   "key_terms": [
     "Limit",
-    "lim_{x→a} f(x) = L",
+    "$\\lim_{x \\to a} f(x) = L$",
     "Approach",
     "Intuitive Definition",
     "Does Not Exist (DNE)",
     "Unbounded Behavior",
     "Oscillating Behavior",
+    "One-Sided Limits",
     "Instantaneous Rate of Change",
     "Secant Line",
     "Tangent Line",
@@ -146,5 +181,5 @@
     "Point of Discontinuity",
     "Prediction"
   ],
-  "summary": "Section 1.1 introduces the limit as the central, unifying idea of calculus. It begins with an intuitive understanding of a function's value 'approaching' a predictable number L as the input nears a point a, independent of the function's actual value at a. This concept is presented as a powerful predictive tool for handling discontinuities and defining instantaneous rates of change. The section also clarifies the critical conditions under which a limit fails to exist, such as unbounded growth or endless oscillation. Ultimately, this foundational idea is framed as the essential bridge from the static world of pre-calculus to the dynamic worlds of differential and integral calculus, where limits are used to define both the derivative and the integral, the two pillars of the subject."
+  "summary": "Section 1.1 introduces the limit as the central, unifying idea of calculus. It begins with an intuitive understanding of a function's value 'approaching' a predictable number $L$ as the input nears a point $a$, independent of the function's actual value at $a$. This concept is presented as a powerful predictive tool for handling discontinuities and defining instantaneous rates of change. The section also clarifies the critical conditions under which a limit fails to exist, such as unbounded growth, endless oscillation, or differing one-sided limits. Ultimately, this foundational idea is framed as the essential bridge from the static world of pre-calculus to the dynamic worlds of differential and integral calculus, where limits are used to define both the derivative and the integral, the two pillars of the subject."
 }

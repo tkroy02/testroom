@@ -20669,6 +20669,19 @@ function displayTextbookSection(sectionData, sectionTitle) {
                         <h4 style="color: var(--primary); margin-bottom: 10px;">Core Concept</h4>
                         <p style="font-weight: 600; margin-bottom: 10px;">${sectionData.core_concept.principle}</p>
                         <p style="color: var(--gray);">${sectionData.core_concept.explanation}</p>
+                        ${sectionData.core_concept.image ? `
+                            <div style="margin: 15px 0; text-align: center;">
+                                <img src="${sectionData.core_concept.image.url}" 
+                                     alt="${sectionData.core_concept.image.alt || 'Concept diagram'}"
+                                     style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--light-gray);"
+                                     onerror="this.style.display='none'">
+                                ${sectionData.core_concept.image.caption ? `
+                                    <div style="margin-top: 8px; font-style: italic; color: var(--gray); font-size: 0.9rem;">
+                                        ${sectionData.core_concept.image.caption}
+                                    </div>
+                                ` : ''}
+                            </div>
+                        ` : ''}
                     </div>
                 ` : ''}
             </div>
@@ -20686,117 +20699,310 @@ function displayTextbookSection(sectionData, sectionTitle) {
                     </h3>
             `;
 
+            // Add section image if present - FIXED: Using proper if statement instead of template literal
+            if (section.image) {
+                htmlContent += `
+                    <div style="margin: 15px 0 20px 0; text-align: center;">
+                        <img src="${section.image.url}" 
+                             alt="${section.image.alt || 'Section diagram'}"
+                             style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--light-gray); box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+                             onerror="this.style.display='none'">
+                `;
+                if (section.image.caption) {
+                    htmlContent += `
+                        <div style="margin-top: 8px; font-style: italic; color: var(--gray); font-size: 0.9rem;">
+                            ${section.image.caption}
+                        </div>
+                    `;
+                }
+                htmlContent += `</div>`;
+            }
+
             // Add introduction if present
             if (section.introduction) {
                 htmlContent += `
                     <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-style: italic;">
                         ${section.introduction}
-                    </div>
                 `;
+                
+                if (section.introduction_image) {
+                    htmlContent += `
+                        <div style="margin-top: 15px; text-align: center;">
+                            <img src="${section.introduction_image.url}" 
+                                 alt="${section.introduction_image.alt || 'Introduction diagram'}"
+                                 style="max-width: 100%; height: auto; border-radius: 6px;"
+                                 onerror="this.style.display='none'">
+                    `;
+                    if (section.introduction_image.caption) {
+                        htmlContent += `
+                            <div style="margin-top: 6px; font-style: italic; color: var(--gray); font-size: 0.85rem;">
+                                ${section.introduction_image.caption}
+                            </div>
+                        `;
+                    }
+                    htmlContent += `</div>`;
+                }
+                
+                htmlContent += `</div>`;
             }
 
             // Add key concept if present
             if (section.key_concept) {
-    if (typeof section.key_concept === 'object' && section.key_concept.definition) {
-        // Handle object format
-        htmlContent += `
-            <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
-                <strong style="color: var(--primary);">Key Concept:</strong> ${section.key_concept.definition}
-                ${section.key_concept.biological_context ? `
-                    <div style="margin-top: 8px;"><strong>Biological Context:</strong> ${section.key_concept.biological_context}</div>
-                ` : ''}
-            </div>
-        `;
-    } else {
-        // Handle string format
-        htmlContent += `
-            <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
-                <strong style="color: var(--primary);">Key Concept:</strong> ${section.key_concept}
-            </div>
-        `;
-    }
-}
+                if (typeof section.key_concept === 'object' && section.key_concept.definition) {
+                    // Handle object format
+                    htmlContent += `
+                        <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
+                            <strong style="color: var(--primary);">Key Concept:</strong> ${section.key_concept.definition}
+                    `;
+                    
+                    if (section.key_concept.context) {
+                        htmlContent += `
+                            <div style="margin-top: 8px;"><strong>Context:</strong> ${section.key_concept.context}</div>
+                        `;
+                    }
+                    
+                    if (section.key_concept.image) {
+                        htmlContent += `
+                            <div style="margin-top: 12px; text-align: center;">
+                                <img src="${section.key_concept.image.url}" 
+                                     alt="${section.key_concept.image.alt || 'Concept diagram'}"
+                                     style="max-width: 100%; height: auto; border-radius: 6px; border: 1px solid #b3e5fc;"
+                                     onerror="this.style.display='none'">
+                        `;
+                        if (section.key_concept.image.caption) {
+                            htmlContent += `
+                                <div style="margin-top: 6px; font-style: italic; color: var(--gray); font-size: 0.85rem;">
+                                    ${section.key_concept.image.caption}
+                                </div>
+                            `;
+                        }
+                        htmlContent += `</div>`;
+                    }
+                    
+                    htmlContent += `</div>`;
+                } else {
+                    // Handle string format
+                    htmlContent += `
+                        <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
+                            <strong style="color: var(--primary);">Key Concept:</strong> ${section.key_concept}
+                        </div>
+                    `;
+                }
+            }
 
-            // Handle different section types with the new structure
-            if (section.types_of_cellular_work) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Types of Cellular Work:</h4>`;
-                section.types_of_cellular_work.forEach(work => {
+            // Handle different section types with universal terminology
+            if (section.categories) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Categories:</h4>`;
+                section.categories.forEach(category => {
                     htmlContent += `
                         <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray); box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                            <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;">${work.type}</h5>
-                            <p style="margin-bottom: 10px;"><strong>Description:</strong> ${work.description}</p>
-                            ${work.detailed_mechanism ? `<p style="margin-bottom: 10px;"><strong>Mechanism:</strong> ${work.detailed_mechanism}</p>` : ''}
-                            
-                            ${work.examples && work.examples.length > 0 ? `
-                                <div style="margin-top: 15px;">
-                                    <strong>Examples:</strong>
-                                    ${work.examples.map(example => `
+                            <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;">${category.type}</h5>
+                    `;
+                    
+                    if (category.image) {
+                        htmlContent += `
+                            <div style="margin-bottom: 15px; text-align: center;">
+                                <img src="${category.image.url}" 
+                                     alt="${category.image.alt || 'Category diagram'}"
+                                     style="max-width: 100%; height: auto; border-radius: 6px;"
+                                     onerror="this.style.display='none'">
+                        `;
+                        if (category.image.caption) {
+                            htmlContent += `
+                                <div style="margin-top: 6px; font-style: italic; color: var(--gray); font-size: 0.85rem;">
+                                    ${category.image.caption}
+                                </div>
+                            `;
+                        }
+                        htmlContent += `</div>`;
+                    }
+                    
+                    htmlContent += `
+                            <p style="margin-bottom: 10px;"><strong>Description:</strong> ${category.description}</p>
+                    `;
+                    
+                    if (category.detailed_mechanism) {
+                        htmlContent += `<p style="margin-bottom: 10px;"><strong>Mechanism:</strong> ${category.detailed_mechanism}</p>`;
+                    }
+                    
+                    if (category.examples && category.examples.length > 0) {
+                        htmlContent += `
+                            <div style="margin-top: 15px;">
+                                <strong>Examples:</strong>
+                                ${category.examples.map(example => {
+                                    let exampleHtml = `
                                         <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 8px;">
                                             <strong>${example.process}:</strong> ${example.explanation}
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            ` : ''}
-                        </div>
-                    `;
-                });
-            }
-
-            if (section.thermodynamic_laws) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Thermodynamic Laws:</h4>`;
-                section.thermodynamic_laws.forEach(law => {
-                    htmlContent += `
-                        <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray); box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                            <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;">${law.law}</h5>
-                            <p style="margin-bottom: 8px;"><strong>Principle:</strong> ${law.principle}</p>
-                            <p style="margin-bottom: 8px;"><strong>Statement:</strong> ${law.statement}</p>
-                            <p style="margin-bottom: 8px;"><strong>Biological Implication:</strong> ${law.biological_implication}</p>
-                            ${law.example ? `<p style="margin-bottom: 8px;"><strong>Example:</strong> ${law.example}</p>` : ''}
-                            ${law.analogy ? `<div style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px; border-left: 4px solid #ffc107;"><strong>Analogy:</strong> ${law.analogy}</div>` : ''}
-                        </div>
-                    `;
-                });
-            }
-
-            if (section.free_energy_components) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Free Energy Components:</h4>`;
-                const freeEnergy = section.free_energy_components;
-                htmlContent += `
-                    <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray);">
-                        <p style="margin-bottom: 10px;"><strong>Definition:</strong> ${freeEnergy.definition}</p>
-                        ${freeEnergy.free_energy_change_equation ? `<p style="margin-bottom: 10px;"><strong>Equation:</strong> ${freeEnergy.free_energy_change_equation}</p>` : ''}
-                        ${freeEnergy.interpretation ? `<p style="margin-bottom: 15px;"><strong>Interpretation:</strong> ${freeEnergy.interpretation}</p>` : ''}
-                    </div>
-                `;
-
-                if (section.reaction_types) {
-                    htmlContent += `<h5 style="color: var(--primary); margin: 20px 0 10px 0;">Reaction Types:</h5>`;
-                    section.reaction_types.forEach(reaction => {
-                        htmlContent += `
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 12px;">
-                                <h6 style="color: var(--primary-dark); margin-bottom: 8px;">${reaction.type}: ${reaction.delta_g}</h6>
-                                <p style="margin-bottom: 8px;"><strong>Characteristics:</strong> ${reaction.characteristics.join(', ')}</p>
-                                <p style="margin-bottom: 8px;"><strong>Energy Flow:</strong> ${reaction.energy_flow}</p>
-                                
-                                ${reaction.biological_example ? `
-                                    <div style="background: white; padding: 10px; border-radius: 6px; margin-top: 10px;">
-                                        <strong>Example - ${reaction.biological_example.process}:</strong><br>
-                                        ${reaction.biological_example.equation ? `<div style="font-family: 'Cambria Math', serif; margin: 5px 0;">${reaction.biological_example.equation}</div>` : ''}
-                                        ${reaction.biological_example.delta_g_value ? `<div><strong>ΔG:</strong> ${reaction.biological_example.delta_g_value}</div>` : ''}
-                                        <div style="margin-top: 5px;">${reaction.biological_example.explanation}</div>
-                                    </div>
-                                ` : ''}
-                                
-                                ${reaction.note ? `<div style="background: #fff3cd; padding: 8px; border-radius: 4px; margin-top: 8px; font-size: 0.9em;"><strong>Note:</strong> ${reaction.note}</div>` : ''}
+                                    `;
+                                    
+                                    if (example.image) {
+                                        exampleHtml += `
+                                            <div style="margin-top: 8px; text-align: center;">
+                                                <img src="${example.image.url}" 
+                                                     alt="${example.image.alt || 'Example diagram'}"
+                                                     style="max-width: 90%; height: auto; border-radius: 4px;"
+                                                     onerror="this.style.display='none'">
+                                        `;
+                                        if (example.image.caption) {
+                                            exampleHtml += `
+                                                <div style="margin-top: 4px; font-style: italic; color: var(--gray); font-size: 0.8rem;">
+                                                    ${example.image.caption}
+                                                </div>
+                                            `;
+                                        }
+                                        exampleHtml += `</div>`;
+                                    }
+                                    
+                                    exampleHtml += `</div>`;
+                                    return exampleHtml;
+                                }).join('')}
                             </div>
                         `;
+                    }
+                    
+                    htmlContent += `</div>`;
+                });
+            }
+
+            if (section.principles) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Fundamental Principles:</h4>`;
+                section.principles.forEach(principle => {
+                    htmlContent += `
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray); box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;">${principle.principle}</h5>
+                    `;
+                    
+                    if (principle.image) {
+                        htmlContent += `
+                            <div style="margin-bottom: 15px; text-align: center;">
+                                <img src="${principle.image.url}" 
+                                     alt="${principle.image.alt || 'Principle diagram'}"
+                                     style="max-width: 100%; height: auto; border-radius: 6px;"
+                                     onerror="this.style.display='none'">
+                        `;
+                        if (principle.image.caption) {
+                            htmlContent += `
+                                <div style="margin-top: 6px; font-style: italic; color: var(--gray); font-size: 0.85rem;">
+                                    ${principle.image.caption}
+                                </div>
+                            `;
+                        }
+                        htmlContent += `</div>`;
+                    }
+                    
+                    htmlContent += `
+                            <p style="margin-bottom: 8px;"><strong>Principle:</strong> ${principle.principle}</p>
+                            <p style="margin-bottom: 8px;"><strong>Statement:</strong> ${principle.statement}</p>
+                            <p style="margin-bottom: 8px;"><strong>Application:</strong> ${principle.application}</p>
+                    `;
+                    
+                    if (principle.example) {
+                        htmlContent += `<p style="margin-bottom: 8px;"><strong>Example:</strong> ${principle.example}</p>`;
+                    }
+                    
+                    if (principle.analogy) {
+                        htmlContent += `<div style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px; border-left: 4px solid #ffc107;"><strong>Analogy:</strong> ${principle.analogy}</div>`;
+                    }
+                    
+                    htmlContent += `</div>`;
+                });
+            }
+
+            if (section.components) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Key Components:</h4>`;
+                const components = section.components;
+                htmlContent += `
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray);">
+                        <p style="margin-bottom: 10px;"><strong>Definition:</strong> ${components.definition}</p>
+                `;
+                
+                if (components.equation) {
+                    htmlContent += `<p style="margin-bottom: 10px;"><strong>Equation:</strong> ${components.equation}</p>`;
+                }
+                
+                if (components.interpretation) {
+                    htmlContent += `<p style="margin-bottom: 15px;"><strong>Interpretation:</strong> ${components.interpretation}</p>`;
+                }
+                
+                if (components.image) {
+                    htmlContent += `
+                        <div style="margin: 15px 0; text-align: center;">
+                            <img src="${components.image.url}" 
+                                 alt="${components.image.alt || 'Components diagram'}"
+                                 style="max-width: 100%; height: auto; border-radius: 6px;"
+                                 onerror="this.style.display='none'">
+                    `;
+                    if (components.image.caption) {
+                        htmlContent += `
+                            <div style="margin-top: 6px; font-style: italic; color: var(--gray); font-size: 0.85rem;">
+                                ${components.image.caption}
+                            </div>
+                        `;
+                    }
+                    htmlContent += `</div>`;
+                }
+                
+                htmlContent += `</div>`;
+
+                if (section.classifications) {
+                    htmlContent += `<h5 style="color: var(--primary); margin: 20px 0 10px 0;">Classifications:</h5>`;
+                    section.classifications.forEach(classification => {
+                        htmlContent += `
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 12px;">
+                                <h6 style="color: var(--primary-dark); margin-bottom: 8px;">${classification.type}: ${classification.value}</h6>
+                                <p style="margin-bottom: 8px;"><strong>Characteristics:</strong> ${classification.characteristics.join(', ')}</p>
+                                <p style="margin-bottom: 8px;"><strong>Behavior:</strong> ${classification.behavior}</p>
+                        `;
+                        
+                        if (classification.example) {
+                            htmlContent += `
+                                <div style="background: white; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                    <strong>Example - ${classification.example.process}:</strong><br>
+                            `;
+                            
+                            if (classification.example.equation) {
+                                htmlContent += `<div style="font-family: 'Cambria Math', serif; margin: 5px 0;">${classification.example.equation}</div>`;
+                            }
+                            
+                            if (classification.example.value) {
+                                htmlContent += `<div><strong>Value:</strong> ${classification.example.value}</div>`;
+                            }
+                            
+                            htmlContent += `<div style="margin-top: 5px;">${classification.example.explanation}</div>`;
+                            
+                            if (classification.example.image) {
+                                htmlContent += `
+                                    <div style="margin-top: 8px; text-align: center;">
+                                        <img src="${classification.example.image.url}" 
+                                             alt="${classification.example.image.alt || 'Example diagram'}"
+                                             style="max-width: 90%; height: auto; border-radius: 4px;"
+                                             onerror="this.style.display='none'">
+                                `;
+                                if (classification.example.image.caption) {
+                                    htmlContent += `
+                                        <div style="margin-top: 4px; font-style: italic; color: var(--gray); font-size: 0.8rem;">
+                                            ${classification.example.image.caption}
+                                        </div>
+                                    `;
+                                }
+                                htmlContent += `</div>`;
+                            }
+                            
+                            htmlContent += `</div>`;
+                        }
+                        
+                        if (classification.note) {
+                            htmlContent += `<div style="background: #fff3cd; padding: 8px; border-radius: 4px; margin-top: 8px; font-size: 0.9em;"><strong>Note:</strong> ${classification.note}</div>`;
+                        }
+                        
+                        htmlContent += `</div>`;
                     });
                 }
             }
 
-            // Add more section type handlers for the new structure...
-            if (section.molecule) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">${section.molecule} - ${section.role || 'Structure and Function'}</h4>`;
+            // Add more universal section type handlers...
+            if (section.concept) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">${section.concept} - ${section.role || 'Structure and Function'}</h4>`;
                 
                 if (section.structure) {
                     htmlContent += `<h5 style="color: var(--primary); margin: 15px 0 10px 0;">Structure:</h5>`;
@@ -20804,10 +21010,35 @@ function displayTextbookSection(sectionData, sectionTitle) {
                         htmlContent += `
                             <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
                                 <strong>${component.part}:</strong> ${component.composition}
-                                ${component.function ? `<div style="margin-top: 5px;"><em>Function:</em> ${component.function}</div>` : ''}
-                                ${component.key_feature ? `<div style="margin-top: 5px;"><strong>Key Feature:</strong> ${component.key_feature}</div>` : ''}
-                            </div>
                         `;
+                        
+                        if (component.function) {
+                            htmlContent += `<div style="margin-top: 5px;"><em>Function:</em> ${component.function}</div>`;
+                        }
+                        
+                        if (component.key_feature) {
+                            htmlContent += `<div style="margin-top: 5px;"><strong>Key Feature:</strong> ${component.key_feature}</div>`;
+                        }
+                        
+                        if (component.image) {
+                            htmlContent += `
+                                <div style="margin-top: 8px; text-align: center;">
+                                    <img src="${component.image.url}" 
+                                         alt="${component.image.alt || 'Component diagram'}"
+                                         style="max-width: 90%; height: auto; border-radius: 4px;"
+                                         onerror="this.style.display='none'">
+                            `;
+                            if (component.image.caption) {
+                                htmlContent += `
+                                    <div style="margin-top: 4px; font-style: italic; color: var(--gray); font-size: 0.8rem;">
+                                        ${component.image.caption}
+                                    </div>
+                                `;
+                            }
+                            htmlContent += `</div>`;
+                        }
+                        
+                        htmlContent += `</div>`;
                     });
                 }
 
@@ -20816,59 +21047,183 @@ function displayTextbookSection(sectionData, sectionTitle) {
                     const func = section.function;
                     htmlContent += `
                         <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
-                            <p><strong>Hydrolysis Reaction:</strong> ${func.hydrolysis_reaction}</p>
-                            <p><strong>Energy Release:</strong> ${func.energy_release}</p>
-                            <p><strong>Mechanism:</strong> ${func.mechanism}</p>
-                            
-                            ${func.atp_cycle ? `
-                                <div style="margin-top: 15px;">
-                                    <strong>ATP Cycle:</strong>
-                                    ${func.atp_cycle.map(cycle => `
-                                        <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 8px;">
-                                            <strong>${cycle.process}:</strong> ${cycle.reaction}<br>
-                                            <em>Purpose:</em> ${cycle.purpose}
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            ` : ''}
-                        </div>
                     `;
+                    
+                    if (func.operation) {
+                        htmlContent += `<p><strong>Operation:</strong> ${func.operation}</p>`;
+                    }
+                    
+                    if (func.energy) {
+                        htmlContent += `<p><strong>Energy:</strong> ${func.energy}</p>`;
+                    }
+                    
+                    if (func.mechanism) {
+                        htmlContent += `<p><strong>Mechanism:</strong> ${func.mechanism}</p>`;
+                    }
+                    
+                    if (func.image) {
+                        htmlContent += `
+                            <div style="margin: 12px 0; text-align: center;">
+                                <img src="${func.image.url}" 
+                                     alt="${func.image.alt || 'Function diagram'}"
+                                     style="max-width: 100%; height: auto; border-radius: 6px;"
+                                     onerror="this.style.display='none'">
+                        `;
+                        if (func.image.caption) {
+                            htmlContent += `
+                                <div style="margin-top: 6px; font-style: italic; color: var(--gray); font-size: 0.85rem;">
+                                    ${func.image.caption}
+                                </div>
+                            `;
+                        }
+                        htmlContent += `</div>`;
+                    }
+                    
+                    if (func.cycle) {
+                        htmlContent += `
+                            <div style="margin-top: 15px;">
+                                <strong>Cycle:</strong>
+                                ${func.cycle.map(cycle => {
+                                    let cycleHtml = `
+                                        <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 8px;">
+                                            <strong>${cycle.process}:</strong> ${cycle.operation}<br>
+                                            <em>Purpose:</em> ${cycle.purpose}
+                                    `;
+                                    
+                                    if (cycle.image) {
+                                        cycleHtml += `
+                                            <div style="margin-top: 8px; text-align: center;">
+                                                <img src="${cycle.image.url}" 
+                                                     alt="${cycle.image.alt || 'Cycle diagram'}"
+                                                     style="max-width: 90%; height: auto; border-radius: 4px;"
+                                                     onerror="this.style.display='none'">
+                                        `;
+                                        if (cycle.image.caption) {
+                                            cycleHtml += `
+                                                <div style="margin-top: 4px; font-style: italic; color: var(--gray); font-size: 0.8rem;">
+                                                    ${cycle.image.caption}
+                                                </div>
+                                            `;
+                                        }
+                                        cycleHtml += `</div>`;
+                                    }
+                                    
+                                    cycleHtml += `</div>`;
+                                    return cycleHtml;
+                                }).join('')}
+                            </div>
+                        `;
+                    }
+                    
+                    htmlContent += `</div>`;
                 }
             }
 
-            if (section.pathway_types) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Metabolic Pathways:</h4>`;
+            if (section.process_types) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Process Types:</h4>`;
                 htmlContent += `<p style="margin-bottom: 15px;"><strong>Definition:</strong> ${section.definition}</p>`;
                 
-                section.pathway_types.forEach(pathway => {
+                section.process_types.forEach(process => {
                     htmlContent += `
                         <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray);">
-                            <h5 style="color: var(--primary); margin-bottom: 10px;">${pathway.type}</h5>
-                            <p><strong>Energy Profile:</strong> ${pathway.energy_profile} (${pathway.direction})</p>
-                            <p><strong>Function:</strong> ${pathway.function}</p>
-                            
-                            ${pathway.goals ? `<p><strong>Goals:</strong> ${pathway.goals.join('; ')}</p>` : ''}
-                            ${pathway.energy_source ? `<p><strong>Energy Source:</strong> ${pathway.energy_source}</p>` : ''}
-                            
-                            ${pathway.primary_example ? `
-                                <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 10px;">
-                                    <strong>Primary Example - ${pathway.primary_example.process}:</strong><br>
-                                    ${pathway.primary_example.explanation}
+                            <h5 style="color: var(--primary); margin-bottom: 10px;">${process.type}</h5>
+                    `;
+                    
+                    if (process.image) {
+                        htmlContent += `
+                            <div style="margin-bottom: 15px; text-align: center;">
+                                <img src="${process.image.url}" 
+                                     alt="${process.image.alt || 'Process diagram'}"
+                                     style="max-width: 100%; height: auto; border-radius: 6px;"
+                                     onerror="this.style.display='none'">
+                        `;
+                        if (process.image.caption) {
+                            htmlContent += `
+                                <div style="margin-top: 6px; font-style: italic; color: var(--gray); font-size: 0.85rem;">
+                                    ${process.image.caption}
                                 </div>
-                            ` : ''}
-                            
-                            ${pathway.examples ? `
-                                <div style="margin-top: 10px;">
-                                    <strong>Examples:</strong>
-                                    ${pathway.examples.map(example => `
+                            `;
+                        }
+                        htmlContent += `</div>`;
+                    }
+                    
+                    htmlContent += `
+                            <p><strong>Energy Profile:</strong> ${process.energy_profile} (${process.direction})</p>
+                            <p><strong>Function:</strong> ${process.function}</p>
+                    `;
+                    
+                    if (process.goals) {
+                        htmlContent += `<p><strong>Goals:</strong> ${process.goals.join('; ')}</p>`;
+                    }
+                    
+                    if (process.energy_source) {
+                        htmlContent += `<p><strong>Energy Source:</strong> ${process.energy_source}</p>`;
+                    }
+                    
+                    if (process.primary_example) {
+                        htmlContent += `
+                            <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                <strong>Primary Example - ${process.primary_example.process}:</strong><br>
+                                ${process.primary_example.explanation}
+                        `;
+                        
+                        if (process.primary_example.image) {
+                            htmlContent += `
+                                <div style="margin-top: 8px; text-align: center;">
+                                    <img src="${process.primary_example.image.url}" 
+                                         alt="${process.primary_example.image.alt || 'Primary example diagram'}"
+                                         style="max-width: 90%; height: auto; border-radius: 4px;"
+                                         onerror="this.style.display='none'">
+                            `;
+                            if (process.primary_example.image.caption) {
+                                htmlContent += `
+                                    <div style="margin-top: 4px; font-style: italic; color: var(--gray); font-size: 0.8rem;">
+                                        ${process.primary_example.image.caption}
+                                    </div>
+                                `;
+                            }
+                            htmlContent += `</div>`;
+                        }
+                        
+                        htmlContent += `</div>`;
+                    }
+                    
+                    if (process.examples) {
+                        htmlContent += `
+                            <div style="margin-top: 10px;">
+                                <strong>Examples:</strong>
+                                ${process.examples.map(example => {
+                                    let exampleHtml = `
                                         <div style="background: #f8f9fa; padding: 8px; border-radius: 4px; margin-top: 5px;">
                                             <strong>${example.process}:</strong> ${example.explanation}
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            ` : ''}
-                        </div>
-                    `;
+                                    `;
+                                    
+                                    if (example.image) {
+                                        exampleHtml += `
+                                            <div style="margin-top: 6px; text-align: center;">
+                                                <img src="${example.image.url}" 
+                                                     alt="${example.image.alt || 'Example diagram'}"
+                                                     style="max-width: 85%; height: auto; border-radius: 3px;"
+                                                     onerror="this.style.display='none'">
+                                        `;
+                                        if (example.image.caption) {
+                                            exampleHtml += `
+                                                <div style="margin-top: 3px; font-style: italic; color: var(--gray); font-size: 0.75rem;">
+                                                    ${example.image.caption}
+                                                </div>
+                                            `;
+                                        }
+                                        exampleHtml += `</div>`;
+                                    }
+                                    
+                                    exampleHtml += `</div>`;
+                                    return exampleHtml;
+                                }).join('')}
+                            </div>
+                        `;
+                    }
+                    
+                    htmlContent += `</div>`;
                 });
                 
                 if (section.relationship) {
@@ -20881,17 +21236,36 @@ function displayTextbookSection(sectionData, sectionTitle) {
             }
 
             if (section.purpose) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Enzymes:</h4>`;
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Mechanisms:</h4>`;
                 htmlContent += `<p style="margin-bottom: 15px;"><strong>Purpose:</strong> ${section.purpose}</p>`;
                 
-                if (section.activation_energy) {
+                if (section.activation) {
                     htmlContent += `
                         <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                            <h5 style="color: var(--primary); margin-bottom: 10px;">Activation Energy</h5>
-                            <p><strong>Definition:</strong> ${section.activation_energy.definition}</p>
-                            <p><strong>Enzyme Effect:</strong> ${section.activation_energy.enzyme_effect}</p>
-                        </div>
+                            <h5 style="color: var(--primary); margin-bottom: 10px;">Activation</h5>
+                            <p><strong>Definition:</strong> ${section.activation.definition}</p>
+                            <p><strong>Effect:</strong> ${section.activation.effect}</p>
                     `;
+                    
+                    if (section.activation.image) {
+                        htmlContent += `
+                            <div style="margin-top: 12px; text-align: center;">
+                                <img src="${section.activation.image.url}" 
+                                     alt="${section.activation.image.alt || 'Activation diagram'}"
+                                     style="max-width: 100%; height: auto; border-radius: 6px;"
+                                     onerror="this.style.display='none'">
+                        `;
+                        if (section.activation.image.caption) {
+                            htmlContent += `
+                                <div style="margin-top: 6px; font-style: italic; color: var(--gray); font-size: 0.85rem;">
+                                    ${section.activation.image.caption}
+                                </div>
+                            `;
+                        }
+                        htmlContent += `</div>`;
+                    }
+                    
+                    htmlContent += `</div>`;
                 }
 
                 if (section.key_properties) {
@@ -20900,19 +21274,38 @@ function displayTextbookSection(sectionData, sectionTitle) {
                         htmlContent += `
                             <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 8px;">
                                 <strong>${property.property}:</strong> ${property.explanation}
-                            </div>
                         `;
+                        
+                        if (property.image) {
+                            htmlContent += `
+                                <div style="margin-top: 8px; text-align: center;">
+                                    <img src="${property.image.url}" 
+                                         alt="${property.image.alt || 'Property diagram'}"
+                                         style="max-width: 90%; height: auto; border-radius: 4px;"
+                                         onerror="this.style.display='none'">
+                            `;
+                            if (property.image.caption) {
+                                htmlContent += `
+                                    <div style="margin-top: 4px; font-style: italic; color: var(--gray); font-size: 0.8rem;">
+                                        ${property.image.caption}
+                                    </div>
+                                `;
+                            }
+                            htmlContent += `</div>`;
+                        }
+                        
+                        htmlContent += `</div>`;
                     });
                 }
             }
 
-            if (section.energy_flow_pathway) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Energy Flow in Living Systems:</h4>`;
+            if (section.process_flow) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Process Flow:</h4>`;
                 if (section.introduction) {
                     htmlContent += `<p style="margin-bottom: 15px;">${section.introduction}</p>`;
                 }
                 
-                section.energy_flow_pathway.forEach(step => {
+                section.process_flow.forEach(step => {
                     htmlContent += `
                         <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--primary-light);">
                             <div style="display: flex; align-items: flex-start; gap: 15px;">
@@ -20922,10 +21315,43 @@ function displayTextbookSection(sectionData, sectionTitle) {
                                 <div style="flex: 1;">
                                     <h6 style="color: var(--primary-dark); margin-bottom: 5px; font-size: 1.1rem;">${step.process}</h6>
                                     <p style="margin-bottom: 5px;">${step.description}</p>
-                                    ${step.mechanism ? `<p style="margin-bottom: 5px;"><em>Mechanism:</em> ${step.mechanism}</p>` : ''}
-                                    ${step.result ? `<p style="margin-bottom: 5px;"><strong>Result:</strong> ${step.result}</p>` : ''}
-                                    ${step.applications ? `<p style="margin-bottom: 5px;"><strong>Applications:</strong> ${step.applications.join(', ')}</p>` : ''}
-                                    ${step.organization ? `<p style="margin-bottom: 5px;"><strong>Organization:</strong> ${step.organization}</p>` : ''}
+                    `;
+                    
+                    if (step.mechanism) {
+                        htmlContent += `<p style="margin-bottom: 5px;"><em>Mechanism:</em> ${step.mechanism}</p>`;
+                    }
+                    
+                    if (step.result) {
+                        htmlContent += `<p style="margin-bottom: 5px;"><strong>Result:</strong> ${step.result}</p>`;
+                    }
+                    
+                    if (step.applications) {
+                        htmlContent += `<p style="margin-bottom: 5px;"><strong>Applications:</strong> ${step.applications.join(', ')}</p>`;
+                    }
+                    
+                    if (step.organization) {
+                        htmlContent += `<p style="margin-bottom: 5px;"><strong>Organization:</strong> ${step.organization}</p>`;
+                    }
+                    
+                    if (step.image) {
+                        htmlContent += `
+                            <div style="margin-top: 10px; text-align: center;">
+                                <img src="${step.image.url}" 
+                                     alt="${step.image.alt || 'Step diagram'}"
+                                     style="max-width: 90%; height: auto; border-radius: 4px; border: 1px solid var(--light-gray);"
+                                     onerror="this.style.display='none'">
+                        `;
+                        if (step.image.caption) {
+                            htmlContent += `
+                                <div style="margin-top: 4px; font-style: italic; color: var(--gray); font-size: 0.8rem;">
+                                    ${step.image.caption}
+                                </div>
+                            `;
+                        }
+                        htmlContent += `</div>`;
+                    }
+                    
+                    htmlContent += `
                                 </div>
                             </div>
                         </div>
