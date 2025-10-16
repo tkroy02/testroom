@@ -4079,11 +4079,6 @@ function calculate() {
         
         // Handle percentage calculations
         expression = expression.replace(/(\d+(\.\d+)?)%/g, '($1/100)');
-
-        // 🔥 ADD THIS: Handle implicit multiplication (number followed by parenthesis)
-        expression = expression.replace(/(\d)(\()/g, '$1*$2');
-        expression = expression.replace(/(\))(\d)/g, '$1*$2');
-        expression = expression.replace(/(\))(\()/g, '$1*$2');
         
         // Evaluate the expression
         let result = eval(expression);
@@ -4312,19 +4307,25 @@ function openResource(resourceType, element) {
     resourceContent.scrollIntoView({ behavior: 'smooth' });
 }
 
-// Examination Quiz Functions - COMPLETE WORKING VERSION
+// Update the openExamQuiz function to reset and clear previous content
 function openExamQuiz() {
     const courseTitle = document.getElementById('detail-course-title').textContent;
     const quizCount = getQuizCountForCourse(currentCourseId);
     const questionCount = getQuestionCountForCourse(currentCourseId);
     const timeLimit = getTimeLimitForCourse(currentCourseId);
 
+    // Clear any existing quiz data
+    const quizGrid = document.getElementById('exam-quiz-grid');
+    if (quizGrid) {
+        quizGrid.innerHTML = '';
+    }
+
     document.getElementById('resource-content').innerHTML = `
         <div id="exam-quiz-section" class="tool-interface active">
             <div class="tool-header">
                 <h3 class="section-title">Examination Quiz - ${courseTitle}</h3>
                 <button class="tool-back" onclick="closeExamQuiz()">
-                    <i class="fas fa-arrow-left"></i> Back to My Courses
+                    <i class="fas fa-arrow-left"></i> Back to Course
                 </button>
             </div>
             
@@ -4352,7 +4353,7 @@ function openExamQuiz() {
                 </div>
                 
                 <div class="quiz-grid-container">
-                    <h4 class="quiz-grid-title">Select a Quiz</h4>
+                    <h4 class="quiz-grid-title">Select a Quiz for ${courseTitle}</h4>
                     <div class="quiz-grid" id="exam-quiz-grid">
                         <!-- Quiz buttons will be generated here -->
                     </div>
@@ -4361,77 +4362,31 @@ function openExamQuiz() {
         </div>
     `;
     
-    // Generate course-specific quiz buttons
+    // Generate fresh course-specific quiz buttons
     generateExamQuizButtons(currentCourseId);
 }
 
-// Helper functions to get course-specific quiz data
-function getQuizCountForCourse(courseId) {
-    const quizCounts = {
-        'ap-physics-1': 100,
-        'ap-physics-2': 80,
-        'ap-physics-c-mechanics': 75,
-        'ap-physics-c-em': 75,
-        'physics-grade-9': 60,
-        'physics-grade-10': 70,
-        'physics-grade-11': 85,
-        'physics-grade-12': 90,
-        'algebra-1': 70,
-        'algebra-2': 80,
-        'geometry': 65,
-        'pre-calculus': 85,
-        'ap-calculus': 100,
-        'chemistry-grade-10': 60,
-        'chemistry-grade-11': 75,
-        'chemistry-grade-12': 85,
-        'biology-grade-9': 55,
-        'biology-grade-10': 65,
-        'biology-grade-11': 75,
-        'biology-grade-12': 85,
-        'ap-biology': 95,
-        'economics': 50,
-        'ap-macroeconomics': 70,
-        'ap-microeconomics': 70
-    };
-    return quizCounts[courseId] || 50;
-}
-
-function getQuestionCountForCourse(courseId) {
-    const questionCounts = {
-        'ap-physics-1': 50,
-        'ap-physics-2': 50,
-        'ap-physics-c-mechanics': 35,
-        'ap-physics-c-em': 35,
-        'ap-calculus': 45,
-        'ap-biology': 60,
-        'ap-macroeconomics': 60,
-        'ap-microeconomics': 60,
-        'default': 40
-    };
-    return questionCounts[courseId] || questionCounts['default'];
-}
-
-function getTimeLimitForCourse(courseId) {
-    const timeLimits = {
-        'ap-physics-1': '90min',
-        'ap-physics-2': '90min',
-        'ap-physics-c-mechanics': '90min',
-        'ap-physics-c-em': '90min',
-        'ap-calculus': '105min',
-        'ap-biology': '160min',
-        'ap-macroeconomics': '130min',
-        'ap-microeconomics': '130min',
-        'default': '60min'
-    };
-    return timeLimits[courseId] || timeLimits['default'];
-}
-
-// Generate quiz buttons for all courses
+// Update the generateExamQuizButtons function to ensure fresh generation
 function generateExamQuizButtons(courseId) {
     const quizGrid = document.getElementById('exam-quiz-grid');
-    quizGrid.innerHTML = '';
+    if (!quizGrid) return;
+    
+    quizGrid.innerHTML = ''; // Clear any existing content
     
     const quizCount = getQuizCountForCourse(courseId);
+    const courseTitle = document.getElementById('detail-course-title').textContent;
+    
+    // Add a header showing which course these quizzes belong to
+    const header = document.createElement('div');
+    header.style.gridColumn = '1 / -1';
+    header.style.textAlign = 'center';
+    header.style.padding = '10px';
+    header.style.color = 'var(--primary)';
+    header.style.fontWeight = '600';
+    header.style.fontSize = '1.1rem';
+    header.style.marginBottom = '10px';
+    header.textContent = `${courseTitle} Quizzes`;
+    quizGrid.appendChild(header);
     
     for (let i = 1; i <= quizCount; i++) {
         const quizBtn = document.createElement('button');
@@ -4442,418 +4397,13 @@ function generateExamQuizButtons(courseId) {
     }
 }
 
-// MAIN FUNCTION THAT LOADS FROM JSON FILES
-async function startExamQuiz(quizNumber, courseId) {
-    console.log(`🎯 Loading quiz ${quizNumber} for ${courseId}`);
-    
-    try {
-        const courseTitle = document.getElementById('detail-course-title').textContent;
-        
-        // Show loading state
-        document.getElementById('resource-content').innerHTML = `
-            <div class="tool-interface active">
-                <div class="tool-header">
-                    <h3 class="section-title">${courseTitle} - Quiz ${quizNumber}</h3>
-                    <div style="display: flex; gap: 15px;">
-                        <div style="background: var(--light-bg); padding: 8px 15px; border-radius: var(--border-radius-sm); color: var(--primary); font-weight: 600;">
-                            <i class="fas fa-clock"></i> <span id="quiz-timer">${getTimeLimitForCourse(courseId)}</span>
-                        </div>
-                        <button class="tool-back" onclick="openExamQuiz()">
-                            <i class="fas fa-times"></i> Exit Quiz
-                        </button>
-                    </div>
-                </div>
-                
-                <div class="quiz-container">
-                    <div style="text-align: center; padding: 60px 20px;">
-                        <div class="tool-icon" style="margin: 0 auto 20px;">
-                            <i class="fas fa-spinner fa-spin"></i>
-                        </div>
-                        <h4 style="color: var(--primary); margin-bottom: 10px;">Loading Quiz ${quizNumber}...</h4>
-                        <p style="color: var(--gray;">Fetching from: exams/${courseId}/quiz${quizNumber}.json</p>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        // ACTUALLY LOAD FROM JSON FILE
-        const quizData = await loadExamQuizData(courseId, quizNumber);
-        
-        if (quizData) {
-            displayExamQuiz(quizData, courseId, quizNumber);
-        } else {
-            displayDefaultExamQuiz(courseId, quizNumber);
-        }
-        
-    } catch (error) {
-        console.error('Error starting exam quiz:', error);
-        displayDefaultExamQuiz(courseId, quizNumber);
-    }
-}
-
-// LOAD FROM JSON FILE - CORE FUNCTION
-async function loadExamQuizData(courseId, quizNumber) {
-    try {
-        const quizPath = `exams/${courseId}/quiz${quizNumber}.json`;
-        console.log('🔍 Loading exam quiz from:', quizPath);
-        
-        const response = await fetch(quizPath);
-        if (!response.ok) {
-            throw new Error(`Failed to load quiz: ${response.status}`);
-        }
-        
-        const quizData = await response.json();
-        console.log('✅ Successfully loaded exam quiz with', quizData.questions?.length || 0, 'questions');
-        return quizData;
-        
-    } catch (error) {
-        console.error('❌ Error loading exam quiz:', error);
-        return null;
-    }
-}
-
-// DISPLAY QUIZ FROM JSON DATA
-function displayExamQuiz(quizData, courseId, quizNumber) {
-    const courseTitle = document.getElementById('detail-course-title').textContent;
-    
-    document.getElementById('resource-content').innerHTML = `
-        <div class="tool-interface active">
-            <div class="tool-header">
-                <h3 class="section-title">${courseTitle} - ${quizData.title || `Quiz ${quizNumber}`}</h3>
-                <div style="display: flex; gap: 15px;">
-                    <div style="background: var(--light-bg); padding: 8px 15px; border-radius: var(--border-radius-sm); color: var(--primary); font-weight: 600;">
-                        <i class="fas fa-clock"></i> <span id="quiz-timer">${getTimeLimitForCourse(courseId)}</span>
-                    </div>
-                    <div style="background: var(--light-bg); padding: 8px 15px; border-radius: var(--border-radius-sm); color: var(--primary); font-weight: 600;">
-                        <i class="fas fa-question-circle"></i> ${quizData.questions ? quizData.questions.length : 0} Questions
-                    </div>
-                    <button class="tool-back" onclick="openExamQuiz()">
-                        <i class="fas fa-times"></i> Exit Quiz
-                    </button>
-                </div>
-            </div>
-            
-            <div class="quiz-container">
-                <div class="quiz-info" style="background: var(--light-bg); padding: 20px; border-radius: var(--border-radius-sm); margin-bottom: 25px;">
-                    <h4 style="color: var(--primary); margin-bottom: 10px;">${quizData.title || `Quiz ${quizNumber}`}</h4>
-                    <p style="color: var(--gray); margin-bottom: 0;">${quizData.description || 'Full-length exam simulation'}</p>
-                    ${quizData.duration ? `<div style="margin-top: 10px;"><strong>Duration:</strong> ${quizData.duration}</div>` : ''}
-                    ${quizData.passingScore ? `<div style="margin-top: 5px;"><strong>Passing Score:</strong> ${quizData.passingScore}%</div>` : ''}
-                </div>
-                
-                <div id="exam-questions-container">
-                    ${quizData.questions && quizData.questions.length > 0 ? 
-                        renderExamQuestions(quizData.questions) : 
-                        '<p style="text-align: center; padding: 40px; color: var(--gray);">No questions available in this quiz.</p>'
-                    }
-                </div>
-                
-                <div class="quiz-actions" style="margin-top: 30px; justify-content: center;">
-                    <button class="btn" style="background: var(--success);" onclick="submitExamQuiz()">
-                        <i class="fas fa-check-circle"></i> Submit Exam
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-    
-    startQuizTimer(courseId);
-}
-
-// RENDER QUESTIONS FROM JSON
-function renderExamQuestions(questions) {
-    return questions.map((question, index) => `
-        <div class="question" style="margin-bottom: 40px; padding: 25px; background: white; border-radius: var(--border-radius-sm); box-shadow: var(--shadow); border-left: 4px solid var(--primary-light);">
-            <div class="question-header" style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
-                <div class="question-text" style="font-weight: 600; color: var(--primary); flex: 1;">
-                    <strong>Question ${index + 1}:</strong> ${renderMarkdown(question.question)}
-                </div>
-                ${question.points ? `
-                    <div style="background: var(--primary); color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem; font-weight: 600;">
-                        ${question.points} pts
-                    </div>
-                ` : ''}
-            </div>
-            
-            ${question.image ? `
-                <div style="margin-bottom: 20px; text-align: center;">
-                    <img src="${question.image}" alt="Question diagram" style="max-width: 100%; max-height: 300px; border-radius: var(--border-radius-sm);">
-                </div>
-            ` : ''}
-            
-            <div class="options" style="display: flex; flex-direction: column; gap: 12px;">
-                ${question.options.map((option, optionIndex) => `
-                    <div class="option" onclick="selectExamOption(${index}, ${optionIndex})" 
-                         style="padding: 15px; border: 2px solid var(--light-gray); border-radius: var(--border-radius-sm); cursor: pointer; transition: var(--transition);"
-                         id="exam-option-${index}-${optionIndex}">
-                         <span style="font-weight: 600; margin-right: 10px;">${String.fromCharCode(65 + optionIndex)}.</span>
-                         <span>${renderMarkdown(option)}</span>
-                    </div>
-                `).join('')}
-            </div>
-            
-            <div class="selection-status" style="margin-top: 15px; font-size: 0.9rem; color: var(--success); display: none;" id="exam-status-${index}">
-                <i class="fas fa-check"></i> Answer Selected
-            </div>
-        </div>
-    `).join('');
-}
-
-// OPTION SELECTION
-function selectExamOption(questionIndex, optionIndex) {
-    const questionElement = document.querySelectorAll('.question')[questionIndex];
-    const options = questionElement.querySelectorAll('.option');
-    const statusElement = document.getElementById(`exam-status-${questionIndex}`);
-    
-    // Remove selected class from all options in this question
-    options.forEach(opt => {
-        opt.classList.remove('selected');
-        opt.style.borderColor = 'var(--light-gray)';
-        opt.style.background = 'white';
-    });
-    
-    // Add selected class to clicked option
-    options[optionIndex].classList.add('selected');
-    options[optionIndex].style.borderColor = 'var(--primary)';
-    options[optionIndex].style.background = 'var(--light-bg)';
-    
-    // Show selection status
-    if (statusElement) {
-        statusElement.style.display = 'block';
-    }
-}
-
-// FALLBACK WHEN JSON FILES DON'T EXIST
-function displayDefaultExamQuiz(courseId, quizNumber) {
-    const courseTitle = document.getElementById('detail-course-title').textContent;
-    
-    document.getElementById('resource-content').innerHTML = `
-        <div class="tool-interface active">
-            <div class="tool-header">
-                <h3 class="section-title">${courseTitle} - Quiz ${quizNumber}</h3>
-                <div style="display: flex; gap: 15px;">
-                    <button class="tool-back" onclick="openExamQuiz()">
-                        <i class="fas fa-arrow-left"></i> Back to Quizzes
-                    </button>
-                </div>
-            </div>
-            
-            <div class="quiz-container">
-                <div style="text-align: center; padding: 60px 20px;">
-                    <div class="tool-icon" style="background: var(--warning); margin: 0 auto 20px;">
-                        <i class="fas fa-book"></i>
-                    </div>
-                    <h4 style="color: var(--primary); margin-bottom: 10px;">Quiz Coming Soon</h4>
-                    <p style="color: var(--gray); margin-bottom: 30px;">
-                        The exam quiz for ${courseTitle} - Quiz ${quizNumber} is being prepared and will be available soon.
-                    </p>
-                    <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 30px;">
-                        File not found: exams/${courseId}/quiz${quizNumber}.json
-                    </p>
-                    <button class="btn" onclick="openExamQuiz()">
-                        <i class="fas fa-arrow-left"></i> Back to Available Quizzes
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// REAL QUIZ SUBMISSION WITH SCORING
-function submitExamQuiz() {
-    // Get all question elements
-    const questionElements = document.querySelectorAll('.question');
-    let score = 0;
-    let totalQuestions = questionElements.length;
-    let results = [];
-    let unansweredCount = 0;
-
-    // Calculate score for each question
-    questionElements.forEach((questionElement, index) => {
-        const selectedOption = questionElement.querySelector('.option.selected');
-        const isAnswered = selectedOption !== null;
-        const userAnswerIndex = isAnswered ? 
-            Array.from(questionElement.querySelectorAll('.option')).indexOf(selectedOption) : -1;
-        
-        // For now, we'll use a simple scoring - in real implementation, 
-        // you'd compare with correct answers from your JSON data
-        const isCorrect = isAnswered; // Placeholder - would compare with actual correct answer
-        
-        if (isAnswered) {
-            score++;
-        } else {
-            unansweredCount++;
-        }
-
-        results.push({
-            questionNumber: index + 1,
-            isAnswered: isAnswered,
-            userAnswerIndex: userAnswerIndex,
-            isCorrect: isCorrect
-        });
-    });
-
-    const percentage = Math.round((score / totalQuestions) * 100);
-    
-    // Display detailed results
-    displayExamResults(score, totalQuestions, percentage, unansweredCount, results);
-}
-
-// COMPREHENSIVE RESULTS DISPLAY
-function displayExamResults(score, totalQuestions, percentage, unansweredCount, results) {
-    const courseTitle = document.getElementById('detail-course-title').textContent;
-    
-    // Determine performance message
-    let performanceMessage = '';
-    let performanceColor = '';
-    
-    if (percentage >= 90) {
-        performanceMessage = 'Excellent! 🎉';
-        performanceColor = 'var(--success)';
-    } else if (percentage >= 70) {
-        performanceMessage = 'Good Job! 👍';
-        performanceColor = 'var(--primary)';
-    } else if (percentage >= 60) {
-        performanceMessage = 'Keep Practicing! 💪';
-        performanceColor = 'var(--warning)';
-    } else {
-        performanceMessage = 'Needs Improvement 📚';
-        performanceColor = 'var(--accent)';
-    }
-
-    document.getElementById('resource-content').innerHTML = `
-        <div class="tool-interface active">
-            <div class="tool-header">
-                <h3 class="section-title">Exam Results - ${courseTitle}</h3>
-                <button class="tool-back" onclick="openExamQuiz()">
-                    <i class="fas fa-arrow-left"></i> Back to Quizzes
-                </button>
-            </div>
-            
-            <div class="quiz-container">
-                <!-- Summary Card -->
-                <div style="background: var(--light-bg); padding: 30px; border-radius: var(--border-radius-sm); margin-bottom: 30px; text-align: center;">
-                    <h3 style="color: var(--primary); margin-bottom: 15px;">Quiz Complete! 🎯</h3>
-                    
-                    <div style="font-size: 4rem; font-weight: 800; color: ${performanceColor}; margin-bottom: 10px;">
-                        ${percentage}%
-                    </div>
-                    
-                    <div style="color: ${performanceColor}; font-size: 1.5rem; font-weight: 600; margin-bottom: 20px;">
-                        ${performanceMessage}
-                    </div>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 25px;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: var(--primary);">${score}/${totalQuestions}</div>
-                            <div style="color: var(--gray); font-size: 0.9rem;">Questions Correct</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: var(--success);">${Math.round((score/totalQuestions)*100)}%</div>
-                            <div style="color: var(--gray); font-size: 0.9rem;">Accuracy</div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; font-weight: 700; color: ${unansweredCount > 0 ? 'var(--warning)' : 'var(--success)'};">${unansweredCount}</div>
-                            <div style="color: var(--gray); font-size: 0.9rem;">Unanswered</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap;">
-                    <button class="btn" onclick="retakeCurrentQuiz()" style="background: var(--primary);">
-                        <i class="fas fa-redo"></i> Retake Quiz
-                    </button>
-                    <button class="btn btn-outline" onclick="openExamQuiz()">
-                        <i class="fas fa-list"></i> Try Another Quiz
-                    </button>
-                    <button class="btn btn-outline" onclick="showCourseDetail(currentCourseId, '${courseTitle}', '')">
-                        <i class="fas fa-home"></i> Back to Course
-                    </button>
-                </div>
-
-                <!-- Detailed Results -->
-                <div style="background: white; padding: 25px; border-radius: var(--border-radius-sm); box-shadow: var(--shadow);">
-                    <h4 style="color: var(--primary); margin-bottom: 20px; border-bottom: 2px solid var(--light-gray); padding-bottom: 10px;">
-                        <i class="fas fa-chart-bar"></i> Detailed Results
-                    </h4>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px;">
-                        ${results.map((result, index) => `
-                            <div style="text-align: center; padding: 15px; border-radius: var(--border-radius-sm); 
-                                      background: ${result.isAnswered ? (result.isCorrect ? '#e8f5e8' : '#ffe8e8') : '#fff3cd'}; 
-                                      border: 2px solid ${result.isAnswered ? (result.isCorrect ? '#4caf50' : '#f44336') : '#ffc107'};">
-                                <div style="font-weight: 600; color: var(--primary); margin-bottom: 5px;">Q${result.questionNumber}</div>
-                                <div style="font-size: 0.9rem; color: ${result.isAnswered ? (result.isCorrect ? '#4caf50' : '#f44336') : '#ff9800'}">
-                                    ${result.isAnswered ? (result.isCorrect ? '✓ Correct' : '✗ Incorrect') : '⏺ Unanswered'}
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-
-                <!-- Performance Tips -->
-                <div style="background: #e8f4fd; padding: 25px; border-radius: var(--border-radius-sm); margin-top: 25px; border-left: 4px solid #2196F3;">
-                    <h5 style="color: #1976d2; margin-bottom: 15px;"><i class="fas fa-lightbulb"></i> Performance Tips</h5>
-                    ${percentage >= 90 ? 
-                        '<p>Excellent work! You have a strong understanding of this material. Consider challenging yourself with more advanced quizzes.</p>' :
-                    percentage >= 70 ? 
-                        '<p>Good performance! Review the questions you missed and focus on those specific areas for improvement.</p>' :
-                    percentage >= 60 ?
-                        '<p>You\'re on the right track! Spend more time reviewing the textbook materials and retake this quiz after studying.</p>' :
-                        '<p>Don\'t worry! Everyone starts somewhere. Focus on the foundational concepts and use the textbook resources to build your understanding.</p>'
-                    }
-                    <p style="margin-top: 10px; font-size: 0.9rem; color: #1976d2;">
-                        <strong>Tip:</strong> Use the "Retake Quiz" button to improve your score through practice.
-                    </p>
-                </div>
-            </div>
-        </div>
-    `;
-}
-
-// RETAKE CURRENT QUIZ
-function retakeCurrentQuiz() {
-    // For now, just go back to the quiz selection
-    // In a full implementation, you'd track which quiz was being taken
-    openExamQuiz();
-    
-    // Optional: Add logic to remember which quiz number was being taken
-    // and automatically restart that specific quiz
-}
-
-// TIMER FUNCTION
-function startQuizTimer(courseId) {
-    const timeLimit = getTimeLimitForCourse(courseId);
-    let totalMinutes = parseInt(timeLimit);
-    let minutes = totalMinutes - 1;
-    let seconds = 0;
-    
-    const timerElement = document.getElementById('quiz-timer');
-    if (!timerElement) return;
-    
-    timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    
-    const timer = setInterval(() => {
-        if (seconds === 0) {
-            if (minutes === 0) {
-                clearInterval(timer);
-                alert("Time's up! Submitting your quiz.");
-                return;
-            }
-            minutes--;
-            seconds = 59;
-        } else {
-            seconds--;
-        }
-        
-        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    }, 1000);
-}
-
-// CLOSE EXAM QUIZ
+// Update the closeExamQuiz function to properly reset
 function closeExamQuiz() {
-    showPage('my-courses', document.querySelector('.sidebar-menu li:nth-child(2) a'));
+    // If you want the button to take you back to My Courses, change it to:
+   showPage('my-courses', document.querySelector('.sidebar-menu li:nth-child(2) a'));
+    
+    // Then re-open the exam quiz section fresh
+    openResource('exam-quiz');
 }
 
 // Also update the showCourseDetail function to ensure currentCourseId is properly set
@@ -21064,10 +20614,51 @@ function loadTextbookSections() {
     `).join('');
 }
         
+async function loadTextbookSection(sectionPath, sectionTitle) {
+    try {
+        const contentArea = document.getElementById('textbook-content');
+        
+        // Show loading state
+        contentArea.innerHTML = `
+            <div style="text-align: center; padding: 40px 20px;">
+                <div class="tool-icon" style="margin: 0 auto 20px;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <h4 style="color: var(--primary); margin-bottom: 10px;">Loading Content</h4>
+                <p style="color: var(--gray);">Loading ${sectionTitle}...</p>
+            </div>
+        `;
+        
+        const response = await fetch(sectionPath);
+        if (!response.ok) {
+            throw new Error(`Failed to load section: ${response.status}`);
+        }
+        
+        const sectionData = await response.json();
+        
+        // Display the section content
+        displayTextbookSection(sectionData, sectionTitle);
+        
+    } catch (error) {
+        console.error('Error loading textbook section:', error);
+        const contentArea = document.getElementById('textbook-content');
+        contentArea.innerHTML = `
+            <div style="text-align: center; padding: 40px 20px; color: var(--accent);">
+                <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                <h4>Content Not Available</h4>
+                <p>Unable to load the textbook section. Please try again later.</p>
+                <button class="btn btn-outline" onclick="loadTextbookContent()">
+                    <i class="fas fa-arrow-left"></i> Back to Sections
+                </button>
+            </div>
+        `;
+    }
+}
+
 function displayTextbookSection(sectionData, sectionTitle) {
     const contentArea = document.getElementById('textbook-content');
     
-    // Build HTML content from the structured JSON
+    // Build HTML content from the new structured JSON
     let htmlContent = `
         <div class="textbook-section">
             <div class="section-header">
@@ -21104,269 +20695,239 @@ function displayTextbookSection(sectionData, sectionTitle) {
                 `;
             }
 
-            // NEW: Image Gallery Section for Mathematical Visualizations
-            if (section.image_gallery) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Visual Representations</h4>`;
-                htmlContent += `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 30px;">`;
-                
-                section.image_gallery.forEach(image => {
-                    htmlContent += `
-                        <div style="background: white; padding: 15px; border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-                            <div style="text-align: center; margin-bottom: 10px;">
-                                <img src="${image.url}" 
-                                     alt="${image.alt || 'Mathematical visualization'}" 
-                                     style="max-width: 100%; height: auto; border-radius: 8px; border: 1px solid #ddd;"
-                                     onerror="this.style.display='none'">
-                            </div>
-                            <div style="text-align: center;">
-                                <strong style="color: var(--primary);">${image.title}</strong>
-                                ${image.caption ? `<div style="font-size: 0.9em; color: var(--gray); margin-top: 5px;">${image.caption}</div>` : ''}
-                                ${image.description ? `<div style="font-size: 0.85em; color: var(--gray); margin-top: 8px; font-style: italic;">${image.description}</div>` : ''}
-                            </div>
-                        </div>
-                    `;
-                });
-                htmlContent += `</div>`;
-            }
+            // Add key concept if present
+            if (section.key_concept) {
+    if (typeof section.key_concept === 'object' && section.key_concept.definition) {
+        // Handle object format
+        htmlContent += `
+            <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
+                <strong style="color: var(--primary);">Key Concept:</strong> ${section.key_concept.definition}
+                ${section.key_concept.biological_context ? `
+                    <div style="margin-top: 8px;"><strong>Biological Context:</strong> ${section.key_concept.biological_context}</div>
+                ` : ''}
+            </div>
+        `;
+    } else {
+        // Handle string format
+        htmlContent += `
+            <div style="background: #e8f4fd; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196F3;">
+                <strong style="color: var(--primary);">Key Concept:</strong> ${section.key_concept}
+            </div>
+        `;
+    }
+}
 
-            // NEW: Graph Comparison Section
-            if (section.graph_comparisons) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Graphical Analysis</h4>`;
-                section.graph_comparisons.forEach(comparison => {
+            // Handle different section types with the new structure
+            if (section.types_of_cellular_work) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Types of Cellular Work:</h4>`;
+                section.types_of_cellular_work.forEach(work => {
                     htmlContent += `
-                        <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 25px; border: 2px solid var(--light-gray);">
-                            <h5 style="color: var(--primary); margin-bottom: 15px; font-size: 1.1rem;">
-                                <i class="fas fa-chart-line" style="margin-right: 8px;"></i>
-                                ${comparison.title}
-                            </h5>
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray); box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;">${work.type}</h5>
+                            <p style="margin-bottom: 10px;"><strong>Description:</strong> ${work.description}</p>
+                            ${work.detailed_mechanism ? `<p style="margin-bottom: 10px;"><strong>Mechanism:</strong> ${work.detailed_mechanism}</p>` : ''}
                             
-                            <div style="display: grid; grid-template-columns: ${comparison.images.length > 1 ? '1fr 1fr' : '1fr'}; gap: 20px; margin-bottom: 15px;">
-                                ${comparison.images.map(img => `
-                                    <div style="text-align: center;">
-                                        <img src="${img.url}" 
-                                             alt="${img.alt}" 
-                                             style="max-width: 100%; height: auto; max-height: 300px; border-radius: 6px; border: 1px solid #ddd;"
-                                             onerror="this.style.display='none'">
-                                        <div style="margin-top: 8px; font-weight: 500; color: var(--primary-dark);">${img.label}</div>
-                                    </div>
-                                `).join('')}
-                            </div>
-                            
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
-                                <strong>Analysis:</strong> ${comparison.analysis}
-                                ${comparison.observations ? `
-                                    <div style="margin-top: 10px;">
-                                        <strong>Key Observations:</strong>
-                                        <ul style="margin: 8px 0 0 20px;">
-                                            ${comparison.observations.map(obs => `<li>${obs}</li>`).join('')}
-                                        </ul>
-                                    </div>
-                                ` : ''}
-                            </div>
-                        </div>
-                    `;
-                });
-            }
-
-            // NEW: Step-by-Step Diagram Flow
-            if (section.diagram_flow) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Process Flow</h4>`;
-                htmlContent += `<div style="display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px;">`;
-                
-                section.diagram_flow.forEach((step, index) => {
-                    htmlContent += `
-                        <div style="display: flex; align-items: center; gap: 20px; background: white; padding: 20px; border-radius: 10px; border: 1px solid #e0e0e0;">
-                            <div style="flex-shrink: 0; text-align: center; min-width: 100px;">
-                                <div style="background: var(--primary); color: white; width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 1.2rem; margin: 0 auto 10px;">
-                                    ${index + 1}
-                                </div>
-                                <div style="font-weight: 500; color: var(--primary-dark);">${step.step_title}</div>
-                            </div>
-                            
-                            ${step.image ? `
-                                <div style="flex-shrink: 0; text-align: center;">
-                                    <img src="${step.image.url}" 
-                                         alt="${step.image.alt}" 
-                                         style="max-width: 200px; height: auto; border-radius: 6px; border: 1px solid #ddd;"
-                                         onerror="this.style.display='none'">
-                                </div>
-                            ` : ''}
-                            
-                            <div style="flex: 1;">
-                                <div style="font-weight: 500; margin-bottom: 8px;">${step.description}</div>
-                                ${step.details ? `<div style="font-size: 0.9em; color: var(--gray);">${step.details}</div>` : ''}
-                            </div>
-                        </div>
-                    `;
-                });
-                htmlContent += `</div>`;
-            }
-
-            // Enhanced: Interactive Examples with Image Support
-            if (section.interactive_examples) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Interactive Examples</h4>`;
-                section.interactive_examples.forEach(example => {
-                    htmlContent += `
-                        <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; border: 2px solid var(--light-gray); box-shadow: 0 2px 10px rgba(0,0,0,0.05);">
-                            <h5 style="color: var(--primary); margin-bottom: 15px; font-size: 1.1rem;">
-                                <i class="fas fa-lightbulb" style="color: #ffc107; margin-right: 8px;"></i>
-                                ${example.title}
-                            </h5>
-                            
-                            ${example.visual_aid ? `
-                                <div style="text-align: center; margin-bottom: 15px;">
-                                    <img src="${example.visual_aid.url}" 
-                                         alt="${example.visual_aid.alt}" 
-                                         style="max-width: 100%; height: auto; max-height: 250px; border-radius: 8px; border: 1px solid #ddd;"
-                                         onerror="this.style.display='none'">
-                                    ${example.visual_aid.caption ? `
-                                        <div style="font-size: 0.9em; color: var(--gray); margin-top: 8px; font-style: italic;">
-                                            ${example.visual_aid.caption}
-                                        </div>
-                                    ` : ''}
-                                </div>
-                            ` : ''}
-                            
-                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-left: 4px solid var(--primary);">
-                                <strong>Problem:</strong> 
-                                <div style="font-family: 'Cambria Math', serif; font-size: 1.1em; margin: 8px 0; padding: 10px; background: white; border-radius: 5px;">
-                                    ${example.problem}
-                                </div>
-                            </div>
-                            
-                            <!-- Rest of interactive example content remains the same -->
-                            <details>
-                                <summary style="cursor: pointer; color: var(--primary); font-weight: bold; padding: 10px; background: #e3f2fd; border-radius: 6px;">
-                                    <i class="fas fa-chevron-down"></i> Show Step-by-Step Solution
-                                </summary>
+                            ${work.examples && work.examples.length > 0 ? `
                                 <div style="margin-top: 15px;">
-                                    ${example.steps.map((step, idx) => `
-                                        <div style="display: flex; align-items: flex-start; gap: 15px; margin-bottom: 12px; padding: 12px; background: ${idx % 2 === 0 ? '#f8f9fa' : 'white'}; border-radius: 6px;">
-                                            <div style="background: var(--primary); color: white; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 0.9rem; flex-shrink: 0;">
-                                                ${idx + 1}
-                                            </div>
-                                            <div style="flex: 1;">
-                                                <div style="font-weight: 500; margin-bottom: 5px;">${step.description}</div>
-                                                ${step.working ? `
-                                                    <div style="font-family: 'Cambria Math', serif; background: white; padding: 8px; border-radius: 4px; margin: 5px 0; border-left: 3px solid #4caf50;">
-                                                        ${step.working}
-                                                    </div>
-                                                ` : ''}
-                                                ${step.diagram ? `
-                                                    <div style="text-align: center; margin: 10px 0;">
-                                                        <img src="${step.diagram.url}" 
-                                                             alt="${step.diagram.alt}" 
-                                                             style="max-width: 100%; height: auto; max-height: 150px; border-radius: 4px; border: 1px solid #ddd;"
-                                                             onerror="this.style.display='none'">
-                                                        ${step.diagram.caption ? `
-                                                            <div style="font-size: 0.8em; color: var(--gray); margin-top: 5px;">
-                                                                ${step.diagram.caption}
-                                                            </div>
-                                                        ` : ''}
-                                                    </div>
-                                                ` : ''}
-                                                ${step.explanation ? `
-                                                    <div style="font-size: 0.9em; color: var(--gray); margin-top: 5px;">
-                                                        <i class="fas fa-info-circle" style="margin-right: 5px;"></i>${step.explanation}
-                                                    </div>
-                                                ` : ''}
-                                            </div>
+                                    <strong>Examples:</strong>
+                                    ${work.examples.map(example => `
+                                        <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 8px;">
+                                            <strong>${example.process}:</strong> ${example.explanation}
                                         </div>
                                     `).join('')}
                                 </div>
-                            </details>
-                            
-                            ${example.final_answer ? `
-                                <div style="background: #e8f5e8; padding: 12px; border-radius: 6px; margin-top: 15px; border-left: 4px solid #4caf50;">
-                                    <strong style="color: #2e7d32;">Final Answer:</strong>
-                                    <div style="font-family: 'Cambria Math', serif; font-size: 1.1em; margin-top: 5px;">
-                                        ${example.final_answer}
-                                    </div>
-                                </div>
                             ` : ''}
                         </div>
                     `;
                 });
             }
 
-            // NEW: Mathematical Visualization Section
-            if (section.mathematical_visualizations) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Mathematical Visualizations</h4>`;
-                section.mathematical_visualizations.forEach(viz => {
+            if (section.thermodynamic_laws) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Thermodynamic Laws:</h4>`;
+                section.thermodynamic_laws.forEach(law => {
                     htmlContent += `
-                        <div style="background: white; padding: 25px; border-radius: 12px; margin-bottom: 25px; border: 2px solid #e3f2fd; box-shadow: 0 4px 15px rgba(0,0,0,0.08);">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px; align-items: start;">
-                                <div>
-                                    <h5 style="color: var(--primary); margin-bottom: 15px; font-size: 1.2rem;">
-                                        <i class="fas fa-project-diagram" style="margin-right: 10px;"></i>
-                                        ${viz.title}
-                                    </h5>
-                                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                                        <strong>Concept:</strong> ${viz.concept_description}
-                                    </div>
-                                    ${viz.key_points ? `
-                                        <div style="background: #fff3e0; padding: 12px; border-radius: 6px;">
-                                            <strong>Key Insights:</strong>
-                                            <ul style="margin: 8px 0 0 20px;">
-                                                ${viz.key_points.map(point => `<li>${point}</li>`).join('')}
-                                            </ul>
-                                        </div>
-                                    ` : ''}
-                                </div>
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray); box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;">${law.law}</h5>
+                            <p style="margin-bottom: 8px;"><strong>Principle:</strong> ${law.principle}</p>
+                            <p style="margin-bottom: 8px;"><strong>Statement:</strong> ${law.statement}</p>
+                            <p style="margin-bottom: 8px;"><strong>Biological Implication:</strong> ${law.biological_implication}</p>
+                            ${law.example ? `<p style="margin-bottom: 8px;"><strong>Example:</strong> ${law.example}</p>` : ''}
+                            ${law.analogy ? `<div style="background: #fff3cd; padding: 10px; border-radius: 6px; margin-top: 10px; border-left: 4px solid #ffc107;"><strong>Analogy:</strong> ${law.analogy}</div>` : ''}
+                        </div>
+                    `;
+                });
+            }
+
+            if (section.free_energy_components) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Free Energy Components:</h4>`;
+                const freeEnergy = section.free_energy_components;
+                htmlContent += `
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray);">
+                        <p style="margin-bottom: 10px;"><strong>Definition:</strong> ${freeEnergy.definition}</p>
+                        ${freeEnergy.free_energy_change_equation ? `<p style="margin-bottom: 10px;"><strong>Equation:</strong> ${freeEnergy.free_energy_change_equation}</p>` : ''}
+                        ${freeEnergy.interpretation ? `<p style="margin-bottom: 15px;"><strong>Interpretation:</strong> ${freeEnergy.interpretation}</p>` : ''}
+                    </div>
+                `;
+
+                if (section.reaction_types) {
+                    htmlContent += `<h5 style="color: var(--primary); margin: 20px 0 10px 0;">Reaction Types:</h5>`;
+                    section.reaction_types.forEach(reaction => {
+                        htmlContent += `
+                            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 12px;">
+                                <h6 style="color: var(--primary-dark); margin-bottom: 8px;">${reaction.type}: ${reaction.delta_g}</h6>
+                                <p style="margin-bottom: 8px;"><strong>Characteristics:</strong> ${reaction.characteristics.join(', ')}</p>
+                                <p style="margin-bottom: 8px;"><strong>Energy Flow:</strong> ${reaction.energy_flow}</p>
                                 
-                                <div style="text-align: center;">
-                                    <img src="${viz.image.url}" 
-                                         alt="${viz.image.alt}" 
-                                         style="max-width: 100%; height: auto; border-radius: 8px; border: 2px solid #bbdefb; box-shadow: 0 3px 10px rgba(0,0,0,0.1);"
-                                         onerror="this.style.display='none'">
-                                    ${viz.image.caption ? `
-                                        <div style="margin-top: 10px; font-style: italic; color: var(--gray);">
-                                            ${viz.image.caption}
-                                        </div>
-                                    ` : ''}
-                                    ${viz.image.interpretation ? `
-                                        <div style="margin-top: 8px; font-size: 0.9em; color: var(--primary-dark); background: #e8f4fd; padding: 8px; border-radius: 4px;">
-                                            <strong>Interpretation:</strong> ${viz.image.interpretation}
-                                        </div>
-                                    ` : ''}
-                                </div>
+                                ${reaction.biological_example ? `
+                                    <div style="background: white; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                        <strong>Example - ${reaction.biological_example.process}:</strong><br>
+                                        ${reaction.biological_example.equation ? `<div style="font-family: 'Cambria Math', serif; margin: 5px 0;">${reaction.biological_example.equation}</div>` : ''}
+                                        ${reaction.biological_example.delta_g_value ? `<div><strong>ΔG:</strong> ${reaction.biological_example.delta_g_value}</div>` : ''}
+                                        <div style="margin-top: 5px;">${reaction.biological_example.explanation}</div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${reaction.note ? `<div style="background: #fff3cd; padding: 8px; border-radius: 4px; margin-top: 8px; font-size: 0.9em;"><strong>Note:</strong> ${reaction.note}</div>` : ''}
                             </div>
+                        `;
+                    });
+                }
+            }
+
+            // Add more section type handlers for the new structure...
+            if (section.molecule) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">${section.molecule} - ${section.role || 'Structure and Function'}</h4>`;
+                
+                if (section.structure) {
+                    htmlContent += `<h5 style="color: var(--primary); margin: 15px 0 10px 0;">Structure:</h5>`;
+                    section.structure.components.forEach(component => {
+                        htmlContent += `
+                            <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                                <strong>${component.part}:</strong> ${component.composition}
+                                ${component.function ? `<div style="margin-top: 5px;"><em>Function:</em> ${component.function}</div>` : ''}
+                                ${component.key_feature ? `<div style="margin-top: 5px;"><strong>Key Feature:</strong> ${component.key_feature}</div>` : ''}
+                            </div>
+                        `;
+                    });
+                }
+
+                if (section.function) {
+                    htmlContent += `<h5 style="color: var(--primary); margin: 15px 0 10px 0;">Function:</h5>`;
+                    const func = section.function;
+                    htmlContent += `
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px;">
+                            <p><strong>Hydrolysis Reaction:</strong> ${func.hydrolysis_reaction}</p>
+                            <p><strong>Energy Release:</strong> ${func.energy_release}</p>
+                            <p><strong>Mechanism:</strong> ${func.mechanism}</p>
+                            
+                            ${func.atp_cycle ? `
+                                <div style="margin-top: 15px;">
+                                    <strong>ATP Cycle:</strong>
+                                    ${func.atp_cycle.map(cycle => `
+                                        <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 8px;">
+                                            <strong>${cycle.process}:</strong> ${cycle.reaction}<br>
+                                            <em>Purpose:</em> ${cycle.purpose}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }
+            }
+
+            if (section.pathway_types) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Metabolic Pathways:</h4>`;
+                htmlContent += `<p style="margin-bottom: 15px;"><strong>Definition:</strong> ${section.definition}</p>`;
+                
+                section.pathway_types.forEach(pathway => {
+                    htmlContent += `
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray);">
+                            <h5 style="color: var(--primary); margin-bottom: 10px;">${pathway.type}</h5>
+                            <p><strong>Energy Profile:</strong> ${pathway.energy_profile} (${pathway.direction})</p>
+                            <p><strong>Function:</strong> ${pathway.function}</p>
+                            
+                            ${pathway.goals ? `<p><strong>Goals:</strong> ${pathway.goals.join('; ')}</p>` : ''}
+                            ${pathway.energy_source ? `<p><strong>Energy Source:</strong> ${pathway.energy_source}</p>` : ''}
+                            
+                            ${pathway.primary_example ? `
+                                <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 10px;">
+                                    <strong>Primary Example - ${pathway.primary_example.process}:</strong><br>
+                                    ${pathway.primary_example.explanation}
+                                </div>
+                            ` : ''}
+                            
+                            ${pathway.examples ? `
+                                <div style="margin-top: 10px;">
+                                    <strong>Examples:</strong>
+                                    ${pathway.examples.map(example => `
+                                        <div style="background: #f8f9fa; padding: 8px; border-radius: 4px; margin-top: 5px;">
+                                            <strong>${example.process}:</strong> ${example.explanation}
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
                         </div>
                     `;
                 });
+                
+                if (section.relationship) {
+                    htmlContent += `
+                        <div style="background: #e8f5e8; padding: 15px; border-radius: 8px; margin-top: 15px; border-left: 4px solid #4caf50;">
+                            <strong>Relationship:</strong> ${section.relationship}
+                        </div>
+                    `;
+                }
             }
 
-            // Rest of existing sections (theorems, properties, etc.) with image support added...
-            if (section.theorems) {
-                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Theorems & Proofs</h4>`;
-                section.theorems.forEach(theorem => {
+            if (section.purpose) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Enzymes:</h4>`;
+                htmlContent += `<p style="margin-bottom: 15px;"><strong>Purpose:</strong> ${section.purpose}</p>`;
+                
+                if (section.activation_energy) {
                     htmlContent += `
-                        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                            ${theorem.visualization ? `
-                                <div style="text-align: center; margin-bottom: 15px;">
-                                    <img src="${theorem.visualization.url}" 
-                                         alt="${theorem.visualization.alt}" 
-                                         style="max-width: 100%; height: auto; max-height: 200px; border-radius: 6px; border: 2px solid rgba(255,255,255,0.3);"
-                                         onerror="this.style.display='none'">
-                                </div>
-                            ` : ''}
-                            <h5 style="margin-bottom: 15px; font-size: 1.2rem; display: flex; align-items: center;">
-                                <i class="fas fa-calculator" style="margin-right: 10px;"></i>
-                                ${theorem.name}
-                            </h5>
-                            <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-                                <strong>Theorem:</strong> ${theorem.statement}
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                            <h5 style="color: var(--primary); margin-bottom: 10px;">Activation Energy</h5>
+                            <p><strong>Definition:</strong> ${section.activation_energy.definition}</p>
+                            <p><strong>Enzyme Effect:</strong> ${section.activation_energy.enzyme_effect}</p>
+                        </div>
+                    `;
+                }
+
+                if (section.key_properties) {
+                    htmlContent += `<h5 style="color: var(--primary); margin: 15px 0 10px 0;">Key Properties:</h5>`;
+                    section.key_properties.forEach(property => {
+                        htmlContent += `
+                            <div style="background: #f8f9fa; padding: 12px; border-radius: 6px; margin-bottom: 8px;">
+                                <strong>${property.property}:</strong> ${property.explanation}
                             </div>
-                            ${theorem.proof ? `
-                                <details style="margin-top: 10px;">
-                                    <summary style="cursor: pointer; font-weight: bold; background: rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 6px;">
-                                        <i class="fas fa-eye"></i> View Proof
-                                    </summary>
-                                    <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 8px; margin-top: 10px;">
-                                        ${theorem.proof}
-                                    </div>
-                                </details>
-                            ` : ''}
+                        `;
+                    });
+                }
+            }
+
+            if (section.energy_flow_pathway) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Energy Flow in Living Systems:</h4>`;
+                if (section.introduction) {
+                    htmlContent += `<p style="margin-bottom: 15px;">${section.introduction}</p>`;
+                }
+                
+                section.energy_flow_pathway.forEach(step => {
+                    htmlContent += `
+                        <div style="background: white; padding: 15px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--primary-light);">
+                            <div style="display: flex; align-items: flex-start; gap: 15px;">
+                                <div style="background: var(--primary); color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; flex-shrink: 0;">
+                                    ${step.step}
+                                </div>
+                                <div style="flex: 1;">
+                                    <h6 style="color: var(--primary-dark); margin-bottom: 5px; font-size: 1.1rem;">${step.process}</h6>
+                                    <p style="margin-bottom: 5px;">${step.description}</p>
+                                    ${step.mechanism ? `<p style="margin-bottom: 5px;"><em>Mechanism:</em> ${step.mechanism}</p>` : ''}
+                                    ${step.result ? `<p style="margin-bottom: 5px;"><strong>Result:</strong> ${step.result}</p>` : ''}
+                                    ${step.applications ? `<p style="margin-bottom: 5px;"><strong>Applications:</strong> ${step.applications.join(', ')}</p>` : ''}
+                                    ${step.organization ? `<p style="margin-bottom: 5px;"><strong>Organization:</strong> ${step.organization}</p>` : ''}
+                                </div>
+                            </div>
                         </div>
                     `;
                 });
@@ -21378,51 +20939,29 @@ function displayTextbookSection(sectionData, sectionTitle) {
 
     htmlContent += `</div>`; // Close section-content
 
-    // Enhanced: Key Terms with optional icons
+    // Add key terms section
     if (sectionData.key_terms && sectionData.key_terms.length > 0) {
         htmlContent += `
             <div class="key-points">
-                <h3><i class="fas fa-key"></i> Key Terms & Concepts</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 15px;">
+                <h3><i class="fas fa-key"></i> Key Terms</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
                     ${sectionData.key_terms.map(term => `
-                        <div style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: white; padding: 12px; border-radius: 8px; text-align: center; font-weight: 500; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                        <span style="background: var(--primary); color: white; padding: 6px 12px; border-radius: 15px; font-size: 0.9rem;">
                             ${term}
-                        </div>
+                        </span>
                     `).join('')}
                 </div>
             </div>
         `;
     }
 
-    // NEW: Visual Summary with Images
-    if (sectionData.visual_summary) {
-        htmlContent += `
-            <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid var(--primary);">
-                <h3><i class="fas fa-images"></i> Visual Summary</h3>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
-                    ${sectionData.visual_summary.map(item => `
-                        <div style="background: white; padding: 15px; border-radius: 10px; border: 1px solid #e0e0e0; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center;">
-                            <img src="${item.image.url}" 
-                                 alt="${item.image.alt}" 
-                                 style="max-width: 100%; height: auto; max-height: 150px; border-radius: 6px; margin-bottom: 10px;"
-                                 onerror="this.style.display='none'">
-                            <div style="font-weight: 600; color: var(--primary); margin-bottom: 5px;">${item.title}</div>
-                            <div style="font-size: 0.9em; color: var(--gray);">${item.description}</div>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    }
-
-    // Rest of existing summary and navigation...
+    // Add summary
     if (sectionData.summary) {
         htmlContent += `
             <div class="vocabulary">
-                <h3><i class="fas fa-file-alt"></i> Chapter Summary</h3>
+                <h3><i class="fas fa-file-alt"></i> Summary</h3>
                 <div class="vocab-grid">
-                    <div class="vocab-item" style="font-style: italic; line-height: 1.6; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                        <i class="fas fa-quote-left" style="font-size: 1.5em; opacity: 0.7; margin-right: 10px;"></i>
+                    <div class="vocab-item" style="font-style: italic; line-height: 1.6;">
                         ${sectionData.summary}
                     </div>
                 </div>
@@ -21440,44 +20979,6 @@ function displayTextbookSection(sectionData, sectionTitle) {
     `;
 
     contentArea.innerHTML = htmlContent;
-
-    // ADD THIS FUNCTION - it's missing!
-function loadTextbookSection(sectionPath, sectionTitle) {
-    try {
-        const contentArea = document.getElementById('textbook-content');
-        
-        // Show loading state
-        contentArea.innerHTML = `
-            <div style="text-align: center; padding: 40px 20px;">
-                <div class="tool-icon" style="margin: 0 auto 20px;">
-                    <i class="fas fa-spinner fa-spin"></i>
-                </div>
-                <h4 style="color: var(--primary); margin-bottom: 10px;">Loading Content</h4>
-                <p style="color: var(--gray);">Loading ${sectionTitle}...</p>
-            </div>
-        `;
-        
-        // Fetch and load the section data
-        fetch(sectionPath)
-            .then(response => response.json())
-            .then(sectionData => {
-                displayTextbookSection(sectionData, sectionTitle);
-            })
-            .catch(error => {
-                console.error('Error loading section:', error);
-                contentArea.innerHTML = `
-                    <div style="text-align: center; padding: 40px 20px; color: var(--accent);">
-                        <i class="fas fa-exclamation-triangle"></i>
-                        <h4>Error Loading Content</h4>
-                        <p>${error.message}</p>
-                    </div>
-                `;
-            });
-        
-    } catch (error) {
-        console.error('Error in loadTextbookSection:', error);
-    }
-}
     
     // Render MathJax for the content
     setTimeout(() => {
@@ -25224,86 +24725,15 @@ function generateExamQuizButtons(courseId) {
 }
 
 // Update the startExamQuiz function to include courseId
-async function startExamQuiz(quizNumber, courseId) {
-    try {
-        const courseTitle = document.getElementById('detail-course-title').textContent;
-        
-        // Show loading state
-        document.getElementById('exam-quiz-section').innerHTML = `
-            <div class="tool-header">
-                <h3 class="section-title">${courseTitle} - Quiz ${quizNumber}</h3>
-                <div style="display: flex; gap: 15px;">
-                    <div style="background: var(--light-bg); padding: 8px 15px; border-radius: var(--border-radius-sm); color: var(--primary); font-weight: 600;">
-                        <i class="fas fa-clock"></i> <span id="quiz-timer">${getTimeLimitForCourse(courseId)}</span>
-                    </div>
-                    <button class="tool-back" onclick="openExamQuiz()">
-                        <i class="fas fa-times"></i> Exit Quiz
-                    </button>
-                </div>
-            </div>
-            
-            <div class="quiz-container">
-                <div style="text-align: center; padding: 60px 20px;">
-                    <div class="tool-icon" style="margin: 0 auto 20px;">
-                        <i class="fas fa-spinner fa-spin"></i>
-                    </div>
-                    <h4 style="color: var(--primary); margin-bottom: 10px;">Loading Quiz...</h4>
-                    <p style="color: var(--gray);">Preparing your exam quiz...</p>
-                </div>
-            </div>
-        `;
-
-        // Load quiz data from JSON file
-        const quizData = await loadExamQuizData(courseId, quizNumber);
-        
-        if (quizData) {
-            displayExamQuiz(quizData, courseId, quizNumber);
-        } else {
-            // Fallback to default quiz if file not found
-            displayDefaultExamQuiz(courseId, quizNumber);
-        }
-        
-    } catch (error) {
-        console.error('Error starting exam quiz:', error);
-        displayDefaultExamQuiz(courseId, quizNumber);
-    }
-}
-
-// Add this function to load exam quiz data from JSON files
-async function loadExamQuizData(courseId, quizNumber) {
-    try {
-        // Construct the path to the quiz JSON file
-        const quizPath = `exams/${courseId}/quiz${quizNumber}.json`;
-        console.log('🔍 Loading exam quiz from:', quizPath);
-        
-        const response = await fetch(quizPath);
-        if (!response.ok) {
-            throw new Error(`Failed to load quiz: ${response.status}`);
-        }
-        
-        const quizData = await response.json();
-        console.log('✅ Successfully loaded exam quiz:', quizData);
-        return quizData;
-        
-    } catch (error) {
-        console.error('❌ Error loading exam quiz:', error);
-        return null;
-    }
-}
-
-// Add this function to display the loaded quiz data
-function displayExamQuiz(quizData, courseId, quizNumber) {
+function startExamQuiz(quizNumber, courseId) {
     const courseTitle = document.getElementById('detail-course-title').textContent;
     
     document.getElementById('exam-quiz-section').innerHTML = `
         <div class="tool-header">
-            <h3 class="section-title">${courseTitle} - ${quizData.title || `Quiz ${quizNumber}`}</h3>
+            <h3 class="section-title">${courseTitle} - Quiz ${quizNumber}</h3>
             <div style="display: flex; gap: 15px;">
                 <div style="background: var(--light-bg); padding: 8px 15px; border-radius: var(--border-radius-sm); color: var(--primary); font-weight: 600;">
                     <i class="fas fa-clock"></i> <span id="quiz-timer">${getTimeLimitForCourse(courseId)}</span>
-                </div>
-                <div style="background: var(--light-bg); padding: 8px 15px; border-radius: var(--border-radius-sm); color: var(--primary); font-weight: 600;">
-                    <i class="fas fa-question-circle"></i> ${quizData.questions ? quizData.questions.length : 0} Questions
                 </div>
                 <button class="tool-back" onclick="openExamQuiz()">
                     <i class="fas fa-times"></i> Exit Quiz
@@ -25312,147 +24742,87 @@ function displayExamQuiz(quizData, courseId, quizNumber) {
         </div>
         
         <div class="quiz-container">
-            <div class="quiz-info" style="background: var(--light-bg); padding: 20px; border-radius: var(--border-radius-sm); margin-bottom: 25px;">
-                <h4 style="color: var(--primary); margin-bottom: 10px;">${quizData.title || `Quiz ${quizNumber}`}</h4>
-                <p style="color: var(--gray); margin-bottom: 0;">${quizData.description || 'Full-length exam simulation'}</p>
-                ${quizData.duration ? `<div style="margin-top: 10px;"><strong>Duration:</strong> ${quizData.duration}</div>` : ''}
-                ${quizData.passingScore ? `<div style="margin-top: 5px;"><strong>Passing Score:</strong> ${quizData.passingScore}%</div>` : ''}
+            <div class="question">
+                <div class="question-text">
+                    This is a sample question from ${courseTitle} - Quiz ${quizNumber}. This quiz is specifically designed for ${courseTitle} and contains ${getQuestionCountForCourse(courseId)} questions with a ${getTimeLimitForCourse(courseId)} time limit.
+                </div>
+                <div class="options">
+                    <div class="option" onclick="selectOption(this)">
+                        Option A - ${courseTitle} specific
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        Option B - ${courseTitle} specific
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        Option C - ${courseTitle} specific
+                    </div>
+                    <div class="option" onclick="selectOption(this)">
+                        Option D - ${courseTitle} specific
+                    </div>
+                </div>
             </div>
             
-            <div id="exam-questions-container">
-                <!-- Questions will be loaded here -->
+            <div class="quiz-navigation">
+                <button class="btn btn-outline">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                <div style="display: flex; gap: 5px;">
+                    <span style="padding: 8px 12px; background: var(--light-bg); border-radius: 5px;">1/${getQuestionCountForCourse(courseId)}</span>
+                </div>
+                <button class="btn">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
             </div>
             
             <div class="quiz-actions" style="margin-top: 30px; justify-content: center;">
-                <button class="btn" style="background: var(--success);" onclick="submitExamQuiz()">
-                    <i class="fas fa-check-circle"></i> Submit Exam
+                <button class="btn" style="background: var(--success);">
+                    <i class="fas fa-check-circle"></i> Submit Quiz
                 </button>
             </div>
         </div>
     `;
-    
-    // Load the questions
-    if (quizData.questions && quizData.questions.length > 0) {
-        displayExamQuestions(quizData.questions);
-    } else {
-        document.getElementById('exam-questions-container').innerHTML = `
-            <div style="text-align: center; padding: 40px 20px; color: var(--gray);">
-                <i class="fas fa-exclamation-circle" style="font-size: 3rem; margin-bottom: 20px;"></i>
-                <h4>No Questions Available</h4>
-                <p>This exam quiz doesn't contain any questions yet.</p>
-            </div>
-        `;
-    }
     
     startQuizTimer(courseId);
 }
 
-// Add this function to display exam questions
-function displayExamQuestions(questions) {
-    const container = document.getElementById('exam-questions-container');
+// Update timer function to be course-specific
+function startQuizTimer(courseId) {
+    const timeLimit = getTimeLimitForCourse(courseId);
+    let totalMinutes = parseInt(timeLimit);
+    let minutes = totalMinutes - 1; // Start counting down from (limit-1):00
+    let seconds = 0;
     
-    container.innerHTML = questions.map((question, index) => `
-        <div class="question" style="margin-bottom: 40px; padding: 25px; background: white; border-radius: var(--border-radius-sm); box-shadow: var(--shadow); border-left: 4px solid var(--primary-light);">
-            <div class="question-header" style="display: flex; justify-content: between; align-items: start; margin-bottom: 20px;">
-                <div class="question-text" style="font-weight: 600; color: var(--primary); flex: 1;">
-                    <strong>Question ${index + 1}:</strong> <span id="question-text-${index}">${renderMarkdown(question.question)}</span>
-                </div>
-                ${question.points ? `
-                    <div style="background: var(--primary); color: white; padding: 4px 12px; border-radius: 15px; font-size: 0.9rem; font-weight: 600;">
-                        ${question.points} pts
-                    </div>
-                ` : ''}
-            </div>
-            
-            ${question.image ? `
-                <div style="margin-bottom: 20px; text-align: center;">
-                    <img src="${question.image}" alt="Question diagram" style="max-width: 100%; max-height: 300px; border-radius: var(--border-radius-sm);">
-                </div>
-            ` : ''}
-            
-            <div class="options" style="display: flex; flex-direction: column; gap: 12px;">
-                ${question.options.map((option, optionIndex) => `
-                    <div class="option" onclick="selectExamOption(${index}, ${optionIndex})" 
-                         style="padding: 15px; border: 2px solid var(--light-gray); border-radius: var(--border-radius-sm); cursor: pointer; transition: var(--transition);"
-                         id="exam-option-${index}-${optionIndex}">
-                         <span style="font-weight: 600; margin-right: 10px;">${String.fromCharCode(65 + optionIndex)}.</span>
-                         <span>${renderMarkdown(option)}</span>
-                    </div>
-                `).join('')}
-            </div>
-            
-            <div class="selection-status" style="margin-top: 15px; font-size: 0.9rem; color: var(--success); display: none;" id="exam-status-${index}">
-                <i class="fas fa-check"></i> Answer Selected
-            </div>
-        </div>
-    `).join('');
-
-    // Render MathJax after questions are loaded
-    setTimeout(() => {
-        if (window.MathJax) {
-            MathJax.typesetPromise().catch(console.error);
+    const timerElement = document.getElementById('quiz-timer');
+    if (!timerElement) return;
+    
+    // Initial display
+    timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    
+    const timer = setInterval(() => {
+        if (seconds === 0) {
+            if (minutes === 0) {
+                clearInterval(timer);
+                alert("Time's up! Submitting your quiz.");
+                return;
+            }
+            minutes--;
+            seconds = 59;
+        } else {
+            seconds--;
         }
-    }, 100);
+        
+        timerElement.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }, 1000);
 }
 
-// Add this function for exam option selection
-function selectExamOption(questionIndex, optionIndex) {
-    const questionElement = document.querySelectorAll('.question')[questionIndex];
-    const options = questionElement.querySelectorAll('.option');
-    const statusElement = document.getElementById(`exam-status-${questionIndex}`);
-    
+function selectOption(optionElement) {
     // Remove selected class from all options in this question
-    options.forEach(opt => {
-        opt.classList.remove('selected');
-        opt.style.borderColor = 'var(--light-gray)';
-        opt.style.background = 'white';
-    });
+    const options = optionElement.parentElement.querySelectorAll('.option');
+    options.forEach(opt => opt.classList.remove('selected'));
     
     // Add selected class to clicked option
-    options[optionIndex].classList.add('selected');
-    options[optionIndex].style.borderColor = 'var(--primary)';
-    options[optionIndex].style.background = 'var(--light-bg)';
-    
-    // Show selection status
-    if (statusElement) {
-        statusElement.style.display = 'block';
-    }
+    optionElement.classList.add('selected');
 }
-
-// Add fallback function for when JSON files are not available
-function displayDefaultExamQuiz(courseId, quizNumber) {
-    const courseTitle = document.getElementById('detail-course-title').textContent;
-    
-    document.getElementById('exam-quiz-section').innerHTML = `
-        <div class="tool-header">
-            <h3 class="section-title">${courseTitle} - Quiz ${quizNumber}</h3>
-            <div style="display: flex; gap: 15px;">
-                <button class="tool-back" onclick="openExamQuiz()">
-                    <i class="fas fa-arrow-left"></i> Back to Quizzes
-                </button>
-            </div>
-        </div>
-        
-        <div class="quiz-container">
-            <div style="text-align: center; padding: 60px 20px;">
-                <div class="tool-icon" style="background: var(--warning); margin: 0 auto 20px;">
-                    <i class="fas fa-book"></i>
-                </div>
-                <h4 style="color: var(--primary); margin-bottom: 10px;">Quiz Coming Soon</h4>
-                <p style="color: var(--gray); margin-bottom: 30px;">
-                    The exam quiz for ${courseTitle} - Quiz ${quizNumber} is being prepared and will be available soon.
-                </p>
-                <p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 30px;">
-                    Check back later for full exam simulations with detailed questions and explanations.
-                </p>
-                <button class="btn" onclick="openExamQuiz()">
-                    <i class="fas fa-arrow-left"></i> Back to Available Quizzes
-                </button>
-            </div>
-        </div>
-    `;
-}
-
 
 // Add this function to load quiz data from JSON files
 async function loadQuizData(quizPath) {
@@ -29852,5 +29222,4 @@ function displayDefaultTopicQuiz(unitId, quizNumber, difficulty) {
     </script>
 </body>
 </html>
-
 
