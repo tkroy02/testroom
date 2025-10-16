@@ -20795,6 +20795,48 @@ function displayTextbookSection(sectionData, sectionTitle) {
                 }
             }
 
+// === ADD CLASSIFICATIONS HANDLER HERE ===
+            if (section.classifications) {
+                htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Methods:</h4>`;
+                section.classifications.forEach(classification => {
+                    htmlContent += `
+                        <div style="background: white; padding: 20px; border-radius: 10px; margin-bottom: 15px; border: 1px solid var(--light-gray); box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <h5 style="color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;">${classification.type}</h5>
+                            <p style="margin-bottom: 8px;"><strong>When to use:</strong> ${classification.value}</p>
+                            <p style="margin-bottom: 8px;"><strong>Characteristics:</strong> ${classification.characteristics.join(', ')}</p>
+                            <p style="margin-bottom: 8px;"><strong>How it works:</strong> ${classification.behavior}</p>
+                    `;
+                    
+                    if (classification.examples && classification.examples.length > 0) {
+                        htmlContent += `
+                            <div style="margin-top: 15px;">
+                                <strong>Examples:</strong>
+                                ${classification.examples.map(example => `
+                                    <div style="background: #f8f9fa; padding: 10px; border-radius: 6px; margin-top: 8px;">
+                                        <strong>${example.process}:</strong> ${example.explanation}
+                                        ${example.image ? `
+                                            <div style="margin-top: 8px; text-align: center;">
+                                                <img src="${example.image.url}" 
+                                                     alt="${example.image.alt || 'Example diagram'}"
+                                                     style="max-width: 90%; height: auto; border-radius: 4px;"
+                                                     onerror="this.style.display='none'">
+                                                ${example.image.caption ? `
+                                                    <div style="margin-top: 4px; font-style: italic; color: var(--gray); font-size: 0.8rem;">
+                                                        ${example.image.caption}
+                                                    </div>
+                                                ` : ''}
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `;
+                    }
+                    
+                    htmlContent += `</div>`;
+                });
+            }
+
             // Handle different section types with universal terminology
             if (section.categories) {
                 htmlContent += `<h4 style="color: var(--primary-dark); margin: 25px 0 15px 0;">Categories:</h4>`;
