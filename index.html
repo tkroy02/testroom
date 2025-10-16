@@ -21440,6 +21440,44 @@ function displayTextbookSection(sectionData, sectionTitle) {
     `;
 
     contentArea.innerHTML = htmlContent;
+
+    // ADD THIS FUNCTION - it's missing!
+function loadTextbookSection(sectionPath, sectionTitle) {
+    try {
+        const contentArea = document.getElementById('textbook-content');
+        
+        // Show loading state
+        contentArea.innerHTML = `
+            <div style="text-align: center; padding: 40px 20px;">
+                <div class="tool-icon" style="margin: 0 auto 20px;">
+                    <i class="fas fa-spinner fa-spin"></i>
+                </div>
+                <h4 style="color: var(--primary); margin-bottom: 10px;">Loading Content</h4>
+                <p style="color: var(--gray);">Loading ${sectionTitle}...</p>
+            </div>
+        `;
+        
+        // Fetch and load the section data
+        fetch(sectionPath)
+            .then(response => response.json())
+            .then(sectionData => {
+                displayTextbookSection(sectionData, sectionTitle);
+            })
+            .catch(error => {
+                console.error('Error loading section:', error);
+                contentArea.innerHTML = `
+                    <div style="text-align: center; padding: 40px 20px; color: var(--accent);">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <h4>Error Loading Content</h4>
+                        <p>${error.message}</p>
+                    </div>
+                `;
+            });
+        
+    } catch (error) {
+        console.error('Error in loadTextbookSection:', error);
+    }
+}
     
     // Render MathJax for the content
     setTimeout(() => {
