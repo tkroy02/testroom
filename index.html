@@ -184,6 +184,7 @@ window.MathJax = {
     position: relative;  /* Change from sticky to relative */
 }
 
+/* Add custom scrollbar styling */
 .textbook-sidebar::-webkit-scrollbar {
     width: 8px;
 }
@@ -1221,15 +1222,19 @@ body {
             padding: 30px 0;
         }
 
-        .page-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            position: relative;
-        }
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    
+    /* ✅ Proper background-clip for all browsers */
+    background-clip: text;             /* Standard property */
+    -webkit-background-clip: text;     /* For Chrome/Safari/Edge */
+    -webkit-text-fill-color: transparent; /* Makes gradient visible through text */
+    
+    position: relative;
+}
 
         .page-title:after {
             content: '';
@@ -1783,7 +1788,6 @@ body {
         cursor: pointer;
         font-size: 1.2rem;
     }
-}
 
 
 @media (min-width: 1201px) {
@@ -23792,46 +23796,35 @@ function shuffleArray(array) {
         
 // SINGLE CORRECTED displayQuizQuestions function - REPLACE ALL DUPLICATES
 function displayQuizQuestions(questions) {
-  const container = document.getElementById('quiz-questions-container');
+    const container = document.getElementById('quiz-questions-container');
+    
+    container.innerHTML = questions.map((question, index) => `
+        <div class="question" style="margin-bottom: 30px; padding: 20px; background: white; border-radius: var(--border-radius-sm); box-shadow: var(--shadow);">
+            <div class="question-text" style="font-weight: 600; color: var(--primary); margin-bottom: 15px;">
+                <strong>Question ${index + 1}:</strong> <span id="question-text-${index}">${renderMarkdown(question.question)}</span>
+            </div>
+            <div class="options" style="display: flex; flex-direction: column; gap: 10px;">
+                ${question.options.map((option, optionIndex) => `
+                    <div class="option" onclick="selectQuizOption(${index}, ${optionIndex})" 
+                         style="padding: 12px 15px; border: 2px solid var(--light-gray); border-radius: var(--border-radius-sm); cursor: pointer; transition: var(--transition);"
+                         id="option-${index}-${optionIndex}">
+                         <span>${renderMarkdown(option)}</span>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="selection-status" style="margin-top: 10px; font-size: 0.9rem; color: var(--gray); display: none;" id="status-${index}">
+                <i class="fas fa-check"></i> Selected
+            </div>
+        </div>
+    `).join('');
 
-  container.innerHTML = questions.map((question, index) => `
-    <div class="question" style="margin-bottom: 30px; padding: 20px; background: white; border-radius: var(--border-radius-sm); box-shadow: var(--shadow);">
-      <div class="question-text" style="font-weight: 600; color: var(--primary); margin-bottom: 15px;">
-        <strong>Question ${index + 1}:</strong> <span id="question-text-${index}">${renderMarkdown(question.question)}</span>
-      </div>
-      <div class="options" style="display: flex; flex-direction: column; gap: 10px;">
-        ${question.options.map((option, optionIndex) => `
-          <div class="option" onclick="selectQuizOption(${index}, ${optionIndex})"
-               style="padding: 12px 15px; border: 2px solid var(--light-gray); border-radius: var(--border-radius-sm); cursor: pointer; transition: var(--transition);"
-               id="option-${index}-${optionIndex}">
-            <span>${renderMarkdown(option)}</span>
-          </div>
-        `).join('')}
-      </div>
-      <div class="selection-status" style="margin-top: 10px; font-size: 0.9rem; color: var(--gray); display: none;" id="status-${index}">
-        <i class="fas fa-check"></i> Selected
-      </div>
-    </div>
-  `).join('');
-
-  // Render MathJax after the questions are loaded (scoped to this container)
-  (async () => {
-    try {
-      await new Promise(resolve => setTimeout(resolve, 150));
-      if (window.MathJax && typeof MathJax.typesetPromise === 'function') {
-        // Clear and re-typeset only inside the quiz container (faster & safer)
-        MathJax.typesetClear([container]);
-        await MathJax.typesetPromise([container]);
-        console.log("✅ MathJax rendered successfully for quiz section.");
-      } else {
-        console.warn("⚠️ MathJax not available or not loaded yet.");
-      }
-    } catch (err) {
-      console.error("❌ MathJax rendering failed:", err);
-    }
-  })();
+    // Render MathJax after the questions are loaded
+    setTimeout(() => {
+        if (window.MathJax) {
+            MathJax.typesetPromise().catch(console.error);
+        }
+    }, 100);
 }
-
 
 // SINGLE CORRECTED selectQuizOption function - REPLACE ALL DUPLICATES
 function selectQuizOption(questionIndex, optionIndex) {
