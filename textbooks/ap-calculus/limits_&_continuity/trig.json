@@ -3,76 +3,121 @@
   "expanded_description": "This section focuses on evaluating limits that involve trigonometric functions, introducing the fundamental trigonometric limits and showing how they form the backbone for calculus involving sine, cosine, and tangent. Students will learn how to handle indeterminate forms, manipulate trigonometric expressions algebraically, and apply special limits in problem solving.",
   "core_concept": {
     "principle": "Trigonometric limits often produce indeterminate forms such as 0/0. Evaluating them requires knowledge of continuity, trigonometric identities, and two essential 'special limits' that describe the behavior of sine and cosine near zero.",
-    "explanation": "Sine and cosine are continuous everywhere, so direct substitution works in many cases. When substitution yields 0/0, the special limits $\\\\lim_{x \\\\to 0} \\\\frac{\\\\sin(x)}{x} = 1$ and $\\\\lim_{x \\\\to 0} \\\\frac{1 - \\\\cos(x)}{x^2} = \\\\frac{1}{2}$ become vital. These are derived using the Squeeze Theorem and geometric reasoning."
+    "explanation": "Sine and cosine are continuous everywhere, so direct substitution works in many cases. When substitution yields 0/0, the special limits $\\lim_{x \\to 0} \\frac{\\sin(x)}{x} = 1$ and $\\lim_{x \\to 0} \\frac{1 - \\cos(x)}{x^2} = \\frac{1}{2}$ become vital. These are derived using the Squeeze Theorem and geometric reasoning."
   },
   "sections": [
     {
       "section_title": "1. Continuity and Direct Substitution",
       "introduction": "Before addressing indeterminate cases, recall that sine and cosine are continuous everywhere. If the function is defined and continuous at the point of interest, the limit can be found by direct substitution.",
       "key_concept": {
-        "definition": "If a trigonometric function is continuous at $x = a$, then $\\\\lim_{x \\\\to a} f(x) = f(a)$.",
+        "definition": "If a trigonometric function is continuous at $x = a$, then $\\lim_{x \\to a} f(x) = f(a)$.",
         "context": "This principle is applied first. Only if substitution gives 0/0 or an undefined value do we apply more advanced techniques."
       },
       "examples": [
         {
-          "process": "$\\\\lim_{x \\\\to \\\\pi} \\\\sin(x)$",
-          "explanation": "Substitute directly: $\\\\sin(\\\\pi) = 0$. Therefore, the limit is 0."
+          "process": "$\\lim_{x \\to \\pi} \\sin(x)$",
+          "explanation": "Substitute directly: $\\sin(\\pi) = 0$. Therefore, the limit is 0."
         },
         {
-          "process": "$\\\\lim_{x \\\\to \\\\frac{\\\\pi}{4}} \\\\tan(x)$",
-          "explanation": "$\\\\tan(x)$ is continuous at $x = \\\\frac{\\\\pi}{4}$, so the limit equals its value: $\\\\tan(\\\\frac{\\\\pi}{4}) = 1$."
+          "process": "$\\lim_{x \\to \\frac{\\pi}{4}} \\tan(x)$",
+          "explanation": "$\\tan(x)$ is continuous at $x = \\frac{\\pi}{4}$, so the limit equals its value: $\\tan(\\frac{\\pi}{4}) = 1$."
         }
       ]
     },
     {
       "section_title": "2. The Fundamental Trigonometric Limit",
       "image": {
-        "url": "images/fundamental-trig-limit.png",
+        "url": "images/trig-continuity-sine-cosine.png",
         "alt": "Graph showing sin(x)/x approaching 1 as x approaches 0",
         "caption": "Graphical demonstration of the fundamental trigonometric limit"
       },
       "key_concept": {
-        "definition": "The essential limit is $\\\\lim_{x \\\\to 0} \\\\frac{\\\\sin(x)}{x} = 1$.",
-        "context": "This limit is derived using the Squeeze Theorem and underlies many trigonometric limit evaluations. It shows that sine behaves almost linearly for small x (since $\\\\sin(x) \\\\approx x$ near zero)."
+        "definition": "The essential limit is $\\lim_{x \\to 0} \\frac{\\sin(x)}{x} = 1$.",
+        "context": "This limit is derived using the Squeeze Theorem and underlies many trigonometric limit evaluations. It shows that sine behaves almost linearly for small x (since $\\sin(x) \\approx x$ near zero)."
       },
       "examples": [
         {
-          "process": "$\\\\lim_{x \\\\to 0} \\\\frac{\\\\sin(5x)}{5x}$",
-          "explanation": "Let $u = 5x$. Then as $x \\\\to 0$, $u \\\\to 0$, and the limit becomes $\\\\lim_{u \\\\to 0} \\\\frac{\\\\sin(u)}{u} = 1$."
+          "process": "$\\lim_{x \\to 0} \\frac{\\sin(5x)}{5x}$",
+          "explanation": "Let $u = 5x$. Then as $x \\to 0$, $u \\to 0$, and the limit becomes $\\lim_{u \\to 0} \\frac{\\sin(u)}{u} = 1$."
         },
         {
-          "process": "$\\\\lim_{x \\\\to 0} \\\\frac{\\\\sin(3x)}{x}$",
-          "explanation": "Multiply and divide by 3: $3 \\\\cdot \\\\lim_{x \\\\to 0} \\\\frac{\\\\sin(3x)}{3x} = 3(1) = 3$."
+          "process": "$\\lim_{x \\to 0} \\frac{\\sin(3x)}{x}$",
+          "explanation": "Multiply and divide by 3: $3 \\cdot \\lim_{x \\to 0} \\frac{\\sin(3x)}{3x} = 3(1) = 3$."
         },
         {
-          "process": "$\\\\lim_{x \\\\to 0} \\\\frac{\\\\sin(2x)}{7x}$",
-          "explanation": "Factor to match the sine’s argument: $\\\\frac{2}{7} \\\\cdot \\\\lim_{x \\\\to 0} \\\\frac{\\\\sin(2x)}{2x} = \\\\frac{2}{7}$."
+          "process": "$\\lim_{x \\to 0} \\frac{\\sin(2x)}{7x}$",
+          "explanation": "Factor to match the sine's argument: $\\frac{2}{7} \\cdot \\lim_{x \\to 0} \\frac{\\sin(2x)}{2x} = \\frac{2}{7}$."
         }
       ]
     },
     {
       "section_title": "3. The Companion Limit for Cosine",
       "key_concept": {
-        "definition": "The related limit is $\\\\lim_{x \\\\to 0} \\\\frac{1 - \\\\cos(x)}{x^2} = \\\\frac{1}{2}$.",
-        "context": "This expresses how cosine approaches 1 near x = 0. It is used when the numerator involves a difference like $1 - \\\\cos(x)$ that also produces 0/0."
+        "definition": "The related limit is $\\lim_{x \\to 0} \\frac{1 - \\cos(x)}{x^2} = \\frac{1}{2}$.",
+        "context": "This expresses how cosine approaches 1 near x = 0. It is used when the numerator involves a difference like $1 - \\cos(x)$ that also produces 0/0."
       },
       "examples": [
         {
-          "process": "$\\\\lim_{x \\\\to 0} \\\\frac{1 - \\\\cos(x)}{x^2}$",
-          "explanation": "Standard form; directly recall the limit equals $\\\\frac{1}{2}$."
+          "process": "$\\lim_{x \\to 0} \\frac{1 - \\cos(x)}{x^2}$",
+          "explanation": "Standard form; directly recall the limit equals $\\frac{1}{2}$."
         },
         {
-          "process": "$\\\\lim_{x \\\\to 0} \\\\frac{1 - \\\\cos(2x)}{x^2}$",
-          "explanation": "Use $1 - \\\\cos(2x) = 2\\\\sin^2(x)$: $\\\\lim_{x \\\\to 0} \\\\frac{2\\\\sin^2(x)}{x^2} = 2(1)^2 = 2$."
+          "process": "$\\lim_{x \\to 0} \\frac{1 - \\cos(2x)}{x^2}$",
+          "explanation": "Use $1 - \\cos(2x) = 2\\sin^2(x)$: $\\lim_{x \\to 0} \\frac{2\\sin^2(x)}{x^2} = 2(1)^2 = 2$."
         },
         {
-          "process": "$\\\\lim_{x \\\\to 0} \\\\frac{1 - \\\\cos(3x)}{x^2}$",
-          "explanation": "Apply identity $1 - \\\\cos(3x) = 2\\\\sin^2(1.5x)$: limit $= 2(1.5)^2 = \\\\frac{9}{2}$."
+          "process": "$\\lim_{x \\to 0} \\frac{1 - \\cos(3x)}{x^2}$",
+          "explanation": "Apply identity $1 - \\cos(3x) = 2\\sin^2(1.5x)$: limit $= 2(1.5)^2 = \\frac{9}{2}$."
         }
       ]
     },
     {
-      "section_title": "4. Strategy for Solving Trigonometric Limits",
+      "section_title": "4. Advanced Applications and Common Pitfalls",
+      "introduction": "This section addresses more complex scenarios and highlights common errors students make when working with trigonometric limits.",
+      "common_errors": [
+        {
+          "error": "Forgetting to match arguments",
+          "description": "Applying $\\lim_{x \\to 0} \\frac{\\sin(x)}{x} = 1$ when the argument doesn't match the denominator",
+          "incorrect_example": "$\\lim_{x \\to 0} \\frac{\\sin(3x)}{x} \\neq 1$",
+          "correct_approach": "Must adjust to $3 \\cdot \\lim_{x \\to 0} \\frac{\\sin(3x)}{3x} = 3$"
+        },
+        {
+          "error": "Misapplying the cosine limit form",
+          "description": "Using the wrong denominator power for $1 - \\cos(kx)$ limits",
+          "incorrect_example": "$\\lim_{x \\to 0} \\frac{1 - \\cos(2x)}{x} \\neq \\frac{1}{2}$",
+          "correct_approach": "Must use $\\lim_{x \\to 0} \\frac{1 - \\cos(2x)}{x^2} = 2$"
+        },
+        {
+          "error": "Overlooking algebraic manipulation",
+          "description": "Not simplifying complex fractions before applying limits",
+          "incorrect_example": "Trying to apply special limits directly to $\\frac{\\sin(x) - x}{x^3}$",
+          "correct_approach": "Use series expansion or L'Hôpital's rule for higher-order terms"
+        }
+      ],
+      "advanced_examples": [
+        {
+          "process": "$\\lim_{x \\to 0} \\frac{\\sin(3x)\\cos(2x)}{x}$",
+          "explanation": "Use product-to-sum identity: $\\frac{1}{2}\\cdot\\frac{\\sin(5x) + \\sin(x)}{x} = \\frac{1}{2}(5 + 1) = 3$"
+        },
+        {
+          "process": "$\\lim_{x \\to 0} \\frac{\\tan(x) - \\sin(x)}{x^3}$",
+          "explanation": "Write as $\\frac{\\sin(x)(1 - \\cos(x))}{x^3\\cos(x)} = \\frac{1}{\\cos(x)} \\cdot \\frac{\\sin(x)}{x} \\cdot \\frac{1 - \\cos(x)}{x^2} \\to 1 \\cdot 1 \\cdot \\frac{1}{2} = \\frac{1}{2}$"
+        },
+        {
+          "process": "$\\lim_{x \\to 0} \\frac{\\sin(2x) - 2\\sin(x)}{x^3}$",
+          "explanation": "Use identity $\\sin(2x) = 2\\sin(x)\\cos(x)$: $\\frac{2\\sin(x)(\\cos(x) - 1)}{x^3} = -2\\cdot\\frac{\\sin(x)}{x}\\cdot\\frac{1 - \\cos(x)}{x^2} \\to -2\\cdot 1\\cdot\\frac{1}{2} = -1$"
+        }
+      ],
+      "essential_identities": [
+        "Double-angle: $\\sin(2x) = 2\\sin(x)\\cos(x)$, $\\cos(2x) = 1 - 2\\sin^2(x)$",
+        "Product-to-sum: $\\sin(A)\\cos(B) = \\frac{1}{2}[\\sin(A+B) + \\sin(A-B)]$",
+        "Sum-to-product: $\\sin(A) - \\sin(B) = 2\\cos(\\frac{A+B}{2})\\sin(\\frac{A-B}{2})$",
+        "Pythagorean: $1 - \\cos^2(x) = \\sin^2(x)$",
+        "Half-angle: $1 - \\cos(x) = 2\\sin^2(\\frac{x}{2})$"
+      ]
+    },
+    {
+      "section_title": "5. Strategy for Solving Trigonometric Limits",
       "purpose": "To apply a systematic approach when facing trigonometric limits that yield indeterminate forms.",
       "process_flow": [
         {
@@ -83,12 +128,12 @@
         {
           "step": 2,
           "process": "Simplify Using Identities",
-          "description": "If substitution yields 0/0, use trigonometric identities such as $\\\\sin(2x) = 2\\\\sin(x)\\\\cos(x)$ or $1 - \\\\cos(x) = 2\\\\sin^2(\\\\frac{x}{2})$ to simplify."
+          "description": "If substitution yields 0/0, use trigonometric identities to simplify the expression."
         },
         {
           "step": 3,
           "process": "Match Arguments to Known Forms",
-          "description": "Rearrange the expression so that each sine term matches its denominator, enabling the use of $\\\\lim_{x \\\\to 0} \\\\frac{\\\\sin(x)}{x} = 1$."
+          "description": "Rearrange the expression so that each sine term matches its denominator, enabling the use of $\\lim_{x \\to 0} \\frac{\\sin(x)}{x} = 1$."
         },
         {
           "step": 4,
@@ -98,8 +143,8 @@
       ],
       "examples": [
         {
-          "process": "$\\\\lim_{x \\\\to 0} \\\\frac{\\\\sin(2x) - \\\\sin(x)}{x}$",
-          "explanation": "Use identity $\\\\sin(A) - \\\\sin(B) = 2\\\\cos(\\\\frac{A+B}{2})\\\\sin(\\\\frac{A-B}{2})$. Expression becomes $2\\\\cos(1.5x)\\\\sin(0.5x)/x = \\\\cos(1.5x) \\\\cdot \\\\frac{\\\\sin(0.5x)}{0.5x} \\\\cdot 0.5$. Limit $= 1 \\\\cdot 1 \\\\cdot 0.5 = 0.5$."
+          "process": "$\\lim_{x \\to 0} \\frac{\\sin(2x) - \\sin(x)}{x}$",
+          "explanation": "Use identity $\\sin(A) - \\sin(B) = 2\\cos(\\frac{A+B}{2})\\sin(\\frac{A-B}{2})$. Expression becomes $2\\cos(1.5x)\\sin(0.5x)/x = \\cos(1.5x) \\cdot \\frac{\\sin(0.5x)}{0.5x} \\cdot 0.5$. Limit $= 1 \\cdot 1 \\cdot 0.5 = 0.5$."
         }
       ]
     }
@@ -109,7 +154,9 @@
     "Fundamental Trigonometric Limit",
     "Continuity",
     "Squeeze Theorem",
-    "Indeterminate Form"
+    "Indeterminate Form",
+    "Argument Matching",
+    "Trigonometric Identities"
   ],
-  "summary": "To evaluate trigonometric limits, first test for continuity and use direct substitution. If substitution produces 0/0, manipulate the expression to apply the special limits $\\\\lim_{x \\\\to 0} \\\\frac{\\\\sin(x)}{x} = 1$ and $\\\\lim_{x \\\\to 0} \\\\frac{1 - \\\\cos(x)}{x^2} = \\\\frac{1}{2}$. Through identities and algebraic techniques, these limits resolve otherwise indeterminate expressions, providing the foundation for differentiation and other calculus operations involving trigonometric functions."
+  "summary": "To evaluate trigonometric limits, first test for continuity and use direct substitution. If substitution produces 0/0, manipulate the expression to apply the special limits $\\lim_{x \\to 0} \\frac{\\sin(x)}{x} = 1$ and $\\lim_{x \\to 0} \\frac{1 - \\cos(x)}{x^2} = \\frac{1}{2}$. Through identities and algebraic techniques, these limits resolve otherwise indeterminate expressions, providing the foundation for differentiation and other calculus operations involving trigonometric functions. Always verify argument matching and watch for common algebraic errors."
 }
