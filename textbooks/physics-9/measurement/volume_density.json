@@ -92,7 +92,7 @@
               "explanation": "Demonstrates practical application of buoyancy control in submarine operation."
             },
             {
-              "process": "Iceberg Floating:\nIce density: 917 kg/m³\nSea water density: 1025 kg/m³\nFraction submerged = ρ_object/ρ_fluid = 917/1025 ≈ 0.895\nInterpretation: ~89.5% of iceberg is underwater\n'Tip of the iceberg' expression explained",
+              "process": "Iceberg Floating:\nIce density: 917 kg/m³\nSea water density: 1025 kg/m³\nFraction submerged = ρ_object/ρ_fluid = 917/1025 ≈ 0.895\nInterpretation: ~89.5% of iceberg is underwater\n\"Tip of the iceberg\" expression explained",
               "explanation": "Shows calculation of submerged fraction and practical significance."
             }
           ]
@@ -146,10 +146,7 @@
               "explanation": "Shows density applications in earth sciences and resource identification."
             },
             {
-              "process": "Forensic Science:\nGlass fragment from crime scene\nDensity: 2.52 g/cm³  
-Suspect's glass: 2.51 g/cm³  
-Conclusion: Consistent within measurement error  
-Application: Evidence matching and exclusion",
+              "process": "Forensic Science:\nGlass fragment from crime scene\nDensity: 2.52 g/cm³  \nSuspect's glass: 2.51 g/cm³  \nConclusion: Consistent within measurement error  \nApplication: Evidence matching and exclusion",
               "explanation": "Demonstrates forensic applications of density measurements for evidence analysis."
             }
           ]
@@ -174,4 +171,3 @@ Application: Evidence matching and exclusion",
   ],
   "summary": "Volume and density are fundamental concepts in physics that describe spatial extent and mass distribution. Volume, measured in cubic meters, can be determined through geometric calculation for regular shapes or displacement methods for irregular objects. Density, defined as mass per unit volume (kg/m³), is an intensive property that characterizes materials and determines buoyancy behavior through Archimedes' principle. Experimental methods vary from direct measurement for regular solids to pycnometers for powders and hydrometers for liquids. Density applications span material identification, quality control, buoyancy calculations, and forensic science. Proper error analysis is crucial since density uncertainties propagate from both mass and volume measurements. Understanding volume and density relationships enables prediction of floating/sinking behavior, material characterization, and solution of practical problems across physics, engineering, and applied sciences. These concepts form the basis for understanding fluid mechanics, material science, and many everyday phenomena involving mass and space relationships."
 }
-
