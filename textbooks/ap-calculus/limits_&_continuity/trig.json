@@ -1,0 +1,158 @@
+{
+"topic": "1.4 Limits (Working with Trigonometry)",
+"expanded_description": "This section focuses on evaluating limits that involve trigonometric functions, introducing fundamental trigonometric limits that serve as the foundation for calculus involving sine, cosine, and tangent.",
+"core_concept": {
+"principle": "Limits of trigonometric functions can be evaluated using direct substitution for continuous functions, but require special techniques and key identities when they result in indeterminate forms like 0/0.",
+"explanation": "Trigonometric functions are continuous on their domains, so direct substitution often works. However, special limits and identities are essential tools for resolving indeterminate forms."
+},
+"sections": [
+{
+"section_title": "Continuity and Direct Substitution",
+"introduction": "Sine and cosine functions are continuous for all real numbers. Other trigonometric functions are continuous wherever they are defined, allowing limits to be found by direct substitution at points within their domains.",
+"image": {
+"url": "images/trig-continuity-sine-cosine.png",
+"alt": "Graphs of smooth, continuous sine and cosine waves",
+"caption": "Sine and cosine are continuous everywhere, allowing direct substitution at any point."
+},
+"key_concept": {
+"definition": "If a trigonometric function is continuous at a point x = a, then $\lim_{x \to a} f(x) = f(a)$.",
+"context": "This is the first and simplest method to attempt for any trigonometric limit problem."
+},
+"categories": [
+{
+"type": "Direct Evaluation",
+"description": "Applying direct substitution to continuous trigonometric functions.",
+"image": {
+"url": "images/trig-direct-substitution.png",
+"alt": "Graph of tangent function with point where substitution is valid",
+"caption": "Direct substitution works where the function is defined and continuous."
+},
+"detailed_mechanism": "Identify if the function is defined and continuous at x = a. If so, substitute the value directly.",
+"examples": [
+{
+"process": "$\lim_{x \to \pi} \sin(x)$",
+"explanation": "Sine is continuous everywhere. $\sin(\pi) = 0$, so the limit is 0."
+},
+{
+"process": "$\lim_{x \to \pi/4} \tan(x)$",
+"explanation": "Tangent is continuous at x = π/4. $\tan(\pi/4) = 1$, so the limit is 1."
+}
+]
+}
+]
+},
+{
+"section_title": "Fundamental Trigonometric Limits",
+"image": {
+"url": "images/fundamental-trig-limit-graph.png",
+"alt": "Graph showing sin(θ)/θ approaching 1",
+"caption": "Graphical demonstration of the fundamental limit"
+},
+"key_concept": "The limit $\lim_{x \to 0} \frac{\sin(x)}{x} = 1$ is a cornerstone of calculus, proven using the Squeeze Theorem and vital for evaluating many trigonometric limits.",
+"classifications": [
+{
+"type": "Standard Limit and Variants",
+"value": "Foundation for trigonometric calculus",
+"characteristics": ["Resolves 0/0 indeterminate form", "Requires matching arguments", "Approaches 1 from both sides"],
+"behavior": "This limit holds true when the expression inside sine and the denominator are identical and both approach zero.",
+"examples": [
+{
+"process": "$\lim_{x \to 0} \frac{\sin(5x)}{5x}$",
+"explanation": "Let θ = 5x. As x → 0, θ → 0. The limit becomes $\lim_{\theta \to 0} \frac{\sin(\theta)}{\theta} = 1$."
+},
+{
+"process": "$\lim_{x \to 0} \frac{\sin(3x)}{x}$",
+"explanation": "Multiply numerator and denominator by 3: $\lim_{x \to 0} \frac{3\sin(3x)}{3x} = 3 \cdot \lim_{\theta \to 0} \frac{\sin(\theta)}{\theta} = 3$."
+},
+{
+"process": "$\lim_{x \to 0} \frac{\sin(7x)}{2x}$",
+"explanation": "Multiply and divide by 7: $\frac{7}{2} \cdot \lim_{x \to 0} \frac{\sin(7x)}{7x} = \frac{7}{2}$."
+},
+{
+"process": "$\lim_{x \to 0} \frac{\sin(4x)}{\sin(2x)}$",
+"explanation": "Divide numerator and denominator by x: $\frac{\sin(4x)/x}{\sin(2x)/x} = \frac{4}{2} = 2$."
+},
+{
+"process": "$\lim_{x \to 0} \frac{\sin^2(x)}{x^2}$",
+"explanation": "Write as $(\frac{\sin(x)}{x})^2$. Limit is $1^2 = 1$."
+},
+{
+"process": "$\lim_{x \to 0} \frac{\sin(2x) - \sin(x)}{x}$",
+"explanation": "Use the identity $\sin(A) - \sin(B) = 2\cos(\frac{A+B}{2})\sin(\frac{A-B}{2})$. Substitute and simplify to find limit $= \cos(\frac{3x}{2}) \cdot \lim_{x \to 0} \frac{\sin(\frac{x}{2})}{x/2} = 1$."
+}
+]
+},
+{
+"type": "Companion Limit",
+"value": "Often used with the standard limit",
+"characteristics": ["Also resolves 0/0 form", "Describes cosine behavior near zero"],
+"behavior": "This limit shows how quickly cosine approaches 1 near zero.",
+"examples": [
+{
+"process": "$\lim_{x \to 0} \frac{1 - \cos(x)}{x^2} = \frac{1}{2}$",
+"explanation": "This is the standard form to remember for the companion limit, proven using trigonometric identities."
+},
+{
+"process": "$\lim_{x \to 0} \frac{1 - \cos(2x)}{x^2}$",
+"explanation": "Use $1 - \cos(2x) = 2\sin^2(x)$. Limit becomes $\lim_{x \to 0} \frac{2\sin^2(x)}{x^2} = 2(1)^2 = 2$."
+},
+{
+"process": "$\lim_{x \to 0} \frac{1 - \cos(3x)}{x^2}$",
+"explanation": "Apply $1 - \cos(3x) = 2\sin^2(\frac{3x}{2})$. Limit becomes $\lim_{x \to 0} \frac{2\sin^2(3x/2)}{x^2} = 2(\frac{3}{2})^2 = \frac{9}{2}$."
+},
+{
+"process": "$\lim_{x \to 0} \frac{\cos(x) - 1}{x}$",
+"explanation": "This tends to 0 because cosine approaches 1 faster than x approaches 0. The derivative perspective confirms $= 0$."
+},
+{
+"process": "$\lim_{x \to 0} \frac{1 - \cos^2(x)}{x^2}$",
+"explanation": "Simplify using $1 - \cos^2(x) = \sin^2(x)$. Limit becomes $\lim_{x \to 0} \frac{\sin^2(x)}{x^2} = 1$."
+}
+]
+}
+]
+},
+{
+"section_title": "Problem-Solving Strategy",
+"purpose": "To provide a clear, step-by-step approach for evaluating trigonometric limits that lead to indeterminate forms.",
+"process_flow": [
+{
+"step": 1,
+"process": "Try Direct Substitution",
+"description": "Always start by plugging in the value",
+"mechanism": "Substitute x = a into f(x)",
+"result": "If defined number, that's the limit. If 0/0, proceed."
+},
+{
+"step": 2,
+"process": "Manipulate the Expression",
+"description": "Use identities to rewrite the limit",
+"mechanism": "Apply trigonometric identities and algebraic manipulation",
+"result": "Expression resembling known limit forms"
+},
+{
+"step": 3,
+"process": "Apply Fundamental Limits",
+"description": "Use the standard trigonometric limits",
+"mechanism": "Ensure arguments match denominator for $\frac{\sin(\theta)}{\theta}$ form",
+"result": "Simplified expression ready for evaluation"
+},
+{
+"step": 4,
+"process": "Substitute and Conclude",
+"description": "Evaluate the final expression",
+"mechanism": "Perform direct substitution on simplified form",
+"result": "Value of the original limit"
+}
+]
+}
+],
+"key_terms": [
+"Trigonometric Limit",
+"Fundamental Trigonometric Limit",
+"Indeterminate Form",
+"Continuity",
+"Squeeze Theorem"
+],
+"summary": "Evaluate trigonometric limits by first trying direct substitution. For 0/0 indeterminate forms, use trigonometric identities and algebraic manipulation to apply the fundamental limits $\lim_{x \to 0} \frac{\sin(x)}{x} = 1$ and $\lim_{x \to 0} \frac{1 - \cos(x)}{x^2} = \frac{1}{2}$, ensuring arguments match appropriately."
+}

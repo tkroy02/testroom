@@ -51,6 +51,25 @@
               "explanation": "For $f(x) = 2x + 3$, we write $\\lim_{x \\to 2} (2x + 3) = 7$. This captures the idea that as $x$ gets closer to $2$, $2x+3$ gets closer to $7$."
             }
           ]
+        },
+        {
+          "type": "The Substitution Method",
+          "description": "For many functions, we can find limits by simply substituting the target value directly into the function.",
+          "detailed_mechanism": "If a function is continuous at $x = a$ (meaning there are no holes, jumps, or asymptotes), then $\\lim_{x \\to a} f(x) = f(a)$. This works for polynomials, rational functions where the denominator isn't zero, and other well-behaved functions at points within their domain.",
+          "examples": [
+            {
+              "process": "Polynomial Function",
+              "explanation": "For $f(x) = 2x^2 - 3x + 5$ as $x \\to 2$:\nDirect substitution: $f(2) = 2(4) - 3(2) + 5 = 8 - 6 + 5 = 7$\nSo $\\lim_{x \\to 2} (2x^2 - 3x + 5) = 7$\nThis works because polynomials are continuous everywhere."
+            },
+            {
+              "process": "Rational Function (when defined)",
+              "explanation": "For $f(x) = \\frac{x^2 - 4}{x - 2}$ as $x \\to 3$:\nDirect substitution: $f(3) = \\frac{9 - 4}{3 - 2} = \\frac{5}{1} = 5$\nSo $\\lim_{x \\to 3} \\frac{x^2 - 4}{x - 2} = 5$\nThis works because the function is defined and continuous at x = 3."
+            },
+            {
+              "process": "When Substitution Fails",
+              "explanation": "For $f(x) = \\frac{x^2 - 4}{x - 2}$ as $x \\to 2$:\nDirect substitution gives $\\frac{0}{0}$, which is undefined.\nHowever, if we simplify: $\\frac{x^2 - 4}{x - 2} = \\frac{(x-2)(x+2)}{x-2} = x + 2$ for $x \\ne 2$\nThen $\\lim_{x \\to 2} (x + 2) = 4$\nSo the limit exists even though direct substitution fails."
+            }
+          ]
         }
       ]
     },
@@ -112,7 +131,9 @@
     "Does Not Exist (DNE)",
     "One-Sided Limits",
     "Derivative",
-    "Instantaneous Rate of Change"
+    "Instantaneous Rate of Change",
+    "Substitution Method",
+    "Continuous Function"
   ],
-  "summary": "A limit describes what value a function approaches as the input gets arbitrarily close to some number. This fundamental idea allows us to analyze function behavior near points of discontinuity and forms the basis for defining derivatives (instantaneous rates of change) and integrals (accumulation of quantities)."
+  "summary": "A limit describes what value a function approaches as the input gets arbitrarily close to some number. This fundamental idea allows us to analyze function behavior near points of discontinuity and forms the basis for defining derivatives (instantaneous rates of change) and integrals (accumulation of quantities). For continuous functions, we can often find limits using direct substitution, while for discontinuous functions we analyze the behavior from both sides."
 }
