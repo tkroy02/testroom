@@ -72,97 +72,97 @@
       ]
     },
     {
-      "section_title": "4. Advanced Applications",
-      "classifications": [
+  "section_title": "4. Basic Sine Limit Variations",
+  "classifications": [
+    {
+      "type": "Direct Argument Matching",
+      "value": "When sine argument exactly matches denominator",
+      "characteristics": ["Simple substitution", "Direct application", "Exact match required"],
+      "behavior": "Apply the fundamental limit directly when arguments match perfectly",
+      "examples": [
         {
-          "type": "Product of Trig Functions",
-          "value": "Use identities to combine products into sums",
-          "characteristics": ["Product-to-sum identities", "Multiple angle formulas", "Algebraic manipulation"],
-          "behavior": "Convert trigonometric products into sums before applying limits",
-          "examples": [
-            {
-              "process": "$\\lim_{x \\to 0} \\frac{\\sin(3x)\\cos(2x)}{x}$",
-              "explanation": "Use product-to-sum identity: $\\frac{1}{2}\\cdot\\frac{\\sin(5x) + \\sin(x)}{x} = \\frac{1}{2}(5 + 1) = 3$"
-            }
-          ]
-        },
-        {
-          "type": "Difference of Trig Functions", 
-          "value": "Simplify differences using algebraic manipulation",
-          "characteristics": ["Factoring techniques", "Common factor extraction", "Identity application"],
-          "behavior": "Factor out common terms and apply fundamental limits to remaining factors",
-          "examples": [
-            {
-              "process": "$\\lim_{x \\to 0} \\frac{\\tan(x) - \\sin(x)}{x^3}$",
-              "explanation": "Write as $\\frac{\\sin(x)(1 - \\cos(x))}{x^3\\cos(x)} = \\frac{1}{\\cos(x)} \\cdot \\frac{\\sin(x)}{x} \\cdot \\frac{1 - \\cos(x)}{x^2} \\to 1 \\cdot 1 \\cdot \\frac{1}{2} = \\frac{1}{2}$"
-            }
-          ]
+          "process": "$\\lim_{x \\to 0} \\frac{\\sin(5x)}{5x}$",
+          "explanation": "Let $\\theta = 5x$. As $x \\to 0$, $\\theta \\to 0$. The limit becomes $\\lim_{\\theta \\to 0} \\frac{\\sin(\\theta)}{\\theta} = 1$"
         }
       ]
     },
     {
-      "section_title": "5. Multiple Angle Techniques", 
-      "classifications": [
+      "type": "Scaled Arguments", 
+      "value": "When denominator differs from sine argument",
+      "characteristics": ["Multiplication factor needed", "Linear scaling", "Constant adjustment"],
+      "behavior": "Multiply and divide by constant to match arguments",
+      "examples": [
         {
-          "type": "Double-Angle Applications",
-          "value": "Apply double-angle identities to simplify limits",
-          "characteristics": ["sin(2x) = 2sin(x)cos(x)", "cos(2x) identities", "Argument matching"],
-          "behavior": "Use double-angle formulas to reveal fundamental limit forms",
-          "examples": [
-            {
-              "process": "$\\lim_{x \\to 0} \\frac{\\sin(2x) - 2\\sin(x)}{x^3}$",
-              "explanation": "Use $\\sin(2x) = 2\\sin(x)\\cos(x)$: $\\frac{2\\sin(x)(\\cos(x) - 1)}{x^3} = -2\\cdot\\frac{\\sin(x)}{x}\\cdot\\frac{1 - \\cos(x)}{x^2} \\to -2\\cdot 1\\cdot\\frac{1}{2} = -1$"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "section_title": "6. Common Error Patterns",
-      "classifications": [
-        {
-          "type": "Argument Matching Errors",
-          "value": "Incorrect application when arguments don't match",
-          "characteristics": ["Missing scaling factors", "Direct application without adjustment", "Ignored coefficients"],
-          "behavior": "Students forget to ensure sine argument matches denominator exactly",
-          "examples": [
-            {
-              "process": "Common Error: $\\lim_{x \\to 0} \\frac{\\sin(3x)}{x} \\neq 1$",
-              "explanation": "Correct approach: $3 \\cdot \\lim_{x \\to 0} \\frac{\\sin(3x)}{3x} = 3$. Must match arguments by multiplying/dividing by 3."
-            }
-          ]
-        },
-        {
-          "type": "Cosine Limit Misapplications",
-          "value": "Using wrong denominator power for cosine limits", 
-          "characteristics": ["Incorrect power in denominator", "Missing square term", "Wrong limit value"],
-          "behavior": "Students apply cosine limit with x instead of x² in denominator",
-          "examples": [
-            {
-              "process": "Common Error: $\\lim_{x \\to 0} \\frac{1 - \\cos(2x)}{x} \\neq \\frac{1}{2}$",
-              "explanation": "Correct approach: $\\lim_{x \\to 0} \\frac{1 - \\cos(2x)}{x^2} = 2$. Cosine limit requires x² in denominator."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "section_title": "7. Problem-Solving Strategies", 
-      "classifications": [
-        {
-          "type": "Systematic Approach",
-          "value": "Step-by-step method for trigonometric limits",
-          "characteristics": ["Four-step process", "Identity application", "Argument matching", "Final evaluation"],
-          "behavior": "Follow consistent strategy to avoid errors and ensure correct solutions",
-          "examples": [
-            {
-              "process": "$\\lim_{x \\to 0} \\frac{\\sin(2x) - \\sin(x)}{x}$",
-              "explanation": "Step 1: Try substitution → 0/0. Step 2: Use identity $\\sin(A)-\\sin(B)=2\\cos(\\frac{A+B}{2})\\sin(\\frac{A-B}{2})$. Step 3: Match arguments. Step 4: Evaluate: $2\\cos(1.5x)\\sin(0.5x)/x = \\cos(1.5x) \\cdot \\frac{\\sin(0.5x)}{0.5x} \\cdot 0.5 \\to 1 \\cdot 1 \\cdot 0.5 = 0.5$"
-            }
-          ]
+          "process": "$\\lim_{x \\to 0} \\frac{\\sin(3x)}{x}$",
+          "explanation": "Multiply numerator and denominator by 3: $3 \\cdot \\lim_{x \\to 0} \\frac{\\sin(3x)}{3x} = 3 \\cdot 1 = 3$"
         }
       ]
     }
+  ]
+},
+{
+  "section_title": "5. Mixed Coefficient Cases", 
+  "classifications": [
+    {
+      "type": "Fractional Coefficients",
+      "value": "When coefficients create fractions in the limit",
+      "characteristics": ["Fractional results", "Coefficient manipulation", "Multiple scaling"],
+      "behavior": "Extract constant factors to reveal the fundamental limit form",
+      "examples": [
+        {
+          "process": "$\\lim_{x \\to 0} \\frac{\\sin(5x)}{2x}$",
+          "explanation": "Factor out constants: $\\frac{5}{2} \\cdot \\lim_{x \\to 0} \\frac{\\sin(5x)}{5x} = \\frac{5}{2} \\cdot 1 = \\frac{5}{2}$"
+        }
+      ]
+    }
+  ]
+},
+{
+  "section_title": "6. Cosine Limit Applications",
+  "classifications": [
+    {
+      "type": "Standard Cosine Limit",
+      "value": "Direct application of the companion limit",
+      "characteristics": ["1 - cos(x) form", "x² denominator", "Approaches 1/2"],
+      "behavior": "Apply the cosine limit directly when in standard form",
+      "examples": [
+        {
+          "process": "Prove: $\\lim_{x \\to 0} \\frac{1 - \\cos(x)}{x^2} = \\frac{1}{2}$",
+          "explanation": "Use identity $1 - \\cos(x) = 2\\sin^2(\\frac{x}{2})$. Then $\\frac{2\\sin^2(x/2)}{x^2} = 2(\\frac{\\sin(x/2)}{x})^2 = 2(\\frac{1}{2} \\cdot \\frac{\\sin(x/2)}{x/2})^2 \\to 2(\\frac{1}{2} \\cdot 1)^2 = \\frac{1}{2}$"
+        }
+      ]
+    },
+    {
+      "type": "Scaled Cosine Limits", 
+      "value": "Cosine limit with scaled arguments",
+      "characteristics": ["Multiple angles", "Coefficient squares", "Scaled results"],
+      "behavior": "Apply cosine limit with appropriate scaling of the result",
+      "examples": [
+        {
+          "process": "$\\lim_{x \\to 0} \\frac{1 - \\cos(3x)}{x^2}$",
+          "explanation": "Use $1 - \\cos(3x) = 2\\sin^2(\\frac{3x}{2})$. Then $\\frac{2\\sin^2(3x/2)}{x^2} = 2(\\frac{\\sin(3x/2)}{x})^2 = 2(\\frac{3}{2} \\cdot \\frac{\\sin(3x/2)}{3x/2})^2 \\to 2(\\frac{3}{2} \\cdot 1)^2 = \\frac{9}{2}$"
+        }
+      ]
+    }
+  ]
+},
+{
+  "section_title": "7. Zero Limit Cases", 
+  "classifications": [
+    {
+      "type": "Linear Denominator Cosine",
+      "value": "When cosine difference has linear denominator",
+      "characteristics": ["Faster convergence", "Zero limit", "Higher order behavior"],
+      "behavior": "Cosine approaches 1 faster than x approaches 0, giving zero limit",
+      "examples": [
+        {
+          "process": "$\\lim_{x \\to 0} \\frac{\\cos(x) - 1}{x}$",
+          "explanation": "Since $\\cos(x) - 1 = -(1 - \\cos(x))$ and $1 - \\cos(x)$ behaves like $\\frac{x^2}{2}$ near zero, we get $\\frac{-(1 - \\cos(x))}{x} \\approx \\frac{-x^2/2}{x} = -\\frac{x}{2} \\to 0$"
+        }
+      ]
+    }
+  ]
+}
   ],
   "key_terms": [
     "Trigonometric Limit",
