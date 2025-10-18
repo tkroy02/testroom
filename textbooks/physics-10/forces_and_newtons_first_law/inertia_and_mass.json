@@ -46,6 +46,8 @@
               "process": "**Mass and Weight Comparison:**\n\n**Mass (m):**\n- Measure of inertia/amount of matter\n- Scalar quantity (magnitude only)\n- SI unit: kilogram (kg)\n- Constant everywhere in universe\n- Measured with balance scales\n\n**Weight (W):**\n- Gravitational force on object\n- Vector quantity (magnitude and direction)\n- SI unit: Newton (N)\n- Changes with location: W = m × g\n- Measured with spring scales\n\n**Example:** Astronaut with m = 80 kg\nOn Earth: W = 80 × 9.8 = 784 N\nOn Moon: W = 80 × 1.6 = 128 N\nMass remains 80 kg in both locations",
               "explanation": "Provides a clear, side-by-side comparison highlighting all key differences."
             }
+          ]
+        }
       ]
     },
     {
